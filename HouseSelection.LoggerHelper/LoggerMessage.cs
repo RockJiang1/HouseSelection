@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HouseSelection.Logger
+namespace HouseSelection.LoggerHelper
 {
     /// <summary>
     /// 日志消息类
@@ -43,6 +43,9 @@ namespace HouseSelection.Logger
         }
     }
 
+    /// <summary>
+    /// 日志级别
+    /// </summary>
     public enum LogLevel
     {
         INFO = 0,

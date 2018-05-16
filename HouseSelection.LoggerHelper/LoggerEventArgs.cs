@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HouseSelection.Logger
+namespace HouseSelection.LoggerHelper
 {
     /// <summary>
     /// 日志事件参数

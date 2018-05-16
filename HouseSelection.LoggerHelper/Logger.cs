@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using log4net;
 
-namespace HouseSelection.Logger
+namespace HouseSelection.LoggerHelper
 {
     public static class Logger
     {
