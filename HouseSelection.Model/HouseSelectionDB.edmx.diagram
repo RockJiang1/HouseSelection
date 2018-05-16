@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75a14397088543dcb6e61da42c0b7ed1" Name="Diagram1">
+        <EntityTypeShape EntityType="HouseSelectionDBModel.House" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.Project" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.ProjectGroup" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.RoomType" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.ShakingNumberResult" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.Subscriber" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberFamilyMember" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberProjectMapping" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_Project_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_RoomType_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_ProjectGroup_ProjectID_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Project_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_ProjectGroup_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Subscriber_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

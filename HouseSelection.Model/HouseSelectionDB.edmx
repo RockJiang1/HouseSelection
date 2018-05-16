@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HouseSelectionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="SerialNumber" Type="int" Nullable="false" />
+          <Property Name="Group" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Block" Type="varchar" MaxLength="20" />
+          <Property Name="Building" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="int" Nullable="false" />
+          <Property Name="RoomNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RoomTypeID" Type="int" Nullable="false" />
+          <Property Name="Toward" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="RoomTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EstimateBuiltUpArea" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstimateLivingArea" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="AreaUnitPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProjectGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="ProjectGroupName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShakingNumberResult">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectGroupID" Type="int" Nullable="false" />
+          <Property Name="SubscriberProjectMappingID" Type="int" Nullable="false" />
+          <Property Name="ShakingNumberSequance" Type="int" Nullable="false" />
+          <Property Name="ShakingNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdentityNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ResidenceArea" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="WorkArea" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SubscriberFamilyMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdentityNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SubscriberProjectMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_House_Project_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_RoomType_ID">
+          <End Role="RoomType" Type="Self.RoomType" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectGroup_ProjectID_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShakingNumberResult_ProjectGroup_ID">
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="1" />
+          <End Role="ShakingNumberResult" Type="Self.ShakingNumberResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShakingNumberResult">
+              <PropertyRef Name="ProjectGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShakingNumberResult_SubscriberProjectMapping_ID">
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="1" />
+          <End Role="ShakingNumberResult" Type="Self.ShakingNumberResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriberProjectMapping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShakingNumberResult">
+              <PropertyRef Name="SubscriberProjectMappingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberFamilyMember_Subscriber_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="SubscriberFamilyMember" Type="Self.SubscriberFamilyMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberFamilyMember">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberProjectMapping_Project_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberProjectMapping">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberProjectMapping_Subscriber_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberProjectMapping">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HouseSelectionDBModelStoreContainer">
+          <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShakingNumberResult" EntityType="Self.ShakingNumberResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriber" EntityType="Self.Subscriber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscriberFamilyMember" EntityType="Self.SubscriberFamilyMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscriberProjectMapping" EntityType="Self.SubscriberProjectMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_House_Project_ID" Association="Self.FK_House_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_RoomType_ID" Association="Self.FK_House_RoomType_ID">
+            <End Role="RoomType" EntitySet="RoomType" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectGroup_ProjectID_ID" Association="Self.FK_ProjectGroup_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShakingNumberResult_ProjectGroup_ID" Association="Self.FK_ShakingNumberResult_ProjectGroup_ID">
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShakingNumberResult_SubscriberProjectMapping_ID" Association="Self.FK_ShakingNumberResult_SubscriberProjectMapping_ID">
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberFamilyMember_Subscriber_ID" Association="Self.FK_SubscriberFamilyMember_Subscriber_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="SubscriberFamilyMember" EntitySet="SubscriberFamilyMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberProjectMapping_Project_ID" Association="Self.FK_SubscriberProjectMapping_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberProjectMapping_Subscriber_ID" Association="Self.FK_SubscriberProjectMapping_Subscriber_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HouseSelectionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int32" Nullable="false" />
+          <Property Name="Group" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Block" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="Int32" Nullable="false" />
+          <Property Name="RoomNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoomTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Toward" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoomTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EstimateBuiltUpArea" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstimateLivingArea" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="AreaUnitPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_House_Project_ID" FromRole="House" ToRole="Project" />
+          <NavigationProperty Name="RoomType" Relationship="Self.FK_House_RoomType_ID" FromRole="House" ToRole="RoomType" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="House" Relationship="Self.FK_House_Project_ID" FromRole="Project" ToRole="House" />
+          <NavigationProperty Name="ProjectGroup" Relationship="Self.FK_ProjectGroup_ProjectID_ID" FromRole="Project" ToRole="ProjectGroup" />
+          <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Project_ID" FromRole="Project" ToRole="SubscriberProjectMapping" />
+        </EntityType>
+        <EntityType Name="ProjectGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectGroupName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectGroup_ProjectID_ID" FromRole="ProjectGroup" ToRole="Project" />
+          <NavigationProperty Name="ShakingNumberResult" Relationship="Self.FK_ShakingNumberResult_ProjectGroup_ID" FromRole="ProjectGroup" ToRole="ShakingNumberResult" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="House" Relationship="Self.FK_House_RoomType_ID" FromRole="RoomType" ToRole="House" />
+        </EntityType>
+        <EntityType Name="ShakingNumberResult">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectGroupID" Type="Int32" Nullable="false" />
+          <Property Name="SubscriberProjectMappingID" Type="Int32" Nullable="false" />
+          <Property Name="ShakingNumberSequance" Type="Int32" Nullable="false" />
+          <Property Name="ShakingNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProjectGroup" Relationship="Self.FK_ShakingNumberResult_ProjectGroup_ID" FromRole="ShakingNumberResult" ToRole="ProjectGroup" />
+          <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_ShakingNumberResult_SubscriberProjectMapping_ID" FromRole="ShakingNumberResult" ToRole="SubscriberProjectMapping" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdentityNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResidenceArea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkArea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubscriberFamilyMember" Relationship="Self.FK_SubscriberFamilyMember_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberFamilyMember" />
+          <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberProjectMapping" />
+        </EntityType>
+        <EntityType Name="SubscriberFamilyMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdentityNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Subscriber" Relationship="Self.FK_SubscriberFamilyMember_Subscriber_ID" FromRole="SubscriberFamilyMember" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="SubscriberProjectMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_SubscriberProjectMapping_Project_ID" FromRole="SubscriberProjectMapping" ToRole="Project" />
+          <NavigationProperty Name="ShakingNumberResult" Relationship="Self.FK_ShakingNumberResult_SubscriberProjectMapping_ID" FromRole="SubscriberProjectMapping" ToRole="ShakingNumberResult" />
+          <NavigationProperty Name="Subscriber" Relationship="Self.FK_SubscriberProjectMapping_Subscriber_ID" FromRole="SubscriberProjectMapping" ToRole="Subscriber" />
+        </EntityType>
+        <Association Name="FK_House_Project_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_RoomType_ID">
+          <End Role="RoomType" Type="Self.RoomType" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectGroup_ProjectID_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProjectGroup">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberProjectMapping_Project_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberProjectMapping">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShakingNumberResult_ProjectGroup_ID">
+          <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="1" />
+          <End Role="ShakingNumberResult" Type="Self.ShakingNumberResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShakingNumberResult">
+              <PropertyRef Name="ProjectGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShakingNumberResult_SubscriberProjectMapping_ID">
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="1" />
+          <End Role="ShakingNumberResult" Type="Self.ShakingNumberResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscriberProjectMapping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShakingNumberResult">
+              <PropertyRef Name="SubscriberProjectMappingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberFamilyMember_Subscriber_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="SubscriberFamilyMember" Type="Self.SubscriberFamilyMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberFamilyMember">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriberProjectMapping_Subscriber_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="SubscriberProjectMapping" Type="Self.SubscriberProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SubscriberProjectMapping">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HouseSelectionDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="House" EntityType="Self.House" />
+          <EntitySet Name="Project" EntityType="Self.Project" />
+          <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" />
+          <EntitySet Name="RoomType" EntityType="Self.RoomType" />
+          <EntitySet Name="ShakingNumberResult" EntityType="Self.ShakingNumberResult" />
+          <EntitySet Name="Subscriber" EntityType="Self.Subscriber" />
+          <EntitySet Name="SubscriberFamilyMember" EntityType="Self.SubscriberFamilyMember" />
+          <EntitySet Name="SubscriberProjectMapping" EntityType="Self.SubscriberProjectMapping" />
+          <AssociationSet Name="FK_House_Project_ID" Association="Self.FK_House_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_RoomType_ID" Association="Self.FK_House_RoomType_ID">
+            <End Role="RoomType" EntitySet="RoomType" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectGroup_ProjectID_ID" Association="Self.FK_ProjectGroup_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberProjectMapping_Project_ID" Association="Self.FK_SubscriberProjectMapping_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShakingNumberResult_ProjectGroup_ID" Association="Self.FK_ShakingNumberResult_ProjectGroup_ID">
+            <End Role="ProjectGroup" EntitySet="ProjectGroup" />
+            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShakingNumberResult_SubscriberProjectMapping_ID" Association="Self.FK_ShakingNumberResult_SubscriberProjectMapping_ID">
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberFamilyMember_Subscriber_ID" Association="Self.FK_SubscriberFamilyMember_Subscriber_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="SubscriberFamilyMember" EntitySet="SubscriberFamilyMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriberProjectMapping_Subscriber_ID" Association="Self.FK_SubscriberProjectMapping_Subscriber_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HouseSelectionDBModelStoreContainer" CdmEntityContainer="HouseSelectionDBEntities">
+          <EntitySetMapping Name="House">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.House">
+              <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+                <ScalarProperty Name="Toward" ColumnName="Toward" />
+                <ScalarProperty Name="RoomTypeCode" ColumnName="RoomTypeCode" />
+                <ScalarProperty Name="EstimateBuiltUpArea" ColumnName="EstimateBuiltUpArea" />
+                <ScalarProperty Name="EstimateLivingArea" ColumnName="EstimateLivingArea" />
+                <ScalarProperty Name="AreaUnitPrice" ColumnName="AreaUnitPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectGroup">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.ProjectGroup">
+              <MappingFragment StoreEntitySet="ProjectGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectGroupName" ColumnName="ProjectGroupName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomType">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.RoomType">
+              <MappingFragment StoreEntitySet="RoomType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShakingNumberResult">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.ShakingNumberResult">
+              <MappingFragment StoreEntitySet="ShakingNumberResult">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProjectGroupID" ColumnName="ProjectGroupID" />
+                <ScalarProperty Name="SubscriberProjectMappingID" ColumnName="SubscriberProjectMappingID" />
+                <ScalarProperty Name="ShakingNumberSequance" ColumnName="ShakingNumberSequance" />
+                <ScalarProperty Name="ShakingNumber" ColumnName="ShakingNumber" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriber">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.Subscriber">
+              <MappingFragment StoreEntitySet="Subscriber">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="ResidenceArea" ColumnName="ResidenceArea" />
+                <ScalarProperty Name="WorkArea" ColumnName="WorkArea" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriberFamilyMember">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.SubscriberFamilyMember">
+              <MappingFragment StoreEntitySet="SubscriberFamilyMember">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriberProjectMapping">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.SubscriberProjectMapping">
+              <MappingFragment StoreEntitySet="SubscriberProjectMapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
