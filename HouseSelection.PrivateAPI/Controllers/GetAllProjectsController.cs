@@ -8,6 +8,7 @@ using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Authorize;
+using HouseSelection.PrivateAPI.Models;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -16,12 +17,12 @@ namespace HouseSelection.PrivateAPI.Controllers
         private ProjectBLL _projectBLL = new ProjectBLL();
 
         [ApiAuthorize]
-        public ProjectListResultEntity Get()
+        public ProjectListResultEntity Get(BaseRequestModel baseRequest)
         {
             ProjectListResultEntity ret = new ProjectListResultEntity();
             try
             {
-                var lstProject = _projectBLL.GetModels(x => 1 == 1).ToList();
+                var lstProject = _projectBLL.GetModelsByPage(baseRequest.PageSize, baseRequest.PageIndex, true, p => p.ID, x => 1 == 1).ToList();
                 ret.ProjectList = new List<ProjectEntity>();
                 foreach (var p in lstProject)
                 {

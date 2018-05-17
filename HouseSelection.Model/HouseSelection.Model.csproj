@@ -81,11 +81,11 @@
     <Compile Include="Project.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProjectEntity.cs" />
     <Compile Include="ProjectGroup.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectListResultEntity.cs" />
-    <Compile Include="ProjectEntity.cs" />
     <Compile Include="ProjectResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomType.cs">
