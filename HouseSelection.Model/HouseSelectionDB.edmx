@@ -31,7 +31,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BackEndAccountID" Type="int" Nullable="false" />
-          <Property Name="LoginTime" Type="int" Nullable="false" />
+          <Property Name="LoginTime" Type="datetime" Nullable="false" />
           <Property Name="LoginIP" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="House">
@@ -553,12 +553,12 @@
             <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
           </AssociationSet>
           <EntitySet Name="BackEndAccount" EntityType="HouseSelectionDBModel.BackEndAccount" />
+          <EntitySet Name="ApplicationAccount" EntityType="HouseSelectionDBModel.ApplicationAccount" />
           <EntitySet Name="BackEndAccountLoginRecord" EntityType="HouseSelectionDBModel.BackEndAccountLoginRecord" />
           <AssociationSet Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID" Association="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID">
             <End Role="BackEndAccount" EntitySet="BackEndAccount" />
             <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
           </AssociationSet>
-          <EntitySet Name="ApplicationAccount" EntityType="HouseSelectionDBModel.ApplicationAccount" />
         </EntityContainer>
         <EntityType Name="BackEndAccount">
           <Key>
@@ -571,13 +571,23 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BackEndAccountLoginRecord" Relationship="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" FromRole="BackEndAccount" ToRole="BackEndAccountLoginRecord" />
         </EntityType>
+        <EntityType Name="ApplicationAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APPSECRET" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="BackEndAccountLoginRecord">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BackEndAccountID" Type="Int32" Nullable="false" />
-          <Property Name="LoginTime" Type="Int32" Nullable="false" />
+          <Property Name="LoginTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LoginIP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BackEndAccount" Relationship="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" FromRole="BackEndAccountLoginRecord" ToRole="BackEndAccount" />
         </EntityType>
@@ -593,16 +603,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ApplicationAccount">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="APPID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APPSECRET" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -730,16 +730,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BackEndAccountLoginRecord">
-            <EntityTypeMapping TypeName="HouseSelectionDBModel.BackEndAccountLoginRecord">
-              <MappingFragment StoreEntitySet="BackEndAccountLoginRecord">
-                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
-                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
-                <ScalarProperty Name="BackEndAccountID" ColumnName="BackEndAccountID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ApplicationAccount">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.ApplicationAccount">
               <MappingFragment StoreEntitySet="ApplicationAccount">
@@ -747,6 +737,16 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="APPSECRET" ColumnName="APPSECRET" />
                 <ScalarProperty Name="APPID" ColumnName="APPID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BackEndAccountLoginRecord">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.BackEndAccountLoginRecord">
+              <MappingFragment StoreEntitySet="BackEndAccountLoginRecord">
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="BackEndAccountID" ColumnName="BackEndAccountID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

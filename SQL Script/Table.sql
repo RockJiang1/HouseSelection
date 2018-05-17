@@ -167,7 +167,7 @@ CREATE TABLE BackEndAccountLoginRecord
 (
 ID INT IDENTITY(1,1) NOT NULL,
 BackEndAccountID INT NOT NULL,
-LoginTime INT NOT NULL,
+LoginTime DATETIME NOT NULL,
 LoginIP VARCHAR(20) NULL,
  CONSTRAINT [PK_BackEndAccountLoginRecord] PRIMARY KEY CLUSTERED 
 (
@@ -176,7 +176,6 @@ LoginIP VARCHAR(20) NULL,
 ) ON [PRIMARY]
 
 ALTER TABLE BackEndAccountLoginRecord ADD CONSTRAINT FK_BackEndAccountLoginRecord_BackEndAccount_ID FOREIGN KEY(BackEndAccountID) REFERENCES BackEndAccount(ID)
-
 
 --应用账号表
 CREATE TABLE ApplicationAccount

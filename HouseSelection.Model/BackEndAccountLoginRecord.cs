@@ -16,7 +16,7 @@ namespace HouseSelection.Model
     {
         public int ID { get; set; }
         public int BackEndAccountID { get; set; }
-        public int LoginTime { get; set; }
+        public System.DateTime LoginTime { get; set; }
         public string LoginIP { get; set; }
     
         public virtual BackEndAccount BackEndAccount { get; set; }
