@@ -33,5 +33,8 @@ namespace HouseSelection.Model
         public virtual DbSet<Subscriber> Subscriber { get; set; }
         public virtual DbSet<SubscriberFamilyMember> SubscriberFamilyMember { get; set; }
         public virtual DbSet<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }
+        public virtual DbSet<BackEndAccount> BackEndAccount { get; set; }
+        public virtual DbSet<BackEndAccountLoginRecord> BackEndAccountLoginRecord { get; set; }
+        public virtual DbSet<ApplicationAccount> ApplicationAccount { get; set; }
     }
 }

@@ -1,4 +1,4 @@
---»œπ∫»À±Ì
+--ËÆ§Ë¥≠‰∫∫Ë°®
 CREATE TABLE Subscriber
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -18,7 +18,7 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
---»œπ∫»Àº“Õ•≥…‘±
+--ËÆ§Ë¥≠‰∫∫ÂÆ∂Â∫≠ÊàêÂëò
 CREATE TABLE SubscriberFamilyMember
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -36,7 +36,7 @@ LastUpdate DATETIME NULL,
 
 ALTER TABLE SubscriberFamilyMember ADD CONSTRAINT FK_SubscriberFamilyMember_Subscriber_ID FOREIGN KEY(SubscriberID) REFERENCES Subscriber(ID)
 
---œÓƒø±Ì
+--È°πÁõÆË°®
 CREATE TABLE Project
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -51,7 +51,7 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
---»œπ∫»À≤Œ”ÎœÓƒøπÿœµ±Ì
+--ËÆ§Ë¥≠‰∫∫ÂèÇ‰∏éÈ°πÁõÆÂÖ≥Á≥ªË°®
 CREATE TABLE SubscriberProjectMapping
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -68,7 +68,7 @@ LastUpdate DATETIME NULL,
 ALTER TABLE SubscriberProjectMapping ADD CONSTRAINT FK_SubscriberProjectMapping_Subscriber_ID FOREIGN KEY(SubscriberID) REFERENCES Subscriber(ID)
 ALTER TABLE SubscriberProjectMapping ADD CONSTRAINT FK_SubscriberProjectMapping_Project_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
 
---æ” “±Ì
+--Â±ÖÂÆ§Ë°®
 CREATE TABLE RoomType
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -81,7 +81,7 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
---∑ø‘¥–≈œ¢±Ì
+--ÊàøÊ∫ê‰ø°ÊÅØË°®
 CREATE TABLE House
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -111,7 +111,7 @@ ALTER TABLE House ADD CONSTRAINT FK_House_Project_ID FOREIGN KEY(ProjectID) REFE
 ALTER TABLE House ADD CONSTRAINT FK_House_RoomType_ID FOREIGN KEY(RoomTypeID) REFERENCES RoomType(ID)
 
 
---œÓƒø∑÷◊È±Ì
+--È°πÁõÆÂàÜÁªÑË°®
 CREATE TABLE ProjectGroup
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -128,7 +128,7 @@ LastUpdate DATETIME NULL,
 ALTER TABLE ProjectGroup ADD CONSTRAINT FK_ProjectGroup_ProjectID_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
 
 
---“°∫≈Ω·π˚±Ì
+--ÊëáÂè∑ÁªìÊûúË°®
 CREATE TABLE ShakingNumberResult
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -146,3 +146,50 @@ LastUpdate DATETIME NULL,
 
 ALTER TABLE ShakingNumberResult ADD CONSTRAINT FK_ShakingNumberResult_ProjectGroup_ID FOREIGN KEY(ProjectGroupID) REFERENCES ProjectGroup(ID)
 ALTER TABLE ShakingNumberResult ADD CONSTRAINT FK_ShakingNumberResult_SubscriberProjectMapping_ID FOREIGN KEY(SubscriberProjectMappingID) REFERENCES SubscriberProjectMapping(ID)
+
+
+--ÂêéÂè∞Ë¥¶Âè∑Ë°®
+CREATE TABLE BackEndAccount
+(
+ID INT IDENTITY(1,1) NOT NULL,
+Account NVARCHAR(100) NOT NULL,
+Password NVARCHAR(50) NOT NULL,
+CreateTime DATETIME NOT NULL,
+LastUpdate DATETIME NULL,
+ CONSTRAINT [PK_BackEndAccount] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+--ÂêéÂè∞Ë¥¶Âè∑ÁôªÈôÜËÆ∞ÂΩïË°®
+CREATE TABLE BackEndAccountLoginRecord
+(
+ID INT IDENTITY(1,1) NOT NULL,
+BackEndAccountID INT NOT NULL,
+LoginTime INT NOT NULL,
+LoginIP VARCHAR(20) NULL,
+ CONSTRAINT [PK_BackEndAccountLoginRecord] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE BackEndAccountLoginRecord ADD CONSTRAINT FK_BackEndAccountLoginRecord_BackEndAccount_ID FOREIGN KEY(BackEndAccountID) REFERENCES BackEndAccount(ID)
+
+
+--Â∫îÁî®Ë¥¶Âè∑Ë°®
+CREATE TABLE ApplicationAccount
+(
+ID INT IDENTITY(1,1) NOT NULL,
+APPID VARCHAR(50) NOT NULL,
+APPSECRET VARCHAR(50) NOT NULL,
+CreateTime DATETIME NOT NULL,
+LastUpdate DATETIME NULL,
+ CONSTRAINT [PK_ApplicationAccount] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+--INSERT INTO ApplicationAccount VALUES ('SYY','0B2223C37F54864403847E762E1F87F3',GETDATE(),GETDATE())

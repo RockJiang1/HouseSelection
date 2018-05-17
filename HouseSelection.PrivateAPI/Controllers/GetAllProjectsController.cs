@@ -7,12 +7,15 @@ using System.Web.Http;
 using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Authorize;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
     public class GetAllProjectsController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
+
+        [ApiAuthorize]
         public ProjectListResultEntity Get()
         {
             ProjectListResultEntity ret = new ProjectListResultEntity();

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationDAL.cs" />
     <Compile Include="BaseDAL.cs" />
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="ProjectDAL.cs" />

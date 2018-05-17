@@ -21,6 +21,10 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Subscriber_ID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.BackEndAccount" Width="1.5" PointX="8.375" PointY="0.875" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.BackEndAccountLoginRecord" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.ApplicationAccount" Width="1.5" PointX="8.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

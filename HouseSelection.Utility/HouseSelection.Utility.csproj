@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MD5Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

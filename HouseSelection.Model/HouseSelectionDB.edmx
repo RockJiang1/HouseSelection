@@ -4,7 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HouseSelectionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HouseSelectionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APPSECRET" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BackEndAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BackEndAccountLoginRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BackEndAccountID" Type="int" Nullable="false" />
+          <Property Name="LoginTime" Type="int" Nullable="false" />
+          <Property Name="LoginIP" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="House">
           <Key>
             <PropertyRef Name="ID" />
@@ -107,6 +136,18 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID">
+          <End Role="BackEndAccount" Type="Self.BackEndAccount" Multiplicity="1" />
+          <End Role="BackEndAccountLoginRecord" Type="Self.BackEndAccountLoginRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BackEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BackEndAccountLoginRecord">
+              <PropertyRef Name="BackEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_House_Project_ID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="House" Type="Self.House" Multiplicity="*" />
@@ -204,6 +245,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HouseSelectionDBModelStoreContainer">
+          <EntitySet Name="ApplicationAccount" EntityType="Self.ApplicationAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BackEndAccount" EntityType="Self.BackEndAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BackEndAccountLoginRecord" EntityType="Self.BackEndAccountLoginRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" Schema="dbo" store:Type="Tables" />
@@ -212,6 +256,10 @@
           <EntitySet Name="Subscriber" EntityType="Self.Subscriber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubscriberFamilyMember" EntityType="Self.SubscriberFamilyMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubscriberProjectMapping" EntityType="Self.SubscriberProjectMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID" Association="Self.FK_BackEndAccountLoginRecord_BackEndAccount_ID">
+            <End Role="BackEndAccount" EntitySet="BackEndAccount" />
+            <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
+          </AssociationSet>
           <AssociationSet Name="FK_House_Project_ID" Association="Self.FK_House_Project_ID">
             <End Role="Project" EntitySet="Project" />
             <End Role="House" EntitySet="House" />
@@ -245,8 +293,7 @@
             <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HouseSelectionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -505,7 +552,57 @@
             <End Role="Subscriber" EntitySet="Subscriber" />
             <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
           </AssociationSet>
+          <EntitySet Name="BackEndAccount" EntityType="HouseSelectionDBModel.BackEndAccount" />
+          <EntitySet Name="BackEndAccountLoginRecord" EntityType="HouseSelectionDBModel.BackEndAccountLoginRecord" />
+          <AssociationSet Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID" Association="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID">
+            <End Role="BackEndAccount" EntitySet="BackEndAccount" />
+            <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
+          </AssociationSet>
+          <EntitySet Name="ApplicationAccount" EntityType="HouseSelectionDBModel.ApplicationAccount" />
         </EntityContainer>
+        <EntityType Name="BackEndAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BackEndAccountLoginRecord" Relationship="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" FromRole="BackEndAccount" ToRole="BackEndAccountLoginRecord" />
+        </EntityType>
+        <EntityType Name="BackEndAccountLoginRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BackEndAccountID" Type="Int32" Nullable="false" />
+          <Property Name="LoginTime" Type="Int32" Nullable="false" />
+          <Property Name="LoginIP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BackEndAccount" Relationship="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" FromRole="BackEndAccountLoginRecord" ToRole="BackEndAccount" />
+        </EntityType>
+        <Association Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID">
+          <End Type="HouseSelectionDBModel.BackEndAccount" Role="BackEndAccount" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.BackEndAccountLoginRecord" Role="BackEndAccountLoginRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BackEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BackEndAccountLoginRecord">
+              <PropertyRef Name="BackEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApplicationAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APPSECRET" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -619,6 +716,38 @@
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BackEndAccount">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.BackEndAccount">
+              <MappingFragment StoreEntitySet="BackEndAccount">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BackEndAccountLoginRecord">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.BackEndAccountLoginRecord">
+              <MappingFragment StoreEntitySet="BackEndAccountLoginRecord">
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="BackEndAccountID" ColumnName="BackEndAccountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationAccount">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.ApplicationAccount">
+              <MappingFragment StoreEntitySet="ApplicationAccount">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="APPSECRET" ColumnName="APPSECRET" />
+                <ScalarProperty Name="APPID" ColumnName="APPID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

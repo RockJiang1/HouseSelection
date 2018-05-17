@@ -17,16 +17,13 @@ namespace HouseSelection.Authorize
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public static TokenEntity AddToken(Guid requestUserId, int requestIdentity, int requestType, string requestAccount, int expiry)
+        public static TokenEntity AddToken(int requestUserId, string requestAccount, int expiry)
         {
             var token = new TokenEntity();
 
             token.AccessToken = GenerateTokenCode();
-            token.Identity = requestIdentity;
-            token.RequestType = requestType;
             token.RequestAccount = requestAccount;
             token.RequestUserId = requestUserId;
-            //token.Status = (int)BaseStatusEnum.Enabled;
             token.Expiry = expiry;
             token.CreateTime = DateTime.Now;
             token.ExpiryDate = DateTime.Now.AddSeconds(expiry);
