@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseSelection.Authorize", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseSelection.Redis", "HouseSelection.Redis\HouseSelection.Redis.csproj", "{99ED9864-AFAD-4825-886A-1DE851413525}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Script", "SQL Script", "{DCB09C17-3D4F-4F95-BB21-8D9427D8DE79}"
+	ProjectSection(SolutionItems) = preProject
+		SQL Script\Table.sql = SQL Script\Table.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
