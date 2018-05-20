@@ -17,6 +17,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         HouseBLL _houseBLL = new HouseBLL();
         HouseGroupBLL _houseGroupBLL = new HouseGroupBLL();
         RoomTypeBLL _roomTypeBLL = new RoomTypeBLL();
+        HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();
 
         [ApiAuthorize]
         public BaseResultEntity Post(ImportHouseInfoRequestEntity ImportHouse)
@@ -28,6 +29,14 @@ namespace HouseSelection.PrivateAPI.Controllers
                 {
                     if(_projectBLL.GetModels(x => x.ID == ImportHouse.ProjectID) != null)
                     {
+                        #region 创建楼盘
+                        var _houseEstate = _houseEstateBLL.GetModels(x => x.Name == ImportHouse.HouseEstate);
+                        if (_houseEstate == null || _houseEstate.Count() == 0)
+                        {
+                            _houseEstateBLL.Add(new HouseEstate() { ProjectID = ImportHouse.ProjectID, Name = ImportHouse.HouseEstate,CreateTime = DateTime.Now, LastUpdate = DateTime.Now });
+                        }
+                        #endregion
+
                         #region 创建房源分组
                         var groupList = ImportHouse.HouseList.GroupBy(x => x.Group).ToList();
                         var _existGroup = _houseGroupBLL.GetModels(x => x.ProjectID == ImportHouse.ProjectID);
@@ -89,6 +98,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                         var _houseGroup = _houseGroupBLL.GetModels(x => x.ProjectID == ImportHouse.ProjectID);
                         var _roomTypeGroup = _roomTypeBLL.GetModels(x => 1 == 1);
                         var _existhouse = _houseBLL.GetModels(x => x.ProjectID == ImportHouse.ProjectID);
+                        int _houseEstateID = _houseEstateBLL.GetModels(x => x.ProjectID == ImportHouse.ProjectID).FirstOrDefault().ID;
 
                         List<House> addHouseList = new List<House>();
                         foreach(var house in ImportHouse.HouseList)
@@ -119,7 +129,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                                     AreaUnitPrice = house.AreaUnitPrice,
                                     TotalPrice = house.TotalPrice,
                                     CreateTime = DateTime.Now,
-                                    LastUpdate = DateTime.Now
+                                    LastUpdate = DateTime.Now,
+                                    HouseEstateID = _houseEstateID
                                 };
                                 addHouseList.Add(_house);
                             }

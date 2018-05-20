@@ -14,6 +14,11 @@ namespace HouseSelection.Model
         public int ProjectID { get; set; }
 
         /// <summary>
+        /// 楼盘名称
+        /// </summary>
+        public string HouseEstate { get; set; }
+
+        /// <summary>
         /// 房源列表
         /// </summary>
         public List<HouseEntity> HouseList { get; set; }

@@ -12,10 +12,10 @@ namespace HouseSelection.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class HouseGroup
+    public partial class HouseEstate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HouseGroup()
+        public HouseEstate()
         {
             this.House = new HashSet<House>();
         }

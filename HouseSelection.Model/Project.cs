@@ -19,8 +19,9 @@ namespace HouseSelection.Model
         {
             this.ProjectGroup = new HashSet<ProjectGroup>();
             this.SubscriberProjectMapping = new HashSet<SubscriberProjectMapping>();
-            this.House = new HashSet<House>();
             this.HouseGroup = new HashSet<HouseGroup>();
+            this.HouseEstate = new HashSet<HouseEstate>();
+            this.House = new HashSet<House>();
         }
     
         public int ID { get; set; }
@@ -37,8 +38,10 @@ namespace HouseSelection.Model
         public virtual ICollection<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }
         public virtual Area Area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<House> House { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseGroup> HouseGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseEstate> HouseEstate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<House> House { get; set; }
     }
 }

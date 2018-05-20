@@ -31,8 +31,10 @@ namespace HouseSelection.Model
         public decimal TotalPrice { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
+        public int HouseEstateID { get; set; }
     
         public virtual HouseGroup HouseGroup { get; set; }
+        public virtual HouseEstate HouseEstate { get; set; }
         public virtual Project Project { get; set; }
         public virtual RoomType RoomType { get; set; }
     }

@@ -54,6 +54,7 @@
     <Compile Include="BaseDAL.cs" />
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="HouseDAL.cs" />
+    <Compile Include="HouseEstateDAL.cs" />
     <Compile Include="HouseGroupDAL.cs" />
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

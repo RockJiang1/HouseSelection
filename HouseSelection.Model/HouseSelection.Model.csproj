@@ -67,6 +67,9 @@
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="HouseEntity.cs" />
+    <Compile Include="HouseEstate.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="HouseGroup.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
