@@ -13,11 +13,11 @@ namespace HouseSelection.PrivateAPI.Controllers
 {
     public class ImportHouseInfoController : ApiController
     {
-        ProjectBLL _projectBLL = new ProjectBLL();
-        HouseBLL _houseBLL = new HouseBLL();
-        HouseGroupBLL _houseGroupBLL = new HouseGroupBLL();
-        RoomTypeBLL _roomTypeBLL = new RoomTypeBLL();
-        HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();
+        private ProjectBLL _projectBLL = new ProjectBLL();
+        private HouseBLL _houseBLL = new HouseBLL();
+        private HouseGroupBLL _houseGroupBLL = new HouseGroupBLL();
+        private RoomTypeBLL _roomTypeBLL = new RoomTypeBLL();
+        private HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();
 
         [ApiAuthorize]
         public BaseResultEntity Post(ImportHouseInfoRequestEntity ImportHouse)

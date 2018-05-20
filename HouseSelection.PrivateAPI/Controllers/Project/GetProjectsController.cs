@@ -42,6 +42,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                 }
                 ret.code = 0;
                 ret.errMsg = "";
+                ret.recordCount = tmp1.Union(tmp2).Count();
             }
             catch (Exception ex)
             {

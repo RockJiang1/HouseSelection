@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseSelection.Model
 {
-    public class ProjectListResultEntity : BaseResultEntity
+    public class ProjectListResultEntity : BaseListResultEntity
     {
         /// <summary>
         /// 项目列表

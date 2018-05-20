@@ -38,6 +38,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                 }
                 ret.code = 0;
                 ret.errMsg = "";
+                ret.recordCount = _projectBLL.GetModels(x => 1 == 1).Count();
             }
             catch (Exception ex)
             {

@@ -62,7 +62,9 @@
     <Compile Include="BackEndAccountLoginRecord.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="BaseListResultEntity.cs" />
     <Compile Include="BaseResultEntity.cs" />
+    <Compile Include="GetHouseEstateResultEntity.cs" />
     <Compile Include="House.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
@@ -70,6 +72,7 @@
     <Compile Include="HouseEstate.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="HouseEstateEntity.cs" />
     <Compile Include="HouseGroup.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
