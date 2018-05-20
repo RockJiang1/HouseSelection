@@ -24,6 +24,11 @@ namespace HouseSelection.BLL
             _dal.Add(t);
             return _dal.SaveChanges();
         }
+        public bool AddRange(List<T> t)
+        {
+            _dal.AddRange(t);
+            return _dal.SaveChanges();
+        }
         public bool Delete(T t)
         {
             _dal.Delete(t);

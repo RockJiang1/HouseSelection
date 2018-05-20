@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="75a14397088543dcb6e61da42c0b7ed1" Name="Diagram1">
-        <EntityTypeShape EntityType="HouseSelectionDBModel.House" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.Project" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.ProjectGroup" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.RoomType" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
@@ -13,8 +12,6 @@
         <EntityTypeShape EntityType="HouseSelectionDBModel.Subscriber" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberFamilyMember" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberProjectMapping" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_House_Project_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_House_RoomType_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_ProjectGroup_ProjectID_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Project_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_ProjectGroup_ID" ManuallyRouted="false" />
@@ -27,6 +24,12 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.Area" Width="1.5" PointX="0.75" PointY="10.75" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_Project_AreaID_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.House" Width="1.5" PointX="8.25" PointY="6.625" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.HouseGroup" Width="1.5" PointX="3" PointY="6.625" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_GroupID_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_Project_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_RoomType_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_HouseGroup_ProjectID_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

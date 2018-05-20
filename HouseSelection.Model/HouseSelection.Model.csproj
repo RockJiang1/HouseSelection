@@ -66,6 +66,10 @@
     <Compile Include="House.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="HouseEntity.cs" />
+    <Compile Include="HouseGroup.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="HouseSelectionDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HouseSelectionDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ImportHouseInfoRequestEntity.cs" />
     <Compile Include="Project.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>

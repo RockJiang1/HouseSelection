@@ -186,11 +186,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\AddProjectController.cs" />
-    <Compile Include="Controllers\CheckBackEndAccountController.cs" />
-    <Compile Include="Controllers\GetAllProjectsController.cs" />
-    <Compile Include="Controllers\GetProjectByIDController.cs" />
-    <Compile Include="Controllers\GetProjectsController.cs" />
+    <Compile Include="Controllers\House\ImportHouseInfoController.cs" />
+    <Compile Include="Controllers\Project\AddProjectController.cs" />
+    <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
+    <Compile Include="Controllers\Project\GetAllProjectsController.cs" />
+    <Compile Include="Controllers\Project\GetProjectByIDController.cs" />
+    <Compile Include="Controllers\Project\GetProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

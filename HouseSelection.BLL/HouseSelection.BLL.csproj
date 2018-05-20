@@ -45,8 +45,11 @@
     <Compile Include="BackEndAccountBLL.cs" />
     <Compile Include="BackEndAccountLoginRecordBLL.cs" />
     <Compile Include="BaseBLL.cs" />
+    <Compile Include="HouseBLL.cs" />
+    <Compile Include="HouseGroupBLL.cs" />
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomTypeBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HouseSelection.DAL\HouseSelection.DAL.csproj">

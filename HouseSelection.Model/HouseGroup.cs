@@ -12,33 +12,22 @@ namespace HouseSelection.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class HouseGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
+        public HouseGroup()
         {
-            this.ProjectGroup = new HashSet<ProjectGroup>();
-            this.SubscriberProjectMapping = new HashSet<SubscriberProjectMapping>();
             this.House = new HashSet<House>();
-            this.HouseGroup = new HashSet<HouseGroup>();
         }
     
         public int ID { get; set; }
-        public string Number { get; set; }
+        public int ProjectID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
-        public int AreaID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProjectGroup> ProjectGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }
-        public virtual Area Area { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<House> House { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HouseGroup> HouseGroup { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

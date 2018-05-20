@@ -25,7 +25,6 @@ namespace HouseSelection.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<House> House { get; set; }
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<ProjectGroup> ProjectGroup { get; set; }
         public virtual DbSet<RoomType> RoomType { get; set; }
@@ -37,5 +36,7 @@ namespace HouseSelection.Model
         public virtual DbSet<ApplicationAccount> ApplicationAccount { get; set; }
         public virtual DbSet<BackEndAccountLoginRecord> BackEndAccountLoginRecord { get; set; }
         public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<House> House { get; set; }
+        public virtual DbSet<HouseGroup> HouseGroup { get; set; }
     }
 }

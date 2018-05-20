@@ -17,7 +17,7 @@ namespace HouseSelection.Model
         public int ID { get; set; }
         public int ProjectID { get; set; }
         public int SerialNumber { get; set; }
-        public string Group { get; set; }
+        public int GroupID { get; set; }
         public string Block { get; set; }
         public int Building { get; set; }
         public int Unit { get; set; }
@@ -32,6 +32,7 @@ namespace HouseSelection.Model
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     
+        public virtual HouseGroup HouseGroup { get; set; }
         public virtual Project Project { get; set; }
         public virtual RoomType RoomType { get; set; }
     }

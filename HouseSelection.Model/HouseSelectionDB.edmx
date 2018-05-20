@@ -49,7 +49,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProjectID" Type="int" Nullable="false" />
           <Property Name="SerialNumber" Type="int" Nullable="false" />
-          <Property Name="Group" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
           <Property Name="Block" Type="varchar" MaxLength="20" />
           <Property Name="Building" Type="int" Nullable="false" />
           <Property Name="Unit" Type="int" Nullable="false" />
@@ -61,6 +61,16 @@
           <Property Name="EstimateLivingArea" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="AreaUnitPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HouseGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
@@ -157,6 +167,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_House_GroupID_ID">
+          <End Role="HouseGroup" Type="Self.HouseGroup" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_House_Project_ID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="House" Type="Self.House" Multiplicity="*" />
@@ -178,6 +200,18 @@
             </Principal>
             <Dependent Role="House">
               <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseGroup_ProjectID_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="HouseGroup" Type="Self.HouseGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseGroup">
+              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -271,6 +305,7 @@
           <EntitySet Name="BackEndAccount" EntityType="Self.BackEndAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BackEndAccountLoginRecord" EntityType="Self.BackEndAccountLoginRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HouseGroup" EntityType="Self.HouseGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
@@ -282,6 +317,10 @@
             <End Role="BackEndAccount" EntitySet="BackEndAccount" />
             <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
           </AssociationSet>
+          <AssociationSet Name="FK_House_GroupID_ID" Association="Self.FK_House_GroupID_ID">
+            <End Role="HouseGroup" EntitySet="HouseGroup" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
           <AssociationSet Name="FK_House_Project_ID" Association="Self.FK_House_Project_ID">
             <End Role="Project" EntitySet="Project" />
             <End Role="House" EntitySet="House" />
@@ -289,6 +328,10 @@
           <AssociationSet Name="FK_House_RoomType_ID" Association="Self.FK_House_RoomType_ID">
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseGroup_ProjectID_ID" Association="Self.FK_HouseGroup_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="HouseGroup" EntitySet="HouseGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_AreaID_ID" Association="Self.FK_Project_AreaID_ID">
             <End Role="Area" EntitySet="Area" />
@@ -323,30 +366,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HouseSelectionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="House">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProjectID" Type="Int32" Nullable="false" />
-          <Property Name="SerialNumber" Type="Int32" Nullable="false" />
-          <Property Name="Group" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Block" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Building" Type="Int32" Nullable="false" />
-          <Property Name="Unit" Type="Int32" Nullable="false" />
-          <Property Name="RoomNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RoomTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Toward" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoomTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EstimateBuiltUpArea" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="EstimateLivingArea" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="AreaUnitPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Project" Relationship="Self.FK_House_Project_ID" FromRole="House" ToRole="Project" />
-          <NavigationProperty Name="RoomType" Relationship="Self.FK_House_RoomType_ID" FromRole="House" ToRole="RoomType" />
-        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="ID" />
@@ -357,11 +376,12 @@
           <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="House" Relationship="Self.FK_House_Project_ID" FromRole="Project" ToRole="House" />
           <NavigationProperty Name="ProjectGroup" Relationship="Self.FK_ProjectGroup_ProjectID_ID" FromRole="Project" ToRole="ProjectGroup" />
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Project_ID" FromRole="Project" ToRole="SubscriberProjectMapping" />
           <Property Name="AreaID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Area" Relationship="HouseSelectionDBModel.FK_Project_AreaID_ID" FromRole="Project" ToRole="Area" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_Project_ID" FromRole="Project" ToRole="House" />
+          <NavigationProperty Name="HouseGroup" Relationship="HouseSelectionDBModel.FK_HouseGroup_ProjectID_ID" FromRole="Project" ToRole="HouseGroup" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -383,7 +403,7 @@
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="House" Relationship="Self.FK_House_RoomType_ID" FromRole="RoomType" ToRole="House" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_RoomType_ID" FromRole="RoomType" ToRole="House" />
         </EntityType>
         <EntityType Name="ShakingNumberResult">
           <Key>
@@ -443,30 +463,6 @@
           <NavigationProperty Name="ShakingNumberResult" Relationship="Self.FK_ShakingNumberResult_SubscriberProjectMapping_ID" FromRole="SubscriberProjectMapping" ToRole="ShakingNumberResult" />
           <NavigationProperty Name="Subscriber" Relationship="Self.FK_SubscriberProjectMapping_Subscriber_ID" FromRole="SubscriberProjectMapping" ToRole="Subscriber" />
         </EntityType>
-        <Association Name="FK_House_Project_ID">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="House" Type="Self.House" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="House">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_House_RoomType_ID">
-          <End Role="RoomType" Type="Self.RoomType" Multiplicity="1" />
-          <End Role="House" Type="Self.House" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoomType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="House">
-              <PropertyRef Name="RoomTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProjectGroup_ProjectID_ID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
@@ -540,7 +536,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HouseSelectionDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="House" EntityType="Self.House" />
           <EntitySet Name="Project" EntityType="Self.Project" />
           <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" />
           <EntitySet Name="RoomType" EntityType="Self.RoomType" />
@@ -548,14 +543,6 @@
           <EntitySet Name="Subscriber" EntityType="Self.Subscriber" />
           <EntitySet Name="SubscriberFamilyMember" EntityType="Self.SubscriberFamilyMember" />
           <EntitySet Name="SubscriberProjectMapping" EntityType="Self.SubscriberProjectMapping" />
-          <AssociationSet Name="FK_House_Project_ID" Association="Self.FK_House_Project_ID">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="House" EntitySet="House" />
-          </AssociationSet>
-          <AssociationSet Name="FK_House_RoomType_ID" Association="Self.FK_House_RoomType_ID">
-            <End Role="RoomType" EntitySet="RoomType" />
-            <End Role="House" EntitySet="House" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProjectGroup_ProjectID_ID" Association="Self.FK_ProjectGroup_ProjectID_ID">
             <End Role="Project" EntitySet="Project" />
             <End Role="ProjectGroup" EntitySet="ProjectGroup" />
@@ -591,6 +578,24 @@
           <AssociationSet Name="FK_Project_AreaID_ID" Association="HouseSelectionDBModel.FK_Project_AreaID_ID">
             <End Role="Area" EntitySet="Area" />
             <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <EntitySet Name="House" EntityType="HouseSelectionDBModel.House" />
+          <EntitySet Name="HouseGroup" EntityType="HouseSelectionDBModel.HouseGroup" />
+          <AssociationSet Name="FK_House_GroupID_ID" Association="HouseSelectionDBModel.FK_House_GroupID_ID">
+            <End Role="HouseGroup" EntitySet="HouseGroup" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_Project_ID" Association="HouseSelectionDBModel.FK_House_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_RoomType_ID" Association="HouseSelectionDBModel.FK_House_RoomType_ID">
+            <End Role="RoomType" EntitySet="RoomType" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseGroup_ProjectID_ID" Association="HouseSelectionDBModel.FK_HouseGroup_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="HouseGroup" EntitySet="HouseGroup" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BackEndAccount">
@@ -657,35 +662,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="Block" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="Int32" Nullable="false" />
+          <Property Name="RoomNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoomTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Toward" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RoomTypeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EstimateBuiltUpArea" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="EstimateLivingArea" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="AreaUnitPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HouseGroup" Relationship="HouseSelectionDBModel.FK_House_GroupID_ID" FromRole="House" ToRole="HouseGroup" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_House_Project_ID" FromRole="House" ToRole="Project" />
+          <NavigationProperty Name="RoomType" Relationship="HouseSelectionDBModel.FK_House_RoomType_ID" FromRole="House" ToRole="RoomType" />
+        </EntityType>
+        <EntityType Name="HouseGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_GroupID_ID" FromRole="HouseGroup" ToRole="House" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_HouseGroup_ProjectID_ID" FromRole="HouseGroup" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_House_GroupID_ID">
+          <End Type="HouseSelectionDBModel.HouseGroup" Role="HouseGroup" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_Project_ID">
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_RoomType_ID">
+          <End Type="HouseSelectionDBModel.RoomType" Role="RoomType" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseGroup_ProjectID_ID">
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseGroup" Role="HouseGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseGroup">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HouseSelectionDBModelStoreContainer" CdmEntityContainer="HouseSelectionDBEntities">
-          <EntitySetMapping Name="House">
-            <EntityTypeMapping TypeName="HouseSelectionDBModel.House">
-              <MappingFragment StoreEntitySet="House">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="Group" ColumnName="Group" />
-                <ScalarProperty Name="Block" ColumnName="Block" />
-                <ScalarProperty Name="Building" ColumnName="Building" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
-                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
-                <ScalarProperty Name="Toward" ColumnName="Toward" />
-                <ScalarProperty Name="RoomTypeCode" ColumnName="RoomTypeCode" />
-                <ScalarProperty Name="EstimateBuiltUpArea" ColumnName="EstimateBuiltUpArea" />
-                <ScalarProperty Name="EstimateLivingArea" ColumnName="EstimateLivingArea" />
-                <ScalarProperty Name="AreaUnitPrice" ColumnName="AreaUnitPrice" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.Project">
               <MappingFragment StoreEntitySet="Project">
@@ -811,6 +878,40 @@
               <MappingFragment StoreEntitySet="Area">
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="House">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.House">
+              <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="AreaUnitPrice" ColumnName="AreaUnitPrice" />
+                <ScalarProperty Name="EstimateLivingArea" ColumnName="EstimateLivingArea" />
+                <ScalarProperty Name="EstimateBuiltUpArea" ColumnName="EstimateBuiltUpArea" />
+                <ScalarProperty Name="RoomTypeCode" ColumnName="RoomTypeCode" />
+                <ScalarProperty Name="Toward" ColumnName="Toward" />
+                <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HouseGroup">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.HouseGroup">
+              <MappingFragment StoreEntitySet="HouseGroup">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
