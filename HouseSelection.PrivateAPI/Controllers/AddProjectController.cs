@@ -13,6 +13,7 @@ namespace HouseSelection.PrivateAPI.Controllers
     public class AddProjectController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
+        private AreaBLL _areaBLL = new AreaBLL();
 
         public BaseResultEntity Post(ProjectEntity Project)
         {
@@ -22,29 +23,39 @@ namespace HouseSelection.PrivateAPI.Controllers
                 var _existProject = _projectBLL.GetModels(x => x.Number == Project.Number || x.Name == Project.Name).ToList();
                 if (_existProject == null || _existProject.Count() == 0)
                 {
-                    if(!string.IsNullOrWhiteSpace(Project.Number) && !string.IsNullOrWhiteSpace(Project.Name))
+                    var _area = _areaBLL.GetModels(x => x.Name == Project.ProjectArea).FirstOrDefault();
+                    if (_area != null && _area.ID != 0)
                     {
-                        var _newProject = new Project()
+                        if (!string.IsNullOrWhiteSpace(Project.Number) && !string.IsNullOrWhiteSpace(Project.Name))
                         {
-                            Number = Project.Number,
-                            Name = Project.Name,
-                            Address = Project.Address,
-                            CreateTime = DateTime.Now,
-                            LastUpdate = DateTime.Now
-                        };
-                        _projectBLL.Add(_newProject);
-                        ret.code = 0;
-                        ret.errMsg = "";
+                            var _newProject = new Project()
+                            {
+                                Number = Project.Number,
+                                Name = Project.Name,
+                                Address = Project.Address,
+                                AreaID = _area.ID,
+                                CreateTime = DateTime.Now,
+                                LastUpdate = DateTime.Now
+                            };
+                            _projectBLL.Add(_newProject);
+                            ret.code = 0;
+                            ret.errMsg = "";
+                        }
+                        else
+                        {
+                            ret.code = 102;
+                            ret.errMsg = "创建项目的编号/名称不允许为空！";
+                        }
                     }
                     else
                     {
-                        ret.code = 3;
-                        ret.errMsg = "创建项目的编号/名称不允许为空！";
+                        ret.code = 103;
+                        ret.errMsg = "项目所属区域不存在！";
                     }
                 }
                 else
                 {
-                    ret.code = 2;
+                    ret.code = 101;
                     ret.errMsg = "创建项目的编号/名称已经存在！";
                 }
             }

@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BaseRequestModel.cs" />
+    <Compile Include="Models\GetProjectByIDRequest.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

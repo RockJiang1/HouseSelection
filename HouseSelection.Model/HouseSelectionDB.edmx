@@ -15,6 +15,14 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="BackEndAccount">
           <Key>
             <PropertyRef Name="ID" />
@@ -66,6 +74,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="1000" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="AreaID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -172,6 +181,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Project_AreaID_ID">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="AreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProjectGroup_ProjectID_ID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="ProjectGroup" Type="Self.ProjectGroup" Multiplicity="*" />
@@ -246,6 +267,7 @@
         </Association>
         <EntityContainer Name="HouseSelectionDBModelStoreContainer">
           <EntitySet Name="ApplicationAccount" EntityType="Self.ApplicationAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BackEndAccount" EntityType="Self.BackEndAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BackEndAccountLoginRecord" EntityType="Self.BackEndAccountLoginRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
@@ -267,6 +289,10 @@
           <AssociationSet Name="FK_House_RoomType_ID" Association="Self.FK_House_RoomType_ID">
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_AreaID_ID" Association="Self.FK_Project_AreaID_ID">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Project" EntitySet="Project" />
           </AssociationSet>
           <AssociationSet Name="FK_ProjectGroup_ProjectID_ID" Association="Self.FK_ProjectGroup_ProjectID_ID">
             <End Role="Project" EntitySet="Project" />
@@ -334,6 +360,8 @@
           <NavigationProperty Name="House" Relationship="Self.FK_House_Project_ID" FromRole="Project" ToRole="House" />
           <NavigationProperty Name="ProjectGroup" Relationship="Self.FK_ProjectGroup_ProjectID_ID" FromRole="Project" ToRole="ProjectGroup" />
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Project_ID" FromRole="Project" ToRole="SubscriberProjectMapping" />
+          <Property Name="AreaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="HouseSelectionDBModel.FK_Project_AreaID_ID" FromRole="Project" ToRole="Area" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -559,6 +587,11 @@
             <End Role="BackEndAccount" EntitySet="BackEndAccount" />
             <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
           </AssociationSet>
+          <EntitySet Name="Area" EntityType="HouseSelectionDBModel.Area" />
+          <AssociationSet Name="FK_Project_AreaID_ID" Association="HouseSelectionDBModel.FK_Project_AreaID_ID">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BackEndAccount">
           <Key>
@@ -603,6 +636,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_Project_AreaID_ID" FromRole="Area" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Project_AreaID_ID">
+          <End Type="HouseSelectionDBModel.Area" Role="Area" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="AreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -635,6 +689,7 @@
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -747,6 +802,15 @@
                 <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
                 <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
                 <ScalarProperty Name="BackEndAccountID" ColumnName="BackEndAccountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

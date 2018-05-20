@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaDAL.cs" />
     <Compile Include="BackEndAccountLoginRecordDAL.cs" />
     <Compile Include="ApplicationDAL.cs" />
     <Compile Include="BackEndAccountDAL.cs" />

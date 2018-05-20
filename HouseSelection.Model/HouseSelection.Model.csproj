@@ -53,6 +53,9 @@
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationEntity.cs" />
+    <Compile Include="Area.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="BackEndAccount.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>

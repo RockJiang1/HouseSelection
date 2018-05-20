@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using HouseSelection.PrivateAPI.Models;
 using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
@@ -13,21 +14,31 @@ namespace HouseSelection.PrivateAPI.Controllers
     public class GetProjectByIDController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
-        public ProjectResultEntity Get(int ProjectID)
+        public ProjectResultEntity Post(GetProjectByIDRequest ProjectID)
         {
             ProjectResultEntity ret = new ProjectResultEntity();
             try
             {
-                var _project = _projectBLL.GetModels(x=> x.ID == ProjectID).FirstOrDefault();
-                ret.Project = new ProjectEntity()
+                var _project = _projectBLL.GetModels(x=> x.ID == ProjectID.ProjectID).FirstOrDefault();
+                if(_project != null)
                 {
-                    ID = _project.ID,
-                    Number = _project.Number,
-                    Name = _project.Name,
-                    Address = _project.Address
-                };
-                ret.code = 0;
-                ret.errMsg = "";
+                    ret.Project = new ProjectEntity()
+                    {
+                        ID = _project.ID,
+                        Number = _project.Number,
+                        Name = _project.Name,
+                        Address = _project.Address,
+                        ProjectArea = _project.Area.Name
+                    };
+                    ret.code = 0;
+                    ret.errMsg = "";
+                }
+                else
+                {
+                    ret.code = 104;
+                    ret.errMsg = "查询的项目ID不存在";
+                }
+                
             }
             catch(Exception ex)
             {

@@ -36,5 +36,6 @@ namespace HouseSelection.Model
         public virtual DbSet<BackEndAccount> BackEndAccount { get; set; }
         public virtual DbSet<ApplicationAccount> ApplicationAccount { get; set; }
         public virtual DbSet<BackEndAccountLoginRecord> BackEndAccountLoginRecord { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
     }
 }

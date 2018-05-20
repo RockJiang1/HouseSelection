@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationBLL.cs" />
+    <Compile Include="AreaBLL.cs" />
     <Compile Include="BackEndAccountBLL.cs" />
     <Compile Include="BackEndAccountLoginRecordBLL.cs" />
     <Compile Include="BaseBLL.cs" />

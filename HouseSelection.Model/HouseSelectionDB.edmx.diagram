@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="HouseSelectionDBModel.ApplicationAccount" Width="1.5" PointX="8.375" PointY="3.75" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.BackEndAccountLoginRecord" Width="1.5" PointX="10.625" PointY="1" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_BackEndAccountLoginRecord_BackEndAccount_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.Area" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_Project_AreaID_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

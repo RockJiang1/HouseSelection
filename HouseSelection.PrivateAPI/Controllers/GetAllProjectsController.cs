@@ -17,7 +17,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         private ProjectBLL _projectBLL = new ProjectBLL();
 
         [ApiAuthorize]
-        public ProjectListResultEntity Get(BaseRequestModel baseRequest)
+        public ProjectListResultEntity Post(BaseRequestModel baseRequest)
         {
             ProjectListResultEntity ret = new ProjectListResultEntity();
             try
@@ -31,7 +31,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                         ID = p.ID,
                         Number = p.Number,
                         Name = p.Name,
-                        Address = p.Address
+                        Address = p.Address,
+                        ProjectArea = p.Area.Name
                     };
                     ret.ProjectList.Add(retP);
                 }

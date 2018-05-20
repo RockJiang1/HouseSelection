@@ -27,5 +27,10 @@ namespace HouseSelection.Model
         /// 项目地址
         /// </summary>
         public string Address { get; set; }
+
+        /// <summary>
+        /// 项目所属区域
+        /// </summary>
+        public string ProjectArea { get; set; }
     }
 }

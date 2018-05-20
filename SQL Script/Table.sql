@@ -69,7 +69,7 @@ END
 GO
 
 --认购人参与项目关系表
-IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'Project' AND [type] = 'U')
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'SubscriberProjectMapping' AND [type] = 'U')
 BEGIN
 	CREATE TABLE SubscriberProjectMapping
 	(
@@ -91,6 +91,8 @@ END
 GO
 
 --居室表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'RoomType' AND [type] = 'U')
+BEGIN
 CREATE TABLE RoomType
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -103,7 +105,13 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+END
+GO
+
+
 --房源信息表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'House' AND [type] = 'U')
+BEGIN
 CREATE TABLE House
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -132,8 +140,12 @@ LastUpdate DATETIME NULL,
 ALTER TABLE House ADD CONSTRAINT FK_House_Project_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
 ALTER TABLE House ADD CONSTRAINT FK_House_RoomType_ID FOREIGN KEY(RoomTypeID) REFERENCES RoomType(ID)
 
+END
+GO
 
 --项目分组表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'ProjectGroup' AND [type] = 'U')
+BEGIN
 CREATE TABLE ProjectGroup
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -150,7 +162,12 @@ LastUpdate DATETIME NULL,
 ALTER TABLE ProjectGroup ADD CONSTRAINT FK_ProjectGroup_ProjectID_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
 
 
+END
+GO
+
 --摇号结果表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'ShakingNumberResult' AND [type] = 'U')
+BEGIN
 CREATE TABLE ShakingNumberResult
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -169,8 +186,12 @@ LastUpdate DATETIME NULL,
 ALTER TABLE ShakingNumberResult ADD CONSTRAINT FK_ShakingNumberResult_ProjectGroup_ID FOREIGN KEY(ProjectGroupID) REFERENCES ProjectGroup(ID)
 ALTER TABLE ShakingNumberResult ADD CONSTRAINT FK_ShakingNumberResult_SubscriberProjectMapping_ID FOREIGN KEY(SubscriberProjectMappingID) REFERENCES SubscriberProjectMapping(ID)
 
+END
+GO
 
 --后台账号表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'BackEndAccount' AND [type] = 'U')
+BEGIN
 CREATE TABLE BackEndAccount
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -184,9 +205,16 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+END
+GO
+
 --INSERT INTO BackEndAccount VALUES ('administrator','200CEB26807D6BF99FD6F4F0D1CA54D4',GETDATE(),GETDATE())
 
+
+
 --后台账号登陆记录表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'BackEndAccountLoginRecord' AND [type] = 'U')
+BEGIN
 CREATE TABLE BackEndAccountLoginRecord
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -201,7 +229,14 @@ LoginIP VARCHAR(20) NULL,
 
 ALTER TABLE BackEndAccountLoginRecord ADD CONSTRAINT FK_BackEndAccountLoginRecord_BackEndAccount_ID FOREIGN KEY(BackEndAccountID) REFERENCES BackEndAccount(ID)
 
+
+END
+GO
+
+
 --应用账号表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'ApplicationAccount' AND [type] = 'U')
+BEGIN
 CREATE TABLE ApplicationAccount
 (
 ID INT IDENTITY(1,1) NOT NULL,
@@ -215,4 +250,49 @@ LastUpdate DATETIME NULL,
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+END
+GO
 --INSERT INTO ApplicationAccount VALUES ('SYY','0B2223C37F54864403847E762E1F87F3',GETDATE(),GETDATE())
+
+
+--城市区表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'Area' AND [type] = 'U')
+BEGIN
+CREATE TABLE Area
+(
+ID INT IDENTITY(1,1) NOT NULL,
+Name NVARCHAR(10) NOT NULL,
+CityName NVARCHAR(10) NOT NULL,
+ CONSTRAINT [PK_Area] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+
+--INSERT INTO Area VALUES (N'东城区',N'北京市')
+--INSERT INTO Area VALUES (N'西城区',N'北京市')
+--INSERT INTO Area VALUES (N'朝阳区',N'北京市')
+--INSERT INTO Area VALUES (N'海淀区',N'北京市')
+--INSERT INTO Area VALUES (N'丰台区',N'北京市')
+--INSERT INTO Area VALUES (N'石景山区',N'北京市')
+--INSERT INTO Area VALUES (N'顺义区',N'北京市')
+--INSERT INTO Area VALUES (N'通州区',N'北京市')
+--INSERT INTO Area VALUES (N'大兴区',N'北京市')
+--INSERT INTO Area VALUES (N'房山区',N'北京市')
+--INSERT INTO Area VALUES (N'门头沟区',N'北京市')
+--INSERT INTO Area VALUES (N'昌平区',N'北京市')
+--INSERT INTO Area VALUES (N'平谷区',N'北京市')
+--INSERT INTO Area VALUES (N'密云区',N'北京市')
+--INSERT INTO Area VALUES (N'怀柔区',N'北京市')
+--INSERT INTO Area VALUES (N'延庆区',N'北京市')
+
+--项目所属城市区
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'AreaID' AND object_id = OBJECT_ID(N'Project'))
+BEGIN
+	ALTER TABLE Project ADD AreaID INT NOT NULL
+	ALTER TABLE Project ADD CONSTRAINT FK_Project_AreaID_ID FOREIGN KEY(AreaID) REFERENCES Area(ID)
+END
+GO
