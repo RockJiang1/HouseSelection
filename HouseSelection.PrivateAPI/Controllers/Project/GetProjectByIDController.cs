@@ -14,7 +14,7 @@ namespace HouseSelection.PrivateAPI.Controllers
     public class GetProjectByIDController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
-        public ProjectResultEntity Post(GetProjectByIDRequest ProjectID)
+        public ProjectResultEntity Post(GetProjectByIDRequestModel ProjectID)
         {
             ProjectResultEntity ret = new ProjectResultEntity();
             try

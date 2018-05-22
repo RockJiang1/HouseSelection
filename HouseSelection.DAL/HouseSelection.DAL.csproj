@@ -59,6 +59,7 @@
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomTypeDAL.cs" />
+    <Compile Include="SubscriberDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

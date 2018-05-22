@@ -23,6 +23,8 @@ BEGIN
 END
 GO
 
+--INSERT INTO Subscriber VALUES (N'蒋天淳', N'110111199001010001','15051439296',N'北京市东城区中南海','100001',N'已婚',N'东城区',N'东城区',GETDATE(),GETDATE())
+
 --认购人家庭成员
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'SubscriberFamilyMember' AND [type] = 'U')
 BEGIN
@@ -354,5 +356,47 @@ IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE [name] = N'HouseEstateID' AND obj
 BEGIN
 	ALTER TABLE House ADD HouseEstateID INT NOT NULL
 	ALTER TABLE House ADD CONSTRAINT FK_House_HouseEstateID_ID FOREIGN KEY(HouseEstateID) REFERENCES HouseEstate(ID)
+END
+GO
+
+
+
+--房源所属认购人
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'SubscriberID' AND object_id = OBJECT_ID(N'House'))
+BEGIN
+	ALTER TABLE House ADD SubscriberID INT NULL
+	ALTER TABLE House ADD CONSTRAINT FK_House_SubscriberID_ID FOREIGN KEY(SubscriberID) REFERENCES Subscriber(ID)
+END
+GO
+
+
+--选房与弃选记录表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'HouseSelectionRecord' AND [type] = 'U')
+BEGIN
+	CREATE TABLE HouseSelectionRecord
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		ProjectID INT NOT NULL,
+		HouseID INT NOT NULL,
+		SubscriberID INT NOT NULL,
+		SelectTime DATETIME NOT NULL,
+		SelectImageUrl1 NVARCHAR(200) NULL,
+		SelectImageUrl2 NVARCHAR(200) NULL,
+		SelectImageUrl3 NVARCHAR(200) NULL,
+		IsAbandon BIT NOT NULL,
+		AbandonTime DATETIME NULL,
+		AbandonImageUrl1 NVARCHAR(200) NULL,
+		AbandonImageUrl2 NVARCHAR(200) NULL,
+		AbandonImageUrl3 NVARCHAR(200) NULL,
+	 CONSTRAINT [PK_HouseSelectionRecord] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE HouseSelectionRecord ADD CONSTRAINT FK_HouseSelectionRecord_ProjectID_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
+	ALTER TABLE HouseSelectionRecord ADD CONSTRAINT FK_HouseSelectionRecord_HouseID_ID FOREIGN KEY(HouseID) REFERENCES House(ID)
+	ALTER TABLE HouseSelectionRecord ADD CONSTRAINT FK_HouseSelectionRecord_SubscriberID_ID FOREIGN KEY(SubscriberID) REFERENCES Subscriber(ID)
+
 END
 GO

@@ -51,6 +51,7 @@
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomTypeBLL.cs" />
+    <Compile Include="SubscriberBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HouseSelection.DAL\HouseSelection.DAL.csproj">

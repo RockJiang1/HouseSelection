@@ -64,6 +64,7 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="HouseEstateID" Type="int" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" />
         </EntityType>
         <EntityType Name="HouseEstate">
           <Key>
@@ -84,6 +85,24 @@
           <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HouseSelectionRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="HouseID" Type="int" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" Nullable="false" />
+          <Property Name="SelectTime" Type="datetime" Nullable="false" />
+          <Property Name="SelectImageUrl1" Type="nvarchar" MaxLength="200" />
+          <Property Name="SelectImageUrl2" Type="nvarchar" MaxLength="200" />
+          <Property Name="SelectImageUrl3" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsAbandon" Type="bit" Nullable="false" />
+          <Property Name="AbandonTime" Type="datetime" />
+          <Property Name="AbandonImageUrl1" Type="nvarchar" MaxLength="200" />
+          <Property Name="AbandonImageUrl2" Type="nvarchar" MaxLength="200" />
+          <Property Name="AbandonImageUrl3" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -226,6 +245,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_House_SubscriberID_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HouseEstate_ProjectID_ID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="HouseEstate" Type="Self.HouseEstate" Multiplicity="*" />
@@ -247,6 +278,42 @@
             </Principal>
             <Dependent Role="HouseGroup">
               <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_HouseID_ID">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="HouseSelectionRecord" Type="Self.HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_ProjectID_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="HouseSelectionRecord" Type="Self.HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_SubscriberID_ID">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="HouseSelectionRecord" Type="Self.HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="SubscriberID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -342,6 +409,7 @@
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseEstate" EntityType="Self.HouseEstate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseGroup" EntityType="Self.HouseGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HouseSelectionRecord" EntityType="Self.HouseSelectionRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectGroup" EntityType="Self.ProjectGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
@@ -369,6 +437,10 @@
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="House" EntitySet="House" />
           </AssociationSet>
+          <AssociationSet Name="FK_House_SubscriberID_ID" Association="Self.FK_House_SubscriberID_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
           <AssociationSet Name="FK_HouseEstate_ProjectID_ID" Association="Self.FK_HouseEstate_ProjectID_ID">
             <End Role="Project" EntitySet="Project" />
             <End Role="HouseEstate" EntitySet="HouseEstate" />
@@ -376,6 +448,18 @@
           <AssociationSet Name="FK_HouseGroup_ProjectID_ID" Association="Self.FK_HouseGroup_ProjectID_ID">
             <End Role="Project" EntitySet="Project" />
             <End Role="HouseGroup" EntitySet="HouseGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_HouseID_ID" Association="Self.FK_HouseSelectionRecord_HouseID_ID">
+            <End Role="House" EntitySet="House" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_ProjectID_ID" Association="Self.FK_HouseSelectionRecord_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_SubscriberID_ID" Association="Self.FK_HouseSelectionRecord_SubscriberID_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_AreaID_ID" Association="Self.FK_Project_AreaID_ID">
             <End Role="Area" EntitySet="Area" />
@@ -427,6 +511,7 @@
           <NavigationProperty Name="HouseGroup" Relationship="HouseSelectionDBModel.FK_HouseGroup_ProjectID_ID" FromRole="Project" ToRole="HouseGroup" />
           <NavigationProperty Name="HouseEstate" Relationship="HouseSelectionDBModel.FK_HouseEstate_ProjectID_ID" FromRole="Project" ToRole="HouseEstate" />
           <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_Project_ID" FromRole="Project" ToRole="House" />
+          <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" FromRole="Project" ToRole="HouseSelectionRecord" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -481,6 +566,8 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubscriberFamilyMember" Relationship="Self.FK_SubscriberFamilyMember_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberFamilyMember" />
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberProjectMapping" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_SubscriberID_ID" FromRole="Subscriber" ToRole="House" />
+          <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="Subscriber" ToRole="HouseSelectionRecord" />
         </EntityType>
         <EntityType Name="SubscriberFamilyMember">
           <Key>
@@ -651,6 +738,23 @@
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="House" EntitySet="House" />
           </AssociationSet>
+          <EntitySet Name="HouseSelectionRecord" EntityType="HouseSelectionDBModel.HouseSelectionRecord" />
+          <AssociationSet Name="FK_House_SubscriberID_ID" Association="HouseSelectionDBModel.FK_House_SubscriberID_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_HouseID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID">
+            <End Role="House" EntitySet="House" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_ProjectID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_SubscriberID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BackEndAccount">
           <Key>
@@ -790,6 +894,9 @@
           <NavigationProperty Name="HouseEstate" Relationship="HouseSelectionDBModel.FK_House_HouseEstateID_ID" FromRole="House" ToRole="HouseEstate" />
           <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_House_Project_ID" FromRole="House" ToRole="Project" />
           <NavigationProperty Name="RoomType" Relationship="HouseSelectionDBModel.FK_House_RoomType_ID" FromRole="House" ToRole="RoomType" />
+          <Property Name="SubscriberID" Type="Int32" />
+          <NavigationProperty Name="Subscriber" Relationship="HouseSelectionDBModel.FK_House_SubscriberID_ID" FromRole="House" ToRole="Subscriber" />
+          <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" FromRole="House" ToRole="HouseSelectionRecord" />
         </EntityType>
         <Association Name="FK_House_GroupID_ID">
           <End Type="HouseSelectionDBModel.HouseGroup" Role="HouseGroup" Multiplicity="1" />
@@ -836,6 +943,75 @@
             </Principal>
             <Dependent Role="House">
               <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HouseSelectionRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="HouseID" Type="Int32" Nullable="false" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
+          <Property Name="SelectTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SelectImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SelectImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SelectImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsAbandon" Type="Boolean" Nullable="false" />
+          <Property Name="AbandonTime" Type="DateTime" Precision="3" />
+          <Property Name="AbandonImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbandonImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbandonImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" FromRole="HouseSelectionRecord" ToRole="House" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" FromRole="HouseSelectionRecord" ToRole="Project" />
+          <NavigationProperty Name="Subscriber" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="HouseSelectionRecord" ToRole="Subscriber" />
+        </EntityType>
+        <Association Name="FK_House_SubscriberID_ID">
+          <End Type="HouseSelectionDBModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="House">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_HouseID_ID">
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_ProjectID_ID">
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_SubscriberID_ID">
+          <End Type="HouseSelectionDBModel.Subscriber" Role="Subscriber" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="SubscriberID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -999,6 +1175,7 @@
           <EntitySetMapping Name="House">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.House">
               <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
                 <ScalarProperty Name="HouseEstateID" ColumnName="HouseEstateID" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
@@ -1015,6 +1192,25 @@
                 <ScalarProperty Name="Block" ColumnName="Block" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HouseSelectionRecord">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.HouseSelectionRecord">
+              <MappingFragment StoreEntitySet="HouseSelectionRecord">
+                <ScalarProperty Name="AbandonImageUrl3" ColumnName="AbandonImageUrl3" />
+                <ScalarProperty Name="AbandonImageUrl2" ColumnName="AbandonImageUrl2" />
+                <ScalarProperty Name="AbandonImageUrl1" ColumnName="AbandonImageUrl1" />
+                <ScalarProperty Name="AbandonTime" ColumnName="AbandonTime" />
+                <ScalarProperty Name="IsAbandon" ColumnName="IsAbandon" />
+                <ScalarProperty Name="SelectImageUrl3" ColumnName="SelectImageUrl3" />
+                <ScalarProperty Name="SelectImageUrl2" ColumnName="SelectImageUrl2" />
+                <ScalarProperty Name="SelectImageUrl1" ColumnName="SelectImageUrl1" />
+                <ScalarProperty Name="SelectTime" ColumnName="SelectTime" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

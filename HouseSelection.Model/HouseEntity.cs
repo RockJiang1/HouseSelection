@@ -9,6 +9,10 @@ namespace HouseSelection.Model
     public class HouseEntity
     {
         /// <summary>
+        /// 房源ID
+        /// </summary>
+        public int HouseID { get; set; }
+        /// <summary>
         /// 序号
         /// </summary>
         public int SerialNumber { get; set; }
@@ -67,5 +71,15 @@ namespace HouseSelection.Model
         /// 总价
         /// </summary>
         public decimal TotalPrice { get; set; }
+
+        /// <summary>
+        /// 认购人ID
+        /// </summary>
+        public int? SubscriberID { get; set; }
+
+        /// <summary>
+        /// 认购人姓名
+        /// </summary>
+        public string SubscriberName { get; set; }
     }
 }

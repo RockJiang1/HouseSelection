@@ -65,6 +65,8 @@
     <Compile Include="BaseListResultEntity.cs" />
     <Compile Include="BaseResultEntity.cs" />
     <Compile Include="GetHouseEstateResultEntity.cs" />
+    <Compile Include="GetHouseResultEntity.cs" />
+    <Compile Include="GetHouseSubscriberResultEntity.cs" />
     <Compile Include="House.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
@@ -91,6 +93,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HouseSelectionDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HouseSelectionRecord.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ImportHouseInfoRequestEntity.cs" />
     <Compile Include="Project.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
@@ -111,6 +116,7 @@
     <Compile Include="Subscriber.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubscriberEntity.cs" />
     <Compile Include="SubscriberFamilyMember.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>

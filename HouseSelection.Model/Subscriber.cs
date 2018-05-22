@@ -19,6 +19,8 @@ namespace HouseSelection.Model
         {
             this.SubscriberFamilyMember = new HashSet<SubscriberFamilyMember>();
             this.SubscriberProjectMapping = new HashSet<SubscriberProjectMapping>();
+            this.House = new HashSet<House>();
+            this.HouseSelectionRecord = new HashSet<HouseSelectionRecord>();
         }
     
         public int ID { get; set; }
@@ -37,5 +39,9 @@ namespace HouseSelection.Model
         public virtual ICollection<SubscriberFamilyMember> SubscriberFamilyMember { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<House> House { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
     }
 }

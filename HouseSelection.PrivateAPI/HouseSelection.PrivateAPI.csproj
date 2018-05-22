@@ -187,7 +187,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\House\GetAllHouseEstateInfoController.cs" />
+    <Compile Include="Controllers\House\GetAllHouseInfoController.cs" />
     <Compile Include="Controllers\House\GetHouseEstatesController.cs" />
+    <Compile Include="Controllers\House\GetHousesController.cs" />
+    <Compile Include="Controllers\House\GetHouseSubscriberController.cs" />
     <Compile Include="Controllers\House\ImportHouseInfoController.cs" />
     <Compile Include="Controllers\Project\AddProjectController.cs" />
     <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
@@ -202,7 +205,10 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BaseRequestModel.cs" />
-    <Compile Include="Models\GetProjectByIDRequest.cs" />
+    <Compile Include="Models\GetAllHouseInfoRequestModel.cs" />
+    <Compile Include="Models\GetHousesRequestModel.cs" />
+    <Compile Include="Models\GetHouseSubscriberRequestModel.cs" />
+    <Compile Include="Models\GetProjectByIDRequestModel.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

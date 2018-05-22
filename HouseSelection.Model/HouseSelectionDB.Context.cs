@@ -39,5 +39,6 @@ namespace HouseSelection.Model
         public virtual DbSet<HouseGroup> HouseGroup { get; set; }
         public virtual DbSet<HouseEstate> HouseEstate { get; set; }
         public virtual DbSet<House> House { get; set; }
+        public virtual DbSet<HouseSelectionRecord> HouseSelectionRecord { get; set; }
     }
 }

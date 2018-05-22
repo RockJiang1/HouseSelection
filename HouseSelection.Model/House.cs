@@ -14,6 +14,12 @@ namespace HouseSelection.Model
     
     public partial class House
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public House()
+        {
+            this.HouseSelectionRecord = new HashSet<HouseSelectionRecord>();
+        }
+    
         public int ID { get; set; }
         public int ProjectID { get; set; }
         public int SerialNumber { get; set; }
@@ -32,10 +38,14 @@ namespace HouseSelection.Model
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public int HouseEstateID { get; set; }
+        public Nullable<int> SubscriberID { get; set; }
     
         public virtual HouseGroup HouseGroup { get; set; }
         public virtual HouseEstate HouseEstate { get; set; }
         public virtual Project Project { get; set; }
         public virtual RoomType RoomType { get; set; }
+        public virtual Subscriber Subscriber { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
     }
 }

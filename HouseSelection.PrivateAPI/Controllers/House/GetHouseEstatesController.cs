@@ -12,6 +12,9 @@ using HouseSelection.LoggerHelper;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
+    /// <summary>
+    /// 按楼盘名称搜索楼盘信息
+    /// </summary>
     public class GetHouseEstatesController : ApiController
     {
         private HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();

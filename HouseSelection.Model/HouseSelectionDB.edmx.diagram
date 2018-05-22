@@ -33,6 +33,11 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_House_HouseEstateID_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_House_Project_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_House_RoomType_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.HouseSelectionRecord" Width="1.5" PointX="11.5" PointY="4.875" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_House_SubscriberID_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
