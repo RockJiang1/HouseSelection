@@ -12,17 +12,16 @@ namespace HouseSelection.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SubscriberFamilyMember
+    public partial class TelephoneNoticeRecord
     {
         public int ID { get; set; }
-        public int SubscriberID { get; set; }
-        public string Name { get; set; }
-        public string IdentityNumber { get; set; }
-        public string Relationship { get; set; }
-        public string Area { get; set; }
+        public int ShakingNumberResultID { get; set; }
+        public Nullable<System.DateTime> NoticeTime { get; set; }
+        public int ResultType { get; set; }
+        public Nullable<int> ErrorType { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     
-        public virtual Subscriber Subscriber { get; set; }
+        public virtual ShakingNumberResult ShakingNumberResult { get; set; }
     }
 }

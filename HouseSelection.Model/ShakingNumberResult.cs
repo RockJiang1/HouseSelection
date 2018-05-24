@@ -14,15 +14,31 @@ namespace HouseSelection.Model
     
     public partial class ShakingNumberResult
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ShakingNumberResult()
+        {
+            this.HouseSelectPeriod = new HashSet<HouseSelectPeriod>();
+            this.TelephoneNoticeRecord = new HashSet<TelephoneNoticeRecord>();
+        }
+    
         public int ID { get; set; }
         public int ProjectGroupID { get; set; }
         public int SubscriberProjectMappingID { get; set; }
         public int ShakingNumberSequance { get; set; }
         public string ShakingNumber { get; set; }
+        public int NoticeTime { get; set; }
+        public bool IsError { get; set; }
+        public bool IsContacted { get; set; }
+        public bool IsCallBack { get; set; }
+        public bool IsMessageSend { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HouseSelectPeriod> HouseSelectPeriod { get; set; }
         public virtual ProjectGroup ProjectGroup { get; set; }
         public virtual SubscriberProjectMapping SubscriberProjectMapping { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelephoneNoticeRecord> TelephoneNoticeRecord { get; set; }
     }
 }

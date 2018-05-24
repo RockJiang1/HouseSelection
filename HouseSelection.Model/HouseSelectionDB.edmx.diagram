@@ -8,15 +8,10 @@
         <EntityTypeShape EntityType="HouseSelectionDBModel.Project" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.ProjectGroup" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.RoomType" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HouseSelectionDBModel.ShakingNumberResult" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.Subscriber" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberFamilyMember" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberProjectMapping" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_ProjectGroup_ProjectID_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Project_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_ProjectGroup_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" ManuallyRouted="false" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberProjectMapping_Subscriber_ID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.BackEndAccount" Width="1.5" PointX="8.375" PointY="0.875" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.ApplicationAccount" Width="1.5" PointX="8.375" PointY="3.75" />
@@ -38,6 +33,18 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.HouseSelectPeriod" Width="1.5" PointX="13.5" PointY="10.25" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.ShakingNumberResult" Width="1.5" PointX="11.25" PointY="10" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.SubscriberFamilyMember" Width="1.5" PointX="6" PointY="1.25" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.TelephoneNoticeRecord" Width="1.5" PointX="13.5" PointY="13.25" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectPeriod_ShakingNumberResult_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_ProjectGroup_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccount" Width="1.5" PointX="13.375" PointY="0.875" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccountLoginRecord" Width="1.5" PointX="15.625" PointY="1" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

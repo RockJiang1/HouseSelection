@@ -27,6 +27,8 @@ namespace HouseSelection.Model
         public string AbandonImageUrl1 { get; set; }
         public string AbandonImageUrl2 { get; set; }
         public string AbandonImageUrl3 { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public Nullable<System.DateTime> LastUpdate { get; set; }
     
         public virtual House House { get; set; }
         public virtual Project Project { get; set; }

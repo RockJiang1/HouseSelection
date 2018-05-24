@@ -26,6 +26,11 @@ namespace HouseSelection.DAL
             dbContext.Set<T>().Remove(t);
         }
 
+        public void DeleteRange(List<T> t)
+        {
+            dbContext.Set<T>().RemoveRange(t);
+        }
+
         public void Update(T t)
         {
 

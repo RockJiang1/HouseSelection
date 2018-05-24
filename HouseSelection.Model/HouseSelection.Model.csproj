@@ -64,6 +64,12 @@
     </Compile>
     <Compile Include="BaseListResultEntity.cs" />
     <Compile Include="BaseResultEntity.cs" />
+    <Compile Include="FrontEndAccount.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEndAccountLoginRecord.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetHouseEstateResultEntity.cs" />
     <Compile Include="GetHouseResultEntity.cs" />
     <Compile Include="GetHouseSubscriberResultEntity.cs" />
@@ -96,7 +102,11 @@
     <Compile Include="HouseSelectionRecord.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="HouseSelectPeriod.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ImportHouseInfoRequestEntity.cs" />
+    <Compile Include="ImportSubscriberRequestEntity.cs" />
     <Compile Include="Project.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
@@ -113,6 +123,7 @@
     <Compile Include="ShakingNumberResult.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShakingNumberResultEntity.cs" />
     <Compile Include="Subscriber.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
@@ -120,7 +131,11 @@
     <Compile Include="SubscriberFamilyMember.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubscriberFamilyMemberEntity.cs" />
     <Compile Include="SubscriberProjectMapping.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TelephoneNoticeRecord.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="TokenEntity.cs" />

@@ -35,6 +35,7 @@ BEGIN
 		Name NVARCHAR(50) NOT NULL,
 		IdentityNumber VARCHAR(20) NOT NULL,
 		Relationship NVARCHAR(10) NOT NULL,
+		Area NVARCHAR(50) NOT NULL,
 		CreateTime DATETIME NOT NULL,
 		LastUpdate DATETIME NULL,
 	 CONSTRAINT [PK_SubscriberFamilyMember] PRIMARY KEY CLUSTERED 
@@ -450,6 +451,48 @@ BEGIN
 	) ON [PRIMARY]
 
 	ALTER TABLE TelephoneNoticeRecord ADD CONSTRAINT FK_TelephoneNoticeRecord_ShakingNumberResult_ID FOREIGN KEY(ShakingNumberResultID) REFERENCES ShakingNumberResult(ID)
+
+END
+GO
+
+
+--前台账号表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'FrontEndAccount' AND [type] = 'U')
+BEGIN
+	CREATE TABLE FrontEndAccount
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		Account NVARCHAR(100) NOT NULL,
+		Password NVARCHAR(50) NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_FrontEndAccount] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+END
+GO
+
+
+--前台账号登陆记录表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'FrontEndAccountLoginRecord' AND [type] = 'U')
+BEGIN
+	CREATE TABLE FrontEndAccountLoginRecord
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		FrontEndAccountID INT NOT NULL,
+		LoginTime DATETIME NOT NULL,
+		LoginIP VARCHAR(20) NULL,
+	 CONSTRAINT [PK_FrontEndAccountLoginRecord] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE FrontEndAccountLoginRecord ADD CONSTRAINT FK_FrontEndAccountLoginRecord_FrontEndAccount_ID FOREIGN KEY(FrontEndAccountID) REFERENCES FrontEndAccount(ID)
+
 
 END
 GO

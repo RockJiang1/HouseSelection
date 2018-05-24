@@ -34,6 +34,11 @@ namespace HouseSelection.BLL
             _dal.Delete(t);
             return _dal.SaveChanges();
         }
+        public bool DeleteRange(List<T> t)
+        {
+            _dal.DeleteRange(t);
+            return _dal.SaveChanges();
+        }
         public bool Update(T t)
         {
             _dal.Update(t);

@@ -17,10 +17,10 @@ namespace HouseSelection.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subscriber()
         {
-            this.SubscriberFamilyMember = new HashSet<SubscriberFamilyMember>();
             this.SubscriberProjectMapping = new HashSet<SubscriberProjectMapping>();
             this.House = new HashSet<House>();
             this.HouseSelectionRecord = new HashSet<HouseSelectionRecord>();
+            this.SubscriberFamilyMember = new HashSet<SubscriberFamilyMember>();
         }
     
         public int ID { get; set; }
@@ -36,12 +36,12 @@ namespace HouseSelection.Model
         public Nullable<System.DateTime> LastUpdate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubscriberFamilyMember> SubscriberFamilyMember { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<House> House { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubscriberFamilyMember> SubscriberFamilyMember { get; set; }
     }
 }
