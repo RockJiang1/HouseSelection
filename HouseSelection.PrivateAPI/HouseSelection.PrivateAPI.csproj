@@ -197,6 +197,7 @@
     <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
     <Compile Include="Controllers\Project\GetAllProjectsController.cs" />
     <Compile Include="Controllers\Project\GetProjectByIDController.cs" />
+    <Compile Include="Controllers\Project\GetProjectGroupController.cs" />
     <Compile Include="Controllers\Project\GetProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Subscriber\ImportSubscriberController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\GetHousesRequestModel.cs" />
     <Compile Include="Models\GetHouseSubscriberRequestModel.cs" />
     <Compile Include="Models\GetProjectByIDRequestModel.cs" />
+    <Compile Include="Models\GetProjectGroupRequestModel.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

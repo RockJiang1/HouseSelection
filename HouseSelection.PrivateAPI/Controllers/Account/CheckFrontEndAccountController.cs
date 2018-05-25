@@ -48,7 +48,7 @@ namespace HouseSelection.PrivateAPI.Controllers.Account
             }
             catch (Exception ex)
             {
-                Logger.LogException("验证后台登陆账号时发生异常！", "CheckFrontEndAccountController", "Post", ex);
+                Logger.LogException("验证前台登陆账号时发生异常！", "CheckFrontEndAccountController", "Post", ex);
                 ret.code = 999;
                 ret.errMsg = ex.Message;
             }

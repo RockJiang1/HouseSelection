@@ -114,6 +114,8 @@
     <Compile Include="ProjectGroup.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetProjectGroupResultEntity.cs" />
+    <Compile Include="ProjectGroupEntity.cs" />
     <Compile Include="ProjectListResultEntity.cs" />
     <Compile Include="ProjectResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
