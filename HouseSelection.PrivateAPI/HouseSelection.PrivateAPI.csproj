@@ -186,6 +186,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Account\CheckFrontEndAccountController.cs" />
     <Compile Include="Controllers\House\GetAllHouseEstateInfoController.cs" />
     <Compile Include="Controllers\House\GetAllHouseInfoController.cs" />
     <Compile Include="Controllers\House\GetHouseEstatesController.cs" />

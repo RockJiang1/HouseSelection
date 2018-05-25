@@ -45,6 +45,8 @@
     <Compile Include="BackEndAccountBLL.cs" />
     <Compile Include="BackEndAccountLoginRecordBLL.cs" />
     <Compile Include="BaseBLL.cs" />
+    <Compile Include="FrontEndAccountBLL.cs" />
+    <Compile Include="FrontEndAccountLoginRecordBLL.cs" />
     <Compile Include="HouseBLL.cs" />
     <Compile Include="HouseEstateBLL.cs" />
     <Compile Include="HouseGroupBLL.cs" />

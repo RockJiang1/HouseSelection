@@ -53,6 +53,8 @@
     <Compile Include="BackEndAccountDAL.cs" />
     <Compile Include="BaseDAL.cs" />
     <Compile Include="DbContextFactory.cs" />
+    <Compile Include="FrontEndAccountDAL.cs" />
+    <Compile Include="FrontEndAccountLoginRecordDAL.cs" />
     <Compile Include="HouseDAL.cs" />
     <Compile Include="HouseEstateDAL.cs" />
     <Compile Include="HouseGroupDAL.cs" />
