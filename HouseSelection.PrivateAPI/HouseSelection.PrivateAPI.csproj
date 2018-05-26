@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Project\GetProjectGroupController.cs" />
     <Compile Include="Controllers\Project\GetProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Subscriber\GetSubscribersController.cs" />
     <Compile Include="Controllers\Subscriber\ImportSubscriberController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Models\GetHouseSubscriberRequestModel.cs" />
     <Compile Include="Models\GetProjectByIDRequestModel.cs" />
     <Compile Include="Models\GetProjectGroupRequestModel.cs" />
+    <Compile Include="Models\GetSubscriberRequestModel.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
