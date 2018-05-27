@@ -34,6 +34,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                 {
                     SubscriberEntity sub = new SubscriberEntity()
                     {
+                        ID = _hs.Subscriber.ID,
                         Name = _hs.Subscriber.Name,
                         IdentityNumber = _hs.Subscriber.IdentityNumber,
                         Telephone = _hs.Subscriber.Telephone,

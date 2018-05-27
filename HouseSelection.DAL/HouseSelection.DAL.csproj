@@ -58,6 +58,7 @@
     <Compile Include="HouseDAL.cs" />
     <Compile Include="HouseEstateDAL.cs" />
     <Compile Include="HouseGroupDAL.cs" />
+    <Compile Include="HouseSelectionRecordDAL.cs" />
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="ProjectGroupDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="SubscriberDAL.cs" />
     <Compile Include="SubscriberFamilyMemberDAL.cs" />
     <Compile Include="SubscriberProjectMappingDAL.cs" />
+    <Compile Include="TelephoneNoticeRecordDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

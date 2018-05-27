@@ -50,6 +50,7 @@
     <Compile Include="HouseBLL.cs" />
     <Compile Include="HouseEstateBLL.cs" />
     <Compile Include="HouseGroupBLL.cs" />
+    <Compile Include="HouseSelectionRecordBLL.cs" />
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="ProjectGroupBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="SubscriberBLL.cs" />
     <Compile Include="SubscriberFamilyMemberBLL.cs" />
     <Compile Include="SubscriberProjectMappingBLL.cs" />
+    <Compile Include="TelephoneNoticeRecordBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HouseSelection.DAL\HouseSelection.DAL.csproj">

@@ -18,7 +18,6 @@ namespace HouseSelection.Model
         public int ShakingNumberResultID { get; set; }
         public Nullable<System.DateTime> NoticeTime { get; set; }
         public int ResultType { get; set; }
-        public Nullable<int> ErrorType { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     

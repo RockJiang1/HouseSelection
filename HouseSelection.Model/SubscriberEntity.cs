@@ -9,6 +9,10 @@ namespace HouseSelection.Model
     public class SubscriberEntity
     {
         /// <summary>
+        /// 认购人ID
+        /// </summary>
+        public int ID { get; set; }
+        /// <summary>
         /// 姓名
         /// </summary>
         public string Name { get; set; }
@@ -24,7 +28,7 @@ namespace HouseSelection.Model
         public string Telephone { get; set; }
 
         /// <summary>
-        /// 联系嗲之
+        /// 联系地址
         /// </summary>
         public string Address { get; set; }
 

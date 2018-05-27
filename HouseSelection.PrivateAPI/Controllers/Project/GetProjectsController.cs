@@ -19,16 +19,16 @@ namespace HouseSelection.PrivateAPI.Controllers
             ProjectListResultEntity ret = new ProjectListResultEntity();
             try
             {
-                var lstProject = _projectBLL.GetModels(x => 1 == 1).ToList();
-                List<Project> tmp1 = new List<Project>();
-                List<Project> tmp2 = new List<Project>();
-                if (!string.IsNullOrWhiteSpace(Search.SearchStr))
-                {
-                    tmp1 = lstProject.Where(x => x.Number.Contains(Search.SearchStr)).ToList();
-                    tmp2 = lstProject.Where(x => x.Name.Contains(Search.SearchStr)).ToList();
-                }
+                var lstProject = _projectBLL.GetModelsByPage(Search.PageSize, Search.PageIndex, true, x => x.ID, x => x.Number.Contains(Search.SearchStr) || x.Name.Contains(Search.SearchStr)).ToList();
+                //List<Project> tmp1 = new List<Project>();
+                //List<Project> tmp2 = new List<Project>();
+                //if (!string.IsNullOrWhiteSpace(Search.SearchStr))
+                //{
+                //    tmp1 = lstProject.Where(x => x.Number.Contains(Search.SearchStr)).ToList();
+                //    tmp2 = lstProject.Where(x => x.Name.Contains(Search.SearchStr)).ToList();
+                //}
                 ret.ProjectList = new List<ProjectEntity>();
-                foreach (var p in tmp1.Union(tmp2).Skip((Search.PageIndex - 1) * Search.PageSize).Take(Search.PageSize))
+                foreach (var p in lstProject)
                 {
                     ProjectEntity retP = new ProjectEntity()
                     {
@@ -42,7 +42,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                 }
                 ret.code = 0;
                 ret.errMsg = "";
-                ret.recordCount = tmp1.Union(tmp2).Count();
+                ret.recordCount = _projectBLL.GetModels(x => x.Number.Contains(Search.SearchStr) || x.Name.Contains(Search.SearchStr)).Count();
             }
             catch (Exception ex)
             {

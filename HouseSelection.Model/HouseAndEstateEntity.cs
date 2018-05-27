@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HouseSelection.Model
 {
-    public class HouseEntity
+    public class HouseAndEstateEntity
     {
         /// <summary>
-        /// 房源ID
+        /// 楼盘名称
         /// </summary>
-        public int HouseID { get; set; }
+        public string HouseEstateName { get; set; }
 
         /// <summary>
         /// 序号
@@ -72,15 +72,5 @@ namespace HouseSelection.Model
         /// 总价
         /// </summary>
         public decimal TotalPrice { get; set; }
-
-        /// <summary>
-        /// 认购人ID
-        /// </summary>
-        public int? SubscriberID { get; set; }
-
-        /// <summary>
-        /// 认购人姓名
-        /// </summary>
-        public string SubscriberName { get; set; }
     }
 }

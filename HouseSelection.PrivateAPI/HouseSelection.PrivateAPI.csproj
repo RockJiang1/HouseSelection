@@ -186,7 +186,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Account\AddFrontEndAccountController.cs" />
     <Compile Include="Controllers\Account\CheckFrontEndAccountController.cs" />
+    <Compile Include="Controllers\Account\EditFrontEndAccountPasswordController.cs" />
+    <Compile Include="Controllers\Account\GetFrontEndAccountController.cs" />
     <Compile Include="Controllers\House\GetAllHouseEstateInfoController.cs" />
     <Compile Include="Controllers\House\GetAllHouseInfoController.cs" />
     <Compile Include="Controllers\House\GetHouseEstatesController.cs" />
@@ -200,7 +203,10 @@
     <Compile Include="Controllers\Project\GetProjectGroupController.cs" />
     <Compile Include="Controllers\Project\GetProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Subscriber\GetSelectHouseInfoController.cs" />
+    <Compile Include="Controllers\Subscriber\GetAllSubscribersController.cs" />
     <Compile Include="Controllers\Subscriber\GetSubscribersController.cs" />
+    <Compile Include="Controllers\Subscriber\GetSubscriberSelectionHistoryController.cs" />
     <Compile Include="Controllers\Subscriber\ImportSubscriberController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -214,7 +220,9 @@
     <Compile Include="Models\GetHouseSubscriberRequestModel.cs" />
     <Compile Include="Models\GetProjectByIDRequestModel.cs" />
     <Compile Include="Models\GetProjectGroupRequestModel.cs" />
+    <Compile Include="Models\GetSelectHouseInfoRequest.cs" />
     <Compile Include="Models\GetSubscriberRequestModel.cs" />
+    <Compile Include="Models\GetSubscriberSelectionHistoryRequestModel.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -313,6 +321,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\SelectRole\" />
+    <Folder Include="Controllers\SelectTimePeriod\" />
+    <Folder Include="Controllers\ShakingNumber\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

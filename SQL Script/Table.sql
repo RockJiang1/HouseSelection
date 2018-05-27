@@ -389,6 +389,7 @@ BEGIN
 		SelectImageUrl1 NVARCHAR(200) NULL,
 		SelectImageUrl2 NVARCHAR(200) NULL,
 		SelectImageUrl3 NVARCHAR(200) NULL,
+		IsConfirm BIT NOT NULL,
 		IsAbandon BIT NOT NULL,
 		AbandonTime DATETIME NULL,
 		AbandonImageUrl1 NVARCHAR(200) NULL,
@@ -441,7 +442,6 @@ BEGIN
 		ShakingNumberResultID INT NOT NULL,
 		NoticeTime DATETIME NULL,
 		ResultType INT NOT NULL,
-		ErrorType INT NULL,
 		CreateTime DATETIME NOT NULL,
 		LastUpdate DATETIME NULL,
 	 CONSTRAINT [PK_TelephoneNoticeRecord] PRIMARY KEY CLUSTERED 
@@ -494,5 +494,13 @@ BEGIN
 	ALTER TABLE FrontEndAccountLoginRecord ADD CONSTRAINT FK_FrontEndAccountLoginRecord_FrontEndAccount_ID FOREIGN KEY(FrontEndAccountID) REFERENCES FrontEndAccount(ID)
 
 
+END
+GO
+
+
+--是否认证
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'IsAuthorized' AND object_id = OBJECT_ID(N'ShakingNumberResult'))
+BEGIN
+	ALTER TABLE ShakingNumberResult ADD IsAuthorized BIT NOT NULL DEFAULT 0
 END
 GO

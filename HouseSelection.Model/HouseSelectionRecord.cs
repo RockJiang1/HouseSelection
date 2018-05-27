@@ -22,6 +22,7 @@ namespace HouseSelection.Model
         public string SelectImageUrl1 { get; set; }
         public string SelectImageUrl2 { get; set; }
         public string SelectImageUrl3 { get; set; }
+        public bool IsConfirm { get; set; }
         public bool IsAbandon { get; set; }
         public Nullable<System.DateTime> AbandonTime { get; set; }
         public string AbandonImageUrl1 { get; set; }

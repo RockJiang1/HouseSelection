@@ -37,12 +37,12 @@ namespace HouseSelection.Model
         public virtual DbSet<HouseGroup> HouseGroup { get; set; }
         public virtual DbSet<HouseEstate> HouseEstate { get; set; }
         public virtual DbSet<House> House { get; set; }
-        public virtual DbSet<HouseSelectionRecord> HouseSelectionRecord { get; set; }
         public virtual DbSet<HouseSelectPeriod> HouseSelectPeriod { get; set; }
         public virtual DbSet<ShakingNumberResult> ShakingNumberResult { get; set; }
         public virtual DbSet<SubscriberFamilyMember> SubscriberFamilyMember { get; set; }
-        public virtual DbSet<TelephoneNoticeRecord> TelephoneNoticeRecord { get; set; }
         public virtual DbSet<FrontEndAccount> FrontEndAccount { get; set; }
         public virtual DbSet<FrontEndAccountLoginRecord> FrontEndAccountLoginRecord { get; set; }
+        public virtual DbSet<HouseSelectionRecord> HouseSelectionRecord { get; set; }
+        public virtual DbSet<TelephoneNoticeRecord> TelephoneNoticeRecord { get; set; }
     }
 }

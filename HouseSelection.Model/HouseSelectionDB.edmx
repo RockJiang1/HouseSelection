@@ -117,6 +117,7 @@
           <Property Name="SelectImageUrl1" Type="nvarchar" MaxLength="200" />
           <Property Name="SelectImageUrl2" Type="nvarchar" MaxLength="200" />
           <Property Name="SelectImageUrl3" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsConfirm" Type="bit" Nullable="false" />
           <Property Name="IsAbandon" Type="bit" Nullable="false" />
           <Property Name="AbandonTime" Type="datetime" />
           <Property Name="AbandonImageUrl1" Type="nvarchar" MaxLength="200" />
@@ -183,6 +184,7 @@
           <Property Name="IsMessageSend" Type="bit" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="IsAuthorized" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscriber">
           <Key>
@@ -231,7 +233,6 @@
           <Property Name="ShakingNumberResultID" Type="int" Nullable="false" />
           <Property Name="NoticeTime" Type="datetime" />
           <Property Name="ResultType" Type="int" Nullable="false" />
-          <Property Name="ErrorType" Type="int" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
@@ -654,8 +655,8 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="Self.FK_SubscriberProjectMapping_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberProjectMapping" />
           <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_SubscriberID_ID" FromRole="Subscriber" ToRole="House" />
-          <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="Subscriber" ToRole="HouseSelectionRecord" />
           <NavigationProperty Name="SubscriberFamilyMember" Relationship="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" FromRole="Subscriber" ToRole="SubscriberFamilyMember" />
+          <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="Subscriber" ToRole="HouseSelectionRecord" />
         </EntityType>
         <EntityType Name="SubscriberProjectMapping">
           <Key>
@@ -763,27 +764,13 @@
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="House" EntitySet="House" />
           </AssociationSet>
-          <EntitySet Name="HouseSelectionRecord" EntityType="HouseSelectionDBModel.HouseSelectionRecord" />
           <AssociationSet Name="FK_House_SubscriberID_ID" Association="HouseSelectionDBModel.FK_House_SubscriberID_ID">
             <End Role="Subscriber" EntitySet="Subscriber" />
             <End Role="House" EntitySet="House" />
           </AssociationSet>
-          <AssociationSet Name="FK_HouseSelectionRecord_HouseID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID">
-            <End Role="House" EntitySet="House" />
-            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HouseSelectionRecord_ProjectID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HouseSelectionRecord_SubscriberID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID">
-            <End Role="Subscriber" EntitySet="Subscriber" />
-            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
-          </AssociationSet>
           <EntitySet Name="HouseSelectPeriod" EntityType="HouseSelectionDBModel.HouseSelectPeriod" />
           <EntitySet Name="ShakingNumberResult" EntityType="HouseSelectionDBModel.ShakingNumberResult" />
           <EntitySet Name="SubscriberFamilyMember" EntityType="HouseSelectionDBModel.SubscriberFamilyMember" />
-          <EntitySet Name="TelephoneNoticeRecord" EntityType="HouseSelectionDBModel.TelephoneNoticeRecord" />
           <AssociationSet Name="FK_HouseSelectPeriod_ShakingNumberResult_ID" Association="HouseSelectionDBModel.FK_HouseSelectPeriod_ShakingNumberResult_ID">
             <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
             <End Role="HouseSelectPeriod" EntitySet="HouseSelectPeriod" />
@@ -796,10 +783,6 @@
             <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
             <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
           </AssociationSet>
-          <AssociationSet Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID" Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
-            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
-            <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
-          </AssociationSet>
           <AssociationSet Name="FK_SubscriberFamilyMember_Subscriber_ID" Association="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID">
             <End Role="Subscriber" EntitySet="Subscriber" />
             <End Role="SubscriberFamilyMember" EntitySet="SubscriberFamilyMember" />
@@ -809,6 +792,24 @@
           <AssociationSet Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
             <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
             <End Role="FrontEndAccountLoginRecord" EntitySet="FrontEndAccountLoginRecord" />
+          </AssociationSet>
+          <EntitySet Name="HouseSelectionRecord" EntityType="HouseSelectionDBModel.HouseSelectionRecord" />
+          <EntitySet Name="TelephoneNoticeRecord" EntityType="HouseSelectionDBModel.TelephoneNoticeRecord" />
+          <AssociationSet Name="FK_HouseSelectionRecord_HouseID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID">
+            <End Role="House" EntitySet="House" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_ProjectID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseSelectionRecord_SubscriberID_ID" Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="HouseSelectionRecord" EntitySet="HouseSelectionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID" Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
+            <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
+            <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BackEndAccount">
@@ -1001,29 +1002,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="HouseSelectionRecord">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProjectID" Type="Int32" Nullable="false" />
-          <Property Name="HouseID" Type="Int32" Nullable="false" />
-          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
-          <Property Name="SelectTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SelectImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SelectImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SelectImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsAbandon" Type="Boolean" Nullable="false" />
-          <Property Name="AbandonTime" Type="DateTime" Precision="3" />
-          <Property Name="AbandonImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AbandonImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AbandonImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" FromRole="HouseSelectionRecord" ToRole="House" />
-          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" FromRole="HouseSelectionRecord" ToRole="Project" />
-          <NavigationProperty Name="Subscriber" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="HouseSelectionRecord" ToRole="Subscriber" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-        </EntityType>
         <Association Name="FK_House_SubscriberID_ID">
           <End Type="HouseSelectionDBModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
           <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="*" />
@@ -1032,42 +1010,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="House">
-              <PropertyRef Name="SubscriberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HouseSelectionRecord_HouseID_ID">
-          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="House">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HouseSelectionRecord">
-              <PropertyRef Name="HouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HouseSelectionRecord_ProjectID_ID">
-          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HouseSelectionRecord">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HouseSelectionRecord_SubscriberID_ID">
-          <End Type="HouseSelectionDBModel.Subscriber" Role="Subscriber" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subscriber">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HouseSelectionRecord">
               <PropertyRef Name="SubscriberID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1104,6 +1046,7 @@
           <NavigationProperty Name="ProjectGroup" Relationship="HouseSelectionDBModel.FK_ShakingNumberResult_ProjectGroup_ID" FromRole="ShakingNumberResult" ToRole="ProjectGroup" />
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" FromRole="ShakingNumberResult" ToRole="SubscriberProjectMapping" />
           <NavigationProperty Name="TelephoneNoticeRecord" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="ShakingNumberResult" ToRole="TelephoneNoticeRecord" />
+          <Property Name="IsAuthorized" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SubscriberFamilyMember">
           <Key>
@@ -1118,19 +1061,6 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Subscriber" Relationship="HouseSelectionDBModel.FK_SubscriberFamilyMember_Subscriber_ID" FromRole="SubscriberFamilyMember" ToRole="Subscriber" />
-        </EntityType>
-        <EntityType Name="TelephoneNoticeRecord">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShakingNumberResultID" Type="Int32" Nullable="false" />
-          <Property Name="NoticeTime" Type="DateTime" Precision="3" />
-          <Property Name="ResultType" Type="Int32" Nullable="false" />
-          <Property Name="ErrorType" Type="Int32" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ShakingNumberResult" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="TelephoneNoticeRecord" ToRole="ShakingNumberResult" />
         </EntityType>
         <Association Name="FK_HouseSelectPeriod_ShakingNumberResult_ID">
           <End Type="HouseSelectionDBModel.ShakingNumberResult" Role="ShakingNumberResult" Multiplicity="1" />
@@ -1165,18 +1095,6 @@
             </Principal>
             <Dependent Role="ShakingNumberResult">
               <PropertyRef Name="SubscriberProjectMappingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
-          <End Type="HouseSelectionDBModel.ShakingNumberResult" Role="ShakingNumberResult" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.TelephoneNoticeRecord" Role="TelephoneNoticeRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShakingNumberResult">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TelephoneNoticeRecord">
-              <PropertyRef Name="ShakingNumberResultID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1222,6 +1140,90 @@
             </Principal>
             <Dependent Role="FrontEndAccountLoginRecord">
               <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HouseSelectionRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="HouseID" Type="Int32" Nullable="false" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
+          <Property Name="SelectTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SelectImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SelectImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SelectImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirm" Type="Boolean" Nullable="false" />
+          <Property Name="IsAbandon" Type="Boolean" Nullable="false" />
+          <Property Name="AbandonTime" Type="DateTime" Precision="3" />
+          <Property Name="AbandonImageUrl1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbandonImageUrl2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AbandonImageUrl3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_HouseID_ID" FromRole="HouseSelectionRecord" ToRole="House" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" FromRole="HouseSelectionRecord" ToRole="Project" />
+          <NavigationProperty Name="Subscriber" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" FromRole="HouseSelectionRecord" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="TelephoneNoticeRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShakingNumberResultID" Type="Int32" Nullable="false" />
+          <Property Name="NoticeTime" Type="DateTime" Precision="3" />
+          <Property Name="ResultType" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ShakingNumberResult" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="TelephoneNoticeRecord" ToRole="ShakingNumberResult" />
+        </EntityType>
+        <Association Name="FK_HouseSelectionRecord_HouseID_ID">
+          <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_ProjectID_ID">
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseSelectionRecord_SubscriberID_ID">
+          <End Type="HouseSelectionDBModel.Subscriber" Role="Subscriber" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.HouseSelectionRecord" Role="HouseSelectionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HouseSelectionRecord">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
+          <End Type="HouseSelectionDBModel.ShakingNumberResult" Role="ShakingNumberResult" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.TelephoneNoticeRecord" Role="TelephoneNoticeRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShakingNumberResult">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TelephoneNoticeRecord">
+              <PropertyRef Name="ShakingNumberResultID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1381,27 +1383,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HouseSelectionRecord">
-            <EntityTypeMapping TypeName="HouseSelectionDBModel.HouseSelectionRecord">
-              <MappingFragment StoreEntitySet="HouseSelectionRecord">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="AbandonImageUrl3" ColumnName="AbandonImageUrl3" />
-                <ScalarProperty Name="AbandonImageUrl2" ColumnName="AbandonImageUrl2" />
-                <ScalarProperty Name="AbandonImageUrl1" ColumnName="AbandonImageUrl1" />
-                <ScalarProperty Name="AbandonTime" ColumnName="AbandonTime" />
-                <ScalarProperty Name="IsAbandon" ColumnName="IsAbandon" />
-                <ScalarProperty Name="SelectImageUrl3" ColumnName="SelectImageUrl3" />
-                <ScalarProperty Name="SelectImageUrl2" ColumnName="SelectImageUrl2" />
-                <ScalarProperty Name="SelectImageUrl1" ColumnName="SelectImageUrl1" />
-                <ScalarProperty Name="SelectTime" ColumnName="SelectTime" />
-                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
-                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HouseSelectPeriod">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.HouseSelectPeriod">
               <MappingFragment StoreEntitySet="HouseSelectPeriod">
@@ -1417,6 +1398,7 @@
           <EntitySetMapping Name="ShakingNumberResult">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.ShakingNumberResult">
               <MappingFragment StoreEntitySet="ShakingNumberResult">
+                <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="IsMessageSend" ColumnName="IsMessageSend" />
@@ -1446,19 +1428,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TelephoneNoticeRecord">
-            <EntityTypeMapping TypeName="HouseSelectionDBModel.TelephoneNoticeRecord">
-              <MappingFragment StoreEntitySet="TelephoneNoticeRecord">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="ErrorType" ColumnName="ErrorType" />
-                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
-                <ScalarProperty Name="NoticeTime" ColumnName="NoticeTime" />
-                <ScalarProperty Name="ShakingNumberResultID" ColumnName="ShakingNumberResultID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FrontEndAccount">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.FrontEndAccount">
               <MappingFragment StoreEntitySet="FrontEndAccount">
@@ -1476,6 +1445,40 @@
                 <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
                 <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
                 <ScalarProperty Name="FrontEndAccountID" ColumnName="FrontEndAccountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HouseSelectionRecord">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.HouseSelectionRecord">
+              <MappingFragment StoreEntitySet="HouseSelectionRecord">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="AbandonImageUrl3" ColumnName="AbandonImageUrl3" />
+                <ScalarProperty Name="AbandonImageUrl2" ColumnName="AbandonImageUrl2" />
+                <ScalarProperty Name="AbandonImageUrl1" ColumnName="AbandonImageUrl1" />
+                <ScalarProperty Name="AbandonTime" ColumnName="AbandonTime" />
+                <ScalarProperty Name="IsAbandon" ColumnName="IsAbandon" />
+                <ScalarProperty Name="IsConfirm" ColumnName="IsConfirm" />
+                <ScalarProperty Name="SelectImageUrl3" ColumnName="SelectImageUrl3" />
+                <ScalarProperty Name="SelectImageUrl2" ColumnName="SelectImageUrl2" />
+                <ScalarProperty Name="SelectImageUrl1" ColumnName="SelectImageUrl1" />
+                <ScalarProperty Name="SelectTime" ColumnName="SelectTime" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelephoneNoticeRecord">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.TelephoneNoticeRecord">
+              <MappingFragment StoreEntitySet="TelephoneNoticeRecord">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+                <ScalarProperty Name="NoticeTime" ColumnName="NoticeTime" />
+                <ScalarProperty Name="ShakingNumberResultID" ColumnName="ShakingNumberResultID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
