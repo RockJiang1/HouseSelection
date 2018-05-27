@@ -23,6 +23,7 @@ namespace HouseSelection.Model
             this.HouseEstate = new HashSet<HouseEstate>();
             this.House = new HashSet<House>();
             this.HouseSelectionRecord = new HashSet<HouseSelectionRecord>();
+            this.FrontEndAccount = new HashSet<FrontEndAccount>();
         }
     
         public int ID { get; set; }
@@ -46,5 +47,7 @@ namespace HouseSelection.Model
         public virtual ICollection<House> House { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FrontEndAccount> FrontEndAccount { get; set; }
     }
 }

@@ -67,9 +67,11 @@
     <Compile Include="FrontEndAccount.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FrontEndAccountEntity.cs" />
     <Compile Include="FrontEndAccountLoginRecord.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetFrontEndAccountResultEntity.cs" />
     <Compile Include="GetHouseEstateResultEntity.cs" />
     <Compile Include="GetHouseResultEntity.cs" />
     <Compile Include="GetHouseSubscriberResultEntity.cs" />
