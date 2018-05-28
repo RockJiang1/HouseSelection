@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HouseSelection.Model;
 using HouseSelection.BLL;
+using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
 
@@ -14,6 +15,8 @@ namespace HouseSelection.PrivateAPI.Controllers
     public class GetProjectsController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
+
+        [ApiAuthorize]
         public ProjectListResultEntity Post(SearchRequestModel Search)
         {
             ProjectListResultEntity ret = new ProjectListResultEntity();

@@ -1,0 +1,14 @@
+﻿2018-05-27 14:55:42,590 [10] INFO  - 获取Token成功，AppId:SYY,AppSecret:0B2223C37F54864403847E762E1F87F3,AccessToken:13ebbe7742bc4d3abec086e8fa6d99ff6366302974251806404b71d2a482ca4ffd8553751d41b8135a	TokenController.Post 
+2018-05-27 20:35:55,533 [8] INFO  - 获取Token成功，AppId:SYY,AppSecret:0B2223C37F54864403847E762E1F87F3,AccessToken:5579e532b5ea4cf48d34a90bde4ca99063663050155462445796e425a73c7e4714a32080528278ac34	TokenController.Post 
+2018-05-27 20:47:02,250 [10] FATAL - 修改前台账号时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.PrivateAPI.Controllers.EditFrontEndAccountPasswordController.Post(EditFrontEndAccountRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\Account\EditFrontEndAccountPasswordController.cs:行号 47	EditFrontEndAccountPasswordController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.PrivateAPI.Controllers.EditFrontEndAccountPasswordController.Post(EditFrontEndAccountRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\Account\EditFrontEndAccountPasswordController.cs:行号 47 
+2018-05-27 20:57:29,660 [10] FATAL - 搜索账号列表时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.PrivateAPI.Controllers.GetFrontEndAccountController.Post(GetFrontEndAccountRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\Account\GetFrontEndAccountController.cs:行号 32	GetFrontEndAccountController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.PrivateAPI.Controllers.GetFrontEndAccountController.Post(GetFrontEndAccountRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\Account\GetFrontEndAccountController.cs:行号 32 

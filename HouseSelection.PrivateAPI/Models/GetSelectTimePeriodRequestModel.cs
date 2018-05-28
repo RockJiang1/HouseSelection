@@ -5,8 +5,8 @@ using System.Web;
 
 namespace HouseSelection.PrivateAPI.Models
 {
-    public class GetProjectGroupRequestModel : BaseRequestModel
+    public class GetSelectTimePeriodRequestModel
     {
-        public int ProjectID { get; set; }
+        public int ProjectGroupID { get; set; }
     }
 }

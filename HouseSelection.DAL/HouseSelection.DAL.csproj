@@ -59,6 +59,7 @@
     <Compile Include="HouseEstateDAL.cs" />
     <Compile Include="HouseGroupDAL.cs" />
     <Compile Include="HouseSelectionRecordDAL.cs" />
+    <Compile Include="HouseSelectPeriodDAL.cs" />
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="ProjectGroupDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

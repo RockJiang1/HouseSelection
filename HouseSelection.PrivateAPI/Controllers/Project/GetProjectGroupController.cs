@@ -28,27 +28,39 @@ namespace HouseSelection.PrivateAPI.Controllers
 
             try
             {
-                if(_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
+                var _dbProGrpList = new List<ProjectGroup>();
+                if (req.ProjectID == 0)//获取所有
                 {
-                    ret.code = 201;
-                    ret.errMsg = "项目ID不存在！";
+                    _dbProGrpList = _projectGroupBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => 1 == 1).ToList();
+                    ret.recordCount = _projectGroupBLL.GetModels(x => 1 == 1).Count();
                 }
                 else
                 {
-                    var _dbProGrpList = _projectGroupBLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
-                    var _proGrpList = new List<ProjectGroupEntity>();
-                    foreach(var proGrp in _dbProGrpList)
+                    if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                     {
-                        var grp = new ProjectGroupEntity()
-                        {
-                            ProjectGroupID = proGrp.ID,
-                            ProjectGroupName = proGrp.ProjectGroupName
-                        };
-                        _proGrpList.Add(grp);
+                        ret.code = 201;
+                        ret.errMsg = "项目ID不存在！";
                     }
-                    ret.ProjectGroupList = _proGrpList;
+                    else
+                    {
+                        _dbProGrpList = _projectGroupBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => x.ProjectID == req.ProjectID).ToList();
+                        ret.recordCount = _projectGroupBLL.GetModels(x => x.ProjectID == req.ProjectID).Count();
+                    }
                 }
-                
+                var _proGrpList = new List<ProjectGroupEntity>();
+                foreach (var proGrp in _dbProGrpList)
+                {
+                    var grp = new ProjectGroupEntity()
+                    {
+                        ProjectID = proGrp.Project.ID,
+                        ProjectNumber = proGrp.Project.Number,
+                        ProjectName = proGrp.Project.Name,
+                        ProjectGroupID = proGrp.ID,
+                        ProjectGroupName = proGrp.ProjectGroupName
+                    };
+                    _proGrpList.Add(grp);
+                }
+                ret.ProjectGroupList = _proGrpList;
             }
             catch(Exception ex)
             {

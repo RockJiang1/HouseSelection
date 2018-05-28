@@ -51,6 +51,7 @@
     <Compile Include="HouseEstateBLL.cs" />
     <Compile Include="HouseGroupBLL.cs" />
     <Compile Include="HouseSelectionRecordBLL.cs" />
+    <Compile Include="HouseSelectPeriodBLL.cs" />
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="ProjectGroupBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

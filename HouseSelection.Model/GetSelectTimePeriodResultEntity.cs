@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HouseSelection.Model
 {
-    public class GetProjectGroupResultEntity : BaseListResultEntity
+    public class GetSelectTimePeriodResultEntity : BaseResultEntity
     {
-        public List<ProjectGroupEntity> ProjectGroupList { get; set; }
+        public List<SelectTimePeriodEntity> SelectTimeList { get; set; }
     }
 }

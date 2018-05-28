@@ -76,6 +76,7 @@
     <Compile Include="GetHouseResultEntity.cs" />
     <Compile Include="GetHouseSubscriberResultEntity.cs" />
     <Compile Include="GetSelectHouseInfoResult.cs" />
+    <Compile Include="GetSelectTimePeriodResultEntity.cs" />
     <Compile Include="GetSubscriberResultEntity.cs" />
     <Compile Include="GetSubscriberSelectionHistoryResultEntity.cs" />
     <Compile Include="House.cs">
@@ -128,6 +129,7 @@
     <Compile Include="RoomType.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SelectTimePeriodEntity.cs" />
     <Compile Include="ShakingNumberResult.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
