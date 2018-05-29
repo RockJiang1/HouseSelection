@@ -69,7 +69,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                                 _periodList.Add(_period);
                             }
                         }
-                        ret.SelectTimeList = _periodList;
+                        ret.SelectTimeList = _periodList.OrderBy(x => x.StartNumber).ToList();
                     }
                 }
             }
