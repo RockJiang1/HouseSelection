@@ -18,6 +18,8 @@ namespace HouseSelection.Model
         public RoomType()
         {
             this.House = new HashSet<House>();
+            this.RoleFamilyNumberAndRoomType = new HashSet<RoleFamilyNumberAndRoomType>();
+            this.RoleProjectGroupAndRoomType = new HashSet<RoleProjectGroupAndRoomType>();
         }
     
         public int ID { get; set; }
@@ -27,5 +29,9 @@ namespace HouseSelection.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<House> House { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleFamilyNumberAndRoomType> RoleFamilyNumberAndRoomType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleProjectGroupAndRoomType> RoleProjectGroupAndRoomType { get; set; }
     }
 }

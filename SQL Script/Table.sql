@@ -507,3 +507,80 @@ BEGIN
 	ALTER TABLE ShakingNumberResult ADD IsAuthorized BIT NOT NULL DEFAULT 0
 END
 GO
+
+
+
+
+--项目分组与户型规则
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'RoleProjectGroupAndRoomType' AND [type] = 'U')
+BEGIN
+	CREATE TABLE RoleProjectGroupAndRoomType
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		ProjectGroupID INT NOT NULL,
+		RoomTypeID INT NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_RoleProjectGroupAndRoomType] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE RoleProjectGroupAndRoomType ADD CONSTRAINT FK_RoleProjectGroupAndRoomType_ProjectGroup_ID FOREIGN KEY(ProjectGroupID) REFERENCES ProjectGroup(ID)
+	ALTER TABLE RoleProjectGroupAndRoomType ADD CONSTRAINT FK_RoleProjectGroupAndRoomType_RoomType_ID FOREIGN KEY(RoomTypeID) REFERENCES RoomType(ID)
+END
+GO
+
+--项目家庭人数与户型规则
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'RoleFamilyNumberAndRoomType' AND [type] = 'U')
+BEGIN
+	CREATE TABLE RoleFamilyNumberAndRoomType
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		ProjectID INT NOT NULL,
+		FamilyNumber INT NOT NULL,
+		RoomTypeID INT NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_RoleFamilyNumberAndRoomType] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE RoleFamilyNumberAndRoomType ADD CONSTRAINT FK_RoleFamilyNumberAndRoomType_Project_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
+	ALTER TABLE RoleFamilyNumberAndRoomType ADD CONSTRAINT FK_RoleFamilyNumberAndRoomType_RoomType_ID FOREIGN KEY(RoomTypeID) REFERENCES RoomType(ID)
+
+END
+GO
+
+--项目分组与房源分组规则
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'RoleProjectGroupAndHouseGroup' AND [type] = 'U')
+BEGIN
+	CREATE TABLE RoleProjectGroupAndHouseGroup
+	(
+
+		ID INT IDENTITY(1,1) NOT NULL,
+		ProjectGroupID INT NOT NULL,
+		HouseGroupID INT NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_RoleProjectGroupAndHouseGroup] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE RoleProjectGroupAndHouseGroup ADD CONSTRAINT FK_RoleProjectGroupAndHouseGroup_ProjectGroup_ID FOREIGN KEY(ProjectGroupID) REFERENCES ProjectGroup(ID)
+	ALTER TABLE RoleProjectGroupAndHouseGroup ADD CONSTRAINT FK_RoleProjectGroupAndHouseGroup_HouseGroup_ID FOREIGN KEY(HouseGroupID) REFERENCES HouseGroup(ID)
+
+END
+GO
+
+--认购人表添加家庭人数
+IF EXISTS (SELECT 1 FROM sys.columns WHERE [name] = N'FamilyMemberNumber' AND object_id = OBJECT_ID(N'Subscriber'))
+BEGIN
+	ALTER TABLE Subscriber ADD FamilyMemberNumber INT NOT NULL
+END
+GO

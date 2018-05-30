@@ -124,6 +124,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                                 MaritalStatus = shake.Subscriber.MaritalStatus,
                                 ResidenceArea = shake.Subscriber.ResidenceArea,
                                 WorkArea = shake.Subscriber.WorkArea,
+                                FamilyMemberNumber = shake.FamilyMemberList.Count(),
                                 CreateTime = DateTime.Now,
                                 LastUpdate = DateTime.Now
                             };
