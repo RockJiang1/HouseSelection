@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeHelper.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="JsonHelper.cs" />
