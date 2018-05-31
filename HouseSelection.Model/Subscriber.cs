@@ -34,6 +34,7 @@ namespace HouseSelection.Model
         public string WorkArea { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
+        public int FamilyMemberNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubscriberProjectMapping> SubscriberProjectMapping { get; set; }

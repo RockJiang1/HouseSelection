@@ -18,6 +18,8 @@ namespace HouseSelection.Model
         public ProjectGroup()
         {
             this.ShakingNumberResult = new HashSet<ShakingNumberResult>();
+            this.RoleProjectGroupAndHouseGroup = new HashSet<RoleProjectGroupAndHouseGroup>();
+            this.RoleProjectGroupAndRoomType = new HashSet<RoleProjectGroupAndRoomType>();
         }
     
         public int ID { get; set; }
@@ -29,5 +31,9 @@ namespace HouseSelection.Model
         public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShakingNumberResult> ShakingNumberResult { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleProjectGroupAndHouseGroup> RoleProjectGroupAndHouseGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleProjectGroupAndRoomType> RoleProjectGroupAndRoomType { get; set; }
     }
 }

@@ -204,6 +204,8 @@
     <Compile Include="Controllers\Project\GetProjectGroupController.cs" />
     <Compile Include="Controllers\Project\GetProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SelectRole\AddSelectRoleController.cs" />
+    <Compile Include="Controllers\SelectRole\GetProjectRoleBaseInfoController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\AddSelectTimePeriodController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\EditSelectTimePeriodController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\GetSelectTimePeriodController.cs" />
@@ -227,6 +229,7 @@
     <Compile Include="Models\GetHouseSubscriberRequestModel.cs" />
     <Compile Include="Models\GetProjectByIDRequestModel.cs" />
     <Compile Include="Models\GetProjectGroupRequestModel.cs" />
+    <Compile Include="Models\GetProjectRoleBaseInfoRequestModel.cs" />
     <Compile Include="Models\GetSelectHouseInfoRequest.cs" />
     <Compile Include="Models\GetSelectTimePeriodRequestModel.cs" />
     <Compile Include="Models\GetSubscriberRequestModel.cs" />
@@ -329,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\SelectRole\" />
     <Folder Include="Controllers\ShakingNumber\" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,7 @@ namespace HouseSelection.Model
         public HouseGroup()
         {
             this.House = new HashSet<House>();
+            this.RoleProjectGroupAndHouseGroup = new HashSet<RoleProjectGroupAndHouseGroup>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace HouseSelection.Model
         public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<House> House { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoleProjectGroupAndHouseGroup> RoleProjectGroupAndHouseGroup { get; set; }
     }
 }
