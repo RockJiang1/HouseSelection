@@ -11,6 +11,7 @@ using HouseSelection.LoggerHelper;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace HouseSelection.NetworkHelper
 {
     public abstract class BaseClient
@@ -208,6 +209,12 @@ namespace HouseSelection.NetworkHelper
             {
                 request.ContentType = "application/json;charset=utf-8";
             }
+            if (GlobalTokenHelper.gToken != "")
+            {
+                request.Headers.Add("access_token", GlobalTokenHelper.gToken);
+            }
+
+
             request.ContentLength = data.Length;
             var stream = request.GetRequestStream();
             stream.Write(data, 0, data.Length);

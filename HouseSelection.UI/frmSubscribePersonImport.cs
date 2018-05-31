@@ -32,10 +32,10 @@ namespace HouseSelection.UI
             string file = textBox1.Text;
             try
             {
-                using (ExcelHelper excelHelper = new ExcelHelper(file))
-                {
-                    DataTable dt = excelHelper.ExcelToDataTable();
-                }
+                //using (ExcelHelper excelHelper = new ExcelHelper(file))
+                //{
+                //    DataTable dt = excelHelper.ExcelToDataTable();
+                //}
 
             }
             catch (Exception ex)

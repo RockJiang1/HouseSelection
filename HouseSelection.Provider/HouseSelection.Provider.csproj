@@ -55,9 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseProvide.cs" />
     <Compile Include="Client\GeneralClient.cs" />
     <Compile Include="Client\Request\GeneralRequest.cs" />
     <Compile Include="Client\Request\GetTokenRequest.cs" />
+    <Compile Include="Client\Request\ImportSubscriberRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,6 +85,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HouseSelection.Model\HouseSelection.Model.csproj">
+      <Project>{203005a8-a2c9-4702-90e9-5584ba6dfe4b}</Project>
+      <Name>HouseSelection.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HouseSelection.NetworkHelper\HouseSelection.NetworkHelper.csproj">
       <Project>{08e37cb8-0143-49dd-b1ca-ca6180afff0f}</Project>
       <Name>HouseSelection.NetworkHelper</Name>

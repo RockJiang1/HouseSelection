@@ -47,6 +47,7 @@
     <Compile Include="BaseClient.cs" />
     <Compile Include="BaseRequest.cs" />
     <Compile Include="FormMethods.cs" />
+    <Compile Include="GlobalTokenHelper.cs" />
     <Compile Include="ParseRequestException.cs" />
     <Compile Include="PostRequestContentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
