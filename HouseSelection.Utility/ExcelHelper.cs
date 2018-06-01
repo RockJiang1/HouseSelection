@@ -7,6 +7,8 @@ using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using System.IO;
 using System.Data;
+using HouseSelection.Model;
+
 
 namespace HouseSelection.Utility
 {
@@ -87,13 +89,45 @@ namespace HouseSelection.Utility
             }
         }
 
+        public ExcelResultEntity GetExcelAttribute()
+        {
+            ExcelResultEntity excelresult = new ExcelResultEntity();
+            int cnt;
+            try
+            {
+                fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                if (fileName.IndexOf(".xlsx") > 0) // >2007版本
+                    workbook = new XSSFWorkbook(fs);
+                else if (fileName.IndexOf(".xls") > 0) // 2003版本
+                    workbook = new HSSFWorkbook(fs);
+
+                excelresult.SheetNumber = workbook.NumberOfSheets;
+                for (cnt = 0; cnt < excelresult.SheetNumber; cnt++)
+                {
+                    SheetName sn = new SheetName();
+                    sn.Name = workbook.GetSheetAt(cnt).SheetName;
+                    excelresult.SheetName.Add(sn);
+                }
+
+                excelresult.code = 0;
+                excelresult.errMsg = "";
+            }
+            catch(Exception ex)
+            {
+                excelresult.code = 9999;
+                excelresult.errMsg = "获取EXCEL属性异常： " + ex.Message;
+            }
+
+            return excelresult;
+        }
+
         /// <summary>
         /// 将excel中的数据导入到DataTable中
         /// </summary>
         /// <param name="sheetName">excel工作薄sheet的名称</param>
         /// <param name="isFirstRowColumn">第一行是否是DataTable的列名</param>
         /// <returns>返回的DataTable</returns>
-        public DataTable ExcelToDataTable(string sheetName = "ALL", bool isFirstRowColumn = true)
+        public DataTable ExcelToDataTable(string sheetName, bool isFirstRowColumn)
         {
             ISheet sheet = null;
             DataTable data = new DataTable();
@@ -106,31 +140,13 @@ namespace HouseSelection.Utility
                 else if (fileName.IndexOf(".xls") > 0) // 2003版本
                     workbook = new HSSFWorkbook(fs);
 
-                if (sheetName != "ALL")
+  
+                sheet = workbook.GetSheet(sheetName);
+                if (sheet == null) //如果没有找到指定的sheetName对应的sheet，则尝试获取第一个sheet
                 {
-                    sheet = workbook.GetSheet(sheetName);
-                    if (sheet == null) //如果没有找到指定的sheetName对应的sheet，则尝试获取第一个sheet
-                    {
-                        sheet = workbook.GetSheetAt(0);
-                    }
-                    if (sheet != null) { InsertSheettoTbl(sheet, data, isFirstRowColumn); }
+                    sheet = workbook.GetSheetAt(0);
                 }
-                else
-                {
-                    int cnt;
-                    int i = workbook.NumberOfSheets;
-                    for (cnt = 0; cnt < i; cnt++)
-                    {
-                        sheet = workbook.GetSheetAt(cnt);
-                        if (sheet != null) { InsertSheettoTbl(sheet, data, isFirstRowColumn); }
-                    }
-
-
-                }
-                if (sheet != null)
-                {
-
-                }
+                if (sheet != null) { InsertSheettoTbl(sheet, data, isFirstRowColumn); }
 
                 return data;
             }

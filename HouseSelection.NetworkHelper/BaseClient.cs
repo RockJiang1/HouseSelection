@@ -8,6 +8,9 @@ using System.IO;
 using System.Web;
 using Newtonsoft.Json;
 using HouseSelection.LoggerHelper;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+
 
 namespace HouseSelection.NetworkHelper
 {
@@ -182,7 +185,20 @@ namespace HouseSelection.NetworkHelper
             var url = req.Url;
 
             Logger.LogInfo("开始执行请求，请求地址：" + url, "BaseClient", "DoPost");
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            HttpWebRequest request = null;
+            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+            {
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+                request = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
+                request.ProtocolVersion = HttpVersion.Version10;
+            }
+            else
+            {
+                request = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
+            }
+
+            Logger.LogInfo("开始执行请求，请求地址：" + url, "BaseClient", "DoPost");
+            //HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
 
             request.Method = "POST";
             if (req.ContentType == PostRequestContentType.Form)
@@ -193,6 +209,12 @@ namespace HouseSelection.NetworkHelper
             {
                 request.ContentType = "application/json;charset=utf-8";
             }
+            if (GlobalTokenHelper.gToken != "")
+            {
+                request.Headers.Add("access_token", GlobalTokenHelper.gToken);
+            }
+
+
             request.ContentLength = data.Length;
             var stream = request.GetRequestStream();
             stream.Write(data, 0, data.Length);
@@ -200,6 +222,11 @@ namespace HouseSelection.NetworkHelper
 
             //开始POST数据
             return (HttpWebResponse)request.GetResponse();
+        }
+
+        private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        {
+            return true; //总是接受  
         }
 
         /// <summary>

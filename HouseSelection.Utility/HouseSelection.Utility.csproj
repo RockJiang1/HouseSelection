@@ -63,6 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseHelper.cs" />
+    <Compile Include="DateTimeHelper.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="JsonHelper.cs" />
@@ -74,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HouseSelection.Model\HouseSelection.Model.csproj">
+      <Project>{203005a8-a2c9-4702-90e9-5584ba6dfe4b}</Project>
+      <Name>HouseSelection.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

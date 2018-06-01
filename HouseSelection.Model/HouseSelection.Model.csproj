@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="BaseListResultEntity.cs" />
     <Compile Include="BaseResultEntity.cs" />
+    <Compile Include="ExcelResultEntity.cs" />
     <Compile Include="FrontEndAccount.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>

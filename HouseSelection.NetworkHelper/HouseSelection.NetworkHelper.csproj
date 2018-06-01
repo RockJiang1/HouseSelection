@@ -47,11 +47,13 @@
     <Compile Include="BaseClient.cs" />
     <Compile Include="BaseRequest.cs" />
     <Compile Include="FormMethods.cs" />
+    <Compile Include="GlobalTokenHelper.cs" />
     <Compile Include="ParseRequestException.cs" />
     <Compile Include="PostRequestContentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestHelper.cs" />
     <Compile Include="RequestPropertyAttribute.cs" />
+    <Compile Include="UnicodeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HouseSelection.LoggerHelper\HouseSelection.LoggerHelper.csproj">
