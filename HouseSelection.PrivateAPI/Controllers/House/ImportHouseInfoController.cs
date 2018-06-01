@@ -8,6 +8,7 @@ using HouseSelection.LoggerHelper;
 using HouseSelection.Authorize;
 using HouseSelection.Model;
 using HouseSelection.BLL;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public BaseResultEntity Post(ImportHouseInfoRequestEntity ImportHouse)
         {
+            Logger.LogDebug("ImportHouseInfo Request:" + JsonHelper.SerializeObject(ImportHouse), "ImportHouseInfoController", "Post");
             var ret = new BaseResultEntity();
             try
             {

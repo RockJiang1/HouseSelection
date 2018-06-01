@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Model;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Authorize;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -20,6 +21,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public GetProjectGroupResultEntity Post(GetProjectGroupRequestModel req)
         {
+            Logger.LogDebug("GetProjectGroup Request:" + JsonHelper.SerializeObject(req), "GetProjectGroupController", "Post");
             GetProjectGroupResultEntity ret = new GetProjectGroupResultEntity()
             {
                 code = 0,

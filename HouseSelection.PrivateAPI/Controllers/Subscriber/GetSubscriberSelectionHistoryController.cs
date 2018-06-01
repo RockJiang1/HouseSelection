@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -26,6 +27,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public GetSubscriberSelectionHistoryResultEntity Post(GetSubscriberSelectionHistoryRequestModel req)
         {
+            Logger.LogDebug("GetSubscriberSelectionHistory Request:" + JsonHelper.SerializeObject(req), "GetSubscriberSelectionHistoryController", "Post");
             var ret = new GetSubscriberSelectionHistoryResultEntity()
             {
                 code = 0,

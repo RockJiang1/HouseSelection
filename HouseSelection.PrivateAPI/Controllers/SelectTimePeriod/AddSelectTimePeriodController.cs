@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
 {
@@ -24,6 +25,7 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
         [ApiAuthorize]
         public BaseResultEntity Post(AddSelectTimePeriodRequestEntity req)
         {
+            Logger.LogDebug("AddSelectTimePeriod Request:" + JsonHelper.SerializeObject(req), "AddSelectTimePeriodController", "Post");
             var ret = new BaseResultEntity()
             {
                 code = 0,

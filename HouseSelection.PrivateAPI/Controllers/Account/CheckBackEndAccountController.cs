@@ -10,6 +10,7 @@ using HouseSelection.BLL;
 using HouseSelection.Model;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Authorize;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -21,6 +22,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public BaseResultEntity Post(AccountModel Account)
         {
+            Logger.LogDebug("CheckBackEndAccount Request:" + JsonHelper.SerializeObject(Account), "CheckBackEndAccountController", "Post");
             var ret = new BaseResultEntity();
             try
             {

@@ -8,14 +8,19 @@ using HouseSelection.PrivateAPI.Models;
 using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Authorize;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
     public class GetProjectByIDController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
+
+        [ApiAuthorize]
         public ProjectResultEntity Post(GetProjectByIDRequestModel ProjectID)
         {
+            Logger.LogDebug("GetProjectByID Request:" + JsonHelper.SerializeObject(ProjectID), "GetProjectByIDController", "Post");
             ProjectResultEntity ret = new ProjectResultEntity();
             try
             {

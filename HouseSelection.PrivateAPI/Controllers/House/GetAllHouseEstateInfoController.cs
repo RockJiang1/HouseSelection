@@ -9,6 +9,7 @@ using HouseSelection.PrivateAPI.Models;
 using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public GetHouseEstateResultEntity Post(BaseRequestModel Req)
         {
+            Logger.LogDebug("GetAllHouseEstateInfo Request:" + JsonHelper.SerializeObject(Req), "GetAllHouseEstateInfoController", "Post");
             var ret = new GetHouseEstateResultEntity()
             {
                 code = 0,

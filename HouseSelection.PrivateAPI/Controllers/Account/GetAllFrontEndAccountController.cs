@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -23,6 +24,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public GetFrontEndAccountResultEntity Post(GetFrontEndAccountRequestModel req)
         {
+            Logger.LogDebug("GetAllFrontEndAccount Request:" + JsonHelper.SerializeObject(req), "GetAllFrontEndAccountController", "Post");
             var ret = new GetFrontEndAccountResultEntity()
             {
                 code = 0,

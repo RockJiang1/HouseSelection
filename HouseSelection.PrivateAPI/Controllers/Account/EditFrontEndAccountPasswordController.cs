@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -20,6 +21,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public BaseResultEntity Post(EditFrontEndAccountRequestModel req)
         {
+            Logger.LogDebug("EditFrontEndAccountPassword Request:" + JsonHelper.SerializeObject(req), "EditFrontEndAccountPasswordController", "Post");
             var ret = new BaseResultEntity()
             {
                 code = 0,

@@ -9,6 +9,7 @@ using HouseSelection.BLL;
 using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.PrivateAPI.Models;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers.SelectRole
 {
@@ -20,8 +21,10 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
         private HouseBLL _houseBLL = new HouseBLL();
         private SubscriberProjectMappingBLL _subscriberMapping = new SubscriberProjectMappingBLL();
 
+        [ApiAuthorize]
         public GetProjectRoleBaseInfoResultEntity Post(GetProjectRoleBaseInfoRequestModel req)
         {
+            Logger.LogDebug("GetProjectRoleBaseInfo Request:" + JsonHelper.SerializeObject(req), "GetProjectRoleBaseInfoController", "Post");
             var ret = new GetProjectRoleBaseInfoResultEntity()
             {
                 code = 0,

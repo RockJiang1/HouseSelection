@@ -7,6 +7,7 @@ using System.Web.Http;
 using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace HouseSelection.PrivateAPI.Controllers
 
         public BaseResultEntity Post(ProjectEntity Project)
         {
+            Logger.LogDebug("AddProject Request:" + JsonHelper.SerializeObject(Project), "AddProjectController", "Post");
             BaseResultEntity ret = new BaseResultEntity();
             try
             {
