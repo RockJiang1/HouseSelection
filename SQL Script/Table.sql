@@ -579,7 +579,7 @@ END
 GO
 
 --认购人表添加家庭人数
-IF EXISTS (SELECT 1 FROM sys.columns WHERE [name] = N'FamilyMemberNumber' AND object_id = OBJECT_ID(N'Subscriber'))
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE [name] = N'FamilyMemberNumber' AND object_id = OBJECT_ID(N'Subscriber'))
 BEGIN
 	ALTER TABLE Subscriber ADD FamilyMemberNumber INT NOT NULL
 END

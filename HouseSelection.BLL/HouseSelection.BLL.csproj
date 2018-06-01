@@ -55,6 +55,9 @@
     <Compile Include="ProjectBLL.cs" />
     <Compile Include="ProjectGroupBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleFamilyNumberAndRoomTypeBLL.cs" />
+    <Compile Include="RoleProjectGroupAndHouseGroupBLL.cs" />
+    <Compile Include="RoleProjectGroupAndRoomTypeBLL.cs" />
     <Compile Include="RoomTypeBLL.cs" />
     <Compile Include="ShakingNumberResultBLL.cs" />
     <Compile Include="SubscriberBLL.cs" />

@@ -63,6 +63,9 @@
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="ProjectGroupDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleFamilyNumberAndRoomTypeDAL.cs" />
+    <Compile Include="RoleProjectGroupAndHouseGroupDAL.cs" />
+    <Compile Include="RoleProjectGroupAndRoomTypeDAL.cs" />
     <Compile Include="RoomTypeDAL.cs" />
     <Compile Include="ShakingNumberResultDAL.cs" />
     <Compile Include="SubscriberDAL.cs" />
