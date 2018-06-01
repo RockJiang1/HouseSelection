@@ -58,8 +58,10 @@
     <Compile Include="BaseProvide.cs" />
     <Compile Include="Client\GeneralClient.cs" />
     <Compile Include="Client\Request\GeneralRequest.cs" />
+    <Compile Include="Client\Request\GetAllProjectsRequest.cs" />
     <Compile Include="Client\Request\GetTokenRequest.cs" />
     <Compile Include="Client\Request\ImportSubscriberRequest.cs" />
+    <Compile Include="Client\Response\ProjectEntityResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

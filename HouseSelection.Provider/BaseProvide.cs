@@ -9,6 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 using HouseSelection.Utility;
 using HouseSelection.Provider.Client.Request;
+using HouseSelection.Provider.Client.Response;
 using HouseSelection.NetworkHelper;
 using HouseSelection.Model;
 
@@ -100,6 +101,30 @@ namespace HouseSelection.Provider
 
             }
             catch(Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public ProjectEntityResponse GetProject()
+        {
+            ProjectEntityResponse result = new ProjectEntityResponse();
+            try
+            {
+                var request = new GetAllProjectsRequest()
+                {
+                    PageIndex = 99999,
+                    PageSize = 1
+                };
+
+                result = this.Client.InvokeAPI<ProjectEntityResponse>(request);
+
+            }
+            catch (Exception ex)
             {
                 result.code = 9999;
                 result.errMsg = ex.Message;
