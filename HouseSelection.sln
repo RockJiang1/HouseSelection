@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseSelection.Utility", "HouseSelection.Utility\HouseSelection.Utility.csproj", "{01CB5072-4F9B-464A-B26A-D593F96F55A8}"
 EndProject
@@ -32,6 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseSelection.Enum", "Hous
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{491E63CA-3436-4AC3-8F35-E63B3609FD10}"
 	ProjectSection(SolutionItems) = preProject
+		\\Mac\Home\Desktop\前端接口说明文档.xlsx = \\Mac\Home\Desktop\前端接口说明文档.xlsx
 		Doc\接口说明文档.xlsx = Doc\接口说明文档.xlsx
 		Doc\数据库表结构说明.xlsx = Doc\数据库表结构说明.xlsx
 	EndProjectSection
