@@ -110,15 +110,39 @@ namespace HouseSelection.Provider
 
         }
 
-        public ProjectEntityResponse GetProject()
+        public BaseResultEntity CheckBackEndAccount(string sAccount,string sPassword)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new CheckBackEndAccountRequest()
+                {
+                    Account = sAccount,
+                    Password= sPassword
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public ProjectEntityResponse GetAllProjects()
         {
             ProjectEntityResponse result = new ProjectEntityResponse();
             try
             {
                 var request = new GetAllProjectsRequest()
                 {
-                    PageIndex = 99999,
-                    PageSize = 1
+                    PageIndex = 1,
+                    PageSize = 99999
                 };
 
                 result = this.Client.InvokeAPI<ProjectEntityResponse>(request);
@@ -134,7 +158,176 @@ namespace HouseSelection.Provider
 
         }
 
-        public string GetSubscribers(DataTable tData, int pId, string pGroup)
+        public ProjectEntityResponse GetProjects(string searchStr)
+        {
+            ProjectEntityResponse result = new ProjectEntityResponse();
+            try
+            {
+                var request = new GetProjectsRequest()
+                {
+                    SearchStr= searchStr,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<ProjectEntityResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity AddProject(string number, string name, string address,string area)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new AddProjectRequest()
+                {
+                    Number = number,
+                    Name = name,
+                    Address = address,
+                    ProjectArea = area
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public SubscriberEntityResponse GetAllSubscribers()
+        {
+            SubscriberEntityResponse result = new SubscriberEntityResponse();
+            try
+            {
+                var request = new GetAllSubscribersReguest
+                {
+                    PageIndex = 99999,
+                    PageSize = 1
+                };
+
+                result = this.Client.InvokeAPI<SubscriberEntityResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public SubscriberEntityResponse GetSubscribers(string searchStr)
+        {
+            SubscriberEntityResponse result = new SubscriberEntityResponse();
+            try
+            {
+                var request = new GetSubscribersRequest()
+                {
+                    SearchStr = searchStr,
+                    PageIndex = 99999,
+                    PageSize = 1
+                };
+
+                result = this.Client.InvokeAPI<SubscriberEntityResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public string ImportHouseInfo(DataTable tData, int pId, string pGroup)
+        {
+            #region 定义参数
+
+            string msg = string.Empty;
+
+            #endregion
+            try
+            {
+                action = "_生成业务级数据";
+                #region 清洗数据
+
+                string sCol = "SerialNumber,Group,Block,Building,Unit,RoomNumber,RoomType,Toward,RoomCode,EstimateBuiltUpArea,EstimateLivingArea,AreaUnitPrice,TotalPrice";
+                List<HouseInfoTable> lDataList = ReadDataTable<HouseInfoTable>(tData, sCol);
+
+                if (lDataList == null || lDataList.Count == 0)
+                {
+                    msg = "读取EXCEL数据失败！";
+                    return msg;
+                }
+
+                ImportHouseInfoRequest requestInfo = new ImportHouseInfoRequest();
+
+                foreach (var item in lDataList)
+                {
+                    HouseInfoTable houseInfo = new HouseInfoTable();
+
+                    houseInfo.SerialNumber= item.SerialNumber;
+                    houseInfo.Group = item.Group;
+                    houseInfo.Block = item.Block;
+                    houseInfo.Building = item.Building;
+                    houseInfo.Unit = item.Unit;
+                    houseInfo.RoomNumber = item.RoomNumber;
+                    houseInfo.RoomType = item.RoomType;
+                    houseInfo.Toward = item.Toward;
+                    houseInfo.RoomCode = item.RoomCode;
+                    houseInfo.EstimateBuiltUpArea = item.EstimateBuiltUpArea;
+                    houseInfo.EstimateLivingArea = item.EstimateLivingArea;
+                    houseInfo.AreaUnitPrice = item.AreaUnitPrice;
+                    houseInfo.TotalPrice = item.TotalPrice;
+
+                    requestInfo.HouseList.Add(houseInfo);
+
+                    requestInfo.ProjectID = pId;
+                    //requestInfo.ProjectGroup = pGroup;
+                }
+
+                #endregion
+                action = "_调用接口";
+                #region 调用接口
+
+                BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
+
+                // 同步数据库内容
+                if (result != null && result.code != 0)
+                {
+                    msg = "上传认购人信息失败, 错误信息！";
+                    return msg;
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                msg = "上传认购人信息失败, 错误信息：" + ex.Message;
+            }
+
+            return msg;
+        }
+
+        public string ImportSubscriber(DataTable tData, int pId, string pGroup)
         {
             #region 定义参数
 
@@ -190,26 +383,27 @@ namespace HouseSelection.Provider
                     string[] tempsplit1st = item.SubscriberFamilyMemberEntity.Split('<');
                     foreach (string fm in tempsplit1st)
                     {
-                        if(fm != "")
+                        if (fm != "")
                         {
                             SubscriberFamilyMemberEntitytemp temp = new SubscriberFamilyMemberEntitytemp();
                             string[] tempsplit2nd = fm.Split('>');
                             temp.Relationship = tempsplit2nd[0];
+                            
                             string[] tempsplit3rd = tempsplit2nd[1].Split(',');
                             temp.SubscriberIdentityNumber = item.IdentityNumber;
                             temp.Name = tempsplit3rd[0];
                             temp.IdentityNumber = tempsplit3rd[2];
                             temp.Area = tempsplit3rd[3];
-                            subscriberFamilyMemberEntitytemp.Add(temp);
+                            if (temp.Relationship != "申请人"){subscriberFamilyMemberEntitytemp.Add(temp);}
                         }
                         
                     }
 
-                    shakingNumberResultEntity.SubscriberFamilyMemberEntity = subscriberFamilyMemberEntitytemp;
+                    shakingNumberResultEntity.FamilyMemberList = subscriberFamilyMemberEntitytemp;
 
                     requestInfo.ShakingNumberList.Add(shakingNumberResultEntity);
-                    requestInfo.PrijectID = pId;
-                    requestInfo.PrijectGroup = pGroup;
+                    requestInfo.ProjectID = pId;
+                    requestInfo.ProjectGroup = pGroup;
                 }
 
                 #endregion
@@ -232,6 +426,108 @@ namespace HouseSelection.Provider
             }
 
             return msg;
+        }
+
+        public BaseResultEntity AddFrontEndAccount(int projrctId, string account, string password)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new AddFrontEndAccountRequest()
+                {
+                    ProjectID = projrctId,
+                    Account = account,
+                    Password = password
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetFrontEndAccountResponse GetAllFrontEndAccount(int projectId)
+        {
+            GetFrontEndAccountResponse result = new GetFrontEndAccountResponse();
+            try
+            {
+                var request = new GetAllFrontEndAccountRequest()
+                {
+                    ProjectID = projectId,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetFrontEndAccountResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetFrontEndAccountResponse GetFrontEndAccount(string searchStr)
+        {
+            GetFrontEndAccountResponse result = new GetFrontEndAccountResponse();
+            try
+            {
+                var request = new GetFrontEndAccountRequest()
+                {
+                    ProjectID = 0,
+                    SearchStr = searchStr,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetFrontEndAccountResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity EditFrontEndAccount(int id, string account, string passwordold, string password)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new EditFrontEndAccountRequest()
+                {
+                    AccountID=id,
+                    Account = account,
+                    BeforePassword = passwordold,
+                    Password = password
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = 9999;
+                result.errMsg = ex.Message;
+            }
+
+            return result;
+
         }
     }
 }

@@ -127,7 +127,7 @@ namespace HouseSelection.Utility
         /// <param name="sheetName">excel工作薄sheet的名称</param>
         /// <param name="isFirstRowColumn">第一行是否是DataTable的列名</param>
         /// <returns>返回的DataTable</returns>
-        public DataTable ExcelToDataTable(string sheetName, bool isFirstRowColumn)
+        public DataTable ExcelToDataTable(string sheetName, bool isFirstRowColumn,int StartRow)
         {
             ISheet sheet = null;
             DataTable data = new DataTable();
@@ -146,7 +146,7 @@ namespace HouseSelection.Utility
                 {
                     sheet = workbook.GetSheetAt(0);
                 }
-                if (sheet != null) { InsertSheettoTbl(sheet, data, isFirstRowColumn); }
+                if (sheet != null) { InsertSheettoTbl(sheet, data, isFirstRowColumn, StartRow); }
 
                 return data;
             }
@@ -157,7 +157,7 @@ namespace HouseSelection.Utility
             }
         }
 
-        public void InsertSheettoTbl(ISheet sheet, DataTable data, bool isFirstRowColumn)
+        public void InsertSheettoTbl(ISheet sheet, DataTable data, bool isFirstRowColumn,int StartRow)
         {
             IRow firstRow = sheet.GetRow(0);
             int startRow = 0;
@@ -182,11 +182,11 @@ namespace HouseSelection.Utility
                         }
                     }
                 }
-                startRow = sheet.FirstRowNum + 1;
+                startRow = sheet.FirstRowNum + StartRow + 1;
             }
             else
             {
-                startRow = sheet.FirstRowNum;
+                startRow = sheet.FirstRowNum + StartRow;
             }
 
             //最后一列的标号

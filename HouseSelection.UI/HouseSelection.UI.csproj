@@ -46,11 +46,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmClientAccountAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientAccountAdd.Designer.cs">
+      <DependentUpon>frmClientAccountAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClientAccountEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientAccountEdit.Designer.cs">
+      <DependentUpon>frmClientAccountEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClientAccountManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientAccountManagement.Designer.cs">
+      <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHousesImport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHousesImport.Designer.cs">
       <DependentUpon>frmHousesImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProjectAddOrEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjectAddOrEdit.Designer.cs">
+      <DependentUpon>frmProjectAddOrEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProjectManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjectManagement.Designer.cs">
+      <DependentUpon>frmProjectManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSubscribePersonImport.cs">
       <SubType>Form</SubType>
@@ -58,13 +100,43 @@
     <Compile Include="frmSubscribePersonImport.Designer.cs">
       <DependentUpon>frmSubscribePersonImport.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSubscribePersonManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubscribePersonManagement.Designer.cs">
+      <DependentUpon>frmSubscribePersonManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmClientAccountAdd.resx">
+      <DependentUpon>frmClientAccountAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClientAccountEdit.resx">
+      <DependentUpon>frmClientAccountEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClientAccountManagement.resx">
+      <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHousesImport.resx">
       <DependentUpon>frmHousesImport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjectAddOrEdit.resx">
+      <DependentUpon>frmProjectAddOrEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjectManagement.resx">
+      <DependentUpon>frmProjectManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSubscribePersonImport.resx">
       <DependentUpon>frmSubscribePersonImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubscribePersonManagement.resx">
+      <DependentUpon>frmSubscribePersonManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

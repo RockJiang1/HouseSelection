@@ -45,5 +45,9 @@ namespace HouseSelection.Provider.Client.Response
         /// 项目所属区域
         /// </summary>
         public string ProjectArea { get; set; }
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public string Operate { get; set; }
     }
 }

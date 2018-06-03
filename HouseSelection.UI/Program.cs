@@ -16,7 +16,7 @@ namespace HouseSelection.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmHousesImport());
+            Application.Run(new frmLogin());
         }
     }
 }

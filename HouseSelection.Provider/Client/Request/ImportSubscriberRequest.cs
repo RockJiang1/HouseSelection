@@ -11,7 +11,7 @@ namespace HouseSelection.Provider.Client.Request
     {
         protected override string APIAddress
         {
-            get { return "/api/GetSubscribers"; }
+            get { return "/api/ImportSubscriber"; }
         }
         public ImportSubscriberRequest()
         {
@@ -21,15 +21,15 @@ namespace HouseSelection.Provider.Client.Request
         /// <summary>
         /// 房源ID
         /// </summary>
-        public int PrijectID { get; set; }
+        public int ProjectID { get; set; }
         /// <summary>
         /// 房源ID
         /// </summary>
-        public string PrijectGroup { get; set; }
+        public string ProjectGroup { get; set; }
         /// <summary>
         /// 房源ID
         /// </summary>
-        [RequestProperty(JsonSerializable = true)]
+        //[RequestProperty(JsonSerializable = true)]
         public List<ShakingNumberResultEntitytemp> ShakingNumberList { get; set; }
     }
 
@@ -37,7 +37,7 @@ namespace HouseSelection.Provider.Client.Request
     {
         public ShakingNumberResultEntitytemp()
         {
-            this.SubscriberFamilyMemberEntity = new List<SubscriberFamilyMemberEntitytemp>();
+            this.FamilyMemberList = new List<SubscriberFamilyMemberEntitytemp>();
             this.Subscriber = new SubscriberEntitytemp();
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace HouseSelection.Provider.Client.Request
         /// <summary>
         /// 菜品sku 参考sku
         /// </summary>
-        public List<SubscriberFamilyMemberEntitytemp> SubscriberFamilyMemberEntity { get; set; }
+        public List<SubscriberFamilyMemberEntitytemp> FamilyMemberList { get; set; }
     }
 
     /// <summary>

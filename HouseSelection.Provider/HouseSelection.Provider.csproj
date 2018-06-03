@@ -57,11 +57,23 @@
   <ItemGroup>
     <Compile Include="BaseProvide.cs" />
     <Compile Include="Client\GeneralClient.cs" />
+    <Compile Include="Client\Request\AddFrontEndAccountRequest.cs" />
+    <Compile Include="Client\Request\AddProjectRequest.cs" />
+    <Compile Include="Client\Request\CheckBackEndAccountRequest.cs" />
+    <Compile Include="Client\Request\EditFrontEndAccountRequest.cs" />
     <Compile Include="Client\Request\GeneralRequest.cs" />
+    <Compile Include="Client\Request\GetAllFrontEndAccountRequest.cs" />
     <Compile Include="Client\Request\GetAllProjectsRequest.cs" />
+    <Compile Include="Client\Request\GetAllSubscribersReguest.cs" />
+    <Compile Include="Client\Request\GetFrontEndAccountRequest.cs" />
+    <Compile Include="Client\Request\GetProjectsRequest.cs" />
+    <Compile Include="Client\Request\GetSubscribersRequest.cs" />
     <Compile Include="Client\Request\GetTokenRequest.cs" />
+    <Compile Include="Client\Request\ImportHouseInfoRequest.cs" />
     <Compile Include="Client\Request\ImportSubscriberRequest.cs" />
+    <Compile Include="Client\Response\GetFrontEndAccountResponse.cs" />
     <Compile Include="Client\Response\ProjectEntityResponse.cs" />
+    <Compile Include="Client\Response\SubscriberEntityResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

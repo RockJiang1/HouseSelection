@@ -34,17 +34,18 @@ namespace HouseSelection.UI
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
-            ProjectEntityResponse getProject = provide.GetProject();
+            ProjectEntityResponse getProject = provide.GetAllProjects();
             if (getProject.code != 0)
             {
                 MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
                 return;
             }
 
-            if (getProject.ProjectList.Count == 0)
-            {
+            
+            //comboBox1.DataSource = getProject.ProjectList;
+            //comboBox1.DisplayMember= getProject.ProjectList
 
-            }
+
 
         }
 
@@ -97,14 +98,14 @@ namespace HouseSelection.UI
                     }
                     foreach(SheetName item in excel.SheetName)
                     {
-                        dt = excelHelper.ExcelToDataTable(item.Name,true);
+                        dt = excelHelper.ExcelToDataTable(item.Name,true,1);
                         if (dt==null || dt.Rows.Count <= 1)
                         {
                             MessageBox.Show("Excel sheet名称： "+ item.Name + "数据为空！");
                             return;
                         }
                         else{
-                            result = provide.GetSubscribers(dt, iprojectId, item.Name);
+                            result = provide.ImportHouseInfo(dt, iprojectId, item.Name);
                         }
                     }
                     
