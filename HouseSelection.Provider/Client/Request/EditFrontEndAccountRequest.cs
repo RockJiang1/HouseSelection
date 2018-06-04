@@ -34,4 +34,3 @@ namespace HouseSelection.Provider.Client.Request
         public string Password { get; set; }
     }
 }
-}
