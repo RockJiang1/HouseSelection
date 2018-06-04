@@ -596,3 +596,10 @@ IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'IdentityNumber' AND 
 BEGIN
 	ALTER TABLE Project ADD IdentityNumber NVARCHAR(200) NULL
 END
+
+--摇号结果表添加选房顺序号字段字段
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'SelectHouseSequance' AND object_id = OBJECT_ID(N'ShakingNumberResult'))
+BEGIN
+	ALTER TABLE ShakingNumberResult ADD SelectHouseSequance INT NOT NULL
+END
+GO

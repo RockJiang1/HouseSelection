@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseSelection.Model
 {
-    public class ShakingNumberResultEntity
+    public class GetShakingNumberResultEntity
     {
         /// <summary>
         /// 摇号顺序号
@@ -27,10 +27,5 @@ namespace HouseSelection.Model
         /// 认购人
         /// </summary>
         public SubscriberEntity Subscriber { get; set; }
-
-        /// <summary>
-        /// 认购人家庭成员
-        /// </summary>
-        public List<SubscriberFamilyMemberEntity> FamilyMemberList { get; set; }
     }
 }

@@ -70,7 +70,13 @@ namespace HouseSelection.PrivateAPI.Controllers
                         ret.errMsg = "摇号编号为" + shake.ShakingNumber + "摇号序号不能为空或小于1！";
                         return ret;
                     }
-                    if(shake.Subscriber.Name == null || shake.Subscriber.IdentityNumber == null || shake.Subscriber.Telephone == null || shake.Subscriber.Address == null || shake.Subscriber.MaritalStatus == null || shake.Subscriber.ZipCode == null || shake.Subscriber.ResidenceArea == null || shake.Subscriber.WorkArea == null)
+                    if (shake.SelectHouseSequance <= 0)
+                    {
+                        ret.code = 405;
+                        ret.errMsg = "摇号编号为" + shake.ShakingNumber + "选房序号不能为空或小于1！";
+                        return ret;
+                    }
+                    if (shake.Subscriber.Name == null || shake.Subscriber.IdentityNumber == null || shake.Subscriber.Telephone == null || shake.Subscriber.Address == null || shake.Subscriber.MaritalStatus == null || shake.Subscriber.ZipCode == null || shake.Subscriber.ResidenceArea == null || shake.Subscriber.WorkArea == null)
                     {
                         ret.code = 406;
                         ret.errMsg = "摇号编号为" + shake.ShakingNumber + "认购人信息不完整！";
@@ -231,6 +237,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                                 ProjectGroupID = _projectGroupID,
                                 SubscriberProjectMappingID = _subProMap.ID,
                                 ShakingNumberSequance = shake.ShakingNumberSequance,
+                                SelectHouseSequance = shake.SelectHouseSequance,
                                 ShakingNumber = shake.ShakingNumber,
                                 NoticeTime = 0,
                                 IsError = false,

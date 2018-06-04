@@ -219,6 +219,7 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="IsAuthorized" Type="bit" Nullable="false" />
+          <Property Name="SelectHouseSequance" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscriber">
           <Key>
@@ -1238,6 +1239,7 @@
           <NavigationProperty Name="SubscriberProjectMapping" Relationship="HouseSelectionDBModel.FK_ShakingNumberResult_SubscriberProjectMapping_ID" FromRole="ShakingNumberResult" ToRole="SubscriberProjectMapping" />
           <NavigationProperty Name="TelephoneNoticeRecord" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="ShakingNumberResult" ToRole="TelephoneNoticeRecord" />
           <Property Name="IsAuthorized" Type="Boolean" Nullable="false" />
+          <Property Name="SelectHouseSequance" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SubscriberFamilyMember">
           <Key>
@@ -1715,6 +1717,7 @@
           <EntitySetMapping Name="ShakingNumberResult">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.ShakingNumberResult">
               <MappingFragment StoreEntitySet="ShakingNumberResult">
+                <ScalarProperty Name="SelectHouseSequance" ColumnName="SelectHouseSequance" />
                 <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />

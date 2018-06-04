@@ -34,6 +34,7 @@ namespace HouseSelection.Model
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public bool IsAuthorized { get; set; }
+        public int SelectHouseSequance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseSelectPeriod> HouseSelectPeriod { get; set; }

@@ -24,7 +24,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         public HouseBLL _houseBLL = new HouseBLL();
 
         [ApiAuthorize]
-        public GetSelectHouseInfoResult Post(GetSelectHouseInfoRequest req)
+        public GetSelectHouseInfoResult Post(GetSelectHouseInfoRequestModel req)
         {
             Logger.LogDebug("GetSelectHouseInfo Request:" + JsonHelper.SerializeObject(req), "GetSelectHouseInfoController", "Post");
             var ret = new GetSelectHouseInfoResult()

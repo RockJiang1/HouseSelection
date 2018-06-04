@@ -10,12 +10,12 @@ using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Utility;
 
-namespace HouseSelection.PrivateAPI.Controllers.SelectRole
+namespace HouseSelection.PrivateAPI.Controllers
 {
     /// <summary>
-    /// 添加选房规则
+    /// 修改选房规则
     /// </summary>
-    public class AddSelectRoleController : ApiController
+    public class EditSelectRoleController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
         private RoleProjectGroupAndRoomTypeBLL _role1BLL = new RoleProjectGroupAndRoomTypeBLL();
@@ -25,21 +25,27 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
         [ApiAuthorize]
         public BaseResultEntity Post(AddSelectRoleRequestEntity req)
         {
-            Logger.LogDebug("AddSelectRole Request:" + JsonHelper.SerializeObject(req), "AddSelectRoleController", "Post");
+            Logger.LogDebug("EditSelectRole Request:" + JsonHelper.SerializeObject(req), "EditSelectRoleController", "Post");
             var ret = new BaseResultEntity()
             {
                 code = 0,
                 errMsg = ""
             };
 
+            List<RoleProjectGroupAndRoomType> role1 = new List<RoleProjectGroupAndRoomType>();
+            List<RoleFamilyNumberAndRoomType> role2 = new List<RoleFamilyNumberAndRoomType>();
+            List<RoleProjectGroupAndHouseGroup> role3 = new List<RoleProjectGroupAndHouseGroup>();
             try
             {
+                role1 = _role1BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).ToList();
+                role2 = _role2BLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
+                role3 = _role3BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).ToList();
                 if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 {
                     ret.code = 201;
                     ret.errMsg = "项目ID不存在！";
                 }
-                else if(req.ProjectGroupAndRoomTypeRoleList == null || req.ProjectGroupAndRoomTypeRoleList.Count() == 0)
+                else if (req.ProjectGroupAndRoomTypeRoleList == null || req.ProjectGroupAndRoomTypeRoleList.Count() == 0)
                 {
                     ret.code = 801;
                     ret.errMsg = "项目分组与户型规则不能为空！";
@@ -54,15 +60,21 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
                     ret.code = 803;
                     ret.errMsg = "项目分组与房源分组规则不能为空！";
                 }
-                else if(_role1BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() != null || _role2BLL.GetModels(x => x.ProjectID == req.ProjectID).FirstOrDefault() != null || _role3BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() != null)
+                else if (role1.FirstOrDefault() == null || role2.FirstOrDefault() == null || role3.FirstOrDefault() == null)
                 {
-                    ret.code = 804;
-                    ret.errMsg = "该项目已经创建选房规则，请使用修改接口修改！";
+                    ret.code = 805;
+                    ret.errMsg = "该项目还未创建选房规则，请使用创建接口！";
                 }
                 else
                 {
+                    //先删
+                    _role1BLL.DeleteRange(role1);
+                    _role2BLL.DeleteRange(role2);
+                    _role3BLL.DeleteRange(role3);
+
+                    //后插
                     var dbRole1List = new List<RoleProjectGroupAndRoomType>();
-                    foreach(var _role1 in req.ProjectGroupAndRoomTypeRoleList)
+                    foreach (var _role1 in req.ProjectGroupAndRoomTypeRoleList)
                     {
                         var dbRole1 = new RoleProjectGroupAndRoomType()
                         {
@@ -105,9 +117,23 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
                     _role3BLL.AddRange(dbRole3List);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Logger.LogException("创建选房规则时发生异常！", "AddSelectRoleController", "Post", ex);
+                //回滚
+                if(_role1BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() == null && role1 != null && role1.Count() > 1)
+                {
+                    _role1BLL.AddRange(role1);
+                }
+                if (_role2BLL.GetModels(x => x.ProjectID == req.ProjectID).FirstOrDefault() == null && role2 != null && role2.Count() > 1)
+                {
+                    _role2BLL.AddRange(role2);
+                }
+                if (_role3BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() == null && role3 != null && role3.Count() > 1)
+                {
+                    _role3BLL.AddRange(role3);
+                }
+
+                Logger.LogException("修改选房规则时发生异常！", "EditSelectRoleController", "Post", ex);
                 ret.code = 999;
                 ret.errMsg = ex.Message;
             }
