@@ -34,8 +34,11 @@ namespace HouseSelection.PrivateAPI.Controllers
                             {
                                 Number = Project.Number,
                                 Name = Project.Name,
-                                Address = Project.Address,
+                                //Address = Project.Address,
+                                Address = "",
                                 AreaID = _area.ID,
+                                DevelopCompany = Project.DevelopCompany,
+                                IdentityNumber = Project.IdentityNumber,
                                 CreateTime = DateTime.Now,
                                 LastUpdate = DateTime.Now
                             };

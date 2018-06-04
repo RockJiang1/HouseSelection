@@ -32,5 +32,15 @@ namespace HouseSelection.Model
         /// 项目所属区域
         /// </summary>
         public string ProjectArea { get; set; }
+
+        /// <summary>
+        /// 开发企业
+        /// </summary>
+        public string DevelopCompany { get; set; }
+
+        /// <summary>
+        /// 预售证号
+        /// </summary>
+        public string IdentityNumber { get; set; }
     }
 }

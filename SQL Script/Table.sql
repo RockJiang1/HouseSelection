@@ -584,3 +584,15 @@ BEGIN
 	ALTER TABLE Subscriber ADD FamilyMemberNumber INT NOT NULL
 END
 GO
+
+--项目表添加开发企业字段
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'DevelopCompany' AND object_id = OBJECT_ID(N'Project'))
+BEGIN
+	ALTER TABLE Project ADD DevelopCompany NVARCHAR(200) NULL
+END
+
+--项目表添加预售证号字段
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'IdentityNumber' AND object_id = OBJECT_ID(N'Project'))
+BEGIN
+	ALTER TABLE Project ADD IdentityNumber NVARCHAR(200) NULL
+END
