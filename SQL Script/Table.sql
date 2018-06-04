@@ -603,3 +603,17 @@ BEGIN
 	ALTER TABLE ShakingNumberResult ADD SelectHouseSequance INT NOT NULL
 END
 GO
+
+--项目表添加项目是否结束字段
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'IsEnd' AND object_id = OBJECT_ID(N'Project'))
+BEGIN
+	ALTER TABLE Project ADD IsEnd BIT NOT NULL DEFAULT 0
+END
+GO
+
+--项目表添加项目结束原因字段
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'EndReason' AND object_id = OBJECT_ID(N'Project'))
+BEGIN
+	ALTER TABLE Project ADD EndReason NVARCHAR(2000) NULL
+END
+GO

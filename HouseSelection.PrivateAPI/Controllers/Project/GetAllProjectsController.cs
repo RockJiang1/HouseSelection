@@ -36,7 +36,9 @@ namespace HouseSelection.PrivateAPI.Controllers
                         Address = p.Address,
                         ProjectArea = p.Area.Name,
                         DevelopCompany = p.DevelopCompany,
-                        IdentityNumber = p.IdentityNumber
+                        IdentityNumber = p.IdentityNumber,
+                        IsEnd = p.IsEnd,
+                        EndReason = p.EndReason
                     };
                     ret.ProjectList.Add(retP);
                 }

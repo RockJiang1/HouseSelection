@@ -40,7 +40,9 @@ namespace HouseSelection.PrivateAPI.Controllers
                                 DevelopCompany = Project.DevelopCompany,
                                 IdentityNumber = Project.IdentityNumber,
                                 CreateTime = DateTime.Now,
-                                LastUpdate = DateTime.Now
+                                LastUpdate = DateTime.Now,
+                                IsEnd = false,
+                                EndReason = null
                             };
                             _projectBLL.Add(_newProject);
                             ret.code = 0;

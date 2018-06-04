@@ -36,6 +36,8 @@ namespace HouseSelection.Model
         public int AreaID { get; set; }
         public string DevelopCompany { get; set; }
         public string IdentityNumber { get; set; }
+        public bool IsEnd { get; set; }
+        public string EndReason { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectGroup> ProjectGroup { get; set; }

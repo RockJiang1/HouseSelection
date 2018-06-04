@@ -151,6 +151,8 @@
           <Property Name="AreaID" Type="int" Nullable="false" />
           <Property Name="DevelopCompany" Type="nvarchar" MaxLength="200" />
           <Property Name="IdentityNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsEnd" Type="bit" Nullable="false" />
+          <Property Name="EndReason" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -770,6 +772,8 @@
           <NavigationProperty Name="RoleFamilyNumberAndRoomType" Relationship="HouseSelectionDBModel.FK_RoleFamilyNumberAndRoomType_Project_ID" FromRole="Project" ToRole="RoleFamilyNumberAndRoomType" />
           <Property Name="DevelopCompany" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IdentityNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnd" Type="Boolean" Nullable="false" />
+          <Property Name="EndReason" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -1552,6 +1556,8 @@
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="EndReason" ColumnName="EndReason" />
+                <ScalarProperty Name="IsEnd" ColumnName="IsEnd" />
                 <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
                 <ScalarProperty Name="DevelopCompany" ColumnName="DevelopCompany" />
                 <ScalarProperty Name="AreaID" ColumnName="AreaID" />

@@ -35,7 +35,9 @@ namespace HouseSelection.PrivateAPI.Controllers
                         Address = _project.Address,
                         ProjectArea = _project.Area.Name,
                         DevelopCompany = _project.DevelopCompany,
-                        IdentityNumber = _project.IdentityNumber
+                        IdentityNumber = _project.IdentityNumber,
+                        IsEnd = _project.IsEnd,
+                        EndReason = _project.EndReason
                     };
                     ret.code = 0;
                     ret.errMsg = "";

@@ -42,5 +42,15 @@ namespace HouseSelection.Model
         /// 预售证号
         /// </summary>
         public string IdentityNumber { get; set; }
+
+        /// <summary>
+        /// 项目是否结束
+        /// </summary>
+        public bool IsEnd { get; set; }
+
+        /// <summary>
+        /// 项目结束原因
+        /// </summary>
+        public string EndReason { get; set; }
     }
 }
