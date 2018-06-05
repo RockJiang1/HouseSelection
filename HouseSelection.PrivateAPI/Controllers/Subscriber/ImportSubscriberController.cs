@@ -95,7 +95,9 @@ namespace HouseSelection.PrivateAPI.Controllers
                         var _progrp = new ProjectGroup()
                         {
                             ProjectID = req.ProjectID,
-                            ProjectGroupName = req.ProjectGroup
+                            ProjectGroupName = req.ProjectGroup,
+                            CreateTime = DateTime.Now,
+                            LastUpdate = DateTime.Now
                         };
                         _projectGroupBLL.Add(_progrp);
                     }
