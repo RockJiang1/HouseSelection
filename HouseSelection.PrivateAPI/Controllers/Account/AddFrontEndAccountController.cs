@@ -24,26 +24,26 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("AddFrontEndAccount Request:" + JsonHelper.SerializeObject(req), "AddFrontEndAccountController", "Post");
             var ret = new BaseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 {
-                    ret.code = 201;
-                    ret.errMsg = "项目ID不存在！";
+                    ret.Code = 201;
+                    ret.ErrMsg = "项目ID不存在！";
                 }
                 else if(string.IsNullOrWhiteSpace(req.Account) || string.IsNullOrWhiteSpace(req.Password))
                 {
-                    ret.code = 601;
-                    ret.errMsg = "账号或密码不允许为空！";
+                    ret.Code = 601;
+                    ret.ErrMsg = "账号或密码不允许为空！";
                 }
                 else if(_frontBLL.GetModels(x => x.Account == req.Account).FirstOrDefault() != null)
                 {
-                    ret.code = 602;
-                    ret.errMsg = "账号已存在！";
+                    ret.Code = 602;
+                    ret.ErrMsg = "账号已存在！";
                 }
                 else
                 {
@@ -61,8 +61,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch(Exception ex)
             {
                 Logger.LogException("添加前台账号时发生异常！", "AddFrontEndAccountController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

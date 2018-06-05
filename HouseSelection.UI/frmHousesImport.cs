@@ -26,18 +26,18 @@ namespace HouseSelection.UI
             GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
 
@@ -80,9 +80,9 @@ namespace HouseSelection.UI
                 GlobalTokenHelper.Expiry = 0;
 
                 TokenResultEntity getToken = provide.GetToken();
-                if (getToken.code != 0)
+                if (getToken.Code != 0)
                 {
-                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
                 GlobalTokenHelper.gToken = getToken.Access_Token;
@@ -91,7 +91,7 @@ namespace HouseSelection.UI
                 using (ExcelHelper excelHelper = new ExcelHelper(file))
                 {
                     excel = excelHelper.GetExcelAttribute();
-                    if (excel.code !=0 || excel.SheetNumber == 0)
+                    if (excel.Code != 0 || excel.SheetNumber == 0)
                     {
                         MessageBox.Show("Excel 异常请核对！");
                         return;

@@ -142,21 +142,21 @@ namespace HouseSelection.PrivateAPI.Controllers
                     }
                     else
                     {
-                        ret.code = 302;
-                        ret.errMsg = "导入的房源信息所属项目不存在！";
+                        ret.Code = 302;
+                        ret.ErrMsg = "导入的房源信息所属项目不存在！";
                     }
                 }
                 else
                 {
-                    ret.code = 301;
-                    ret.errMsg = "导入的房源信息不允许为空！";
+                    ret.Code = 301;
+                    ret.ErrMsg = "导入的房源信息不允许为空！";
                 }
             }
             catch(Exception ex)
             {
                 Logger.LogException("导入房源信息时发生异常！", "ImportHouseInfoController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

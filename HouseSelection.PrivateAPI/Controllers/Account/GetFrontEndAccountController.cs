@@ -24,8 +24,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetFrontEndAccount Request:" + JsonHelper.SerializeObject(req), "GetFrontEndAccountController", "Post");
             var ret = new GetFrontEndAccountResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -36,12 +36,12 @@ namespace HouseSelection.PrivateAPI.Controllers
                     if(string.IsNullOrWhiteSpace(req.SearchStr))
                     {
                         _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => 1 == 1).ToList();
-                        ret.recordCount = _frontBLL.GetModels(x => 1 == 1).Count();
+                        ret.RecordCount = _frontBLL.GetModels(x => 1 == 1).Count();
                     }
                     else
                     {
                         _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => x.Account.Contains(req.SearchStr)).ToList();
-                        ret.recordCount = _frontBLL.GetModels(x => x.Account.Contains(req.SearchStr)).Count();
+                        ret.RecordCount = _frontBLL.GetModels(x => x.Account.Contains(req.SearchStr)).Count();
                     }
                     
                     
@@ -50,8 +50,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                 {
                     if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                     {
-                        ret.code = 201;
-                        ret.errMsg = "项目ID不存在！";
+                        ret.Code = 201;
+                        ret.ErrMsg = "项目ID不存在！";
                         return ret;
                     }
                     else
@@ -59,12 +59,12 @@ namespace HouseSelection.PrivateAPI.Controllers
                         if (string.IsNullOrWhiteSpace(req.SearchStr))
                         {
                             _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => x.ProjectID == req.ProjectID).ToList();
-                            ret.recordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID).Count();
+                            ret.RecordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID).Count();
                         }
                         else
                         {
                             _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => x.ProjectID == req.ProjectID && x.Account.Contains(req.SearchStr)).ToList();
-                            ret.recordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID && x.Account.Contains(req.SearchStr)).Count();
+                            ret.RecordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID && x.Account.Contains(req.SearchStr)).Count();
                         }
                     }
                 }
@@ -85,8 +85,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch (Exception ex)
             {
                 Logger.LogException("搜索账号列表时发生异常！", "GetFrontEndAccountController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

@@ -22,8 +22,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             Logger.LogDebug("GetHousesEstateByProject Request:" + JsonHelper.SerializeObject(req), "GetHouseEstatesByProjectController", "Post");
             GetHouseEstatesByProjectResultEntity ret = new GetHouseEstatesByProjectResultEntity
             {
-                code = 0,
-                errMsg = "",
+                Code = 0,
+                ErrMsg = "",
                 HouseEstates = new List<HouseEstateEntity>()
             };
 
@@ -57,15 +57,15 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                 else
                 {
                     Logger.LogWarning("项目id" + req.ProjectId + "无效，请校验后重新请求。", "GetHouseEstatesByProjectController", "post");
-                    ret.code = 2;
-                    ret.errMsg = "参数错误。";
+                    ret.Code = 2;
+                    ret.ErrMsg = "参数错误。";
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogException("获取项目列表时发生异常！", "GetHouseEstatesByProjectController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
 
             return ret;

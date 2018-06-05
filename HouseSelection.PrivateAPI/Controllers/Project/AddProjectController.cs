@@ -45,32 +45,32 @@ namespace HouseSelection.PrivateAPI.Controllers
                                 EndReason = null
                             };
                             _projectBLL.Add(_newProject);
-                            ret.code = 0;
-                            ret.errMsg = "";
+                            ret.Code = 0;
+                            ret.ErrMsg = "";
                         }
                         else
                         {
-                            ret.code = 102;
-                            ret.errMsg = "创建项目的编号/名称不允许为空！";
+                            ret.Code = 102;
+                            ret.ErrMsg = "创建项目的编号/名称不允许为空！";
                         }
                     }
                     else
                     {
-                        ret.code = 103;
-                        ret.errMsg = "项目所属区域不存在！";
+                        ret.Code = 103;
+                        ret.ErrMsg = "项目所属区域不存在！";
                     }
                 }
                 else
                 {
-                    ret.code = 101;
-                    ret.errMsg = "创建项目的编号/名称已经存在！";
+                    ret.Code = 101;
+                    ret.ErrMsg = "创建项目的编号/名称已经存在！";
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogException("创建项目发生异常！", "AddProjectController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

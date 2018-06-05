@@ -27,16 +27,16 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
             Logger.LogDebug("GetProjectRoleBaseInfo Request:" + JsonHelper.SerializeObject(req), "GetProjectRoleBaseInfoController", "Post");
             var ret = new GetProjectRoleBaseInfoResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if(_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 {
-                    ret.code = 201;
-                    ret.errMsg = "项目ID不存在！";
+                    ret.Code = 201;
+                    ret.ErrMsg = "项目ID不存在！";
                 }
                 else
                 {
@@ -86,8 +86,8 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
             catch(Exception ex)
             {
                 Logger.LogException("", "", "", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

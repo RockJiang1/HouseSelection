@@ -27,8 +27,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetAllFrontEndAccount Request:" + JsonHelper.SerializeObject(req), "GetAllFrontEndAccountController", "Post");
             var ret = new GetFrontEndAccountResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -37,20 +37,20 @@ namespace HouseSelection.PrivateAPI.Controllers
                 if (req.ProjectID == 0)//获取全部
                 {
                     _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => 1 == 1).ToList();
-                    ret.recordCount = _frontBLL.GetModels(x => 1 == 1).Count();
+                    ret.RecordCount = _frontBLL.GetModels(x => 1 == 1).Count();
                 }
                 else
                 {
                     if(_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                     {
-                        ret.code = 201;
-                        ret.errMsg = "项目ID不存在！";
+                        ret.Code = 201;
+                        ret.ErrMsg = "项目ID不存在！";
                         return ret;
                     }
                     else
                     {
                         _dbAccountList = _frontBLL.GetModelsByPage(req.PageSize, req.PageIndex, true, x => x.ID, x => x.ProjectID == req.ProjectID).ToList();
-                        ret.recordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID).Count();
+                        ret.RecordCount = _frontBLL.GetModels(x => x.ProjectID == req.ProjectID).Count();
                     }
                 }
                 var _accountList = new List<FrontEndAccountEntity>();
@@ -70,8 +70,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch(Exception ex)
             {
                 Logger.LogException("获取账号列表时发生异常！", "GetAllFrontEndAccountController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

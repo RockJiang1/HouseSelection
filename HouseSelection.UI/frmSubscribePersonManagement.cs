@@ -27,25 +27,25 @@ namespace HouseSelection.UI
             GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
 
             SubscriberEntityResponse subscribers = provide.GetAllSubscribers();
-            if (subscribers.code != 0)
+            if (subscribers.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.ErrMsg);
                 return;
             }
             else
@@ -73,18 +73,18 @@ namespace HouseSelection.UI
             GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             SubscriberEntityResponse subscribers = provide.GetSubscribers(textBox1.Text);
-            if (subscribers.code != 0)
+            if (subscribers.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.ErrMsg);
                 return;
             }
             else

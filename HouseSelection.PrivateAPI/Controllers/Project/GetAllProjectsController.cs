@@ -42,15 +42,15 @@ namespace HouseSelection.PrivateAPI.Controllers
                     };
                     ret.ProjectList.Add(retP);
                 }
-                ret.code = 0;
-                ret.errMsg = "";
-                ret.recordCount = _projectBLL.GetModels(x => 1 == 1).Count();
+                ret.Code = 0;
+                ret.ErrMsg = "";
+                ret.RecordCount = _projectBLL.GetModels(x => 1 == 1).Count();
             }
             catch (Exception ex)
             {
                 Logger.LogException("获取项目列表发生异常！", "", "", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
                 ret.ProjectList = null;
             }
             return ret;

@@ -21,8 +21,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             Logger.LogDebug("GetAreaList Request:" + JsonHelper.SerializeObject(req), "GetAreaListController", "Post");
             GetAreaListResultEntity ret = new GetAreaListResultEntity()
             {
-                code = 0,
-                errMsg = "",
+                Code = 0,
+                ErrMsg = "",
                 AreaList = new List<AreaEntity>()
             };
             try
@@ -55,8 +55,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             catch (Exception ex)
             {
                 Logger.LogException("获取区域列表时发生异常！", "GetAreaListController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }
