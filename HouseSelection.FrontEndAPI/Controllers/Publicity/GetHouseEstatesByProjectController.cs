@@ -1,5 +1,4 @@
-﻿using HouseSelection.Authorize;
-using HouseSelection.BLL;
+﻿using HouseSelection.BLL;
 using HouseSelection.FrontEndAPI.Models.PublicityRequest;
 using HouseSelection.FrontEndAPI.Models.PublicityResult;
 using HouseSelection.LoggerHelper;
@@ -18,7 +17,6 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
         HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();
         ProjectBLL _projectBLL = new ProjectBLL();
 
-        [ApiAuthorize]
         public GetHouseEstatesByProjectResultEntity Post(GetHouseEstatesByProjectRequestModel req)
         {
             Logger.LogDebug("GetHousesEstateByProject Request:" + JsonHelper.SerializeObject(req), "GetHouseEstatesByProjectController", "Post");
