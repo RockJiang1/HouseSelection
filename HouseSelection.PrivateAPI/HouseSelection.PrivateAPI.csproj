@@ -199,6 +199,8 @@
     <Compile Include="Controllers\House\ImportHouseInfoController.cs" />
     <Compile Include="Controllers\Project\AddProjectController.cs" />
     <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
+    <Compile Include="Controllers\Project\CloseProjectController.cs" />
+    <Compile Include="Controllers\Project\EditProjectController.cs" />
     <Compile Include="Controllers\Project\GetAllProjectsController.cs" />
     <Compile Include="Controllers\Project\GetProjectByIDController.cs" />
     <Compile Include="Controllers\Project\GetProjectGroupController.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AddFrontEndAccountRequestModel.cs" />
     <Compile Include="Models\BaseRequestModel.cs" />
+    <Compile Include="Models\CloseProjectRequestModel.cs" />
     <Compile Include="Models\EditFrontEndAccountRequestModel.cs" />
     <Compile Include="Models\GetAllHouseInfoRequestModel.cs" />
     <Compile Include="Models\GetFrontEndAccountRequestModel.cs" />

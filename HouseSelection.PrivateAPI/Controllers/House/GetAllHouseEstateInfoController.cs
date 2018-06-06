@@ -26,8 +26,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetAllHouseEstateInfo Request:" + JsonHelper.SerializeObject(Req), "GetAllHouseEstateInfoController", "Post");
             var ret = new GetHouseEstateResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
             try
             {
@@ -45,13 +45,13 @@ namespace HouseSelection.PrivateAPI.Controllers
                     _hseList.Add(he);
                 }
                 ret.HouseEstateList = _hseList;
-                ret.recordCount = _houseEstateBLL.GetModels(x => 1 == 1).Count();
+                ret.RecordCount = _houseEstateBLL.GetModels(x => 1 == 1).Count();
             }
             catch(Exception ex)
             {
                 Logger.LogException("获取所有楼盘信息时发生异常！", "GetAllHouseEstateInfoController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

@@ -26,8 +26,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetHouseSubscriber Request:" + JsonHelper.SerializeObject(req), "GetHouseSubscriberController", "Post");
             GetHouseSubscriberResultEntity ret = new GetHouseSubscriberResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
             try
             {
@@ -50,15 +50,15 @@ namespace HouseSelection.PrivateAPI.Controllers
                 }
                 else
                 {
-                    ret.code = 205;
-                    ret.errMsg = "查询房源的认购人不存在！";
+                    ret.Code = 205;
+                    ret.ErrMsg = "查询房源的认购人不存在！";
                 }
             }
             catch(Exception ex)
             {
                 Logger.LogException("获取房源认购人时发生异常！", "GetHouseSubscriberController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

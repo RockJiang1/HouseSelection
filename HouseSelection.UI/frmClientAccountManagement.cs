@@ -27,18 +27,18 @@ namespace HouseSelection.UI
             GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             GetFrontEndAccountResponse getAllFrontEndAccount = provide.GetAllFrontEndAccount(0);
-            if (getAllFrontEndAccount.code != 0)
+            if (getAllFrontEndAccount.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.ErrMsg);
                 return;
             }
             else
@@ -83,18 +83,18 @@ namespace HouseSelection.UI
             searchStr = textBox1.Text;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             GetFrontEndAccountResponse getFrontEndAccount = provide.GetFrontEndAccount(searchStr);
-            if (getFrontEndAccount.code != 0)
+            if (getFrontEndAccount.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getFrontEndAccount.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getFrontEndAccount.ErrMsg);
                 return;
             }
             else
@@ -123,18 +123,18 @@ namespace HouseSelection.UI
             clearDataView();
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             GetFrontEndAccountResponse getAllFrontEndAccount = provide.GetAllFrontEndAccount(0);
-            if (getAllFrontEndAccount.code != 0)
+            if (getAllFrontEndAccount.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.ErrMsg);
                 return;
             }
             else

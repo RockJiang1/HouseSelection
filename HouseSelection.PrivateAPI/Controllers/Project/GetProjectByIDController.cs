@@ -39,21 +39,21 @@ namespace HouseSelection.PrivateAPI.Controllers
                         IsEnd = _project.IsEnd,
                         EndReason = _project.EndReason
                     };
-                    ret.code = 0;
-                    ret.errMsg = "";
+                    ret.Code = 0;
+                    ret.ErrMsg = "";
                 }
                 else
                 {
-                    ret.code = 104;
-                    ret.errMsg = "查询的项目ID不存在";
+                    ret.Code = 104;
+                    ret.ErrMsg = "查询的项目ID不存在";
                 }
                 
             }
             catch(Exception ex)
             {
                 Logger.LogException("获取项目列表发生异常！", "", "", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
                 ret.Project = null;
             }
             return ret;

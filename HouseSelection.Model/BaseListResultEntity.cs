@@ -8,8 +8,8 @@ namespace HouseSelection.Model
 {
     public class BaseListResultEntity
     {
-        public int code { get; set; }
-        public string errMsg { get; set; }
-        public int recordCount { get; set; }
+        public int Code { get; set; }
+        public string ErrMsg { get; set; }
+        public int RecordCount { get; set; }
     }
 }

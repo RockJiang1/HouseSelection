@@ -28,36 +28,36 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
             Logger.LogDebug("AddSelectRole Request:" + JsonHelper.SerializeObject(req), "AddSelectRoleController", "Post");
             var ret = new BaseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 {
-                    ret.code = 201;
-                    ret.errMsg = "项目ID不存在！";
+                    ret.Code = 201;
+                    ret.ErrMsg = "项目ID不存在！";
                 }
                 else if(req.ProjectGroupAndRoomTypeRoleList == null || req.ProjectGroupAndRoomTypeRoleList.Count() == 0)
                 {
-                    ret.code = 801;
-                    ret.errMsg = "项目分组与户型规则不能为空！";
+                    ret.Code = 801;
+                    ret.ErrMsg = "项目分组与户型规则不能为空！";
                 }
                 else if (req.FamilyNumberAndRoomTypeRoleList == null || req.FamilyNumberAndRoomTypeRoleList.Count() == 0)
                 {
-                    ret.code = 802;
-                    ret.errMsg = "家庭人数与户型规则不能为空！";
+                    ret.Code = 802;
+                    ret.ErrMsg = "家庭人数与户型规则不能为空！";
                 }
                 else if (req.ProjectGroupAndHouseGroupRoleList == null || req.ProjectGroupAndHouseGroupRoleList.Count() == 0)
                 {
-                    ret.code = 803;
-                    ret.errMsg = "项目分组与房源分组规则不能为空！";
+                    ret.Code = 803;
+                    ret.ErrMsg = "项目分组与房源分组规则不能为空！";
                 }
                 else if(_role1BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() != null || _role2BLL.GetModels(x => x.ProjectID == req.ProjectID).FirstOrDefault() != null || _role3BLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).FirstOrDefault() != null)
                 {
-                    ret.code = 804;
-                    ret.errMsg = "该项目已经创建选房规则，请使用修改接口修改！";
+                    ret.Code = 804;
+                    ret.ErrMsg = "该项目已经创建选房规则，请使用修改接口修改！";
                 }
                 else
                 {
@@ -108,8 +108,8 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectRole
             catch(Exception ex)
             {
                 Logger.LogException("创建选房规则时发生异常！", "AddSelectRoleController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

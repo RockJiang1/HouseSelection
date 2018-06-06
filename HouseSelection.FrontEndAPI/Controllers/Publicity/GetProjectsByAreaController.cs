@@ -1,5 +1,4 @@
-﻿using HouseSelection.Authorize;
-using HouseSelection.BLL;
+﻿using HouseSelection.BLL;
 using HouseSelection.FrontEndAPI.Models.PublicityRequest;
 using HouseSelection.FrontEndAPI.Models.PublicityResult;
 using HouseSelection.LoggerHelper;
@@ -18,14 +17,13 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
         ProjectBLL _projectBLL = new ProjectBLL();
         AreaBLL _areaBLL = new AreaBLL();
 
-        [ApiAuthorize]
         public GetProjectsByAreaResultEntity Post(GetProjectsByAreaRequestModel req)
         {
             Logger.LogDebug("GetProjectsByArea Request:" + JsonHelper.SerializeObject(req), "GetProjectsByAreaController", "Post");
             GetProjectsByAreaResultEntity ret = new GetProjectsByAreaResultEntity
             {
-                code = 0,
-                errMsg = "",
+                Code = 0,
+                ErrMsg = "",
                 Projects = new List<ProjectEntity>()
             };
 
@@ -44,8 +42,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
 
                 if (_projects == null || _projects.Count == 0)
                 {
-                    ret.code = 405;
-                    ret.errMsg = "没有查询到对应的项目信息。";
+                    ret.Code = 405;
+                    ret.ErrMsg = "没有查询到对应的项目信息。";
                 }
                 else
                 {
@@ -85,8 +83,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             catch (Exception ex)
             {
                 Logger.LogException("获取项目列表时发生异常！", "GetProjectsByAreaController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

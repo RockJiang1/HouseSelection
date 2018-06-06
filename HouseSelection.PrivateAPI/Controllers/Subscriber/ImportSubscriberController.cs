@@ -30,8 +30,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("ImportSubscriber Request:" + JsonHelper.SerializeObject(req), "ImportSubscriberController", "Post");
             BaseResultEntity ret = new BaseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -40,46 +40,46 @@ namespace HouseSelection.PrivateAPI.Controllers
                 var _pro = _projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault();
                 if (_pro == null)
                 {
-                    ret.code = 401;
-                    ret.errMsg = "项目ID不存在！";
+                    ret.Code = 401;
+                    ret.ErrMsg = "项目ID不存在！";
                     return ret;
                 }
                 else if(req.ProjectGroup == null)
                 {
-                    ret.code = 402;
-                    ret.errMsg = "项目分组不能为空！";
+                    ret.Code = 402;
+                    ret.ErrMsg = "项目分组不能为空！";
                     return ret;
                 }
                 foreach(var shake in req.ShakingNumberList)
                 {
                     if (shake.ShakingNumber == null)
                     {
-                        ret.code = 403;
-                        ret.errMsg = "摇号编号不能为空！";
+                        ret.Code = 403;
+                        ret.ErrMsg = "摇号编号不能为空！";
                         return ret;
                     }
                     if (shake.Subscriber == null)
                     {
-                        ret.code = 404;
-                        ret.errMsg = "摇号编号为" + shake.ShakingNumber + "的认购人信息不能为空！";
+                        ret.Code = 404;
+                        ret.ErrMsg = "摇号编号为" + shake.ShakingNumber + "的认购人信息不能为空！";
                         return ret;
                     }
                     if (shake.ShakingNumberSequance <= 0)
                     {
-                        ret.code = 405;
-                        ret.errMsg = "摇号编号为" + shake.ShakingNumber + "摇号序号不能为空或小于1！";
+                        ret.Code = 405;
+                        ret.ErrMsg = "摇号编号为" + shake.ShakingNumber + "摇号序号不能为空或小于1！";
                         return ret;
                     }
                     if (shake.SelectHouseSequance <= 0)
                     {
-                        ret.code = 405;
-                        ret.errMsg = "摇号编号为" + shake.ShakingNumber + "选房序号不能为空或小于1！";
+                        ret.Code = 405;
+                        ret.ErrMsg = "摇号编号为" + shake.ShakingNumber + "选房序号不能为空或小于1！";
                         return ret;
                     }
                     if (shake.Subscriber.Name == null || shake.Subscriber.IdentityNumber == null || shake.Subscriber.Telephone == null || shake.Subscriber.Address == null || shake.Subscriber.MaritalStatus == null || shake.Subscriber.ZipCode == null || shake.Subscriber.ResidenceArea == null || shake.Subscriber.WorkArea == null)
                     {
-                        ret.code = 406;
-                        ret.errMsg = "摇号编号为" + shake.ShakingNumber + "认购人信息不完整！";
+                        ret.Code = 406;
+                        ret.ErrMsg = "摇号编号为" + shake.ShakingNumber + "认购人信息不完整！";
                         return ret;
                     }
                 }
@@ -106,8 +106,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                 catch(Exception ex)
                 {
                     Logger.LogException("创建项目分组时发生异常！", "ImportSubscriberController", "Post", ex);
-                    ret.code = 999;
-                    ret.errMsg = ex.Message;
+                    ret.Code = 999;
+                    ret.ErrMsg = ex.Message;
                     return ret;
                 }
                 #endregion
@@ -117,11 +117,12 @@ namespace HouseSelection.PrivateAPI.Controllers
                 var _familyList = new List<SubscriberFamilyMemberEntity>();
                 var _shakeList = new List<ShakingNumberResult>();
                 #region 创建认购人
+                var _dbSubList = _subscriberBLL.GetModels(x => 1 == 1).ToList();
                 foreach (var shake in req.ShakingNumberList)
                 {
                     try
                     {
-                        var _sub = _subscriberBLL.GetModels(x => x.IdentityNumber == shake.Subscriber.IdentityNumber).FirstOrDefault();
+                        var _sub = _dbSubList.FirstOrDefault(x => x.IdentityNumber == shake.Subscriber.IdentityNumber);
                         if (_sub == null)  //认购人不存在
                         {
                             var _subscriber = new Subscriber()
@@ -153,8 +154,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                     catch(Exception ex)
                     {
                         Logger.LogException("创建摇号编号为" + shake.ShakingNumber + "的认购人时发生异常！", "ImportSubscriberController", "Post", ex);
-                        ret.code = 999;
-                        ret.errMsg = ex.Message;
+                        ret.Code = 999;
+                        ret.ErrMsg = ex.Message;
                         return ret;
                     }
                 }
@@ -188,8 +189,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                     {
                         _subscriberBLL.DeleteRange(_subList);  //回滚新建认购人
                         Logger.LogException("创建身份证为" + family.IdentityNumber + "的认购人家庭成员时发生异常！", "ImportSubscriberController", "Post", ex);
-                        ret.code = 999;
-                        ret.errMsg = ex.Message;
+                        ret.Code = 999;
+                        ret.ErrMsg = ex.Message;
                         return ret;
                     }
                 }
@@ -209,30 +210,37 @@ namespace HouseSelection.PrivateAPI.Controllers
                     };
                     _subProMapList.Add(_subProMap);
                 }
-                foreach(var sub in _existSubList)//添加已存在认购人Mapping
+
+                var _existSubMap = _subscriberProjectMapBLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
+                foreach (var sub in _existSubList)//添加已存在认购人Mapping
                 {
-                    var _subProMap = new SubscriberProjectMapping()
+                    if(!_existSubMap.Any(x => x.SubscriberID == sub.ID))
                     {
-                        SubscriberID = sub.ID,
-                        ProjectID = req.ProjectID,
-                        CreateTime = DateTime.Now,
-                        LastUpdate = DateTime.Now
-                    };
-                    _subProMapList.Add(_subProMap);
+                        var _subProMap = new SubscriberProjectMapping()
+                        {
+                            SubscriberID = sub.ID,
+                            ProjectID = req.ProjectID,
+                            CreateTime = DateTime.Now,
+                            LastUpdate = DateTime.Now
+                        };
+                        _subProMapList.Add(_subProMap);
+                    }
+                    
                 }
                 _subProMapList.OrderBy(x => x.SubscriberID);
                 _subscriberProjectMapBLL.AddRange(_subProMapList);
                 #endregion
 
                 #region 创建摇号结果
-                var _dbSubProMap = _subscriberProjectMapBLL.GetModels(x => 1 == 1).ToList();
+                var _dbSubProMap = _subscriberProjectMapBLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
+                var _existShakingList = _shakingNumberBLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).ToList();
                 var _dbshakingNumberList = new List<ShakingNumberResult>();
                 foreach (var shake in req.ShakingNumberList)
                 {
                     try
                     {
-                        var _subProMap = _dbSubProMap.FirstOrDefault(x => x.ProjectID == req.ProjectID && x.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber);
-                        if (_subProMap != null && _projectGroupID != 0)
+                        var _subProMap = _dbSubProMap.FirstOrDefault(x => x.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber);
+                        if (_subProMap != null && _projectGroupID != 0 && !_existShakingList.Any(x => x.SubscriberProjectMapping.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber))
                         {
                             var _shake = new ShakingNumberResult()
                             {
@@ -256,8 +264,8 @@ namespace HouseSelection.PrivateAPI.Controllers
                     {
                         _subscriberProjectMapBLL.DeleteRange(_subProMapList);  //回滚新建认购人项目关联
                         Logger.LogException("创建摇号编号为" + shake.ShakingNumber + "的摇号结果时发生异常！", "ImportSubscriberController", "Post", ex);
-                        ret.code = 999;
-                        ret.errMsg = ex.Message;
+                        ret.Code = 999;
+                        ret.ErrMsg = ex.Message;
                         return ret;
                     }
                 }
@@ -267,8 +275,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch(Exception ex)
             {
                 Logger.LogException("导入认购人和摇号信息时发生异常！", "ImportSubscriberController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

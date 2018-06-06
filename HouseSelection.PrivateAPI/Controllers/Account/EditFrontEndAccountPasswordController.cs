@@ -24,8 +24,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("EditFrontEndAccountPassword Request:" + JsonHelper.SerializeObject(req), "EditFrontEndAccountPasswordController", "Post");
             var ret = new BaseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -33,23 +33,23 @@ namespace HouseSelection.PrivateAPI.Controllers
                 var _dbAccount = _frontBLL.GetModels(x => x.ID == req.AccountID).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(req.Account) || string.IsNullOrWhiteSpace(req.Password) || string.IsNullOrWhiteSpace(req.BeforePassword))
                 {
-                    ret.code = 601;
-                    ret.errMsg = "账号或密码不允许为空！";
+                    ret.Code = 601;
+                    ret.ErrMsg = "账号或密码不允许为空！";
                 }
                 else if (_dbAccount == null)
                 {
-                    ret.code = 603;
-                    ret.errMsg = "账号ID不存在！";
+                    ret.Code = 603;
+                    ret.ErrMsg = "账号ID不存在！";
                 }
                 else if (_dbAccount.Account != req.Account)
                 {
-                    ret.code = 604;
-                    ret.errMsg = "账号名称不匹配！";
+                    ret.Code = 604;
+                    ret.ErrMsg = "账号名称不匹配！";
                 }
                 else if (_dbAccount.Password.ToUpper() != req.BeforePassword.ToUpper())
                 {
-                    ret.code = 605;
-                    ret.errMsg = "原密码错误！";
+                    ret.Code = 605;
+                    ret.ErrMsg = "原密码错误！";
                 }
                 else
                 {
@@ -60,8 +60,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch (Exception ex)
             {
                 Logger.LogException("修改前台账号时发生异常！", "EditFrontEndAccountPasswordController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

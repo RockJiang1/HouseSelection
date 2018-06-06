@@ -35,14 +35,14 @@ namespace HouseSelection.UI
             {
 
                 TokenResultEntity getToken = provide.GetToken();
-                if (getToken.code != 0)
+                if (getToken.Code != 0)
                 {
-                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
 
                 BaseResultEntity result = provide.CheckBackEndAccount(sUserAccount, sUserPassword);
-                if (result.code == 0)
+                if (result.Code == 0)
                 {
                     frmMain main = new frmMain();
                     main.Show();

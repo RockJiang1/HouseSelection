@@ -109,13 +109,13 @@ namespace HouseSelection.Utility
                     excelresult.SheetName.Add(sn);
                 }
 
-                excelresult.code = 0;
-                excelresult.errMsg = "";
+                excelresult.Code = 0;
+                excelresult.ErrMsg = "";
             }
             catch(Exception ex)
             {
-                excelresult.code = 9999;
-                excelresult.errMsg = "获取EXCEL属性异常： " + ex.Message;
+                excelresult.Code = 9999;
+                excelresult.ErrMsg = "获取EXCEL属性异常： " + ex.Message;
             }
 
             return excelresult;
