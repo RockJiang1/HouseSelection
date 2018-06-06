@@ -8,6 +8,7 @@ using HouseSelection.Model;
 using HouseSelection.BLL;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Utility;
+using HouseSelection.Authorize;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
@@ -16,6 +17,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         private ProjectBLL _projectBLL = new ProjectBLL();
         private AreaBLL _areaBLL = new AreaBLL();
 
+        [ApiAuthorize]
         public BaseResultEntity Post(ProjectEntity Project)
         {
             Logger.LogDebug("AddProject Request:" + JsonHelper.SerializeObject(Project), "AddProjectController", "Post");
