@@ -108,7 +108,7 @@ namespace HouseSelection.Provider
                     };
 
                     result = this.Client.InvokeAPI<TokenResultEntity>(request);
-                    if (result.code == 0)
+                    if (result.Code == 0)
                     {
                         GlobalTokenHelper.gToken = result.Access_Token;
                         GlobalTokenHelper.Expiry = result.Expiry;
@@ -119,8 +119,8 @@ namespace HouseSelection.Provider
             }
             catch(Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -143,8 +143,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -167,8 +167,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -192,8 +192,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -209,8 +209,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -233,8 +233,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -258,8 +258,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -332,7 +332,7 @@ namespace HouseSelection.Provider
                         BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
 
                         // 同步数据库内容
-                        if (result != null && result.code != 0)
+                        if (result != null && result.Code != 0)
                         {
                             msg = "上传认购人信息失败, 错误信息！";
                             return msg;
@@ -437,7 +437,7 @@ namespace HouseSelection.Provider
                         BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
 
                         // 同步数据库内容
-                        if (result != null && result.code != 0)
+                        if (result != null && result.Code != 0)
                         {
                             msg = "上传认购人信息失败, 错误信息！";
                             return msg;
@@ -476,8 +476,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -501,8 +501,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -527,8 +527,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -553,8 +553,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;

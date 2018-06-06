@@ -38,9 +38,9 @@ namespace HouseSelection.UI
         private void button1_Click(object sender, EventArgs e)
         {
             BaseResultEntity result = IsValidProjectInfo();
-            if (result.code !=0)
+            if (result.Code != 0)
             {
-                MessageBox.Show("输入信息有误, 错误信息： " + result.errMsg);
+                MessageBox.Show("输入信息有误, 错误信息： " + result.ErrMsg);
             }
 
             AddProjectRequest para = new AddProjectRequest();
@@ -51,16 +51,16 @@ namespace HouseSelection.UI
             para.ProjectArea = comboBox1.Text;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
 
             BaseResultEntity getProject = provide.AddProject(para);
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("添加项目失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("添加项目失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
@@ -72,24 +72,24 @@ namespace HouseSelection.UI
         private BaseResultEntity IsValidProjectInfo()
         {
             BaseResultEntity result = new BaseResultEntity();
-            result.code = 0;
-            result.errMsg = "";
+            result.Code = 0;
+            result.ErrMsg = "";
             if (string.IsNullOrEmpty(textBox1.Text))
             {
-                result.code = 999;
-                result.errMsg = "项目名称为空！";
+                result.Code = 999;
+                result.ErrMsg = "项目名称为空！";
                 return result;
             }
             if (string.IsNullOrEmpty(textBox2.Text))
             {
-                result.code = 999;
-                result.errMsg = "开发企业为空！";
+                result.Code = 999;
+                result.ErrMsg = "开发企业为空！";
                 return result;
             }
             if (string.IsNullOrEmpty(textBox3.Text))
             {
-                result.code = 999;
-                result.errMsg = "预售证号为空！";
+                result.Code = 999;
+                result.ErrMsg = "预售证号为空！";
                 return result;
             }
             

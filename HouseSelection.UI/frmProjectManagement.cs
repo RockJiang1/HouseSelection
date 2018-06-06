@@ -24,16 +24,16 @@ namespace HouseSelection.UI
             InitializeComponent();
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取项目信息失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取项目信息失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
@@ -67,16 +67,16 @@ namespace HouseSelection.UI
             searchStr = textBox1.Text;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
 
             ProjectEntityResponse getProject = provide.GetProjects(searchStr);
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
