@@ -18,8 +18,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
         {
             var ret = new GetHouseBuildingsResultEntity()
             {
-                code = 0,
-                errMsg = "",
+                Code = 0,
+                ErrMsg = "",
                 Buildings = new List<int>()
             };
 
@@ -32,8 +32,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             catch (Exception ex)
             {
                 Logger.LogException("获取区域列表时发生异常！", "GetAreaListController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
 
             return ret;

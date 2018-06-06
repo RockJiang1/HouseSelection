@@ -21,8 +21,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
         {
             var ret = new GetHouseEstateDetailsResultEntity()
             {
-                code = 0,
-                errMsg = "",
+                Code = 0,
+                ErrMsg = "",
                 Houses = new List<HouseInfo>()
             };
 
@@ -30,8 +30,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             {
                 if (req.HouseEstateId <= 0 || req.ProjectId <= 0)
                 {
-                    ret.code = 401;
-                    ret.errMsg = "入参无效。";
+                    ret.Code = 401;
+                    ret.ErrMsg = "入参无效。";
                 }
                 else
                 {
@@ -88,8 +88,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
             catch (Exception ex)
             {
                 Logger.LogException("获取楼盘明细信息时发生异常！", "GetHouseEstateDetailsController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
 
             return ret;
