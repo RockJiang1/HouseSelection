@@ -117,11 +117,12 @@ namespace HouseSelection.PrivateAPI.Controllers
                 var _familyList = new List<SubscriberFamilyMemberEntity>();
                 var _shakeList = new List<ShakingNumberResult>();
                 #region 创建认购人
+                var _dbSubList = _subscriberBLL.GetModels(x => 1 == 1).ToList();
                 foreach (var shake in req.ShakingNumberList)
                 {
                     try
                     {
-                        var _sub = _subscriberBLL.GetModels(x => x.IdentityNumber == shake.Subscriber.IdentityNumber).FirstOrDefault();
+                        var _sub = _dbSubList.FirstOrDefault(x => x.IdentityNumber == shake.Subscriber.IdentityNumber);
                         if (_sub == null)  //认购人不存在
                         {
                             var _subscriber = new Subscriber()
@@ -209,30 +210,37 @@ namespace HouseSelection.PrivateAPI.Controllers
                     };
                     _subProMapList.Add(_subProMap);
                 }
-                foreach(var sub in _existSubList)//添加已存在认购人Mapping
+
+                var _existSubMap = _subscriberProjectMapBLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
+                foreach (var sub in _existSubList)//添加已存在认购人Mapping
                 {
-                    var _subProMap = new SubscriberProjectMapping()
+                    if(!_existSubMap.Any(x => x.SubscriberID == sub.ID))
                     {
-                        SubscriberID = sub.ID,
-                        ProjectID = req.ProjectID,
-                        CreateTime = DateTime.Now,
-                        LastUpdate = DateTime.Now
-                    };
-                    _subProMapList.Add(_subProMap);
+                        var _subProMap = new SubscriberProjectMapping()
+                        {
+                            SubscriberID = sub.ID,
+                            ProjectID = req.ProjectID,
+                            CreateTime = DateTime.Now,
+                            LastUpdate = DateTime.Now
+                        };
+                        _subProMapList.Add(_subProMap);
+                    }
+                    
                 }
                 _subProMapList.OrderBy(x => x.SubscriberID);
                 _subscriberProjectMapBLL.AddRange(_subProMapList);
                 #endregion
 
                 #region 创建摇号结果
-                var _dbSubProMap = _subscriberProjectMapBLL.GetModels(x => 1 == 1).ToList();
+                var _dbSubProMap = _subscriberProjectMapBLL.GetModels(x => x.ProjectID == req.ProjectID).ToList();
+                var _existShakingList = _shakingNumberBLL.GetModels(x => x.ProjectGroup.ProjectID == req.ProjectID).ToList();
                 var _dbshakingNumberList = new List<ShakingNumberResult>();
                 foreach (var shake in req.ShakingNumberList)
                 {
                     try
                     {
-                        var _subProMap = _dbSubProMap.FirstOrDefault(x => x.ProjectID == req.ProjectID && x.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber);
-                        if (_subProMap != null && _projectGroupID != 0)
+                        var _subProMap = _dbSubProMap.FirstOrDefault(x => x.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber);
+                        if (_subProMap != null && _projectGroupID != 0 && !_existShakingList.Any(x => x.SubscriberProjectMapping.Subscriber.IdentityNumber == shake.Subscriber.IdentityNumber))
                         {
                             var _shake = new ShakingNumberResult()
                             {
