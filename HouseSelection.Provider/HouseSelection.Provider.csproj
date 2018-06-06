@@ -61,6 +61,7 @@
     <Compile Include="Client\Request\AddProjectRequest.cs" />
     <Compile Include="Client\Request\CheckBackEndAccountRequest.cs" />
     <Compile Include="Client\Request\EditFrontEndAccountRequest.cs" />
+    <Compile Include="Client\Request\EditProjectRequest.cs" />
     <Compile Include="Client\Request\GeneralRequest.cs" />
     <Compile Include="Client\Request\GetAllFrontEndAccountRequest.cs" />
     <Compile Include="Client\Request\GetAllProjectsRequest.cs" />

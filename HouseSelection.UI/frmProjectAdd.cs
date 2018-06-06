@@ -66,6 +66,9 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("添加项目成功！");
+                frmProjectManagement fm = new frmProjectManagement();
+                fm.RefreshDataView();
+                this.Close();
             }
         }
 

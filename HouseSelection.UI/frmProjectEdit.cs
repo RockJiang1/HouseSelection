@@ -18,6 +18,7 @@ namespace HouseSelection.UI
     {
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        private int projectId = 0;
         public frmProjectEdit()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace HouseSelection.UI
             comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
 
             frmProjectManagement fm = new frmProjectManagement();
+            projectId = fm.model.ID;
             label1.Text = fm.model.Number;
             textBox1.Text = fm.model.Name;
             textBox2.Text = fm.model.DevelopCompany;
@@ -47,7 +49,8 @@ namespace HouseSelection.UI
                 MessageBox.Show("输入信息有误, 错误信息： " + result.ErrMsg);
             }
 
-            AddProjectRequest para = new AddProjectRequest();
+            EditProjectRequest para = new EditProjectRequest();
+            para.ID = projectId;
             para.Number = label1.Text;
             para.Name = textBox1.Text;
             para.DevelopCompany = textBox2.Text;
@@ -61,7 +64,7 @@ namespace HouseSelection.UI
                 return;
             }
 
-            BaseResultEntity getProject = provide.AddProject(para);
+            BaseResultEntity getProject = provide.EditProject(para);
             if (getProject.Code != 0)
             {
                 MessageBox.Show("修改项目失败, 错误信息： " + getProject.ErrMsg);
@@ -70,6 +73,9 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("修改项目成功！");
+                frmProjectManagement fm = new frmProjectManagement();
+                fm.RefreshDataView();
+                this.Close();
             }
         }
 

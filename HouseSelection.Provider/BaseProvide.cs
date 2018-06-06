@@ -217,6 +217,23 @@ namespace HouseSelection.Provider
 
         }
 
+        public BaseResultEntity EditProject(EditProjectRequest request)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
         public SubscriberEntityResponse GetAllSubscribers()
         {
             SubscriberEntityResponse result = new SubscriberEntityResponse();
