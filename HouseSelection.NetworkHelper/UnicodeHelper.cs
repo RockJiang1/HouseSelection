@@ -16,7 +16,7 @@ namespace HouseSelection.NetworkHelper
         public static string ToJSUnicode(string str)
         {
             string outStr = "";
-            string a = "";
+            //string a = "";
             if (!string.IsNullOrEmpty(str))
             {
                 for (int i = 0; i < str.Length; i++)

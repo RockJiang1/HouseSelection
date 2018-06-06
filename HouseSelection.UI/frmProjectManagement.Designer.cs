@@ -36,7 +36,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DevelopCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdentityNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -85,7 +86,8 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.number,
             this.Name,
-            this.Address,
+            this.DevelopCompany,
+            this.IdentityNumber,
             this.ProjectArea,
             this.Operate});
             this.dataGridView1.Location = new System.Drawing.Point(12, 183);
@@ -109,12 +111,18 @@
             this.Name.Name = "Name";
             this.Name.Width = 150;
             // 
-            // Address
+            // DevelopCompany
             // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "项目地址";
-            this.Address.Name = "Address";
-            this.Address.Width = 300;
+            this.DevelopCompany.DataPropertyName = "DevelopCompany";
+            this.DevelopCompany.HeaderText = "开发企业";
+            this.DevelopCompany.Name = "DevelopCompany";
+            this.DevelopCompany.Width = 300;
+            // 
+            // IdentityNumber
+            // 
+            this.IdentityNumber.DataPropertyName = "IdentityNumber";
+            this.IdentityNumber.HeaderText = "预售证号";
+            this.IdentityNumber.Name = "IdentityNumber";
             // 
             // ProjectArea
             // 
@@ -142,7 +150,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "frmProjectManagement";
             this.Text = "frmProjectManagement";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -159,7 +166,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DevelopCompany;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdentityNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectArea;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate;
     }

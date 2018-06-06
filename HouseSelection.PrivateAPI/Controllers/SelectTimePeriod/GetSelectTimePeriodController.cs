@@ -27,16 +27,16 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetSelectTimePeriod Request:" + JsonHelper.SerializeObject(req), "GetSelectTimePeriodController", "Post");
             var ret = new GetSelectTimePeriodResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if(_projectGroupBLL.GetModels(x => x.ID == req.ProjectGroupID).FirstOrDefault() == null)
                 {
-                    ret.code = 202;
-                    ret.errMsg = "项目分组ID不存在！";
+                    ret.Code = 202;
+                    ret.ErrMsg = "项目分组ID不存在！";
                     return ret;
                 }
                 else
@@ -78,8 +78,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch(Exception ex)
             {
                 Logger.LogException("", "", "", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

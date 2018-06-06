@@ -26,8 +26,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetHouses Request:" + JsonHelper.SerializeObject(req), "GetHousesController", "Post");
             GetHouseResultEntity ret = new GetHouseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
             try
             {
@@ -62,13 +62,13 @@ namespace HouseSelection.PrivateAPI.Controllers
                     _retHouseList.Add(_retHouse);
                 }
                 ret.HouseList = _retHouseList;
-                ret.recordCount = _tmpHouseList.Count();
+                ret.RecordCount = _tmpHouseList.Count();
             }
             catch (Exception ex)
             {
                 Logger.LogException("搜索房源信息时发生异常！", "GetHousesController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

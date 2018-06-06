@@ -44,6 +44,7 @@ namespace HouseSelection.Provider.Client.Request
         /// erp方菜品id
         /// </summary>
         public int ShakingNumberSequance { get; set; }
+        public int SelectHouseSequance{ get; set; }
         public string ShakingNumber { get; set; }
         public SubscriberEntitytemp Subscriber { get; set; }
         /// <summary>
@@ -121,6 +122,7 @@ namespace HouseSelection.Provider.Client.Request
         /// 序号
         /// </summary>
         public int No { get; set; }
+        public int SelectHouseSequance { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>

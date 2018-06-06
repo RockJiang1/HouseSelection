@@ -29,21 +29,21 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetSelectHouseInfo Request:" + JsonHelper.SerializeObject(req), "GetSelectHouseInfoController", "Post");
             var ret = new GetSelectHouseInfoResult()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if (_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 {
-                    ret.code = 201;
-                    ret.errMsg = "项目ID不存在！";
+                    ret.Code = 201;
+                    ret.ErrMsg = "项目ID不存在！";
                 }
                 if (_subscriberBLL.GetModels(x => x.ID == req.SubscriberID).FirstOrDefault() == null)
                 {
-                    ret.code = 202;
-                    ret.errMsg = "认购人ID不存在！";
+                    ret.Code = 202;
+                    ret.ErrMsg = "认购人ID不存在！";
                 }
                 else
                 {
@@ -71,16 +71,16 @@ namespace HouseSelection.PrivateAPI.Controllers
                     }
                     else
                     {
-                        ret.code = 203;
-                        ret.errMsg = "该认购人未在该项目中选房！";
+                        ret.Code = 203;
+                        ret.ErrMsg = "该认购人未在该项目中选房！";
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogException("获取选房详情发生", "GetSelectHouseInfoController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
 

@@ -32,27 +32,27 @@ namespace HouseSelection.PrivateAPI.Controllers
                     if (_account != null && _account.Count() > 0)
                     {
                         _bkLoginBLL.Add(new BackEndAccountLoginRecord() { BackEndAccountID = _account.FirstOrDefault().ID, LoginTime = DateTime.Now, LoginIP = ((HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.UserHostAddress });
-                        ret.code = 0;
-                        ret.errMsg = "";
+                        ret.Code = 0;
+                        ret.ErrMsg = "";
                     }
                     else
                     {
-                        ret.code = 101;
-                        ret.errMsg = "登陆账号/密码错误！";
+                        ret.Code = 101;
+                        ret.ErrMsg = "登陆账号/密码错误！";
                     }
                 }
                 else
                 {
-                    ret.code = 102;
-                    ret.errMsg = "登陆账号/密码不允许为空！";
+                    ret.Code = 102;
+                    ret.ErrMsg = "登陆账号/密码不允许为空！";
                 }
                 
             }
             catch(Exception ex)
             {
                 Logger.LogException("验证后台登陆账号时发生异常！", "CheckBackEndAccountController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

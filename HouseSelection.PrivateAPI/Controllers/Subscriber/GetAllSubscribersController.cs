@@ -26,15 +26,15 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetAllSubscribers Request:" + JsonHelper.SerializeObject(req), "GetAllSubscribersController", "Post");
             var ret = new GetSubscriberResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
             try
             {
                 //if(_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 //{
                 //    ret.code = 201;
-                //    ret.errMsg = "项目ID不存在！";
+                //    ret.ErrMsg = "项目ID不存在！";
                 //}
                 //else
                 //{
@@ -58,7 +58,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                         _subList.Add(_sub);
                     }
                     ret.SubscriberList = _subList;
-                    ret.recordCount = _subscriberBLL.GetModels(x => 1 == 1).Count();
+                    ret.RecordCount = _subscriberBLL.GetModels(x => 1 == 1).Count();
                 //}
                 
             }

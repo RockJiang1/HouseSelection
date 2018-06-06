@@ -54,18 +54,18 @@ namespace HouseSelection.UI
                 GlobalTokenHelper.Expiry = 0;
 
                 TokenResultEntity getToken = provide.GetToken();
-                if (getToken.code != 0)
+                if (getToken.Code != 0)
                 {
-                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
                 GlobalTokenHelper.gToken = getToken.Access_Token;
                 GlobalTokenHelper.Expiry = getToken.Expiry;
 
                 BaseResultEntity editFrontEndAccount = provide.EditFrontEndAccount(id, account, passwordold, password1st);
-                if (editFrontEndAccount.code != 0)
+                if (editFrontEndAccount.Code != 0)
                 {
-                    MessageBox.Show("前台帐号创建失败, 错误信息： " + editFrontEndAccount.errMsg);
+                    MessageBox.Show("前台帐号创建失败, 错误信息： " + editFrontEndAccount.ErrMsg);
                     return;
                 }
                 else

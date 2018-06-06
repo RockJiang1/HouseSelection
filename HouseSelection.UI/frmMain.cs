@@ -19,6 +19,8 @@ namespace HouseSelection.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            frmProjectManagement fm = new frmProjectManagement();
+            fm.Show();
             this.Hide();
         }
     }

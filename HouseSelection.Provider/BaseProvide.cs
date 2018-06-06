@@ -20,10 +20,6 @@ namespace HouseSelection.Provider
     {
         private GeneralClient Client = new GeneralClient();
         private string action = string.Empty;
-        private int SUCCESS = 0;
-        private int FAIL = 0;
-        private int WARNING = 0;
-        private int EXCEPTION = 0;
 
         private List<T> ReadDataTable<T>(DataTable tableData, string columns)
         {
@@ -88,22 +84,43 @@ namespace HouseSelection.Provider
 
         public TokenResultEntity GetToken()
         {
+            bool bgetToken = false;
             TokenResultEntity result = new TokenResultEntity();
             try
             {
-                var request = new GetTokenRequest()
+                if (string.IsNullOrEmpty(GlobalTokenHelper.gToken))
                 {
-                    AppId = "SYY",
-                    AppSecret = "0B2223C37F54864403847E762E1F87F3"
-                };
+                    bgetToken = true;
+                }
+                else
+                {
+                    System.DateTime currentTime = System.DateTime.Now;
+                    System.TimeSpan TS = currentTime - GlobalTokenHelper.gTokenDateTime;
+                    if (TS.TotalSeconds >= GlobalTokenHelper.Expiry-60) { bgetToken = true; }
+                }
 
-                result = this.Client.InvokeAPI<TokenResultEntity>(request);
+                if (bgetToken == true)
+                {
+                    var request = new GetTokenRequest()
+                    {
+                        AppId = "SYY",
+                        AppSecret = "0B2223C37F54864403847E762E1F87F3"
+                    };
+
+                    result = this.Client.InvokeAPI<TokenResultEntity>(request);
+                    if (result.Code == 0)
+                    {
+                        GlobalTokenHelper.gToken = result.Access_Token;
+                        GlobalTokenHelper.Expiry = result.Expiry;
+                        GlobalTokenHelper.gTokenDateTime = System.DateTime.Now;
+                    }
+                }
 
             }
             catch(Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -126,8 +143,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -150,8 +167,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -175,34 +192,25 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
 
         }
 
-        public BaseResultEntity AddProject(string number, string name, string address,string area)
+        public BaseResultEntity AddProject(AddProjectRequest request)
         {
             BaseResultEntity result = new BaseResultEntity();
             try
             {
-                var request = new AddProjectRequest()
-                {
-                    Number = number,
-                    Name = name,
-                    Address = address,
-                    ProjectArea = area
-                };
-
                 result = this.Client.InvokeAPI<BaseResultEntity>(request);
-
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -225,8 +233,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -250,19 +258,21 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
 
         }
 
-        public string ImportHouseInfo(DataTable tData, int pId, string pGroup)
+        public string ImportHouseInfo(DataTable tData, int pId, string houseEstate)
         {
             #region 定义参数
 
             string msg = string.Empty;
+            int dtcolcount = tData.Columns.Count;
+            string sCol = string.Empty;
 
             #endregion
             try
@@ -270,7 +280,14 @@ namespace HouseSelection.Provider
                 action = "_生成业务级数据";
                 #region 清洗数据
 
-                string sCol = "SerialNumber,Group,Block,Building,Unit,RoomNumber,RoomType,Toward,RoomCode,EstimateBuiltUpArea,EstimateLivingArea,AreaUnitPrice,TotalPrice";
+                if (dtcolcount == 13)
+                {
+                    sCol = "SerialNumber,Group,Block,Building,Unit,RoomNumber,RoomType,Toward,RoomCode,EstimateBuiltUpArea,EstimateLivingArea,AreaUnitPrice,TotalPrice";
+                }
+                else
+                {
+                    sCol = "SerialNumber,Group,Building,Unit,RoomNumber,RoomType,Toward,RoomCode,EstimateBuiltUpArea,EstimateLivingArea,AreaUnitPrice,TotalPrice";
+                }
                 List<HouseInfoTable> lDataList = ReadDataTable<HouseInfoTable>(tData, sCol);
 
                 if (lDataList == null || lDataList.Count == 0)
@@ -278,44 +295,49 @@ namespace HouseSelection.Provider
                     msg = "读取EXCEL数据失败！";
                     return msg;
                 }
-
-                ImportHouseInfoRequest requestInfo = new ImportHouseInfoRequest();
-
-                foreach (var item in lDataList)
+                List<HouseInfoTable> listtemp = new List<HouseInfoTable>();
+                for (int i = 0; i < lDataList.Count; i++)
                 {
-                    HouseInfoTable houseInfo = new HouseInfoTable();
+                    listtemp.Add(lDataList[i]);
+                    if (i != 0 && i % 100 == 0)
+                    {
+                        ImportHouseInfoRequest requestInfo = new ImportHouseInfoRequest();
+                        requestInfo.ProjectID = pId;
+                        requestInfo.HouseEstate = houseEstate;
+                        foreach (var item in listtemp)
+                        {
+                            HouseInfoTable houseInfo = new HouseInfoTable();
 
-                    houseInfo.SerialNumber= item.SerialNumber;
-                    houseInfo.Group = item.Group;
-                    houseInfo.Block = item.Block;
-                    houseInfo.Building = item.Building;
-                    houseInfo.Unit = item.Unit;
-                    houseInfo.RoomNumber = item.RoomNumber;
-                    houseInfo.RoomType = item.RoomType;
-                    houseInfo.Toward = item.Toward;
-                    houseInfo.RoomCode = item.RoomCode;
-                    houseInfo.EstimateBuiltUpArea = item.EstimateBuiltUpArea;
-                    houseInfo.EstimateLivingArea = item.EstimateLivingArea;
-                    houseInfo.AreaUnitPrice = item.AreaUnitPrice;
-                    houseInfo.TotalPrice = item.TotalPrice;
+                            houseInfo.SerialNumber = item.SerialNumber;
+                            houseInfo.Group = item.Group;
+                            if (dtcolcount == 13) { houseInfo.Block = item.Block; }
+                            houseInfo.Building = item.Building;
+                            houseInfo.Unit = item.Unit;
+                            houseInfo.RoomNumber = item.RoomNumber;
+                            houseInfo.RoomType = item.RoomType;
+                            houseInfo.Toward = item.Toward;
+                            houseInfo.RoomCode = item.RoomCode;
+                            houseInfo.EstimateBuiltUpArea = item.EstimateBuiltUpArea;
+                            houseInfo.EstimateLivingArea = item.EstimateLivingArea;
+                            houseInfo.AreaUnitPrice = item.AreaUnitPrice;
+                            houseInfo.TotalPrice = item.TotalPrice;
 
-                    requestInfo.HouseList.Add(houseInfo);
+                            requestInfo.HouseList.Add(houseInfo);
+                        }
 
-                    requestInfo.ProjectID = pId;
-                    //requestInfo.ProjectGroup = pGroup;
-                }
+                        #endregion
+                        action = "_调用接口";
+                        #region 调用接口
 
-                #endregion
-                action = "_调用接口";
-                #region 调用接口
+                        BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
 
-                BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
-
-                // 同步数据库内容
-                if (result != null && result.code != 0)
-                {
-                    msg = "上传认购人信息失败, 错误信息！";
-                    return msg;
+                        // 同步数据库内容
+                        if (result != null && result.Code != 0)
+                        {
+                            msg = "上传认购人信息失败, 错误信息！";
+                            return msg;
+                        }
+                    }
                 }
                 #endregion
             }
@@ -336,18 +358,11 @@ namespace HouseSelection.Provider
             #endregion
             try
             {
-                //TokenResultEntity getToken = GetToken();
-                //if (getToken.code != 0)
-                //{
-                //    msg = "获取Token失败, 错误信息： " + getToken.errMsg;
-                //    return msg;
-                //}
-
 
                 action = "_生成业务级数据";
                 #region 清洗数据
 
-                string sCol = "No,Name,IdentityNumber,ShakingNumber,Telephone,Address,ZipCode,MaritalStatus,ResidenceArea,WorkArea,SubscriberFamilyMemberEntity";
+                string sCol = "No,SelectHouseSequance,Name,IdentityNumber,ShakingNumber,Telephone,Address,ZipCode,MaritalStatus,ResidenceArea,WorkArea,SubscriberFamilyMemberEntity";
                 List<SubscriberTable> lDataList = ReadDataTable<SubscriberTable>(tData, sCol);
 
                 if (lDataList == null || lDataList.Count == 0)
@@ -356,67 +371,83 @@ namespace HouseSelection.Provider
                     return msg;
                 }
 
-                ImportSubscriberRequest requestInfo = new ImportSubscriberRequest();
-
-                foreach (var item in lDataList)
+                List<SubscriberTable> listtemp = new List<SubscriberTable>();
+                for (int i = 0; i < lDataList.Count; i++)
                 {
-                    ShakingNumberResultEntitytemp shakingNumberResultEntity = new ShakingNumberResultEntitytemp();
-
-                    shakingNumberResultEntity.ShakingNumberSequance = item.No;
-                    shakingNumberResultEntity.ShakingNumber = item.ShakingNumber;
-
-                    SubscriberEntitytemp subscriberEntitytemp = new SubscriberEntitytemp();
-
-                    subscriberEntitytemp.Name = item.Name;
-                    subscriberEntitytemp.IdentityNumber = item.IdentityNumber;
-                    subscriberEntitytemp.Telephone = item.Telephone;
-                    subscriberEntitytemp.Address = item.Address;
-                    subscriberEntitytemp.ZipCode = item.ZipCode;
-                    subscriberEntitytemp.MaritalStatus = item.MaritalStatus;
-                    subscriberEntitytemp.ResidenceArea = item.ResidenceArea;
-                    subscriberEntitytemp.WorkArea = item.WorkArea;
-
-                    shakingNumberResultEntity.Subscriber = subscriberEntitytemp;
-
-                    List<SubscriberFamilyMemberEntitytemp> subscriberFamilyMemberEntitytemp = new List<SubscriberFamilyMemberEntitytemp>();
-
-                    string[] tempsplit1st = item.SubscriberFamilyMemberEntity.Split('<');
-                    foreach (string fm in tempsplit1st)
+                    listtemp.Add(lDataList[i]);
+                    if (i != 0 && i % 100 == 0)
                     {
-                        if (fm != "")
+                        ImportSubscriberRequest requestInfo = new ImportSubscriberRequest();
+                        requestInfo.ProjectID = pId;
+                        requestInfo.ProjectGroup = pGroup;
+
+                        //foreach (var item in lDataList)
+                        foreach (var item in listtemp)
                         {
-                            SubscriberFamilyMemberEntitytemp temp = new SubscriberFamilyMemberEntitytemp();
-                            string[] tempsplit2nd = fm.Split('>');
-                            temp.Relationship = tempsplit2nd[0];
-                            
-                            string[] tempsplit3rd = tempsplit2nd[1].Split(',');
-                            temp.SubscriberIdentityNumber = item.IdentityNumber;
-                            temp.Name = tempsplit3rd[0];
-                            temp.IdentityNumber = tempsplit3rd[2];
-                            temp.Area = tempsplit3rd[3];
-                            if (temp.Relationship != "申请人"){subscriberFamilyMemberEntitytemp.Add(temp);}
+                            ShakingNumberResultEntitytemp shakingNumberResultEntity = new ShakingNumberResultEntitytemp();
+
+                            shakingNumberResultEntity.ShakingNumberSequance = item.No;
+                            shakingNumberResultEntity.SelectHouseSequance = item.SelectHouseSequance;
+                            shakingNumberResultEntity.ShakingNumber = item.ShakingNumber;
+
+                            SubscriberEntitytemp subscriberEntitytemp = new SubscriberEntitytemp();
+
+                            subscriberEntitytemp.Name = item.Name;
+                            subscriberEntitytemp.IdentityNumber = item.IdentityNumber;
+                            subscriberEntitytemp.Telephone = item.Telephone;
+                            subscriberEntitytemp.Address = item.Address;
+                            subscriberEntitytemp.ZipCode = item.ZipCode;
+                            subscriberEntitytemp.MaritalStatus = item.MaritalStatus;
+                            subscriberEntitytemp.ResidenceArea = item.ResidenceArea;
+                            subscriberEntitytemp.WorkArea = item.WorkArea;
+
+                            shakingNumberResultEntity.Subscriber = subscriberEntitytemp;
+
+                            List<SubscriberFamilyMemberEntitytemp> subscriberFamilyMemberEntitytemp = new List<SubscriberFamilyMemberEntitytemp>();
+
+                            string[] tempsplit1st = item.SubscriberFamilyMemberEntity.Split('<');
+                            foreach (string fm in tempsplit1st)
+                            {
+                                if (fm != "")
+                                {
+                                    SubscriberFamilyMemberEntitytemp temp = new SubscriberFamilyMemberEntitytemp();
+                                    string[] tempsplit2nd = fm.Split('>');
+                                    temp.Relationship = tempsplit2nd[0];
+
+                                    string[] tempsplit3rd = tempsplit2nd[1].Split(',');
+                                    temp.SubscriberIdentityNumber = item.IdentityNumber;
+                                    temp.Name = tempsplit3rd[0];
+                                    temp.IdentityNumber = tempsplit3rd[2];
+                                    temp.Area = tempsplit3rd[3];
+                                    if (temp.Relationship != "申请人") { subscriberFamilyMemberEntitytemp.Add(temp); }
+                                }
+
+                            }
+
+                            shakingNumberResultEntity.FamilyMemberList = subscriberFamilyMemberEntitytemp;
+
+                            requestInfo.ShakingNumberList.Add(shakingNumberResultEntity);
+
+                        }
+
+                        #endregion
+                        action = "_调用接口";
+                        #region 调用接口
+
+                        BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
+
+                        // 同步数据库内容
+                        if (result != null && result.Code != 0)
+                        {
+                            msg = "上传认购人信息失败, 错误信息！";
+                            return msg;
+                        }
+                        else
+                        {
+                            listtemp.Clear();
                         }
                         
                     }
-
-                    shakingNumberResultEntity.FamilyMemberList = subscriberFamilyMemberEntitytemp;
-
-                    requestInfo.ShakingNumberList.Add(shakingNumberResultEntity);
-                    requestInfo.ProjectID = pId;
-                    requestInfo.ProjectGroup = pGroup;
-                }
-
-                #endregion
-                action = "_调用接口";
-                #region 调用接口
-
-                BaseResultEntity result = this.Client.InvokeAPI<BaseResultEntity>(requestInfo);
-
-                    // 同步数据库内容
-                if (result != null && result.code !=0)
-                {
-                    msg = "上传认购人信息失败, 错误信息！";
-                    return msg;
                 }
                 #endregion
             }
@@ -445,8 +476,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -470,8 +501,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -496,8 +527,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;
@@ -522,8 +553,8 @@ namespace HouseSelection.Provider
             }
             catch (Exception ex)
             {
-                result.code = 9999;
-                result.errMsg = ex.Message;
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
             }
 
             return result;

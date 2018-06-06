@@ -16,28 +16,24 @@ namespace HouseSelection.UI
 {
     public partial class frmProjectManagement : Form
     {
+        public AddProjectRequest model = new AddProjectRequest();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
         public frmProjectManagement()
         {
             InitializeComponent();
 
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取项目信息失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
@@ -60,7 +56,7 @@ namespace HouseSelection.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmProjectAddOrEdit fm = new frmProjectAddOrEdit();
+            frmProjectAdd fm = new frmProjectAdd();
             fm.ShowDialog();
         }
 
@@ -69,22 +65,18 @@ namespace HouseSelection.UI
             string searchStr = string.Empty;
 
             searchStr = textBox1.Text;
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetProjects(searchStr);
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
@@ -100,7 +92,17 @@ namespace HouseSelection.UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate")
+            {
+                //可以在此打开新窗口，把参数传递过去
+                model.Number = this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                model.DevelopCompany = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                model.IdentityNumber = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                model.ProjectArea = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                frmProjectEdit fm = new frmProjectEdit();
+                fm.ShowDialog();
+            }
         }
     }
 }

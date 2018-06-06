@@ -617,3 +617,9 @@ BEGIN
 	ALTER TABLE Project ADD EndReason NVARCHAR(2000) NULL
 END
 GO
+
+IF EXISTS (SELECT * FROM sys.columns WHERE [name] = N'IdentityNumber' AND object_id = OBJECT_ID(N'SubscriberFamilyMember') AND max_length < 200)
+BEGIN
+	ALTER TABLE SubscriberFamilyMember ALTER COLUMN IdentityNumber NVARCHAR(200) NOT NULL
+END
+GO

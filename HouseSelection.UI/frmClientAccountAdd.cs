@@ -26,18 +26,18 @@ namespace HouseSelection.UI
             GlobalTokenHelper.Expiry = 0;
 
             TokenResultEntity getToken = provide.GetToken();
-            if (getToken.code != 0)
+            if (getToken.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
             GlobalTokenHelper.gToken = getToken.Access_Token;
             GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.code != 0)
+            if (getProject.Code != 0)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.errMsg);
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
             else
@@ -73,18 +73,18 @@ namespace HouseSelection.UI
                 GlobalTokenHelper.Expiry = 0;
 
                 TokenResultEntity getToken = provide.GetToken();
-                if (getToken.code != 0)
+                if (getToken.Code != 0)
                 {
-                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
                 GlobalTokenHelper.gToken = getToken.Access_Token;
                 GlobalTokenHelper.Expiry = getToken.Expiry;
 
                 BaseResultEntity addFrontEndAccount = provide.AddFrontEndAccount(projrctId, account, password1st);
-                if (addFrontEndAccount.code != 0)
+                if (addFrontEndAccount.Code != 0)
                 {
-                    MessageBox.Show("前台帐号创建失败, 错误信息： " + addFrontEndAccount.errMsg);
+                    MessageBox.Show("前台帐号创建失败, 错误信息： " + addFrontEndAccount.ErrMsg);
                     return;
                 }
                 else

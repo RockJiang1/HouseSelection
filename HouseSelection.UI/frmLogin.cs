@@ -33,20 +33,16 @@ namespace HouseSelection.UI
 
             if (!string.IsNullOrEmpty(sUserAccount) && !string.IsNullOrEmpty(sUserPassword))
             {
-                GlobalTokenHelper.gToken = "";
-                GlobalTokenHelper.Expiry = 0;
 
                 TokenResultEntity getToken = provide.GetToken();
-                if (getToken.code != 0)
+                if (getToken.Code != 0)
                 {
-                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
+                    MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
-                GlobalTokenHelper.gToken = getToken.Access_Token;
-                GlobalTokenHelper.Expiry = getToken.Expiry;
 
                 BaseResultEntity result = provide.CheckBackEndAccount(sUserAccount, sUserPassword);
-                if (result.code == 0)
+                if (result.Code == 0)
                 {
                     frmMain main = new frmMain();
                     main.Show();

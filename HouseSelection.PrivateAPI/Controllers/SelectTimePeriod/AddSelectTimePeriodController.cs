@@ -28,8 +28,8 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
             Logger.LogDebug("AddSelectTimePeriod Request:" + JsonHelper.SerializeObject(req), "AddSelectTimePeriodController", "Post");
             var ret = new BaseResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -37,13 +37,13 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
                 #region 数据校验
                 if(_projectGroupBLL.GetModels(x => x.ID == req.ProjectGroupID).FirstOrDefault() == null)
                 {
-                    ret.code = 301;
-                    ret.errMsg = "项目分组ID不存在";
+                    ret.Code = 301;
+                    ret.ErrMsg = "项目分组ID不存在";
                 }
                 else if (_selectPeriodBLL.GetModels(x => x.ShakingNumberResult.ProjectGroupID == req.ProjectGroupID).FirstOrDefault() != null)//已存在
                 {
-                    ret.code = 705;
-                    ret.errMsg = "该项目分组已经创建过选房时间段，请使用修改模块！";
+                    ret.Code = 705;
+                    ret.ErrMsg = "该项目分组已经创建过选房时间段，请使用修改模块！";
                 }
                 else
                 {
@@ -52,16 +52,16 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
                     {
                         if(arryReq[i].StartNumber > arryReq[i].EndNumber)
                         {
-                            ret.code = 701;
-                            ret.errMsg = "一个时段内开始号段不得大于结束号段";
+                            ret.Code = 701;
+                            ret.ErrMsg = "一个时段内开始号段不得大于结束号段";
                             return ret;
                         }
                         if(i > 0)
                         {
                             if(arryReq[i].StartNumber <= arryReq[i - 1].EndNumber)
                             {
-                                ret.code = 703;
-                                ret.errMsg = "号段存在重复";
+                                ret.Code = 703;
+                                ret.ErrMsg = "号段存在重复";
                                 return ret;
                             }
                         }
@@ -72,16 +72,16 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
                     {
                         if (Convert.ToDateTime(arryTimeReq[i].StartTime) > Convert.ToDateTime(arryTimeReq[i].EndTime))
                         {
-                            ret.code = 702;
-                            ret.errMsg = "一个时段内开始时间不得大于结束号段";
+                            ret.Code = 702;
+                            ret.ErrMsg = "一个时段内开始时间不得大于结束号段";
                             return ret;
                         }
                         if (i > 0)
                         {
                             if (Convert.ToDateTime(arryTimeReq[i].StartTime) < Convert.ToDateTime(arryTimeReq[i - 1].EndTime))
                             {
-                                ret.code = 704;
-                                ret.errMsg = "时间存在重复";
+                                ret.Code = 704;
+                                ret.ErrMsg = "时间存在重复";
                                 return ret;
                             }
                         }
@@ -122,15 +122,15 @@ namespace HouseSelection.PrivateAPI.Controllers.SelectTimePeriod
                             existStr += s.ToString() + ",";
                         }
                         existStr = existStr.Substring(0, existStr.Length - 1);
-                        ret.errMsg = "已跳过存在的选房顺序号：" + existStr;
+                        ret.ErrMsg = "已跳过存在的选房顺序号：" + existStr;
                     }
                 }
             }
             catch(Exception ex)
             {
                 Logger.LogException("创建项目分组时间段时发生异常！", "AddSelectTimePeriodController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

@@ -109,13 +109,13 @@ namespace HouseSelection.Utility
                     excelresult.SheetName.Add(sn);
                 }
 
-                excelresult.code = 0;
-                excelresult.errMsg = "";
+                excelresult.Code = 0;
+                excelresult.ErrMsg = "";
             }
             catch(Exception ex)
             {
-                excelresult.code = 9999;
-                excelresult.errMsg = "获取EXCEL属性异常： " + ex.Message;
+                excelresult.Code = 9999;
+                excelresult.ErrMsg = "获取EXCEL属性异常： " + ex.Message;
             }
 
             return excelresult;
@@ -159,7 +159,7 @@ namespace HouseSelection.Utility
 
         public void InsertSheettoTbl(ISheet sheet, DataTable data, bool isFirstRowColumn,int StartRow)
         {
-            IRow firstRow = sheet.GetRow(0);
+            IRow firstRow = sheet.GetRow(StartRow);
             int startRow = 0;
             int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
             int dataCount = data.Rows.Count;
@@ -201,6 +201,7 @@ namespace HouseSelection.Utility
                 {
                     if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
                         dataRow[j] = row.GetCell(j).ToString();
+                        string aa = row.GetCell(j).ToString();
                 }
                 data.Rows.Add(dataRow);
             }

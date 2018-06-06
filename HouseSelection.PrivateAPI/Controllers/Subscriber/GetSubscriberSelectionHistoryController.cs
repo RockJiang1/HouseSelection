@@ -30,8 +30,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             Logger.LogDebug("GetSubscriberSelectionHistory Request:" + JsonHelper.SerializeObject(req), "GetSubscriberSelectionHistoryController", "Post");
             var ret = new GetSubscriberSelectionHistoryResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
@@ -39,12 +39,12 @@ namespace HouseSelection.PrivateAPI.Controllers
                 //if(_projectBLL.GetModels(x => x.ID == req.ProjectID).FirstOrDefault() == null)
                 //{
                 //    ret.code = 201;
-                //    ret.errMsg = "项目ID不存在！";
+                //    ret.ErrMsg = "项目ID不存在！";
                 //}
                 if(_subscriberBLL.GetModels(x => x.ID == req.SubscriberID).FirstOrDefault() == null)
                 {
-                    ret.code = 202;
-                    ret.errMsg = "认购人ID不存在！";
+                    ret.Code = 202;
+                    ret.ErrMsg = "认购人ID不存在！";
                 }
                 else
                 {
@@ -77,8 +77,8 @@ namespace HouseSelection.PrivateAPI.Controllers
             catch(Exception ex)
             {
                 Logger.LogException("获取认购人认购历史时发生异常！", "GetSubscriberSelectionHistoryController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }

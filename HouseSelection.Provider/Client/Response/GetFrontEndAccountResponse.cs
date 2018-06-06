@@ -18,7 +18,7 @@ namespace HouseSelection.Provider.Client.Response
         /// </summary>
         public List<FrontEndAccountEntityTemp> AccountList { get; set; }
 
-        //public int recordCount { get; set; }
+        //public int RecordCount { get; set; }
     }
     public class FrontEndAccountEntityTemp
     {

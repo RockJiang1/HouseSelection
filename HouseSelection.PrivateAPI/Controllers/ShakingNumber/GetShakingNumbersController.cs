@@ -23,16 +23,16 @@ namespace HouseSelection.PrivateAPI.Controllers
         {
             var ret = new GetShakingNumbersResultEntity()
             {
-                code = 0,
-                errMsg = ""
+                Code = 0,
+                ErrMsg = ""
             };
 
             try
             {
                 if(_projectGroupBLL.GetModels(x => x.ID == req.ProjectGroupID).FirstOrDefault() == null)
                 {
-                    ret.code = 202;
-                    ret.errMsg = "项目分组ID不存在！";
+                    ret.Code = 202;
+                    ret.ErrMsg = "项目分组ID不存在！";
                 }
                 else
                 {
@@ -61,14 +61,14 @@ namespace HouseSelection.PrivateAPI.Controllers
                         _shakingList.Add(_shaking);
                     }
                     ret.ShakingNumberResultList = _shakingList;
-                    ret.recordCount = _shakingNumberBLL.GetModels(x => x.ProjectGroupID == req.ProjectGroupID).Count();
+                    ret.RecordCount = _shakingNumberBLL.GetModels(x => x.ProjectGroupID == req.ProjectGroupID).Count();
                 }
             }
             catch(Exception ex)
             {
                 Logger.LogException("获取摇号结果列表发生异常！", "GetShakingNumbersController", "Post", ex);
-                ret.code = 999;
-                ret.errMsg = ex.Message;
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
             }
             return ret;
         }
