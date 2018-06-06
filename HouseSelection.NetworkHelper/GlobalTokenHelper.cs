@@ -10,5 +10,6 @@ namespace HouseSelection.NetworkHelper
     {
         public static String gToken = "";
         public static int Expiry = 0;
+        public static System.DateTime gTokenDateTime;
     }
 }

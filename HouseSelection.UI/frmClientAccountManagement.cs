@@ -69,7 +69,7 @@ namespace HouseSelection.UI
                 model.ProjectNumber = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                 model.ProjectName = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 model.Account = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                frmClientAccountAdd fm = new frmClientAccountAdd();
+                frmClientAccountEdit fm = new frmClientAccountEdit();
                 fm.ShowDialog();
             }
         }

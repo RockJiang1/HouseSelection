@@ -82,11 +82,17 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProjectAddOrEdit.cs">
+    <Compile Include="frmProjectAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProjectAddOrEdit.Designer.cs">
-      <DependentUpon>frmProjectAddOrEdit.cs</DependentUpon>
+    <Compile Include="frmProjectAdd.Designer.cs">
+      <DependentUpon>frmProjectAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProjectEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjectEdit.Designer.cs">
+      <DependentUpon>frmProjectEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="frmProjectManagement.cs">
       <SubType>Form</SubType>
@@ -126,8 +132,11 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProjectAddOrEdit.resx">
-      <DependentUpon>frmProjectAddOrEdit.cs</DependentUpon>
+    <EmbeddedResource Include="frmProjectAdd.resx">
+      <DependentUpon>frmProjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjectEdit.resx">
+      <DependentUpon>frmProjectEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProjectManagement.resx">
       <DependentUpon>frmProjectManagement.cs</DependentUpon>

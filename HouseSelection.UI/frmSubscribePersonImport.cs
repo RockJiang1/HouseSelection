@@ -24,17 +24,12 @@ namespace HouseSelection.UI
         {
             InitializeComponent();
 
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.code != 0)
             {
                 MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
                 return;
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
 
             ProjectEntityResponse getProject = provide.GetAllProjects();
             if (getProject.code != 0)
@@ -74,17 +69,13 @@ namespace HouseSelection.UI
             try
             {
                 iprojectId = 2;
-                GlobalTokenHelper.gToken = "";
-                GlobalTokenHelper.Expiry = 0;
-
+               
                 TokenResultEntity getToken = provide.GetToken();
                 if (getToken.code != 0)
                 {
                     MessageBox.Show("获取Token失败, 错误信息： " + getToken.errMsg);
                     return;
                 }
-                GlobalTokenHelper.gToken = getToken.Access_Token;
-                GlobalTokenHelper.Expiry = getToken.Expiry;
 
                 using (ExcelHelper excelHelper = new ExcelHelper(file))
                 {
@@ -104,6 +95,7 @@ namespace HouseSelection.UI
                         }
                         else
                         {
+                            
                             result = provide.ImportSubscriber(dt, iprojectId, item.Name);
                         }
                     }
