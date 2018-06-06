@@ -17,7 +17,6 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
     {
         AreaBLL _areaBLL = new AreaBLL();
 
-        [ApiAuthorize]
         public GetAreaListResultEntity Post(GetAreaListRequestModel req)
         {
             Logger.LogDebug("GetAreaList Request:" + JsonHelper.SerializeObject(req), "GetAreaListController", "Post");

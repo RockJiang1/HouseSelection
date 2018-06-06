@@ -203,6 +203,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Publicity\GetAreaListController.cs" />
+    <Compile Include="Controllers\Publicity\GetHouseBuildingsController.cs" />
+    <Compile Include="Controllers\Publicity\GetHouseEstateDetailsController.cs" />
     <Compile Include="Controllers\Publicity\GetHouseEstatesByProjectController.cs" />
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -213,9 +215,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PublicityRequest\GetAreaListRequestModel.cs" />
+    <Compile Include="Models\PublicityRequest\GetHouseBuildingsRequestModel.cs" />
+    <Compile Include="Models\PublicityRequest\GetHouseEstateDetailsRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetHouseEstatesByProjectRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetProjectsByAreaRequestModel.cs" />
     <Compile Include="Models\PublicityResult\GetAreaListResultEntity.cs" />
+    <Compile Include="Models\PublicityResult\GetHouseBuildingsResultEntity.cs" />
+    <Compile Include="Models\PublicityResult\GetHouseEstateDetailsResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetHouseEstatesByProjectResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
