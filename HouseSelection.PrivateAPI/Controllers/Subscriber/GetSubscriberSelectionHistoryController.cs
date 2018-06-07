@@ -61,6 +61,7 @@ namespace HouseSelection.PrivateAPI.Controllers
 
                         var _history = new SubscriberSelectionEntity()
                         {
+                            ProjectID = pro.ProjectID,
                             ProjectNumber = pro.Project.Number,
                             ProjectName = pro.Project.Name,
                             NoticeStatus = _notice != null ? _notice.ResultType : 0,
