@@ -11,7 +11,7 @@ using HouseSelection.Authorize;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Utility;
 
-namespace HouseSelection.PrivateAPI.Controllers.House
+namespace HouseSelection.PrivateAPI.Controllers
 {
     public class GetSubscriberByHouseIDController : ApiController
     {
