@@ -196,6 +196,7 @@
     <Compile Include="Controllers\House\GetHouseEstatesController.cs" />
     <Compile Include="Controllers\House\GetHousesController.cs" />
     <Compile Include="Controllers\House\GetHouseSubscriberController.cs" />
+    <Compile Include="Controllers\House\GetSubscriberByHouseIDController.cs" />
     <Compile Include="Controllers\House\ImportHouseInfoController.cs" />
     <Compile Include="Controllers\Project\AddProjectController.cs" />
     <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Controllers\SelectRole\AddSelectRoleController.cs" />
     <Compile Include="Controllers\SelectRole\EditSelectRoleController.cs" />
     <Compile Include="Controllers\SelectRole\GetProjectRoleBaseInfoController.cs" />
+    <Compile Include="Controllers\SelectRole\GetSelectRoleByProjectIDController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\AddSelectTimePeriodController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\EditSelectTimePeriodController.cs" />
     <Compile Include="Controllers\SelectTimePeriod\GetSelectTimePeriodController.cs" />
@@ -236,8 +238,10 @@
     <Compile Include="Models\GetProjectGroupRequestModel.cs" />
     <Compile Include="Models\GetProjectRoleBaseInfoRequestModel.cs" />
     <Compile Include="Models\GetSelectHouseInfoRequestModel.cs" />
+    <Compile Include="Models\GetSelectRoleRequestModel.cs" />
     <Compile Include="Models\GetSelectTimePeriodRequestModel.cs" />
     <Compile Include="Models\GetShakingNumbersRequestModel.cs" />
+    <Compile Include="Models\GetSubscriberByHouseIDRequestModel.cs" />
     <Compile Include="Models\GetSubscriberRequestModel.cs" />
     <Compile Include="Models\GetSubscriberSelectionHistoryRequestModel.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
