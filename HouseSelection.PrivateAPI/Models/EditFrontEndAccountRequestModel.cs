@@ -26,5 +26,10 @@ namespace HouseSelection.PrivateAPI.Models
         /// 新密码
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// 关联项目ID列表
+        /// </summary>
+        public List<int> ProjectID { get; set; }
     }
 }

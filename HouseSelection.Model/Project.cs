@@ -23,8 +23,8 @@ namespace HouseSelection.Model
             this.HouseEstate = new HashSet<HouseEstate>();
             this.House = new HashSet<House>();
             this.HouseSelectionRecord = new HashSet<HouseSelectionRecord>();
-            this.FrontEndAccount = new HashSet<FrontEndAccount>();
             this.RoleFamilyNumberAndRoomType = new HashSet<RoleFamilyNumberAndRoomType>();
+            this.FrontEndAccountProjectMapping = new HashSet<FrontEndAccountProjectMapping>();
         }
     
         public int ID { get; set; }
@@ -53,8 +53,8 @@ namespace HouseSelection.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FrontEndAccount> FrontEndAccount { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleFamilyNumberAndRoomType> RoleFamilyNumberAndRoomType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FrontEndAccountProjectMapping> FrontEndAccountProjectMapping { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace HouseSelection.PrivateAPI.Models
 {
     public class GetFrontEndAccountRequestModel : SearchRequestModel
     {
-        public int ProjectID { get; set; }
+        //public int ProjectID { get; set; }
     }
 }

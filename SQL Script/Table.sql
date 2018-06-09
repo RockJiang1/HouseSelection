@@ -623,3 +623,34 @@ BEGIN
 	ALTER TABLE SubscriberFamilyMember ALTER COLUMN IdentityNumber NVARCHAR(200) NOT NULL
 END
 GO
+
+
+--删除前台账号所属项目字段
+IF EXISTS (SELECT * FROM sys.columns WHERE [name] = 'ProjectID' AND object_id = OBJECT_ID('FrontEndAccount'))
+BEGIN
+	ALTER TABLE FrontEndAccount DROP CONSTRAINT FK_FrontEndAccount_Project_ID
+	ALTER TABLE FrontEndAccount DROP COLUMN ProjectID
+END
+GO
+
+--前台账号项目关联表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'FrontEndAccountProjectMapping' AND [type] = 'U')
+BEGIN
+	CREATE TABLE FrontEndAccountProjectMapping
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		FrontEndAccountID INT NOT NULL,
+		ProjectID INT NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_FrontEndAccountProjectMapping] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE FrontEndAccountProjectMapping ADD CONSTRAINT FK_FrontEndAccountProjectMapping_FrontEndAccount_ID FOREIGN KEY(FrontEndAccountID) REFERENCES FrontEndAccount(ID)
+	ALTER TABLE FrontEndAccountProjectMapping ADD CONSTRAINT FK_FrontEndAccountProjectMapping_Project_ID FOREIGN KEY(ProjectID) REFERENCES Project(ID)
+
+END
+GO

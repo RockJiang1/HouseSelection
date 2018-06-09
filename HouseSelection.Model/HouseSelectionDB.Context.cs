@@ -43,9 +43,10 @@ namespace HouseSelection.Model
         public virtual DbSet<FrontEndAccountLoginRecord> FrontEndAccountLoginRecord { get; set; }
         public virtual DbSet<HouseSelectionRecord> HouseSelectionRecord { get; set; }
         public virtual DbSet<TelephoneNoticeRecord> TelephoneNoticeRecord { get; set; }
-        public virtual DbSet<FrontEndAccount> FrontEndAccount { get; set; }
         public virtual DbSet<RoleFamilyNumberAndRoomType> RoleFamilyNumberAndRoomType { get; set; }
         public virtual DbSet<RoleProjectGroupAndHouseGroup> RoleProjectGroupAndHouseGroup { get; set; }
         public virtual DbSet<RoleProjectGroupAndRoomType> RoleProjectGroupAndRoomType { get; set; }
+        public virtual DbSet<FrontEndAccount> FrontEndAccount { get; set; }
+        public virtual DbSet<FrontEndAccountProjectMapping> FrontEndAccountProjectMapping { get; set; }
     }
 }

@@ -43,9 +43,6 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_HouseSelectionRecord_SubscriberID_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" />
-        <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccount" Width="1.5" PointX="3" PointY="18.75" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccount_Project_ID" />
-        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.RoleFamilyNumberAndRoomType" Width="1.5" PointX="6" PointY="10" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.RoleProjectGroupAndHouseGroup" Width="1.5" PointX="8.25" PointY="14.25" />
         <EntityTypeShape EntityType="HouseSelectionDBModel.RoleProjectGroupAndRoomType" Width="1.5" PointX="5.25" PointY="14.125" />
@@ -55,6 +52,11 @@
         <AssociationConnector Association="HouseSelectionDBModel.FK_RoleProjectGroupAndRoomType_ProjectGroup_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_RoleFamilyNumberAndRoomType_RoomType_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_RoleProjectGroupAndRoomType_RoomType_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccount" Width="1.5" PointX="13.375" PointY="0.875" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" />
+        <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccountProjectMapping" Width="1.5" PointX="16" PointY="4.75" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_Project_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

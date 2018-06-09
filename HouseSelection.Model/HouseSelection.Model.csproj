@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountProjectEntity.cs" />
     <Compile Include="AddSelectRoleRequestEntity.cs" />
     <Compile Include="AddSelectTimePeriodRequestEntity.cs" />
     <Compile Include="ApplicationAccount.cs">
@@ -73,6 +74,9 @@
     </Compile>
     <Compile Include="FrontEndAccountEntity.cs" />
     <Compile Include="FrontEndAccountLoginRecord.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEndAccountProjectMapping.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="GetFrontEndAccountResultEntity.cs" />
