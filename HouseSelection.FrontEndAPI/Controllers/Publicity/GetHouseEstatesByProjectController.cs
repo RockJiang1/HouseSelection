@@ -16,7 +16,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
     {
         HouseEstateBLL _houseEstateBLL = new HouseEstateBLL();
         ProjectBLL _projectBLL = new ProjectBLL();
-
+        
         public GetHouseEstatesByProjectResultEntity Post(GetHouseEstatesByProjectRequestModel req)
         {
             Logger.LogDebug("GetHousesEstateByProject Request:" + JsonHelper.SerializeObject(req), "GetHouseEstatesByProjectController", "Post");

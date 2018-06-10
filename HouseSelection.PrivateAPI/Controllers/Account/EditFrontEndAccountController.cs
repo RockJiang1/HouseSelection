@@ -13,10 +13,11 @@ using HouseSelection.Utility;
 
 namespace HouseSelection.PrivateAPI.Controllers
 {
-    public class EditFrontEndAccountPasswordController : ApiController
+    public class EditFrontEndAccountController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
         private FrontEndAccountBLL _frontBLL = new FrontEndAccountBLL();
+        private FrontEndAccountProjectMappingBLL _frontMapBLL = new FrontEndAccountProjectMappingBLL();
 
         [ApiAuthorize]
         public BaseResultEntity Post(EditFrontEndAccountRequestModel req)
@@ -30,6 +31,16 @@ namespace HouseSelection.PrivateAPI.Controllers
 
             try
             {
+                foreach (int i in req.ProjectID)
+                {
+                    if (_projectBLL.GetModels(x => x.ID == i).FirstOrDefault() == null)
+                    {
+                        ret.Code = 201;
+                        ret.ErrMsg = "项目ID不存在！";
+                        return ret;
+                    }
+                }
+
                 var _dbAccount = _frontBLL.GetModels(x => x.ID == req.AccountID).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(req.Account) || string.IsNullOrWhiteSpace(req.Password) || string.IsNullOrWhiteSpace(req.BeforePassword))
                 {
@@ -56,6 +67,25 @@ namespace HouseSelection.PrivateAPI.Controllers
                     _dbAccount.Password = req.Password.ToUpper();
                     _frontBLL.Update(_dbAccount);
                 }
+
+                //先删
+                var _dbMapList = _frontMapBLL.GetModels(x => x.FrontEndAccountID == req.AccountID).ToList();
+                _frontMapBLL.DeleteRange(_dbMapList); 
+                //后插
+                var _dbNewMapList = new List<FrontEndAccountProjectMapping>();
+                foreach (int i in req.ProjectID)
+                {
+                    var _dbMap = new FrontEndAccountProjectMapping()
+                    {
+                        ProjectID = i,
+                        FrontEndAccountID = _dbAccount.ID,
+                        CreateTime = DateTime.Now,
+                        LastUpdate = DateTime.Now
+                    };
+                    _dbNewMapList.Add(_dbMap);
+                }
+                _frontMapBLL.AddRange(_dbNewMapList);
+
             }
             catch (Exception ex)
             {

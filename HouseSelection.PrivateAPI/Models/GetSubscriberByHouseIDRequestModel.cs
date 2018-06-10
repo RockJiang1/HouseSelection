@@ -5,8 +5,8 @@ using System.Web;
 
 namespace HouseSelection.PrivateAPI.Models
 {
-    public class GetFrontEndAccountRequestModel : SearchRequestModel
+    public class GetSubscriberByHouseIDRequestModel
     {
-        //public int ProjectID { get; set; }
+        public int HouseID { get; set; }
     }
 }

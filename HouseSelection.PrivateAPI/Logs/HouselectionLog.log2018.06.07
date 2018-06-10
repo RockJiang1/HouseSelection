@@ -1,0 +1,37 @@
+﻿2018-06-07 20:50:40,821 [11] INFO  - 获取Token成功，AppId:SYY,AppSecret:0B2223C37F54864403847E762E1F87F3,AccessToken:ced3555d17914b1f99268844827417da6366400144075122650107d0d476044ad0a919f416b2db40d6	TokenController.Post 
+2018-06-07 20:51:00,520 [11] DEBUG - GetProjectRoleBaseInfo Request:{"ProjectID":2}	GetProjectRoleBaseInfoController.Post 
+2018-06-07 20:52:40,552 [8] DEBUG - GetSelectRoleByProjectID Request:{"ProjectID":2}	GetSelectRoleByProjectIDController.Post 
+2018-06-07 20:58:34,971 [36] DEBUG - GetAllSubscribers Request:{"PageSize":0,"PageIndex":0}	GetAllSubscribersController.Post 
+2018-06-07 20:59:11,062 [33] DEBUG - GetAllSubscribers Request:{"PageSize":10,"PageIndex":1}	GetAllSubscribersController.Post 
+2018-06-07 20:59:19,776 [41] DEBUG - GetAllSubscribers Request:{"PageSize":100,"PageIndex":1}	GetAllSubscribersController.Post 
+2018-06-07 21:00:18,139 [39] DEBUG - GetSubscriberSelectionHistory Request:{"SubscriberID":803}	GetSubscriberSelectionHistoryController.Post 
+2018-06-07 21:01:21,894 [8] DEBUG - GetSubscriberSelectionHistory Request:{"SubscriberID":803}	GetSubscriberSelectionHistoryController.Post 
+2018-06-07 21:06:45,953 [11] DEBUG - GetAllHouseInfo Request:{"HouseEstateID":0,"PageSize":0,"PageIndex":0}	GetAllHouseInfoController.Post 
+2018-06-07 21:06:57,658 [16] DEBUG - GetAllHouseInfo Request:{"HouseEstateID":0,"PageSize":100,"PageIndex":1}	GetAllHouseInfoController.Post 
+2018-06-07 21:07:28,470 [11] DEBUG - GetAllHouseInfo Request:{"HouseEstateID":3,"PageSize":100,"PageIndex":1}	GetAllHouseInfoController.Post 
+2018-06-07 21:08:47,230 [11] DEBUG - GetHouses Request:{"HouseEstateID":3,"SearchStr":null,"PageSize":100,"PageIndex":1}	GetHousesController.Post 
+2018-06-07 21:08:47,342 [11] FATAL - 搜索房源信息时发生异常！
+System.ArgumentNullException: 值不能为 null。
+参数名: value
+   在 System.String.IndexOf(String value, Int32 startIndex, Int32 count, StringComparison comparisonType)
+   在 System.String.Contains(String value)
+   在 HouseSelection.PrivateAPI.Controllers.GetHousesController.<>c__DisplayClass1_0.<Post>b__2(House x) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\House\GetHousesController.cs:行号 35
+   在 System.Linq.Enumerable.WhereListIterator`1.MoveNext()
+   在 System.Linq.Enumerable.<UnionIterator>d__67`1.MoveNext()
+   在 System.Linq.Enumerable.<UnionIterator>d__67`1.MoveNext()
+   在 System.Linq.Enumerable.<SkipIterator>d__31`1.MoveNext()
+   在 System.Linq.Enumerable.<TakeIterator>d__25`1.MoveNext()
+   在 HouseSelection.PrivateAPI.Controllers.GetHousesController.Post(GetHousesRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\House\GetHousesController.cs:行号 42	GetHousesController.Post
+==EXCEPTION==
+System.ArgumentNullException: 值不能为 null。
+参数名: value
+   在 System.String.IndexOf(String value, Int32 startIndex, Int32 count, StringComparison comparisonType)
+   在 System.String.Contains(String value)
+   在 HouseSelection.PrivateAPI.Controllers.GetHousesController.<>c__DisplayClass1_0.<Post>b__2(House x) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\House\GetHousesController.cs:行号 35
+   在 System.Linq.Enumerable.WhereListIterator`1.MoveNext()
+   在 System.Linq.Enumerable.<UnionIterator>d__67`1.MoveNext()
+   在 System.Linq.Enumerable.<UnionIterator>d__67`1.MoveNext()
+   在 System.Linq.Enumerable.<SkipIterator>d__31`1.MoveNext()
+   在 System.Linq.Enumerable.<TakeIterator>d__25`1.MoveNext()
+   在 HouseSelection.PrivateAPI.Controllers.GetHousesController.Post(GetHousesRequestModel req) 位置 C:\Users\Rock\source\repos\HouseSelection\HouseSelection.PrivateAPI\Controllers\House\GetHousesController.cs:行号 42 
+2018-06-07 21:09:39,978 [9] DEBUG - GetHouses Request:{"HouseEstateID":3,"SearchStr":"2","PageSize":100,"PageIndex":1}	GetHousesController.Post 

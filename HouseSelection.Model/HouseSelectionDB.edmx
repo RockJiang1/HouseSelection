@@ -47,7 +47,6 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProjectID" Type="int" Nullable="false" />
           <Property Name="Account" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -61,6 +60,16 @@
           <Property Name="FrontEndAccountID" Type="int" Nullable="false" />
           <Property Name="LoginTime" Type="datetime" Nullable="false" />
           <Property Name="LoginIP" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="FrontEndAccountProjectMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FrontEndAccountID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
         <EntityType Name="House">
           <Key>
@@ -286,18 +295,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FrontEndAccount_Project_ID">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="FrontEndAccount" Type="Self.FrontEndAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FrontEndAccount">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
           <End Role="FrontEndAccount" Type="Self.FrontEndAccount" Multiplicity="1" />
           <End Role="FrontEndAccountLoginRecord" Type="Self.FrontEndAccountLoginRecord" Multiplicity="*" />
@@ -307,6 +304,30 @@
             </Principal>
             <Dependent Role="FrontEndAccountLoginRecord">
               <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FrontEndAccountProjectMapping_FrontEndAccount_ID">
+          <End Role="FrontEndAccount" Type="Self.FrontEndAccount" Multiplicity="1" />
+          <End Role="FrontEndAccountProjectMapping" Type="Self.FrontEndAccountProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FrontEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FrontEndAccountProjectMapping">
+              <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FrontEndAccountProjectMapping_Project_ID">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="FrontEndAccountProjectMapping" Type="Self.FrontEndAccountProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FrontEndAccountProjectMapping">
+              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -617,6 +638,7 @@
           <EntitySet Name="BackEndAccountLoginRecord" EntityType="Self.BackEndAccountLoginRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FrontEndAccount" EntityType="Self.FrontEndAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FrontEndAccountLoginRecord" EntityType="Self.FrontEndAccountLoginRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FrontEndAccountProjectMapping" EntityType="Self.FrontEndAccountProjectMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseEstate" EntityType="Self.HouseEstate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HouseGroup" EntityType="Self.HouseGroup" Schema="dbo" store:Type="Tables" />
@@ -637,13 +659,17 @@
             <End Role="BackEndAccount" EntitySet="BackEndAccount" />
             <End Role="BackEndAccountLoginRecord" EntitySet="BackEndAccountLoginRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_FrontEndAccount_Project_ID" Association="Self.FK_FrontEndAccount_Project_ID">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
-          </AssociationSet>
           <AssociationSet Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" Association="Self.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
             <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
             <End Role="FrontEndAccountLoginRecord" EntitySet="FrontEndAccountLoginRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" Association="Self.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID">
+            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
+            <End Role="FrontEndAccountProjectMapping" EntitySet="FrontEndAccountProjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FrontEndAccountProjectMapping_Project_ID" Association="Self.FK_FrontEndAccountProjectMapping_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="FrontEndAccountProjectMapping" EntitySet="FrontEndAccountProjectMapping" />
           </AssociationSet>
           <AssociationSet Name="FK_House_GroupID_ID" Association="Self.FK_House_GroupID_ID">
             <End Role="HouseGroup" EntitySet="HouseGroup" />
@@ -768,12 +794,12 @@
           <NavigationProperty Name="HouseEstate" Relationship="HouseSelectionDBModel.FK_HouseEstate_ProjectID_ID" FromRole="Project" ToRole="HouseEstate" />
           <NavigationProperty Name="House" Relationship="HouseSelectionDBModel.FK_House_Project_ID" FromRole="Project" ToRole="House" />
           <NavigationProperty Name="HouseSelectionRecord" Relationship="HouseSelectionDBModel.FK_HouseSelectionRecord_ProjectID_ID" FromRole="Project" ToRole="HouseSelectionRecord" />
-          <NavigationProperty Name="FrontEndAccount" Relationship="HouseSelectionDBModel.FK_FrontEndAccount_Project_ID" FromRole="Project" ToRole="FrontEndAccount" />
           <NavigationProperty Name="RoleFamilyNumberAndRoomType" Relationship="HouseSelectionDBModel.FK_RoleFamilyNumberAndRoomType_Project_ID" FromRole="Project" ToRole="RoleFamilyNumberAndRoomType" />
           <Property Name="DevelopCompany" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IdentityNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsEnd" Type="Boolean" Nullable="false" />
           <Property Name="EndReason" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FrontEndAccountProjectMapping" Relationship="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_Project_ID" FromRole="Project" ToRole="FrontEndAccountProjectMapping" />
         </EntityType>
         <EntityType Name="ProjectGroup">
           <Key>
@@ -970,15 +996,6 @@
             <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
             <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
           </AssociationSet>
-          <EntitySet Name="FrontEndAccount" EntityType="HouseSelectionDBModel.FrontEndAccount" />
-          <AssociationSet Name="FK_FrontEndAccount_Project_ID" Association="HouseSelectionDBModel.FK_FrontEndAccount_Project_ID">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
-            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
-            <End Role="FrontEndAccountLoginRecord" EntitySet="FrontEndAccountLoginRecord" />
-          </AssociationSet>
           <EntitySet Name="RoleFamilyNumberAndRoomType" EntityType="HouseSelectionDBModel.RoleFamilyNumberAndRoomType" />
           <EntitySet Name="RoleProjectGroupAndHouseGroup" EntityType="HouseSelectionDBModel.RoleProjectGroupAndHouseGroup" />
           <EntitySet Name="RoleProjectGroupAndRoomType" EntityType="HouseSelectionDBModel.RoleProjectGroupAndRoomType" />
@@ -1005,6 +1022,20 @@
           <AssociationSet Name="FK_RoleProjectGroupAndRoomType_RoomType_ID" Association="HouseSelectionDBModel.FK_RoleProjectGroupAndRoomType_RoomType_ID">
             <End Role="RoomType" EntitySet="RoomType" />
             <End Role="RoleProjectGroupAndRoomType" EntitySet="RoleProjectGroupAndRoomType" />
+          </AssociationSet>
+          <EntitySet Name="FrontEndAccount" EntityType="HouseSelectionDBModel.FrontEndAccount" />
+          <AssociationSet Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" Association="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
+            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
+            <End Role="FrontEndAccountLoginRecord" EntitySet="FrontEndAccountLoginRecord" />
+          </AssociationSet>
+          <EntitySet Name="FrontEndAccountProjectMapping" EntityType="HouseSelectionDBModel.FrontEndAccountProjectMapping" />
+          <AssociationSet Name="FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID">
+            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
+            <End Role="FrontEndAccountProjectMapping" EntitySet="FrontEndAccountProjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FrontEndAccountProjectMapping_Project_ID" Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_Project_ID">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="FrontEndAccountProjectMapping" EntitySet="FrontEndAccountProjectMapping" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BackEndAccount">
@@ -1401,43 +1432,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="FrontEndAccount">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProjectID" Type="Int32" Nullable="false" />
-          <Property Name="Account" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_FrontEndAccount_Project_ID" FromRole="FrontEndAccount" ToRole="Project" />
-          <NavigationProperty Name="FrontEndAccountLoginRecord" Relationship="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="FrontEndAccountLoginRecord" />
-        </EntityType>
-        <Association Name="FK_FrontEndAccount_Project_ID">
-          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FrontEndAccount">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
-          <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="1" />
-          <End Type="HouseSelectionDBModel.FrontEndAccountLoginRecord" Role="FrontEndAccountLoginRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FrontEndAccount">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="FrontEndAccountLoginRecord">
-              <PropertyRef Name="FrontEndAccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="RoleFamilyNumberAndRoomType">
           <Key>
             <PropertyRef Name="ID" />
@@ -1544,6 +1538,66 @@
             </Principal>
             <Dependent Role="RoleProjectGroupAndRoomType">
               <PropertyRef Name="RoomTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FrontEndAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FrontEndAccountLoginRecord" Relationship="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="FrontEndAccountLoginRecord" />
+          <NavigationProperty Name="FrontEndAccountProjectMapping" Relationship="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="FrontEndAccountProjectMapping" />
+        </EntityType>
+        <Association Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
+          <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.FrontEndAccountLoginRecord" Role="FrontEndAccountLoginRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FrontEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FrontEndAccountLoginRecord">
+              <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FrontEndAccountProjectMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FrontEndAccountID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FrontEndAccount" Relationship="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" FromRole="FrontEndAccountProjectMapping" ToRole="FrontEndAccount" />
+          <NavigationProperty Name="Project" Relationship="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_Project_ID" FromRole="FrontEndAccountProjectMapping" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_FrontEndAccountProjectMapping_FrontEndAccount_ID">
+          <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.FrontEndAccountProjectMapping" Role="FrontEndAccountProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FrontEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FrontEndAccountProjectMapping">
+              <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FrontEndAccountProjectMapping_Project_ID">
+          <End Type="HouseSelectionDBModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.FrontEndAccountProjectMapping" Role="FrontEndAccountProjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FrontEndAccountProjectMapping">
+              <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1798,18 +1852,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FrontEndAccount">
-            <EntityTypeMapping TypeName="HouseSelectionDBModel.FrontEndAccount">
-              <MappingFragment StoreEntitySet="FrontEndAccount">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Account" ColumnName="Account" />
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RoleFamilyNumberAndRoomType">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.RoleFamilyNumberAndRoomType">
               <MappingFragment StoreEntitySet="RoleFamilyNumberAndRoomType">
@@ -1840,6 +1882,28 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
                 <ScalarProperty Name="ProjectGroupID" ColumnName="ProjectGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FrontEndAccount">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.FrontEndAccount">
+              <MappingFragment StoreEntitySet="FrontEndAccount">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FrontEndAccountProjectMapping">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.FrontEndAccountProjectMapping">
+              <MappingFragment StoreEntitySet="FrontEndAccountProjectMapping">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="FrontEndAccountID" ColumnName="FrontEndAccountID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

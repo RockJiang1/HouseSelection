@@ -7,7 +7,7 @@ namespace HouseSelection.PrivateAPI.Models
 {
     public class AddFrontEndAccountRequestModel
     {
-        public int ProjectID { get; set; }
+        public List<int> ProjectID { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
     }

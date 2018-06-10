@@ -18,17 +18,18 @@ namespace HouseSelection.Model
         public FrontEndAccount()
         {
             this.FrontEndAccountLoginRecord = new HashSet<FrontEndAccountLoginRecord>();
+            this.FrontEndAccountProjectMapping = new HashSet<FrontEndAccountProjectMapping>();
         }
     
         public int ID { get; set; }
-        public int ProjectID { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     
-        public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FrontEndAccountLoginRecord> FrontEndAccountLoginRecord { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FrontEndAccountProjectMapping> FrontEndAccountProjectMapping { get; set; }
     }
 }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountProjectEntity.cs" />
     <Compile Include="AddSelectRoleRequestEntity.cs" />
     <Compile Include="AddSelectTimePeriodRequestEntity.cs" />
     <Compile Include="ApplicationAccount.cs">
@@ -75,15 +76,20 @@
     <Compile Include="FrontEndAccountLoginRecord.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FrontEndAccountProjectMapping.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetFrontEndAccountResultEntity.cs" />
     <Compile Include="GetHouseEstateResultEntity.cs" />
     <Compile Include="GetHouseResultEntity.cs" />
     <Compile Include="GetHouseSubscriberResultEntity.cs" />
     <Compile Include="GetProjectRoleBaseInfoResultEntity.cs" />
     <Compile Include="GetSelectHouseInfoResult.cs" />
+    <Compile Include="GetSelectRoleResultEntity.cs" />
     <Compile Include="GetSelectTimePeriodResultEntity.cs" />
     <Compile Include="GetShakingNumberResultEntity.cs" />
     <Compile Include="GetShakingNumbersResultEntity.cs" />
+    <Compile Include="GetSubscriberByHouseIDResultEntity.cs" />
     <Compile Include="GetSubscriberResultEntity.cs" />
     <Compile Include="GetSubscriberSelectionHistoryResultEntity.cs" />
     <Compile Include="House.cs">
