@@ -9,7 +9,7 @@ namespace HouseSelection.Authorize
     {
         private static RedisHelper redisHelper = new RedisHelper(PubConstant.DBIndex);
         private const string REDIS_KEY_TOKEN_ACCESSTOKEN = "Token:AccessToken";
-        private const string REDIS_KEY_TOKEN_USER = "Token:User";
+        //private const string REDIS_KEY_TOKEN_USER = "Token:User";
         public const string TOKEN_KEY = "access_token";
 
         /// <summary>
@@ -29,15 +29,15 @@ namespace HouseSelection.Authorize
             token.ExpiryDate = DateTime.Now.AddSeconds(expiry);
 
             // 删除旧的Token
-            var currentToken = redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, token.RequestUserId.ToString()));
-            if (currentToken != null)
-            {
-                redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken.AccessToken));
-            }
+            //var currentToken = redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, token.RequestUserId.ToString()));
+            //if (currentToken != null)
+            //{
+            //    redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken.AccessToken));
+            //}
 
             // 添加新的Token
             redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, token.AccessToken), token, expiry);
-            redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, token.RequestUserId.ToString()), token, expiry);
+            //redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, token.RequestUserId.ToString()), token, expiry);
 
             return token;
         }
@@ -68,12 +68,12 @@ namespace HouseSelection.Authorize
         /// <param name="userId"></param>
         public static void RemoveToken(string userId)
         {
-            var currentToken = redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
-            if (currentToken != null)
-            {
-                redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken.AccessToken));
-                redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
-            }
+            //var currentToken = redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
+            //if (currentToken != null)
+            //{
+            //    redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken.AccessToken));
+            //    redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
+            //}
         }
 
         /// <summary>
