@@ -654,3 +654,18 @@ BEGIN
 
 END
 GO
+
+--通知登陆账号
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'FrontEndAccountID' AND object_id = OBJECT_ID(N'TelephoneNoticeRecord'))
+BEGIN
+	ALTER TABLE TelephoneNoticeRecord ADD FrontEndAccountID INT NOT NULL
+	ALTER TABLE TelephoneNoticeRecord ADD CONSTRAINT FK_TelephoneNoticeRecord_FrontEndAccount_ID FOREIGN KEY(FrontEndAccountID) REFERENCES FrontEndAccount(ID)
+END
+GO
+
+--通知使用的电话
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'NoticeTelephone' AND object_id = OBJECT_ID(N'TelephoneNoticeRecord'))
+BEGIN
+	ALTER TABLE TelephoneNoticeRecord ADD NoticeTelephone VARCHAR(20) NOT NULL
+END
+GO
