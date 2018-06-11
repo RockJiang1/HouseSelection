@@ -53,9 +53,9 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
 
                     PeriodEntity periodInfo = new PeriodEntity()
                     {
-                        Date = string.Format("{0}.{1}", date.Month, date.Day),
-                        BeginTime = string.Format("{0}:{1}", startTime.Hours, startTime.Minutes),
-                        EndTime = endTime.Hours.ToString() + ":" + endTime.Minutes.ToString(),
+                        Date = date.ToString("yyyy-MM-dd"),
+                        BeginTime = startTime,
+                        EndTime = endTime,
                         GroupId = i.ProjectGroupName,
                         Number = string.Format("{0}-{1}", beginNumber, endNumber)
                     };
