@@ -10,9 +10,15 @@ namespace HouseSelection.BLL
 {
     public class HouseSelectionRecordBLL : BaseBLL<HouseSelectionRecord>
     {
+        private HouseSelectionRecordDAL _selectDAL = new HouseSelectionRecordDAL();
         public override void SetDAL()
         {
             _dal = new HouseSelectionRecordDAL();
+        }
+
+        public List<SubscriberSelectionEntity> GetSubscriberSelectionRecord(int SubscriberID)
+        {
+            return _selectDAL.GetSubscriberSelectionRecord(SubscriberID);
         }
     }
 }
