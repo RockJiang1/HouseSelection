@@ -206,7 +206,9 @@
     <Compile Include="Controllers\Publicity\GetHouseBuildingsController.cs" />
     <Compile Include="Controllers\Publicity\GetHouseEstateDetailsController.cs" />
     <Compile Include="Controllers\Publicity\GetHouseEstatesByProjectController.cs" />
+    <Compile Include="Controllers\Publicity\GetHouseSelectPeriodController.cs" />
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
+    <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,12 +220,16 @@
     <Compile Include="Models\PublicityRequest\GetHouseBuildingsRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetHouseEstateDetailsRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetHouseEstatesByProjectRequestModel.cs" />
+    <Compile Include="Models\PublicityRequest\GetHouseSelectPeriodRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetProjectsByAreaRequestModel.cs" />
+    <Compile Include="Models\PublicityRequest\GetRoomQuantityInfoRequestModel.cs" />
     <Compile Include="Models\PublicityResult\GetAreaListResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetHouseBuildingsResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetHouseEstateDetailsResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetHouseEstatesByProjectResultEntity.cs" />
+    <Compile Include="Models\PublicityResult\GetHouseSelectPeriodResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
+    <Compile Include="Models\PublicityResult\GetRoomQuantityInfoResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

@@ -1,0 +1,10 @@
+﻿2018-06-07 00:11:10,776 [6] FATAL - 获取楼盘明细信息时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseEstateDetailsController.<>c__DisplayClass1_0.<Post>b__1(House h) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseEstateDetailsController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseEstateDetailsController.Post(GetHouseEstateDetailsRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseEstateDetailsController.cs:行号 37	GetHouseEstateDetailsController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseEstateDetailsController.<>c__DisplayClass1_0.<Post>b__1(House h) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseEstateDetailsController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseEstateDetailsController.Post(GetHouseEstateDetailsRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseEstateDetailsController.cs:行号 37 
