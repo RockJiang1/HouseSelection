@@ -217,6 +217,7 @@
     <Compile Include="Controllers\ShakingNumber\GetShakingNumbersController.cs" />
     <Compile Include="Controllers\Subscriber\GetSelectHouseInfoController.cs" />
     <Compile Include="Controllers\Subscriber\GetAllSubscribersController.cs" />
+    <Compile Include="Controllers\Subscriber\GetSelectionDetailController.cs" />
     <Compile Include="Controllers\Subscriber\GetSubscribersController.cs" />
     <Compile Include="Controllers\Subscriber\GetSubscriberSelectionHistoryController.cs" />
     <Compile Include="Controllers\Subscriber\ImportSubscriberController.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Models\GetProjectGroupRequestModel.cs" />
     <Compile Include="Models\GetProjectRoleBaseInfoRequestModel.cs" />
     <Compile Include="Models\GetSelectHouseInfoRequestModel.cs" />
+    <Compile Include="Models\GetSelectionDetailRequestModel.cs" />
     <Compile Include="Models\GetSelectRoleRequestModel.cs" />
     <Compile Include="Models\GetSelectTimePeriodRequestModel.cs" />
     <Compile Include="Models\GetShakingNumbersRequestModel.cs" />
