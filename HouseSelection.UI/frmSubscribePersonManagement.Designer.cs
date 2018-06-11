@@ -30,15 +30,19 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdentityNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telephone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ZipCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaritalStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ResidenceArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WorkArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,14 +64,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(314, 170);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(268, 20);
-            this.comboBox1.TabIndex = 11;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
@@ -92,44 +89,89 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
+            this.Name,
+            this.IdentityNumber,
+            this.Telephone,
+            this.Address,
+            this.ZipCode,
+            this.MaritalStatus,
+            this.ResidenceArea,
+            this.WorkArea,
+            this.Operate});
             this.dataGridView1.Location = new System.Drawing.Point(12, 216);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(928, 349);
             this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Column1
             // 
             this.Column1.DataPropertyName = "No";
             this.Column1.HeaderText = "序号";
             this.Column1.Name = "Column1";
+            this.Column1.Width = 80;
             // 
-            // Column2
+            // Name
             // 
-            this.Column2.DataPropertyName = "ID";
-            this.Column2.HeaderText = "认购人编号";
-            this.Column2.Name = "Column2";
+            this.Name.DataPropertyName = "Name";
+            this.Name.HeaderText = "姓名";
+            this.Name.Name = "Name";
+            this.Name.Width = 120;
             // 
-            // Column3
+            // IdentityNumber
             // 
-            this.Column3.DataPropertyName = "Name";
-            this.Column3.HeaderText = "姓名";
-            this.Column3.Name = "Column3";
+            this.IdentityNumber.DataPropertyName = "IdentityNumber";
+            this.IdentityNumber.HeaderText = "身份证";
+            this.IdentityNumber.Name = "IdentityNumber";
+            this.IdentityNumber.Width = 150;
             // 
-            // Column4
+            // Telephone
             // 
-            this.Column4.HeaderText = "......";
-            this.Column4.Name = "Column4";
+            this.Telephone.DataPropertyName = "Telephone";
+            this.Telephone.HeaderText = "电话号码";
+            this.Telephone.Name = "Telephone";
+            this.Telephone.Width = 120;
             // 
-            // Column5
+            // Address
             // 
-            this.Column5.DataPropertyName = "Option";
-            this.Column5.HeaderText = "操作";
-            this.Column5.Name = "Column5";
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "联系地址";
+            this.Address.Name = "Address";
+            this.Address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Address.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Address.Width = 300;
+            // 
+            // ZipCode
+            // 
+            this.ZipCode.DataPropertyName = "ZipCode";
+            this.ZipCode.HeaderText = "邮编";
+            this.ZipCode.Name = "ZipCode";
+            // 
+            // MaritalStatus
+            // 
+            this.MaritalStatus.DataPropertyName = "MaritalStatus";
+            this.MaritalStatus.HeaderText = "婚姻情况";
+            this.MaritalStatus.Name = "MaritalStatus";
+            // 
+            // ResidenceArea
+            // 
+            this.ResidenceArea.DataPropertyName = "ResidenceArea";
+            this.ResidenceArea.HeaderText = "户籍所在区县";
+            this.ResidenceArea.Name = "ResidenceArea";
+            // 
+            // WorkArea
+            // 
+            this.WorkArea.DataPropertyName = "WorkArea";
+            this.WorkArea.HeaderText = "工作所在区县";
+            this.WorkArea.Name = "WorkArea";
+            // 
+            // Operate
+            // 
+            this.Operate.DataPropertyName = "Operate";
+            this.Operate.HeaderText = "操作";
+            this.Operate.Name = "Operate";
+            this.Operate.Width = 150;
             // 
             // frmSubscribePersonManagement
             // 
@@ -139,10 +181,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "frmSubscribePersonManagement";
+            this.Load += new System.EventHandler(this.frmSubscribePersonManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,14 +195,18 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewButtonColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdentityNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telephone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ZipCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaritalStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ResidenceArea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkArea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Operate;
     }
 }

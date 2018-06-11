@@ -7,7 +7,7 @@ using HouseSelection.Model;
 
 namespace HouseSelection.Provider.Client.Response
 {
-    public class ProjectEntityResponse:BaseResultEntity
+    public class ProjectEntityResponse:BaseListResultEntity
     {
         public ProjectEntityResponse()
         {
@@ -67,5 +67,17 @@ namespace HouseSelection.Provider.Client.Response
         /// 操作
         /// </summary>
         public string Operate { get; set; }
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public string Operate1 { get; set; }
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public string Operate2 { get; set; }
+        /// <summary>
+        /// 操作
+        /// </summary>
+        public string Operate3 { get; set; }
     }
 }

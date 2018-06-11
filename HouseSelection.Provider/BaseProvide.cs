@@ -200,6 +200,102 @@ namespace HouseSelection.Provider
 
         }
 
+        public GetProjectGroupResponse GetProjectGroup(int projectId)
+        {
+            GetProjectGroupResponse result = new GetProjectGroupResponse();
+            try
+            {
+                var request = new GetProjectGroupRequest()
+                {
+                    ProjectID = projectId
+                };
+
+                result = this.Client.InvokeAPI<GetProjectGroupResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetHouseEstatesResponse GetAllHouseEstateInfo()
+        {
+            GetHouseEstatesResponse result = new GetHouseEstatesResponse();
+            try
+            {
+                var request = new GetAllHouseEstateInfoRequest()
+                {
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetHouseEstatesResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetHouseEstatesResponse GetHouseEstates(string searchStr)
+        {
+            GetHouseEstatesResponse result = new GetHouseEstatesResponse();
+            try
+            {
+                var request = new GetHouseEstatesRequest()
+                {
+                    SearchStr = searchStr,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetHouseEstatesResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+
+        public GetShakingNumbersResponse GetShakingNumbers(int projectId)
+        {
+            GetShakingNumbersResponse result = new GetShakingNumbersResponse();
+            try
+            {
+                var request = new GetShakingNumbersRequest()
+                {
+                    ProjectGroupID = projectId
+                };
+
+                result = this.Client.InvokeAPI<GetShakingNumbersResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
         public BaseResultEntity AddProject(AddProjectRequest request)
         {
             BaseResultEntity result = new BaseResultEntity();
@@ -476,7 +572,7 @@ namespace HouseSelection.Provider
             return msg;
         }
 
-        public BaseResultEntity AddFrontEndAccount(int projrctId, string account, string password)
+        public BaseResultEntity AddFrontEndAccount(List<int> projrctId, string account, string password)
         {
             BaseResultEntity result = new BaseResultEntity();
             try
@@ -563,6 +659,249 @@ namespace HouseSelection.Provider
                     Account = account,
                     BeforePassword = passwordold,
                     Password = password
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity AddSelectTimePeriod(List<SelectTimePeriodEntityTemp> list,int projectgroupId)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new AddSelectTimePeriodRequest()
+                {
+                    ProjectGroupID = projectgroupId,
+                    SelectTimeList = list
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity EditSelectTimePeriod(List<SelectTimePeriodEntityTemp> list, int projectgroupId)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new EditSelectTimePeriodRequest()
+                {
+                    ProjectGroupID = projectgroupId,
+                    SelectTimeList = list
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetSelectTimePeriodResponse GetSelectTimePeriod(int projectgroupId)
+        {
+            GetSelectTimePeriodResponse result = new GetSelectTimePeriodResponse();
+            try
+            {
+                var request = new GetSelectTimePeriodRequest()
+                {
+                    ProjectGroupID = projectgroupId
+                };
+
+                result = this.Client.InvokeAPI<GetSelectTimePeriodResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetHousesResponse GetAllHouseInfo(int houseEstateID)
+        {
+            GetHousesResponse result = new GetHousesResponse();
+            try
+            {
+                var request = new GetAllHouseInfoRequest()
+                {
+                    HouseEstateID = houseEstateID,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetHousesResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetHousesResponse GetHouses(int houseEstateID, string searchStr)
+        {
+            GetHousesResponse result = new GetHousesResponse();
+            try
+            {
+                var request = new GetHousesRequest()
+                {
+                    HouseEstateID = houseEstateID,
+                    SearchStr = searchStr,
+                    PageIndex = 1,
+                    PageSize = 99999
+                };
+
+                result = this.Client.InvokeAPI<GetHousesResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetSubscriberByHouseIDResponse GetSubscriberByHouseID(int houseId)
+        {
+            GetSubscriberByHouseIDResponse result = new GetSubscriberByHouseIDResponse();
+            try
+            {
+                var request = new GetSubscriberByHouseIDRequest()
+                {
+                    HouseID = houseId
+                };
+
+                result = this.Client.InvokeAPI<GetSubscriberByHouseIDResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetProjectRoleBaseInfoResponse GetProjectRoleBaseInfo(int projectId)
+        {
+            GetProjectRoleBaseInfoResponse result = new GetProjectRoleBaseInfoResponse();
+            try
+            {
+                var request = new GetProjectRoleBaseInfoRequest()
+                {
+                    ProjectID = projectId
+                };
+
+                result = this.Client.InvokeAPI<GetProjectRoleBaseInfoResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity AddSelectRole(int projectId, List<ProjectGroupAndRoomTypeRoleTemp> list1, List<FamilyNumberAndRoomTypeRoleTemp> list2, List<ProjectGroupAndHouseGroupRoleTemp> list3 )
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new AddSelectRoleRequest()
+                {
+                    ProjectID = projectId,
+                    ProjectGroupAndRoomTypeRoleList = list1,
+                    FamilyNumberAndRoomTypeRoleList = list2,
+                    ProjectGroupAndHouseGroupRoleList = list3
+                };
+
+                result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetSelectRoleByProjectIDResponse GetSelectRoleByProjectID(int projectId)
+        {
+            GetSelectRoleByProjectIDResponse result = new GetSelectRoleByProjectIDResponse();
+            try
+            {
+                var request = new GetSelectRoleByProjectIDRequest()
+                {
+                    ProjectID = projectId
+                };
+
+                result = this.Client.InvokeAPI<GetSelectRoleByProjectIDResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public BaseResultEntity EditSelectRole(int projectId, List<ProjectGroupAndRoomTypeRoleTemp> list1, List<FamilyNumberAndRoomTypeRoleTemp> list2, List<ProjectGroupAndHouseGroupRoleTemp> list3)
+        {
+            BaseResultEntity result = new BaseResultEntity();
+            try
+            {
+                var request = new AddSelectRoleRequest()
+                {
+                    ProjectID = projectId,
+                    ProjectGroupAndRoomTypeRoleList = list1,
+                    FamilyNumberAndRoomTypeRoleList = list2,
+                    ProjectGroupAndHouseGroupRoleList = list3
                 };
 
                 result = this.Client.InvokeAPI<BaseResultEntity>(request);

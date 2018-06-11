@@ -22,7 +22,7 @@ namespace HouseSelection.Provider.Client.Request
         /// <summary>
         /// ERP门店ID
         /// </summary>
-        public int ProjectID { get; set; }
+        public List<int> ProjectID { get; set; }
         /// <summary>
         /// ERP门店ID
         /// </summary>

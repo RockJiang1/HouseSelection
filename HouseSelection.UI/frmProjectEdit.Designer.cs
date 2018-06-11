@@ -106,6 +106,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmProjectEdit";
             this.Text = "frmProjectEdit";
+            this.Load += new System.EventHandler(this.frmProjectEdit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

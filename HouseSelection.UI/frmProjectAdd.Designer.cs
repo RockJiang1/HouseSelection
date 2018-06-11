@@ -106,6 +106,7 @@
             this.Controls.Add(this.textBox2);
             this.Name = "frmProjectAdd";
             this.Text = "frmProjectAdd";
+            this.Load += new System.EventHandler(this.frmProjectAdd_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

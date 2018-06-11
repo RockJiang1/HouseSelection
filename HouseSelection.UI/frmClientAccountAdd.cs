@@ -16,36 +16,12 @@ namespace HouseSelection.UI
 {
     public partial class frmClientAccountAdd : Form
     {
+        private Dictionary<int, String> chklist = new Dictionary<int, string>();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
         public frmClientAccountAdd()
         {
             InitializeComponent();
-
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
-            }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
-
-            ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
-                return;
-            }
-            else
-            {
-                comboBox1.DataSource = getProject;//绑定数据源
-                comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
-                comboBox1.ValueMember = "ID";//实际值
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -57,20 +33,28 @@ namespace HouseSelection.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int projrctId = 0;
             string account = string.Empty;
             string password1st = string.Empty;
             string password2nd = string.Empty;
 
-            projrctId = Convert.ToInt32(projrctId);
             account = textBox1.Text;
             password1st = textBox2.Text;
             password2nd = textBox3.Text;
 
             if (ValidPassword(password1st, password2nd) == true)
             {
-                GlobalTokenHelper.gToken = "";
-                GlobalTokenHelper.Expiry = 0;
+                List<int> projrctId = new List<int>();
+                CheckedListBox.CheckedItemCollection listChecked = checkedListBox1.CheckedItems;
+                for (int i = 0; i < listChecked.Count; i++)
+                {
+                    //将被选中item的text打印出来
+                    textBox4.Text = textBox4.Text + " " + listChecked[i].ToString();
+                    int id = chklist.Where(x => x.Value == listChecked[i].ToString()).Select(x => x.Key).FirstOrDefault();
+                    if (id > 0)
+                    {
+                        projrctId.Add(id);
+                    }
+                }
 
                 TokenResultEntity getToken = provide.GetToken();
                 if (getToken.Code != 0)
@@ -78,8 +62,6 @@ namespace HouseSelection.UI
                     MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                     return;
                 }
-                GlobalTokenHelper.gToken = getToken.Access_Token;
-                GlobalTokenHelper.Expiry = getToken.Expiry;
 
                 BaseResultEntity addFrontEndAccount = provide.AddFrontEndAccount(projrctId, account, password1st);
                 if (addFrontEndAccount.Code != 0)
@@ -106,6 +88,68 @@ namespace HouseSelection.UI
             if (pwd1st == pwd2nd & !string.IsNullOrEmpty(pwd1st)) { result = true; }
 
             return result;
+        }
+
+        private void frmClientAccountAdd_Load(object sender, EventArgs e)
+        {
+            InitForm();
+
+            GetProjects();
+        }
+
+        private void InitForm()
+        {
+            checkedListBox1.Visible = false;
+        }
+
+        private void GetProjects()
+        {
+            TokenResultEntity getToken = provide.GetToken();
+            if (getToken.Code != 0)
+            {
+                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
+                return;
+            }
+
+            ProjectEntityResponse getProject = provide.GetAllProjects();
+            if (getProject.Code != 0)
+            {
+                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
+                return;
+            }
+            else
+            {
+                for(int i =0;i< getProject.ProjectList.Count; i++)
+                {
+                    checkedListBox1.Items.Add(getProject.ProjectList[i].Name);
+                    chklist.Add(getProject.ProjectList[i].ID, getProject.ProjectList[i].Name);
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.Visible == false)
+            {
+                checkedListBox1.Visible = true;
+            }
+            else
+            {
+                checkedListBox1.Visible = false;
+            }
+            
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            textBox4.Text = "";
+            CheckedListBox.CheckedItemCollection listChecked = checkedListBox1.CheckedItems;
+            for (int i = 0; i < listChecked.Count; i++)
+            {
+                //将被选中item的text打印出来
+                textBox4.Text = textBox4.Text + " " + listChecked[i].ToString();
+
+            }
         }
     }
 }
