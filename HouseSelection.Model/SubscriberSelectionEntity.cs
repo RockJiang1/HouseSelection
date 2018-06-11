@@ -44,9 +44,19 @@ namespace HouseSelection.Model
         public int ConfirmStatus { get; set; }
 
         /// <summary>
+        /// 弃选状态
+        /// </summary>
+        public int AbandonStatus { get; set; }
+
+        /// <summary>
         /// 摇号结果ID(获取录音信息时使用)
         /// </summary>
         public int? ShakingResultID { get; set; }
+
+        /// <summary>
+        /// 选房ID(获取选房明细信息时使用)
+        /// </summary>
+        public int? HouseSelectionID { get; set; }
         
     }
 }

@@ -19,10 +19,10 @@ namespace HouseSelection.PrivateAPI.Controllers
     public class GetSubscriberSelectionHistoryController : ApiController
     {
         public SubscriberBLL _subscriberBLL = new SubscriberBLL();
-        public SubscriberProjectMappingBLL _subscriberProjectMapBLL = new SubscriberProjectMappingBLL();
-        public ShakingNumberResultBLL _shakingNumberBLL = new ShakingNumberResultBLL();
+        //public SubscriberProjectMappingBLL _subscriberProjectMapBLL = new SubscriberProjectMappingBLL();
+        //public ShakingNumberResultBLL _shakingNumberBLL = new ShakingNumberResultBLL();
         public HouseSelectionRecordBLL _selectionBLL = new HouseSelectionRecordBLL();
-        public TelephoneNoticeRecordBLL _noticeBLL = new TelephoneNoticeRecordBLL();
+        //public TelephoneNoticeRecordBLL _noticeBLL = new TelephoneNoticeRecordBLL();
 
         [ApiAuthorize]
         public GetSubscriberSelectionHistoryResultEntity Post(GetSubscriberSelectionHistoryRequestModel req)
@@ -48,31 +48,32 @@ namespace HouseSelection.PrivateAPI.Controllers
                 }
                 else
                 {
-                    var _proList = _subscriberProjectMapBLL.GetModels(x => x.SubscriberID == req.SubscriberID).ToList();
-                    var _selectionList = _selectionBLL.GetModels(x => x.SubscriberID == req.SubscriberID).ToList();
-                    var _noticeList = _noticeBLL.GetModels(x => x.ShakingNumberResult.SubscriberProjectMapping.SubscriberID == req.SubscriberID).ToList();
+                    //var _proList = _subscriberProjectMapBLL.GetModels(x => x.SubscriberID == req.SubscriberID).ToList();
+                    //var _selectionList = _selectionBLL.GetModels(x => x.SubscriberID == req.SubscriberID).ToList();
+                    //var _noticeList = _noticeBLL.GetModels(x => x.ShakingNumberResult.SubscriberProjectMapping.SubscriberID == req.SubscriberID).ToList();
 
-                    var _historyList = new List<SubscriberSelectionEntity>();
-                    foreach(var pro in _proList)
-                    {
-                        var _shakingNumber = _shakingNumberBLL.GetModels(x => x.SubscriberProjectMappingID == pro.ID).FirstOrDefault();
-                        var _notice = _noticeList.FirstOrDefault(x => x.ShakingNumberResult.SubscriberProjectMappingID == pro.ID);
-                        var _selection = _selectionList.FirstOrDefault(x => x.SubscriberID == pro.SubscriberID && x.ProjectID == pro.ProjectID);
+                    //var _historyList = new List<SubscriberSelectionEntity>();
+                    //foreach(var pro in _proList)
+                    //{
+                    //    var _shakingNumber = _shakingNumberBLL.GetModels(x => x.SubscriberProjectMappingID == pro.ID).FirstOrDefault();
+                    //    var _notice = _noticeList.FirstOrDefault(x => x.ShakingNumberResult.SubscriberProjectMappingID == pro.ID);
+                    //    var _selection = _selectionList.FirstOrDefault(x => x.SubscriberID == pro.SubscriberID && x.ProjectID == pro.ProjectID);
 
-                        var _history = new SubscriberSelectionEntity()
-                        {
-                            ProjectID = pro.ProjectID,
-                            ProjectNumber = pro.Project.Number,
-                            ProjectName = pro.Project.Name,
-                            NoticeStatus = _notice != null ? _notice.ResultType : 0,
-                            AuthStatus = _shakingNumber == null ? 0 : (_shakingNumber.IsAuthorized ? 1 : 0),
-                            SelectionStatus = _selection != null ? 1 : 0,
-                            ConfirmStatus = _selection != null ? (_selection.IsConfirm ? 1 : 0) : 0,
-                            ShakingResultID = _shakingNumber == null ? 0 : _shakingNumber.ID
-                        };
-                        _historyList.Add(_history);
-                    }
-                    ret.SelectionList = _historyList;
+                    //    var _history = new SubscriberSelectionEntity()
+                    //    {
+                    //        ProjectID = pro.ProjectID,
+                    //        ProjectNumber = pro.Project.Number,
+                    //        ProjectName = pro.Project.Name,
+                    //        NoticeStatus = _notice != null ? _notice.ResultType : 0,
+                    //        AuthStatus = _shakingNumber == null ? 0 : (_shakingNumber.IsAuthorized ? 1 : 0),
+                    //        SelectionStatus = _selection != null ? 1 : 0,
+                    //        ConfirmStatus = _selection != null ? (_selection.IsConfirm ? 1 : 0) : 0,
+                    //        ShakingResultID = _shakingNumber == null ? 0 : _shakingNumber.ID
+                    //    };
+                    //    _historyList.Add(_history);
+                    //}
+                    //ret.SelectionList = _historyList;
+                    ret.SelectionList = _selectionBLL.GetSubscriberSelectionRecord(req.SubscriberID);
                 }
             }
             catch(Exception ex)

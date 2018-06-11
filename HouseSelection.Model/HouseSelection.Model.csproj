@@ -85,6 +85,7 @@
     <Compile Include="GetHouseSubscriberResultEntity.cs" />
     <Compile Include="GetProjectRoleBaseInfoResultEntity.cs" />
     <Compile Include="GetSelectHouseInfoResult.cs" />
+    <Compile Include="GetSelectionDetailResultEntity.cs" />
     <Compile Include="GetSelectRoleResultEntity.cs" />
     <Compile Include="GetSelectTimePeriodResultEntity.cs" />
     <Compile Include="GetShakingNumberResultEntity.cs" />
