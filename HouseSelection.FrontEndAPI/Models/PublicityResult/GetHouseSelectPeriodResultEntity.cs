@@ -15,19 +15,19 @@ namespace HouseSelection.FrontEndAPI.Models.PublicityResult
     public class PeriodEntity
     {
         /// <summary>
-        /// 日期 MM.dd
+        /// 日期 yyyy-MM-dd
         /// </summary>
         public string Date { get; set; }
 
         /// <summary>
         /// 开始时间 hh:mm:ss
         /// </summary>
-        public string BeginTime { get; set; }
+        public TimeSpan BeginTime { get; set; }
 
         /// <summary>
         /// 结束时间 hh:mm:ss
         /// </summary>
-        public string EndTime { get; set; }
+        public TimeSpan EndTime { get; set; }
 
         /// <summary>
         /// 组
