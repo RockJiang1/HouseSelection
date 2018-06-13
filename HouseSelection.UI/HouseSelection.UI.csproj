@@ -64,11 +64,29 @@
     <Compile Include="frmClientAccountManagement.Designer.cs">
       <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHouseDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHouseDetails.Designer.cs">
+      <DependentUpon>frmHouseDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHousesImport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHousesImport.Designer.cs">
       <DependentUpon>frmHousesImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHousesManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHousesManagement.Designer.cs">
+      <DependentUpon>frmHousesManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHouseSubscriberInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHouseSubscriberInfo.Designer.cs">
+      <DependentUpon>frmHouseSubscriberInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -100,6 +118,66 @@
     <Compile Include="frmProjectManagement.Designer.cs">
       <DependentUpon>frmProjectManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSelectRoleAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectRoleAdd.Designer.cs">
+      <DependentUpon>frmSelectRoleAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectRoleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectRoleDetails.Designer.cs">
+      <DependentUpon>frmSelectRoleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectRoleEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectRoleEdit.Designer.cs">
+      <DependentUpon>frmSelectRoleEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectRoleManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectRoleManagement.Designer.cs">
+      <DependentUpon>frmSelectRoleManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodAdd.Designer.cs">
+      <DependentUpon>frmSelectTimePeriodAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodDetails.Designer.cs">
+      <DependentUpon>frmSelectTimePeriodDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodEdit.Designer.cs">
+      <DependentUpon>frmSelectTimePeriodEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectTimePeriodManagement.Designer.cs">
+      <DependentUpon>frmSelectTimePeriodManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmShakingNumbersDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShakingNumbersDetails.Designer.cs">
+      <DependentUpon>frmShakingNumbersDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmShakingNumbersManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShakingNumbersManagement.Designer.cs">
+      <DependentUpon>frmShakingNumbersManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSubscribePersonImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +190,12 @@
     <Compile Include="frmSubscribePersonManagement.Designer.cs">
       <DependentUpon>frmSubscribePersonManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSubscriberSelectionHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubscriberSelectionHistory.Designer.cs">
+      <DependentUpon>frmSubscriberSelectionHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmClientAccountAdd.resx">
@@ -123,8 +207,17 @@
     <EmbeddedResource Include="frmClientAccountManagement.resx">
       <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmHouseDetails.resx">
+      <DependentUpon>frmHouseDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHousesImport.resx">
       <DependentUpon>frmHousesImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHousesManagement.resx">
+      <DependentUpon>frmHousesManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHouseSubscriberInfo.resx">
+      <DependentUpon>frmHouseSubscriberInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -141,11 +234,44 @@
     <EmbeddedResource Include="frmProjectManagement.resx">
       <DependentUpon>frmProjectManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectRoleAdd.resx">
+      <DependentUpon>frmSelectRoleAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectRoleDetails.resx">
+      <DependentUpon>frmSelectRoleDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectRoleEdit.resx">
+      <DependentUpon>frmSelectRoleEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectRoleManagement.resx">
+      <DependentUpon>frmSelectRoleManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectTimePeriodAdd.resx">
+      <DependentUpon>frmSelectTimePeriodAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectTimePeriodDetails.resx">
+      <DependentUpon>frmSelectTimePeriodDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectTimePeriodEdit.resx">
+      <DependentUpon>frmSelectTimePeriodEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectTimePeriodManagement.resx">
+      <DependentUpon>frmSelectTimePeriodManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShakingNumbersDetails.resx">
+      <DependentUpon>frmShakingNumbersDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShakingNumbersManagement.resx">
+      <DependentUpon>frmShakingNumbersManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSubscribePersonImport.resx">
       <DependentUpon>frmSubscribePersonImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSubscribePersonManagement.resx">
       <DependentUpon>frmSubscribePersonManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubscriberSelectionHistory.resx">
+      <DependentUpon>frmSubscriberSelectionHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

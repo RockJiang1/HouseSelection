@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using HouseSelection.Utility;
 using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Request;
-using HouseSelection.Provider.Client.Response;
-using HouseSelection.NetworkHelper;
 using HouseSelection.Model;
 
 namespace HouseSelection.UI
@@ -20,14 +14,21 @@ namespace HouseSelection.UI
         BaseProvide provide = new BaseProvide();
         public frmProjectAdd()
         {
-            InitializeComponent();
+            InitializeComponent();  
+        }
 
+        private void frmProjectAdd_Load(object sender, EventArgs e)
+        {
+            InitForm();
+        }
+
+        private void InitForm()
+        {
             label1.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
-
             BaseHelper baseHelper = new BaseHelper();
             comboBox1.DataSource = baseHelper.GetAreaList();//绑定数据源
             comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
-            //comboBox1.ValueMember = "ID";//实际值
+            comboBox1.ValueMember = "ID";//实际值
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -43,13 +44,15 @@ namespace HouseSelection.UI
                 MessageBox.Show("输入信息有误, 错误信息： " + result.ErrMsg);
             }
 
-            AddProjectRequest para = new AddProjectRequest();
-            para.Number = label1.Text;
-            para.Name = textBox1.Text;
-            para.DevelopCompany = textBox2.Text;
-            para.IdentityNumber= textBox3.Text;
-            para.ProjectArea = comboBox1.Text;
-
+            AddProjectRequest para = new AddProjectRequest()
+            {
+                Number = label1.Text,
+                Name = textBox1.Text,
+                DevelopCompany = textBox2.Text,
+                IdentityNumber = textBox3.Text,
+                ProjectArea = comboBox1.Text
+            };
+            
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
             {
@@ -66,6 +69,9 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("添加项目成功！");
+                frmProjectManagement fm = new frmProjectManagement();
+                fm.GetProjectInfo(false);
+                this.Close();
             }
         }
 
@@ -95,5 +101,6 @@ namespace HouseSelection.UI
             
             return result;
         }
+
     }
 }

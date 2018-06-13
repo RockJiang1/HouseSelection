@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HouseSelection.Utility;
 using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
-using HouseSelection.Provider.Client.Request;
-using HouseSelection.Provider.Client.Response;
-using HouseSelection.NetworkHelper;
 using HouseSelection.Model;
 
 namespace HouseSelection.UI

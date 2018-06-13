@@ -11,7 +11,7 @@ namespace HouseSelection.Provider.Client.Request
     {
         protected override string APIAddress
         {
-            get { return "api/GetSubscribers"; }
+            get { return "/api/GetSubscribers"; }
         }
 
         public override PostRequestContentType ContentType

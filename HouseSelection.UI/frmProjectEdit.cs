@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using HouseSelection.Utility;
 using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Request;
-using HouseSelection.Provider.Client.Response;
-using HouseSelection.NetworkHelper;
 using HouseSelection.Model;
 
 namespace HouseSelection.UI
@@ -18,15 +12,26 @@ namespace HouseSelection.UI
     {
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        private int projectId = 0;
         public frmProjectEdit()
         {
             InitializeComponent();
+        }
 
+        private void frmProjectEdit_Load(object sender, EventArgs e)
+        {
+            InitForm();
+        }
+
+        private void InitForm()
+        {
             BaseHelper baseHelper = new BaseHelper();
             comboBox1.DataSource = baseHelper.GetAreaList();//绑定数据源
             comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
+            comboBox1.ValueMember = "ID";//实际值
 
             frmProjectManagement fm = new frmProjectManagement();
+            projectId = fm.model.ID;
             label1.Text = fm.model.Number;
             textBox1.Text = fm.model.Name;
             textBox2.Text = fm.model.DevelopCompany;
@@ -47,12 +52,15 @@ namespace HouseSelection.UI
                 MessageBox.Show("输入信息有误, 错误信息： " + result.ErrMsg);
             }
 
-            AddProjectRequest para = new AddProjectRequest();
-            para.Number = label1.Text;
-            para.Name = textBox1.Text;
-            para.DevelopCompany = textBox2.Text;
-            para.IdentityNumber = textBox3.Text;
-            para.ProjectArea = comboBox1.Text;
+            EditProjectRequest para = new EditProjectRequest()
+            {
+                ID = projectId,
+                Number = label1.Text,
+                Name = textBox1.Text,
+                DevelopCompany = textBox2.Text,
+                IdentityNumber = textBox3.Text,
+                ProjectArea = comboBox1.Text
+            };
 
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
@@ -61,7 +69,7 @@ namespace HouseSelection.UI
                 return;
             }
 
-            BaseResultEntity getProject = provide.AddProject(para);
+            BaseResultEntity getProject = provide.EditProject(para);
             if (getProject.Code != 0)
             {
                 MessageBox.Show("修改项目失败, 错误信息： " + getProject.ErrMsg);
@@ -70,6 +78,9 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("修改项目成功！");
+                frmProjectManagement fm = new frmProjectManagement();
+                fm.GetProjectInfo(false);
+                this.Close();
             }
         }
 

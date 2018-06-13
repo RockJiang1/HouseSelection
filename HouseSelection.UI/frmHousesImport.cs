@@ -22,6 +22,18 @@ namespace HouseSelection.UI
         {
             InitializeComponent();
 
+            InitForm();
+
+            GetProjectInfo();
+        }
+
+        private void InitForm()
+        {
+            //初始化界面
+        }
+
+        private void GetProjectInfo()
+        {
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
             {
@@ -32,16 +44,13 @@ namespace HouseSelection.UI
             ProjectEntityResponse getProject = provide.GetAllProjects();
             if (getProject.Code != 0)
             {
-                MessageBox.Show("获取项目失败, 错误信息： " + getProject.ErrMsg);
+                MessageBox.Show("获取项目信息失败, 错误信息： " + getProject.ErrMsg);
                 return;
             }
 
-            
-            //comboBox1.DataSource = getProject.ProjectList;
-            //comboBox1.DisplayMember= getProject.ProjectList
-
-
-
+            comboBox1.DataSource = getProject.ProjectList;
+            comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
+            comboBox1.ValueMember = "ID";//实际值
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -98,6 +107,10 @@ namespace HouseSelection.UI
                         }
                         else{
                             result = provide.ImportHouseInfo(dt, iprojectId, item.Name);
+                            if (!string.IsNullOrEmpty(result))
+                            {
+                                MessageBox.Show("导入房源信息失败, 错误信息： " + result);
+                            }
                         }
                     }
                     

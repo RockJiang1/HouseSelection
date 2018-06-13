@@ -16,49 +16,17 @@ namespace HouseSelection.UI
 {
     public partial class frmSubscribePersonManagement : Form
     {
+        public SubscriberEntityTemp model = new SubscriberEntityTemp();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-
         public frmSubscribePersonManagement()
         {
             InitializeComponent();
+        }
 
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
-            }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
-
-            ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);
-                return;
-            }
-
-            SubscriberEntityResponse subscribers = provide.GetAllSubscribers();
-            if (subscribers.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.ErrMsg);
-                return;
-            }
-            else
-            {
-                for(int i=1; i< subscribers.SubscriberList.Count; i++)
-                {
-                    subscribers.SubscriberList[i].No = i;
-                    subscribers.SubscriberList[i].Option ="操作";
-                }
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = subscribers.SubscriberList;
-
-            }
+        private void frmSubscribePersonManagement_Load(object sender, EventArgs e)
+        {
+            GetSubscribers(false);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -69,35 +37,67 @@ namespace HouseSelection.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
 
+            GetSubscribers(true);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate")
+            {
+                //可以在此打开新窗口，把参数传递过去
+                //model.s = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                model.IdentityNumber = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                frmSubscriberSelectionHistory fm = new frmSubscriberSelectionHistory();
+                fm.ShowDialog();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmMain main = new frmMain();
+            main.Show();
+            this.Close();
+        }
+
+        private void GetSubscribers(bool isSearch)
+        {
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
             {
                 MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
 
-            SubscriberEntityResponse subscribers = provide.GetSubscribers(textBox1.Text);
-            if (subscribers.Code != 0)
+            SubscriberEntityResponse getSubscribers = new SubscriberEntityResponse();
+
+            if (isSearch == false) {
+                getSubscribers = provide.GetAllSubscribers();
+            }
+            else
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + subscribers.ErrMsg);
+                string searchStr = string.Empty;
+                getSubscribers = provide.GetSubscribers(searchStr);
+            }
+            if (getSubscribers.Code != 0)
+            {
+                MessageBox.Show("获取认购人信息失败, 错误信息： " + getSubscribers.ErrMsg);
                 return;
             }
             else
             {
-                for (int i = 1; i < subscribers.SubscriberList.Count; i++)
+                for (int i = 1; i < getSubscribers.SubscriberList.Count; i++)
                 {
-                    subscribers.SubscriberList[i].No = i;
-                    subscribers.SubscriberList[i].Option = "操作";
+                    getSubscribers.SubscriberList[i].No = i;
+                    getSubscribers.SubscriberList[i].Option = "认购人详情";
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = subscribers.SubscriberList;
+                dataGridView1.DataSource = getSubscribers.SubscriberList;
 
             }
         }
+
+        
     }
 }

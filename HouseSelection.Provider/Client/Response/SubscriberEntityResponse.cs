@@ -7,7 +7,7 @@ using HouseSelection.Model;
 
 namespace HouseSelection.Provider.Client.Response
 {
-    public class SubscriberEntityResponse : BaseResultEntity
+    public class SubscriberEntityResponse : BaseListResultEntity
     {
         public SubscriberEntityResponse()
         {
@@ -27,10 +27,6 @@ namespace HouseSelection.Provider.Client.Response
             Option = "";
         }
         public int No { get; set; }
-        /// <summary>
-        /// 认购人ID
-        /// </summary>
-        public int ID { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>

@@ -23,5 +23,33 @@ namespace HouseSelection.UI
             fm.Show();
             this.Hide();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            frmShakingNumbersManagement fm = new frmShakingNumbersManagement();
+            fm.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmHousesManagement fm = new frmHousesManagement();
+            fm.Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frmSubscribePersonManagement fm = new frmSubscribePersonManagement();
+            fm.Show();
+            this.Hide();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            frmSelectTimePeriodManagement fm = new frmSelectTimePeriodManagement();
+            fm.Show();
+            this.Hide();
+        }
     }
 }
