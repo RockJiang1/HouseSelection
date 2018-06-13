@@ -34,7 +34,7 @@ namespace HouseSelection.PrivateAPI.Controllers
 
             try
             {
-                var _dbSelection = _selectionBLL.GetModels(x => x.ID == req.HouseSelectionID).FirstOrDefault();
+                var _dbSelection = _selectionBLL.GetModels(x => x.ID == req.SelectionID).FirstOrDefault();
                 if(_dbSelection == null)
                 {
                     ret.Code = 901;

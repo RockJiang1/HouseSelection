@@ -7,6 +7,6 @@ namespace HouseSelection.PrivateAPI.Models
 {
     public class GetSelectionDetailRequestModel
     {
-        public int HouseSelectionID { get; set; }
+        public int SelectionID { get; set; }
     }
 }
