@@ -56,7 +56,7 @@ namespace HouseSelection.Model
         /// <summary>
         /// 选房ID(获取选房明细信息时使用)
         /// </summary>
-        public int? HouseSelectionID { get; set; }
+        public int? SelectionID { get; set; }
         
     }
 }
