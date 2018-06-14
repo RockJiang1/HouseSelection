@@ -20,7 +20,10 @@ namespace HouseSelection.Model
         public int ResultType { get; set; }
         public System.DateTime CreateTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
+        public int FrontEndAccountID { get; set; }
+        public string NoticeTelephone { get; set; }
     
         public virtual ShakingNumberResult ShakingNumberResult { get; set; }
+        public virtual FrontEndAccount FrontEndAccount { get; set; }
     }
 }

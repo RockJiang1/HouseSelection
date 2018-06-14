@@ -209,6 +209,7 @@
     <Compile Include="Controllers\Publicity\GetHouseSelectPeriodController.cs" />
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
     <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
+    <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -230,6 +231,11 @@
     <Compile Include="Models\PublicityResult\GetHouseSelectPeriodResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetRoomQuantityInfoResultEntity.cs" />
+    <Compile Include="Models\SelectHouseRequest\GetSubscriberByIdentityRequestModel.cs" />
+    <Compile Include="Controllers\SelectHouse\SubscriberAuthorizeController.cs" />
+    <Compile Include="Models\SelectHouseRequest\SubscriberAuthorizeRequestModel.cs" />
+    <Compile Include="Models\SelectHouseResult\GetSubscriberByIdentityResultEntity.cs" />
+    <Compile Include="Models\SelectHouseResult\SubscriberAuthorizeResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -341,7 +347,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CallCustomer\" />
-    <Folder Include="Controllers\SelectHouse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

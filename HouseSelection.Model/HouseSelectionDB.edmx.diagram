@@ -57,6 +57,7 @@
         <EntityTypeShape EntityType="HouseSelectionDBModel.FrontEndAccountProjectMapping" Width="1.5" PointX="16" PointY="4.75" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" />
         <AssociationConnector Association="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_Project_ID" />
+        <AssociationConnector Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_FrontEndAccount_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

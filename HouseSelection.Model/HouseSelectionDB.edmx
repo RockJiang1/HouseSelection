@@ -231,6 +231,7 @@
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="IsAuthorized" Type="bit" Nullable="false" />
           <Property Name="SelectHouseSequance" Type="int" Nullable="false" />
+          <Property Name="IsAgent" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscriber">
           <Key>
@@ -282,6 +283,8 @@
           <Property Name="ResultType" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="FrontEndAccountID" Type="int" Nullable="false" />
+          <Property Name="NoticeTelephone" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK_BackEndAccountLoginRecord_BackEndAccount_ID">
           <End Role="BackEndAccount" Type="Self.BackEndAccount" Multiplicity="1" />
@@ -619,6 +622,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TelephoneNoticeRecord_FrontEndAccount_ID">
+          <End Role="FrontEndAccount" Type="Self.FrontEndAccount" Multiplicity="1" />
+          <End Role="TelephoneNoticeRecord" Type="Self.TelephoneNoticeRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FrontEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TelephoneNoticeRecord">
+              <PropertyRef Name="FrontEndAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
           <End Role="ShakingNumberResult" Type="Self.ShakingNumberResult" Multiplicity="1" />
           <End Role="TelephoneNoticeRecord" Type="Self.TelephoneNoticeRecord" Multiplicity="*" />
@@ -766,6 +781,10 @@
           <AssociationSet Name="FK_SubscriberProjectMapping_Subscriber_ID" Association="Self.FK_SubscriberProjectMapping_Subscriber_ID">
             <End Role="Subscriber" EntitySet="Subscriber" />
             <End Role="SubscriberProjectMapping" EntitySet="SubscriberProjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelephoneNoticeRecord_FrontEndAccount_ID" Association="Self.FK_TelephoneNoticeRecord_FrontEndAccount_ID">
+            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
+            <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
           </AssociationSet>
           <AssociationSet Name="FK_TelephoneNoticeRecord_ShakingNumberResult_ID" Association="Self.FK_TelephoneNoticeRecord_ShakingNumberResult_ID">
             <End Role="ShakingNumberResult" EntitySet="ShakingNumberResult" />
@@ -1037,6 +1056,10 @@
             <End Role="Project" EntitySet="Project" />
             <End Role="FrontEndAccountProjectMapping" EntitySet="FrontEndAccountProjectMapping" />
           </AssociationSet>
+          <AssociationSet Name="FK_TelephoneNoticeRecord_FrontEndAccount_ID" Association="HouseSelectionDBModel.FK_TelephoneNoticeRecord_FrontEndAccount_ID">
+            <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
+            <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BackEndAccount">
           <Key>
@@ -1275,6 +1298,7 @@
           <NavigationProperty Name="TelephoneNoticeRecord" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="ShakingNumberResult" ToRole="TelephoneNoticeRecord" />
           <Property Name="IsAuthorized" Type="Boolean" Nullable="false" />
           <Property Name="SelectHouseSequance" Type="Int32" Nullable="false" />
+          <Property Name="IsAgent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SubscriberFamilyMember">
           <Key>
@@ -1383,6 +1407,9 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ShakingNumberResult" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_ShakingNumberResult_ID" FromRole="TelephoneNoticeRecord" ToRole="ShakingNumberResult" />
+          <Property Name="FrontEndAccountID" Type="Int32" Nullable="false" />
+          <Property Name="NoticeTelephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FrontEndAccount" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_FrontEndAccount_ID" FromRole="TelephoneNoticeRecord" ToRole="FrontEndAccount" />
         </EntityType>
         <Association Name="FK_HouseSelectionRecord_HouseID_ID">
           <End Type="HouseSelectionDBModel.House" Role="House" Multiplicity="1" />
@@ -1552,6 +1579,7 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="FrontEndAccountLoginRecord" Relationship="HouseSelectionDBModel.FK_FrontEndAccountLoginRecord_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="FrontEndAccountLoginRecord" />
           <NavigationProperty Name="FrontEndAccountProjectMapping" Relationship="HouseSelectionDBModel.FK_FrontEndAccountProjectMapping_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="FrontEndAccountProjectMapping" />
+          <NavigationProperty Name="TelephoneNoticeRecord" Relationship="HouseSelectionDBModel.FK_TelephoneNoticeRecord_FrontEndAccount_ID" FromRole="FrontEndAccount" ToRole="TelephoneNoticeRecord" />
         </EntityType>
         <Association Name="FK_FrontEndAccountLoginRecord_FrontEndAccount_ID">
           <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="1" />
@@ -1598,6 +1626,18 @@
             </Principal>
             <Dependent Role="FrontEndAccountProjectMapping">
               <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelephoneNoticeRecord_FrontEndAccount_ID">
+          <End Type="HouseSelectionDBModel.FrontEndAccount" Role="FrontEndAccount" Multiplicity="1" />
+          <End Type="HouseSelectionDBModel.TelephoneNoticeRecord" Role="TelephoneNoticeRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FrontEndAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TelephoneNoticeRecord">
+              <PropertyRef Name="FrontEndAccountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1777,6 +1817,7 @@
           <EntitySetMapping Name="ShakingNumberResult">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.ShakingNumberResult">
               <MappingFragment StoreEntitySet="ShakingNumberResult">
+                <ScalarProperty Name="IsAgent" ColumnName="IsAgent" />
                 <ScalarProperty Name="SelectHouseSequance" ColumnName="SelectHouseSequance" />
                 <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
@@ -1843,6 +1884,8 @@
           <EntitySetMapping Name="TelephoneNoticeRecord">
             <EntityTypeMapping TypeName="HouseSelectionDBModel.TelephoneNoticeRecord">
               <MappingFragment StoreEntitySet="TelephoneNoticeRecord">
+                <ScalarProperty Name="NoticeTelephone" ColumnName="NoticeTelephone" />
+                <ScalarProperty Name="FrontEndAccountID" ColumnName="FrontEndAccountID" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="ResultType" ColumnName="ResultType" />

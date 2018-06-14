@@ -47,10 +47,5 @@ namespace HouseSelection.Model
         public virtual Subscriber Subscriber { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HouseSelectionRecord> HouseSelectionRecord { get; set; }
-
-        public static implicit operator string(House v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

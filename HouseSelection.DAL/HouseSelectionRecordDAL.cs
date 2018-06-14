@@ -28,7 +28,7 @@ namespace HouseSelection.DAL
                                 ConfirmStatus = t == null ? 0 : (t.IsConfirm ? 1 : 0),
                                 AbandonStatus = t == null ? 0 : (t.IsAbandon ? 1 : 0),
                                 ShakingResultID = S.ID,
-                                HouseSelectionID = t.ID
+                                SelectionID = t.ID
                             }).ToList();
             }
         }

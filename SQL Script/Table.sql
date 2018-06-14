@@ -669,3 +669,10 @@ BEGIN
 	ALTER TABLE TelephoneNoticeRecord ADD NoticeTelephone VARCHAR(20) NOT NULL
 END
 GO
+
+--是否为代理人
+IF NOT EXISTS (SELECT 1 FROM sys.all_columns WHERE name = N'IsAgent' AND object_id = OBJECT_ID(N'ShakingNumberResult'))
+BEGIN
+	ALTER TABLE ShakingNumberResult ADD IsAgent BIT NOT NULL DEFAULT 0
+END
+GO
