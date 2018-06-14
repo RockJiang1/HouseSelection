@@ -191,6 +191,8 @@
     <Compile Include="Controllers\Account\EditFrontEndAccountController.cs" />
     <Compile Include="Controllers\Account\GetAllFrontEndAccountController.cs" />
     <Compile Include="Controllers\Account\GetFrontEndAccountController.cs" />
+    <Compile Include="Controllers\Files\UploadImageController.cs" />
+    <Compile Include="Controllers\Files\UploadSoundController.cs" />
     <Compile Include="Controllers\House\GetAllHouseEstateInfoController.cs" />
     <Compile Include="Controllers\House\GetAllHouseInfoController.cs" />
     <Compile Include="Controllers\House\GetHouseEstatesController.cs" />
@@ -246,7 +248,10 @@
     <Compile Include="Models\GetSubscriberByHouseIDRequestModel.cs" />
     <Compile Include="Models\GetSubscriberRequestModel.cs" />
     <Compile Include="Models\GetSubscriberSelectionHistoryRequestModel.cs" />
+    <Compile Include="Models\HDFile.cs" />
     <Compile Include="Models\SearchRequestModel.cs" />
+    <Compile Include="Models\UploadImageRequestModel.cs" />
+    <Compile Include="Models\WithExtensionMultipartFormDataStreamProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
