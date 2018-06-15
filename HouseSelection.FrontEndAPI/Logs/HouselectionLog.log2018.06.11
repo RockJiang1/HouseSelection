@@ -1,0 +1,75 @@
+﻿2018-06-11 08:26:45,050 [5] FATAL - 获取项目时间段发生异常！
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34	GetHouseSelectPeriodController.Post
+==EXCEPTION==
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34 
+2018-06-11 08:28:43,317 [8] FATAL - 获取项目时间段发生异常！
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34	GetHouseSelectPeriodController.Post
+==EXCEPTION==
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34 
+2018-06-11 08:29:19,522 [9] FATAL - 获取项目时间段发生异常！
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34	GetHouseSelectPeriodController.Post
+==EXCEPTION==
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 38
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34 
+2018-06-11 08:34:46,008 [6] WARN  - 项目分组3下没有找到摇号结果。跳过此分组。	GetHouseSelectPeriodController.Post 
+2018-06-11 08:34:46,145 [6] FATAL - 获取项目时间段发生异常！
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34	GetHouseSelectPeriodController.Post
+==EXCEPTION==
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34 
+2018-06-11 08:34:57,706 [7] WARN  - 项目分组3下没有找到摇号结果。跳过此分组。	GetHouseSelectPeriodController.Post 
+2018-06-11 08:34:57,743 [7] FATAL - 获取项目时间段发生异常！
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34	GetHouseSelectPeriodController.Post
+==EXCEPTION==
+System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Min(IEnumerable`1 source)
+   在 System.Linq.Enumerable.Min[TSource](IEnumerable`1 source, Func`2 selector)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.<>c__DisplayClass3_0.<Post>b__1(ProjectGroup i) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 42
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.Publicity.GetHouseSelectPeriodController.Post(GetHouseSelectPeriodRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\Publicity\GetHouseSelectPeriodController.cs:行号 34 
+2018-06-11 08:37:30,197 [5] WARN  - 项目分组3下没有找到摇号结果。跳过此分组。	GetHouseSelectPeriodController.Post 
+2018-06-11 22:49:24,842 [5] WARN  - 项目分组3下没有找到摇号结果。跳过此分组。	GetHouseSelectPeriodController.Post 
+2018-06-11 23:35:01,747 [8] WARN  - 项目分组3下没有找到摇号结果。跳过此分组。	GetHouseSelectPeriodController.Post 

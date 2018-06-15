@@ -57,7 +57,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                         AreaUnitPrice = _hs.AreaUnitPrice,
                         TotalPrice = _hs.TotalPrice,
                         SubscriberID = _hs.SubscriberID,
-                        SubscriberName = _hs.SubscriberID == null ? "" : _hs.Subscriber.Name
+                        //SubscriberName = _hs.SubscriberID == null ? "" : _hs.Subscriber.Name
                     };
                     _retHouseList.Add(_retHouse);
                 }

@@ -25,7 +25,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         public GetSelectionDetailResultEntity Post(GetSelectionDetailRequestModel req)
         {
             Logger.LogDebug("GetSelectionDetail Request:" + JsonHelper.SerializeObject(req), "GetSelectionDetailController", "Post");
-
+            
             var ret = new GetSelectionDetailResultEntity()
             {
                 Code = 0,
@@ -66,7 +66,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                             AreaUnitPrice = _dbHouse.AreaUnitPrice,
                             TotalPrice = _dbHouse.TotalPrice,
                             SubscriberID = _dbHouse.SubscriberID,
-                            SubscriberName = _dbHouse.Subscriber.Name
+                            //SubscriberName = _dbHouse.Subscriber.Name
                         };
                         ret.House = _house;
                         ret.SelectTime = _dbSelection.SelectTime;

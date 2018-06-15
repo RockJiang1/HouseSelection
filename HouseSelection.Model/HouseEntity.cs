@@ -82,5 +82,10 @@ namespace HouseSelection.Model
         /// 认购人姓名
         /// </summary>
         public string SubscriberName { get; set; }
+
+        /// <summary>
+        /// 是否选择
+        /// </summary>
+        public bool IsSelected { get; set; }
     }
 }

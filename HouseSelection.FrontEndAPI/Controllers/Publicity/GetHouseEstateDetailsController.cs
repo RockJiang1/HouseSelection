@@ -63,6 +63,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                         {
                             roomType = roomTypeInfo.Name;
                         }
+                        bool isSelected = ((h.SubscriberID != null) && h.SubscriberID > 0);
                         houseInfo.HouseDetail = new Model.HouseEntity()
                         {
                             AreaUnitPrice = h.AreaUnitPrice,
@@ -75,11 +76,10 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                             RoomNumber = h.RoomNumber,
                             RoomType = roomType,
                             SerialNumber = h.SerialNumber,
-                            SubscriberID = h.SubscriberID,
-                            SubscriberName = subscriberName,
                             TotalPrice = h.TotalPrice,
                             Toward = h.Toward,
-                            Unit = h.Unit
+                            Unit = h.Unit,
+                            IsSelected = isSelected
                         };
                         ret.Houses.Add(houseInfo);
                     });

@@ -11,5 +11,7 @@ namespace HouseSelection.Model
         public int ProjectID { get; set; }
         public string ProjectNumber { get; set; }
         public string ProjectName { get; set; }
+        public bool IsEnd { get; set; }
+        public string EndReason { get; set; }
     }
 }
