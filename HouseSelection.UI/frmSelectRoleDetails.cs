@@ -248,7 +248,7 @@ namespace HouseSelection.UI
             {
                 MessageBox.Show("添加项目成功！");
                 frmProjectManagement fm = new frmProjectManagement();
-                fm.GetProjectInfo();
+                //fm.GetProjectInfo();
                 this.Close();
             }
         }
