@@ -19,6 +19,7 @@ namespace HouseSelection.Model
         {
             this.FrontEndAccountLoginRecord = new HashSet<FrontEndAccountLoginRecord>();
             this.FrontEndAccountProjectMapping = new HashSet<FrontEndAccountProjectMapping>();
+            this.TelephoneNoticeRecord = new HashSet<TelephoneNoticeRecord>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,7 @@ namespace HouseSelection.Model
         public virtual ICollection<FrontEndAccountLoginRecord> FrontEndAccountLoginRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FrontEndAccountProjectMapping> FrontEndAccountProjectMapping { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelephoneNoticeRecord> TelephoneNoticeRecord { get; set; }
     }
 }
