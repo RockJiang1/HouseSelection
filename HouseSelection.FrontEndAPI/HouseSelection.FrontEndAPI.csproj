@@ -202,6 +202,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PhoneCall\GetPhoneCallProjectGroupListController.cs" />
+    <Compile Include="Controllers\PhoneCall\GetSubscriberInfoForPhoneCallController.cs" />
     <Compile Include="Controllers\PhoneCall\PhoneCallLoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Publicity\GetAreaListController.cs" />
@@ -220,8 +221,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PhoneCallRequest\GetPhoneCallProjectGroupListRequestModel.cs" />
+    <Compile Include="Models\PhoneCallRequest\GetSubscriberDialingStatusRequestModel.cs" />
     <Compile Include="Models\PhoneCallRequest\PhoneCallLoginRequestModel.cs" />
     <Compile Include="Models\PhoneCallResult\GetPhoneCallProjectGroupListResultEntity.cs" />
+    <Compile Include="Models\PhoneCallResult\GetSubscriberDialingStatusResultEntity.cs" />
     <Compile Include="Models\PhoneCallResult\PhoneCallLoginResultEntity.cs" />
     <Compile Include="Models\PublicityRequest\GetAreaListRequestModel.cs" />
     <Compile Include="Models\PublicityRequest\GetHouseBuildingsRequestModel.cs" />
@@ -353,7 +356,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CallCustomer\" />
-    <Folder Include="Controllers\SelectHouse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
