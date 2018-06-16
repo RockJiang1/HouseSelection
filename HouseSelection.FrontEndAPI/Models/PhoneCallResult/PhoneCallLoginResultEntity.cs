@@ -9,5 +9,6 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallResult
     public class PhoneCallLoginResultEntity:BaseResultEntity
     {
         public FrontEndAccountEntity AcountProjectInfo { get; set; }
+        public TokenResultEntity Token { get; set; }
     }
 }

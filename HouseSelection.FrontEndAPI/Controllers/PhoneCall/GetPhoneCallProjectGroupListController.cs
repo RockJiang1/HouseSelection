@@ -2,6 +2,7 @@
 using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
 using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Authorize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
         ProjectGroupBLL _projectGroupBLL = new ProjectGroupBLL();
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
 
+        [ApiAuthorize]
         public GetPhoneCallProjectGroupListResultEntity Post(GetPhoneCallProjectGroupListRequestModel req)
         {
             bool isWarn = false;

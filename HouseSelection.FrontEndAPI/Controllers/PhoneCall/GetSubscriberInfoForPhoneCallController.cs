@@ -3,6 +3,7 @@ using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
 using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
+using HouseSelection.Authorize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
         SubscriberBLL _subscriberBLL = new SubscriberBLL();
         SubscriberProjectMappingBLL _subscriberProjectMappingBLL = new SubscriberProjectMappingBLL();
 
+        [ApiAuthorize]
         public GetSubscriberDialingStatusResultEntity Post(GetSubscriberDialingStatusRequestModel req)
         {
             var ret = new GetSubscriberDialingStatusResultEntity()
