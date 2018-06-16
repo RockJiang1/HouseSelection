@@ -52,7 +52,7 @@ namespace HouseSelection.FrontEndAPI.Areas.HelpPage
         /// <param name="parameterNames">The parameter names.</param>
         public HelpPageSampleKey(SampleDirection sampleDirection, string controllerName, string actionName, IEnumerable<string> parameterNames)
         {
-            if (!Enum.IsDefined(typeof(SampleDirection), sampleDirection))
+            if (!System.Enum.IsDefined(typeof(SampleDirection), sampleDirection))
             {
                 throw new InvalidEnumArgumentException("sampleDirection", (int)sampleDirection, typeof(SampleDirection));
             }

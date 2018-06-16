@@ -9,6 +9,7 @@ namespace HouseSelection.Authorize
     {
         private static RedisHelper redisHelper = new RedisHelper(PubConstant.DBIndex);
         private const string REDIS_KEY_TOKEN_ACCESSTOKEN = "Token:AccessToken";
+        private const string REDIS_KEY_TOKEN_REFRESHTOKEN = "Token:RefreshToken";
         //private const string REDIS_KEY_TOKEN_USER = "Token:User";
         public const string TOKEN_KEY = "access_token";
 
@@ -22,6 +23,7 @@ namespace HouseSelection.Authorize
             var token = new TokenEntity();
 
             token.AccessToken = GenerateTokenCode();
+            token.RefreshToken = GenerateTokenCode();
             token.RequestAccount = requestAccount;
             token.RequestUserId = requestUserId;
             token.Expiry = expiry;
@@ -38,7 +40,7 @@ namespace HouseSelection.Authorize
             // 添加新的Token
             redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, token.AccessToken), token, expiry);
             //redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, token.RequestUserId.ToString()), token, expiry);
-
+            redisHelper.Set(string.Format("{0}:{1}", REDIS_KEY_TOKEN_REFRESHTOKEN, token.RefreshToken), token.AccessToken, expiry * 12);
             return token;
         }
 
@@ -62,18 +64,24 @@ namespace HouseSelection.Authorize
             return redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, token));
         }
 
+        public static TokenEntity GetTokenByRefreshToken(string token)
+        {
+            string currentToken = redisHelper.Get<string>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_REFRESHTOKEN, token));
+            return redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken));
+        }
+
         /// <summary>
         /// 移除令牌
         /// </summary>
         /// <param name="userId"></param>
-        public static void RemoveToken(string userId)
+        public static void RemoveToken(string RefreshToken)
         {
-            //var currentToken = redisHelper.Get<TokenEntity>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
-            //if (currentToken != null)
-            //{
-            //    redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken.AccessToken));
-            //    redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_USER, userId));
-            //}
+            string currentToken = redisHelper.Get<string>(string.Format("{0}:{1}", REDIS_KEY_TOKEN_REFRESHTOKEN, RefreshToken));
+            if (currentToken != null)
+            {
+                redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_ACCESSTOKEN, currentToken));
+                redisHelper.Remove(string.Format("{0}:{1}", REDIS_KEY_TOKEN_REFRESHTOKEN, RefreshToken));
+            }
         }
 
         /// <summary>

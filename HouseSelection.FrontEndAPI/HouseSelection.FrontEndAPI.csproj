@@ -212,7 +212,9 @@
     <Compile Include="Controllers\Publicity\GetHouseSelectPeriodController.cs" />
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
     <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
+    <Compile Include="Controllers\RefreshTokenController.cs" />
     <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
+    <Compile Include="Controllers\GetTokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,6 +242,7 @@
     <Compile Include="Models\PublicityResult\GetHouseSelectPeriodResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetRoomQuantityInfoResultEntity.cs" />
+    <Compile Include="Models\RefreshTokenEntity.cs" />
     <Compile Include="Models\SelectHouseRequest\GetSubscriberByIdentityRequestModel.cs" />
     <Compile Include="Controllers\SelectHouse\SubscriberAuthorizeController.cs" />
     <Compile Include="Models\SelectHouseRequest\SubscriberAuthorizeRequestModel.cs" />
@@ -371,6 +374,10 @@
     <ProjectReference Include="..\HouseSelection.BLL\HouseSelection.BLL.csproj">
       <Project>{D573EA1E-F5D7-44DD-823C-BFE9D6528A5A}</Project>
       <Name>HouseSelection.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseSelection.Enum\HouseSelection.Enum.csproj">
+      <Project>{2c408e1b-0516-48b1-9617-8024800120b2}</Project>
+      <Name>HouseSelection.Enum</Name>
     </ProjectReference>
     <ProjectReference Include="..\HouseSelection.LoggerHelper\HouseSelection.LoggerHelper.csproj">
       <Project>{17EE0B7B-B9D2-4305-8CBA-2A334F1EF400}</Project>

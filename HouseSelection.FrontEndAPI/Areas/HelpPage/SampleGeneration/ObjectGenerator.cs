@@ -271,7 +271,7 @@ namespace HouseSelection.FrontEndAPI.Areas.HelpPage
 
         private static object GenerateEnum(Type enumType)
         {
-            Array possibleValues = Enum.GetValues(enumType);
+            Array possibleValues = System.Enum.GetValues(enumType);
             if (possibleValues.Length > 0)
             {
                 return possibleValues.GetValue(0);

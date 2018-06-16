@@ -9,6 +9,7 @@ namespace HouseSelection.Model
     public class TokenResultEntity : BaseResultEntity
     {
         public string Access_Token { get; set; }
+        public string Refresh_Token { get; set; }
         public int Expiry { get; set; }
     }
 }
