@@ -4,6 +4,7 @@ using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
 using HouseSelection.Authorize;
+using HouseSelection.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
         [ApiAuthorize]
         public GetSubscriberDialingStatusResultEntity Post(GetSubscriberDialingStatusRequestModel req)
         {
+            Logger.LogInfo("GetSubscriberDialingStatus Request:" + JsonHelper.SerializeObject(req), "GetSubscriberDialingStatusController", "Post");
             var ret = new GetSubscriberDialingStatusResultEntity()
             {
                 Code = 0,

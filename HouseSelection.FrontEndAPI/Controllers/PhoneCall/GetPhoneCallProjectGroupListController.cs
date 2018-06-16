@@ -2,6 +2,7 @@
 using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
 using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
+using HouseSelection.Utility;
 using HouseSelection.Authorize;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
         [ApiAuthorize]
         public GetPhoneCallProjectGroupListResultEntity Post(GetPhoneCallProjectGroupListRequestModel req)
         {
+            Logger.LogInfo("GetPhoneCallProjectGroupList Request:" + JsonHelper.SerializeObject(req), "GetPhoneCallProjectGroupListController", "Post");
             bool isWarn = false;
             var ret = new GetPhoneCallProjectGroupListResultEntity()
             {

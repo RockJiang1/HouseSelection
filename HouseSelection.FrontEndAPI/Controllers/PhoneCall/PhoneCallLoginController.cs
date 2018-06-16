@@ -23,6 +23,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
 
         public PhoneCallLoginResultEntity Post(PhoneCallLoginRequestModel req)
         {
+            Logger.LogInfo("PhoneCallLogin Request:" + JsonHelper.SerializeObject(req), "PhoneCallLoginController", "Post");
             var ret = new PhoneCallLoginResultEntity()
             {
                 Code = 0,
@@ -97,8 +98,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                     }
                     else
                     {
-                        result.Code = (int)InterfaceResultEnum.AppError;
-                        result.ErrMsg = EnumHelper.GetDescription(InterfaceResultEnum.AppError);
+                        ret.Code = (int)InterfaceResultEnum.AppError;
+                        ret.ErrMsg = EnumHelper.GetDescription(InterfaceResultEnum.AppError);
                         Logger.LogInfo(string.Format("获取Token失败，AppId:{0},AppSecret:{1}", req.LoginAccount, req.LoginPassword), "TokenController", "Post");
                     }
                     ret.Token = result;
