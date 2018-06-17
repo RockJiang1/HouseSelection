@@ -52,7 +52,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(880, 176);
+            this.panel1.Size = new System.Drawing.Size(880, 195);
             this.panel1.TabIndex = 5;
             // 
             // role1stAll
@@ -90,7 +90,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(14, 261);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(880, 176);
+            this.panel2.Size = new System.Drawing.Size(880, 210);
             this.panel2.TabIndex = 7;
             // 
             // role2ndAll
@@ -117,9 +117,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.role3rdAll);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(14, 460);
+            this.panel3.Location = new System.Drawing.Point(14, 477);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(880, 176);
+            this.panel3.Size = new System.Drawing.Size(880, 201);
             this.panel3.TabIndex = 8;
             // 
             // role3rdAll
@@ -143,7 +143,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(502, 645);
+            this.button2.Location = new System.Drawing.Point(504, 684);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(103, 37);
             this.button2.TabIndex = 10;
@@ -152,7 +152,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(257, 645);
+            this.button1.Location = new System.Drawing.Point(257, 684);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 37);
             this.button1.TabIndex = 9;
@@ -164,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 694);
+            this.ClientSize = new System.Drawing.Size(903, 733);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel3);

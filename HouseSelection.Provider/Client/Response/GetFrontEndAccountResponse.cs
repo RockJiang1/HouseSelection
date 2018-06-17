@@ -24,6 +24,41 @@ namespace HouseSelection.Provider.Client.Response
     {
         public FrontEndAccountEntityTemp()
         {
+            this.ProjectList = new List<AccountProjectEntityTemp>();
+        }
+        /// <summary>
+        /// 前台账号ID
+        /// </summary>
+        public int AccountID { get; set; }
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public string Account { get; set; }
+        public List<AccountProjectEntityTemp> ProjectList { get; set; }
+        
+    }
+
+    public class AccountProjectEntityTemp
+    {
+        /// <summary>
+        /// 所属项目编号
+        /// </summary>
+        public int ProjectID { get; set; }
+        /// <summary>
+        /// 所属项目编号
+        /// </summary>
+        public string ProjectNumber { get; set; }
+
+        /// <summary>
+        /// 所属项目名称
+        /// </summary>
+        public string ProjectName { get; set; }
+    }
+
+    public class FrontEndAccountSource
+    {
+        public FrontEndAccountSource()
+        {
             this.No = 0;
             this.Operate = "";
         }
@@ -36,14 +71,9 @@ namespace HouseSelection.Provider.Client.Response
         /// </summary>
         public int AccountID { get; set; }
         /// <summary>
-        /// 所属项目编号
-        /// </summary>
-        public string ProjectNumber { get; set; }
-
-        /// <summary>
         /// 所属项目名称
         /// </summary>
-        public string ProjectName { get; set; }
+        public string AllName { get; set; }
 
         /// <summary>
         /// 账号名称

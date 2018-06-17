@@ -11,18 +11,44 @@ namespace HouseSelection.Provider.Client.Response
     {
         public GetProjectGroupResponse()
         {
-            this.ProjectGroupList = new List<GetProjectGroupResponseTemp>();
+            this.ProjectGroupList = new List<ProjectGroupEntityTemp>();
         }
         /// <summary>
         /// 房源ID
         /// </summary>
-        public List<GetProjectGroupResponseTemp> ProjectGroupList { get; set; }
+        public List<ProjectGroupEntityTemp> ProjectGroupList { get; set; }
 
         //public int RecordCount { get; set; }
     }
-    public class GetProjectGroupResponseTemp
+    public class ProjectGroupEntityTemp
     {
-        public GetProjectGroupResponseTemp()
+        /// <summary>
+        /// 前台账号ID
+        /// </summary>
+        public int ProjectID { get; set; }
+        /// <summary>
+        /// 所属项目编号
+        /// </summary>
+        public string ProjectNumber { get; set; }
+
+        /// <summary>
+        /// 所属项目名称
+        /// </summary>
+        public string ProjectName { get; set; }
+
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public int ProjectGroupID { get; set; }
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public string ProjectGroupName { get; set; }
+    }
+
+    public class ProjectGroupSource1st
+    {
+        public ProjectGroupSource1st()
         {
             this.No = 0;
             this.Operate = "";
@@ -57,6 +83,38 @@ namespace HouseSelection.Provider.Client.Response
         /// 操作
         /// </summary>
         public string Operate { get; set; }
+    }
+
+    public class ProjectGroupSource2nd
+    {
+        public ProjectGroupSource2nd()
+        {
+            this.Operate1 = "";
+            this.Operate2 = "";
+            this.Operate3 = "";
+        }
+        /// <summary>
+        /// 前台账号ID
+        /// </summary>
+        public int ProjectID { get; set; }
+        /// <summary>
+        /// 所属项目编号
+        /// </summary>
+        public string ProjectNumber { get; set; }
+
+        /// <summary>
+        /// 所属项目名称
+        /// </summary>
+        public string ProjectName { get; set; }
+
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public int ProjectGroupID { get; set; }
+        /// <summary>
+        /// 账号名称
+        /// </summary>
+        public string ProjectGroupName { get; set; }
         /// <summary>
         /// 操作
         /// </summary>

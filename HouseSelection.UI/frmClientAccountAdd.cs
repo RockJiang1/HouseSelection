@@ -19,14 +19,28 @@ namespace HouseSelection.UI
         private Dictionary<int, String> chklist = new Dictionary<int, string>();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmClientAccountAdd frmCAccountAdd;
         public frmClientAccountAdd()
         {
             InitializeComponent();
+
+            InitForm();
+
+            GetProjects();
+        }
+
+        public static frmClientAccountAdd GetInstance()
+        {
+            if (frmCAccountAdd == null)
+            {
+                frmCAccountAdd = new frmClientAccountAdd();
+            }
+            return frmCAccountAdd;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frmClientAccountManagement fm = new frmClientAccountManagement();
+            frmClientAccountManagement fm = frmClientAccountManagement.GetInstance();
             fm.Show();
             this.Close();
         }
@@ -38,8 +52,8 @@ namespace HouseSelection.UI
             string password2nd = string.Empty;
 
             account = textBox1.Text;
-            password1st = textBox2.Text;
-            password2nd = textBox3.Text;
+            password1st = MD5Helper.ToMD5(textBox2.Text);
+            password2nd = MD5Helper.ToMD5(textBox3.Text);
 
             if (ValidPassword(password1st, password2nd) == true)
             {
@@ -90,13 +104,6 @@ namespace HouseSelection.UI
             return result;
         }
 
-        private void frmClientAccountAdd_Load(object sender, EventArgs e)
-        {
-            InitForm();
-
-            GetProjects();
-        }
-
         private void InitForm()
         {
             checkedListBox1.Visible = false;
@@ -141,6 +148,18 @@ namespace HouseSelection.UI
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //textBox4.Text = "";
+            //CheckedListBox.CheckedItemCollection listChecked = checkedListBox1.CheckedItems;
+            //for (int i = 0; i < listChecked.Count; i++)
+            //{
+            //    //将被选中item的text打印出来
+            //    textBox4.Text = textBox4.Text + " " + listChecked[i].ToString();
+
+            //}
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox4.Text = "";
             CheckedListBox.CheckedItemCollection listChecked = checkedListBox1.CheckedItems;

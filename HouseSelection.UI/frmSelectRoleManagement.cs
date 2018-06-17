@@ -19,11 +19,21 @@ namespace HouseSelection.UI
         public ProjectEntityTemp model = new ProjectEntityTemp();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmSelectRoleManagement frmSelectRoleMgt;
         public frmSelectRoleManagement()
         {
             InitializeComponent();
 
             GetProjects(false);
+        }
+
+        public static frmSelectRoleManagement GetInstance()
+        {
+            if (frmSelectRoleMgt == null)
+            {
+                frmSelectRoleMgt = new frmSelectRoleManagement();
+            }
+            return frmSelectRoleMgt;
         }
 
         private void GetProjects(bool isSearch)
@@ -53,20 +63,29 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getProject.ProjectList.Count; i++)
+                List<ProjectSource2nd> list = new List<ProjectSource2nd>();
+                foreach (ProjectEntityTemp item in getProject.ProjectList)
                 {
-                    getProject.ProjectList[i].Operate1 = "创建规则";
-                    getProject.ProjectList[i].Operate2 = "修改规则";
-                    getProject.ProjectList[i].Operate3 = "查看详情";
+                    ProjectSource2nd obj = new ProjectSource2nd();
+                    obj.ID = item.ID;
+                    obj.Number = item.Number;
+                    obj.Name = item.Name;
+                    obj.DevelopCompany = item.DevelopCompany;
+                    obj.IdentityNumber = item.IdentityNumber;
+                    obj.ProjectArea = item.ProjectArea;
+                    obj.Operate1 = "创建规则";
+                    obj.Operate2 = "修改规则";
+                    obj.Operate3 = "查看详情";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getProject.ProjectList;
+                dataGridView1.DataSource = list;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmMain main = new frmMain();
+            frmMain main = frmMain.GetInstance();
             main.Show();
             this.Close();
         }
@@ -83,7 +102,8 @@ namespace HouseSelection.UI
                 //可以在此打开新窗口，把参数传递过去
                 model.ID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                frmSelectRoleAdd fm = new frmSelectRoleAdd();
+                frmSelectRoleAdd fm = frmSelectRoleAdd.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate2")
@@ -91,40 +111,17 @@ namespace HouseSelection.UI
                 //可以在此打开新窗口，把参数传递过去
                 model.ID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                frmSelectRoleEdit fm = new frmSelectRoleEdit();
+                frmSelectRoleEdit fm = frmSelectRoleEdit.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate3")
             {
-
-            }
-        }
-
-        public void RefreshDataView()
-        {
-            clearDataView();
-
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
-            }
-
-            ProjectEntityResponse getProject = provide.GetAllProjects();
-            if (getProject.Code != 0)
-            {
-                MessageBox.Show("获取项目信息失败, 错误信息： " + getProject.ErrMsg);
-                return;
-            }
-            else
-            {
-                for (int i = 1; i < getProject.ProjectList.Count; i++)
-                {
-                    getProject.ProjectList[i].Operate = "修改项目";
-                }
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getProject.ProjectList;
+                model.ID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                frmSelectRoleDetails fm = frmSelectRoleDetails.GetInstance(model);
+                fm.Exec(model);
+                fm.ShowDialog();
             }
         }
 

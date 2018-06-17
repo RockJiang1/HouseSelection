@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HouseSelection.NetworkHelper;
+using HouseSelection.Provider.Client.Response;
 
 namespace HouseSelection.Provider.Client.Request
 {

@@ -108,7 +108,7 @@
             // 
             // number
             // 
-            this.number.DataPropertyName = "number";
+            this.number.DataPropertyName = "Number";
             this.number.HeaderText = "项目编号";
             this.number.Name = "number";
             this.number.Width = 150;
@@ -159,8 +159,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            //this.Name = "frmProjectManagement";
-            //this.Text = "frmProjectManagement";
+            this.Text = "frmProjectManagement";
             this.Load += new System.EventHandler(this.frmProjectManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

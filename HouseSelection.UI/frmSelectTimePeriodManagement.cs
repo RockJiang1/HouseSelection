@@ -4,6 +4,7 @@ using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.Model;
+using System.Collections.Generic;
 
 namespace HouseSelection.UI
 {
@@ -13,9 +14,20 @@ namespace HouseSelection.UI
         public string desc = string.Empty;
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmSelectTimePeriodManagement frmseTimePeriodMgt;
+
         public frmSelectTimePeriodManagement()
         {
             InitializeComponent();
+        }
+
+        public static frmSelectTimePeriodManagement GetInstance()
+        {
+            if (frmseTimePeriodMgt == null)
+            {
+                frmseTimePeriodMgt = new frmSelectTimePeriodManagement();
+            }
+            return frmseTimePeriodMgt;
         }
 
         private void frmSelectTimePeriodManagement_Load(object sender, EventArgs e)
@@ -27,7 +39,7 @@ namespace HouseSelection.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmMain main = new frmMain();
+            frmMain main = frmMain.GetInstance();
             main.Show();
             this.Close();
         }
@@ -49,16 +61,17 @@ namespace HouseSelection.UI
             }
             else
             {
-                comboBox1.DataSource = getProject;//绑定数据源
                 comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
                 comboBox1.ValueMember = "ID";//实际值
+                comboBox1.DataSource = getProject.ProjectList;//绑定数据源
+                
             }
         }
 
-        private void GetProjectGroupList()
+        public void GetProjectGroupList()
         {
             int projectId = 0;
-            projectId = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+            projectId = Convert.ToInt32(this.comboBox1.SelectedValue.ToString());
 
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
@@ -76,14 +89,24 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getProjectGroup.ProjectGroupList.Count; i++)
+                List<ProjectGroupSource2nd> list = new List<ProjectGroupSource2nd>();
+                int i = 0;
+                foreach (ProjectGroupEntityTemp item in getProjectGroup.ProjectGroupList)
                 {
-                    getProjectGroup.ProjectGroupList[i].Operate1 = "创建时段";
-                    getProjectGroup.ProjectGroupList[i].Operate2 = "修改时段";
-                    getProjectGroup.ProjectGroupList[i].Operate3 = "查看详情";
+                    i++;
+                    ProjectGroupSource2nd obj = new ProjectGroupSource2nd();
+                    obj.ProjectID = item.ProjectID;
+                    obj.ProjectNumber = item.ProjectNumber;
+                    obj.ProjectName = item.ProjectName;
+                    obj.ProjectGroupID = item.ProjectGroupID;
+                    obj.ProjectGroupName = item.ProjectGroupName;
+                    obj.Operate1 = "创建时段";
+                    obj.Operate2 = "修改时段";
+                    obj.Operate3 = "查看详情";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getProjectGroup.ProjectGroupList;
+                dataGridView1.DataSource = list;
             }
         }
 
@@ -97,20 +120,23 @@ namespace HouseSelection.UI
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate1")
             {
                 projectgroupId = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-                frmSelectTimePeriodAdd fm = new frmSelectTimePeriodAdd();
+                frmSelectTimePeriodAdd fm = frmSelectTimePeriodAdd.GetInstance(projectgroupId);
+                fm.Exec(projectgroupId);
                 fm.ShowDialog();
             }
             else if(dataGridView1.Columns[e.ColumnIndex].Name == "Operate2")
             {
                 projectgroupId = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-                frmSelectTimePeriodEdit fm = new frmSelectTimePeriodEdit();
+                frmSelectTimePeriodEdit fm = frmSelectTimePeriodEdit.GetInstance(projectgroupId);
+                fm.Exec(projectgroupId);
                 fm.ShowDialog();
             }
             else if(dataGridView1.Columns[e.ColumnIndex].Name == "Operate3")
             {
                 projectgroupId = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
                 desc = this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() + " " + this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                frmSelectTimePeriodDetails fm = new frmSelectTimePeriodDetails();
+                frmSelectTimePeriodDetails fm = frmSelectTimePeriodDetails.GetInstance(projectgroupId, desc);
+                fm.Exec(projectgroupId, desc);
                 fm.ShowDialog();
             }
         }

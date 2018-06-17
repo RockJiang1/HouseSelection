@@ -23,6 +23,8 @@ namespace HouseSelection.Provider.Client.Request
         /// ERP门店ID
         /// </summary>
         public int ProjectID { get; set; }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
     }
 }
 

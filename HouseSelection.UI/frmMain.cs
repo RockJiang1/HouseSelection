@@ -10,44 +10,73 @@ using System.Windows.Forms;
 
 namespace HouseSelection.UI
 {
-    public partial class frmMain : Form
+    public partial class frmMain : MetroFramework.Forms.MetroForm
     {
+        public static frmMain main;
         public frmMain()
         {
             InitializeComponent();
         }
 
+        public static frmMain GetInstance()
+        {
+            if (main == null)
+            {
+                main = new frmMain();
+            }
+            return main;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            frmProjectManagement fm = new frmProjectManagement();
+            frmProjectManagement fm = frmProjectManagement.GetInstance();
             fm.Show();
             this.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            frmShakingNumbersManagement fm = new frmShakingNumbersManagement();
+            frmShakingNumbersManagement fm = frmShakingNumbersManagement.GetInstance();
             fm.Show();
             this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frmHousesManagement fm = new frmHousesManagement();
+            frmHousesManagement fm = frmHousesManagement.GetInstance();
             fm.Show();
             this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frmSubscribePersonManagement fm = new frmSubscribePersonManagement();
+            frmSubscribePersonManagement fm = frmSubscribePersonManagement.GetInstance();
             fm.Show();
             this.Hide();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            frmSelectTimePeriodManagement fm = new frmSelectTimePeriodManagement();
+            frmSelectTimePeriodManagement fm = frmSelectTimePeriodManagement.GetInstance();
+            fm.Show();
+            this.Hide();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            frmClientAccountManagement fm = frmClientAccountManagement.GetInstance();
+            fm.Show();
+            this.Hide();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            frmSelectRoleManagement fm = frmSelectRoleManagement.GetInstance();
             fm.Show();
             this.Hide();
         }
