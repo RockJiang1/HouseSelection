@@ -32,7 +32,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                     if(_projectBLL.GetModels(x => x.ID == ImportHouse.ProjectID) != null)
                     {
                         #region 创建楼盘
-                        var _houseEstate = _houseEstateBLL.GetModels(x => x.Name == ImportHouse.HouseEstate);
+                        var _houseEstate = _houseEstateBLL.GetModels(x => x.Name == ImportHouse.HouseEstate && x.ProjectID == ImportHouse.ProjectID);
                         if (_houseEstate == null || _houseEstate.Count() == 0)
                         {
                             _houseEstateBLL.Add(new HouseEstate() { ProjectID = ImportHouse.ProjectID, Name = ImportHouse.HouseEstate,CreateTime = DateTime.Now, LastUpdate = DateTime.Now });

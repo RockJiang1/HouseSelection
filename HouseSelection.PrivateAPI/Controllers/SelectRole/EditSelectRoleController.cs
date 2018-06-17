@@ -91,6 +91,7 @@ namespace HouseSelection.PrivateAPI.Controllers
                     {
                         var dbRole2 = new RoleFamilyNumberAndRoomType()
                         {
+                            ProjectID = req.ProjectID,
                             FamilyNumber = _role2.FamilyNumber,
                             RoomTypeID = _role2.RoomTypeID,
                             CreateTime = DateTime.Now,
