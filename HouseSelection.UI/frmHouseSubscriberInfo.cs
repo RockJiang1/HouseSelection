@@ -19,23 +19,29 @@ namespace HouseSelection.UI
         private int houseId = 0;
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmHouseSubscriberInfo()
+        public static frmHouseSubscriberInfo frmHouseSubscriber;
+        public frmHouseSubscriberInfo(string projectName,HouseEntityTemp model)
         {
             InitializeComponent();
-        }
 
-        private void frmHouseSubscriberInfo_Load(object sender, EventArgs e)
-        {
-            InitForm();
+            InitForm(projectName,model);
 
             GetSubscriberByHouseID();
         }
 
-        private void InitForm()
+        public static frmHouseSubscriberInfo GetInstance(string projectName,HouseEntityTemp model)
         {
-            frmHouseDetails fm = new frmHouseDetails();
-            houseId = fm.model.HouseID;
-            label1.Text = fm.model.Building + "栋 " + fm.model.Unit + "单元 " + fm.model.RoomNumber + "室";
+            if (frmHouseSubscriber == null)
+            {
+                frmHouseSubscriber = new frmHouseSubscriberInfo(projectName, model);
+            }
+            return frmHouseSubscriber;
+        }
+
+        private void InitForm(string projectName, HouseEntityTemp model)
+        {
+            houseId = model.HouseID;
+            label1.Text = model.Building + "栋 " + model.Unit + "单元 " + model.RoomNumber + "室";
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HouseEstateID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HouseEstateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(43, 50);
+            this.button1.Location = new System.Drawing.Point(41, 80);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 38);
             this.button1.TabIndex = 0;
@@ -82,11 +83,11 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
+            this.HouseEstateID,
+            this.ProjectNumber,
+            this.ProjectName,
+            this.HouseEstateName,
+            this.Operate});
             this.dataGridView1.Location = new System.Drawing.Point(12, 182);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -94,35 +95,42 @@
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // Column1
+            // HouseEstateID
             // 
-            this.Column1.HeaderText = "楼盘ID";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
+            this.HouseEstateID.DataPropertyName = "HouseEstateID";
+            this.HouseEstateID.HeaderText = "楼盘ID";
+            this.HouseEstateID.Name = "HouseEstateID";
+            this.HouseEstateID.Visible = false;
             // 
-            // Column2
+            // ProjectNumber
             // 
-            this.Column2.HeaderText = "项目编号";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 150;
+            this.ProjectNumber.DataPropertyName = "ProjectNumber";
+            this.ProjectNumber.HeaderText = "项目编号";
+            this.ProjectNumber.Name = "ProjectNumber";
+            this.ProjectNumber.Width = 150;
             // 
-            // Column3
+            // ProjectName
             // 
-            this.Column3.HeaderText = "项目名称";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 200;
+            this.ProjectName.DataPropertyName = "ProjectName";
+            this.ProjectName.HeaderText = "项目名称";
+            this.ProjectName.Name = "ProjectName";
+            this.ProjectName.Width = 200;
             // 
-            // Column4
+            // HouseEstateName
             // 
-            this.Column4.HeaderText = "楼盘名称";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 250;
+            this.HouseEstateName.DataPropertyName = "HouseEstateName";
+            this.HouseEstateName.HeaderText = "楼盘名称";
+            this.HouseEstateName.Name = "HouseEstateName";
+            this.HouseEstateName.Width = 250;
             // 
-            // Column5
+            // Operate
             // 
-            this.Column5.HeaderText = "操作";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 150;
+            this.Operate.DataPropertyName = "Operate";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Operate.HeaderText = "操作";
+            this.Operate.Name = "Operate";
+            this.Operate.Width = 150;
             // 
             // frmHousesManagement
             // 
@@ -150,10 +158,10 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HouseEstateID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HouseEstateName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Operate;
     }
 }

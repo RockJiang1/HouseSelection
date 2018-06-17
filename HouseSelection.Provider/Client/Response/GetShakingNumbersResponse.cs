@@ -43,7 +43,7 @@ namespace HouseSelection.Provider.Client.Response
         public SubscriberEntityTemp Subscriber { get; set; }
     }
 
-    public class GetShakingNumberDetails
+    public class GetShakingNumberSource
     {
         /// <summary>
         /// 序号

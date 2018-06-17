@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -135,18 +138,24 @@
             // Operate1
             // 
             this.Operate1.DataPropertyName = "Operate1";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Operate1.HeaderText = "操作1";
             this.Operate1.Name = "Operate1";
             // 
             // Operate2
             // 
             this.Operate2.DataPropertyName = "Operate2";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Blue;
+            this.Operate2.DefaultCellStyle = dataGridViewCellStyle2;
             this.Operate2.HeaderText = "操作2";
             this.Operate2.Name = "Operate2";
             // 
             // Operate3
             // 
             this.Operate3.DataPropertyName = "Operate3";
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
+            this.Operate3.DefaultCellStyle = dataGridViewCellStyle3;
             this.Operate3.HeaderText = "操作3";
             this.Operate3.Name = "Operate3";
             // 
@@ -159,8 +168,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            //this.Name = "frmSelectRoleManagement";
-            //this.Text = "frmSelectRoleManagement";
+            this.Text = "frmSelectRoleManagement";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

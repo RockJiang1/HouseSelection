@@ -4,40 +4,57 @@ using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.Model;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace HouseSelection.UI
 {
     public partial class frmHouseDetails : Form
     {
         private int houseEstateID = 0;
+        private bool optLock = false;
         public HouseEntityTemp model = new HouseEntityTemp();
         public string projectName = string.Empty;
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmHouseDetails()
+        public static frmHouseDetails frmHouseDtls;
+        public frmHouseDetails(HouseEstateEntityTemp model)
         {
             InitializeComponent();
+
+            InitForm(model);
+        }
+
+        public void Exec(HouseEstateEntityTemp model)
+        {
+            InitForm(model);
+        }
+
+        public static frmHouseDetails GetInstance(HouseEstateEntityTemp model)
+        {
+            if (frmHouseDtls == null)
+            {
+                frmHouseDtls = new frmHouseDetails(model);
+            }
+            return frmHouseDtls;
         }
 
         private void frmHouseDetails_Load(object sender, EventArgs e)
         {
-            InitForm();
-
             GetHouses(false);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmHousesManagement fm = new frmHousesManagement();
+            frmHousesManagement fm = frmHousesManagement.GetInstance();
             fm.Show();
             this.Close();
         }
 
-        private void InitForm()
+        private void InitForm(HouseEstateEntityTemp model)
         {
-            frmHousesManagement fm = new frmHousesManagement();
-            houseEstateID = fm.model.HouseEstateID;
-            label1.Text = fm.model.HouseEstateName;
+            houseEstateID = model.HouseEstateID;
+            label1.Text = model.HouseEstateName;
         }
 
         private void GetHouses(bool isSearch)
@@ -68,20 +85,52 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getHouses.HouseList.Count; i++)
+                List<HouseSource> list = new List<HouseSource>();
+                foreach (HouseEntityTemp item in getHouses.HouseList)
                 {
-                    if (string.IsNullOrEmpty(getHouses.HouseList[i].SubscriberName))
+                    HouseSource obj = new HouseSource();
+                    obj.HouseID = item.HouseID;
+                    obj.SerialNumber = item.SerialNumber;
+                    obj.Group = item.Group;
+                    obj.Block = item.Block;
+                    obj.Building = item.Building;
+                    obj.Unit = item.Unit;
+                    obj.RoomNumber = item.RoomNumber;
+                    obj.Toward = item.Toward;
+                    obj.RoomType = item.RoomType;
+                    obj.EstimateBuiltUpArea = item.EstimateBuiltUpArea;
+                    obj.EstimateLivingArea = item.EstimateLivingArea;
+                    obj.AreaUnitPrice = item.AreaUnitPrice;
+                    obj.TotalPrice = item.TotalPrice;
+                    obj.SubscriberID = item.SubscriberID;
+                    obj.SubscriberName = item.SubscriberName;
+                    if (string.IsNullOrEmpty(item.SubscriberName))
                     {
-                        getHouses.HouseList[i].SubscriberStatus = "未认购";
+                        obj.SubscriberStatus = "未认购";
                     }
                     else
                     {
-                        getHouses.HouseList[i].SubscriberStatus = "已认购";
+                        obj.SubscriberStatus = "已认购";
                     }
-                    getHouses.HouseList[i].Operate = "查看认购信息";
+                    obj.Operate = "查看认购信息";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getHouses.HouseList;
+                dataGridView1.DataSource = list;
+
+                for(int i =0;i< dataGridView1.Rows.Count; i++)
+                {
+                    if (this.dataGridView1.Rows[i].Cells["SubscriberName"].Value == null)
+                    {
+                        this.dataGridView1.Rows[i].Cells["Operate"].Style.ForeColor = Color.Gray;
+                        optLock = true;
+                    }
+                    else
+                    {
+                        this.dataGridView1.Rows[i].Cells["Operate"].Style.ForeColor = Color.Blue;
+                        optLock = false;
+                    }      
+                }
             }
         }
 
@@ -92,7 +141,7 @@ namespace HouseSelection.UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate")
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate" && optLock == false)
             {
                 //可以在此打开新窗口，把参数传递过去
                 projectName = label1.Text;
@@ -100,7 +149,7 @@ namespace HouseSelection.UI
                 model.Building = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
                 model.Unit = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
                 model.RoomNumber = this.dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                frmHouseSubscriberInfo fm = new frmHouseSubscriberInfo();
+                frmHouseSubscriberInfo fm = frmHouseSubscriberInfo.GetInstance(projectName,model);
                 fm.ShowDialog();
             }
         }

@@ -32,5 +32,7 @@ namespace HouseSelection.Provider.Client.Request
         /// </summary>
         public string BeforePassword { get; set; }
         public string Password { get; set; }
+        public List<int> ProjectID { get; set; }
+
     }
 }

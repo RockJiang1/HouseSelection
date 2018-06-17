@@ -14,14 +14,27 @@ namespace HouseSelection.UI
         private int groupId = 0;
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmShakingNumbersDetails()
+        public static frmShakingNumbersDetails frmShakingNumbersDtls;
+        public frmShakingNumbersDetails(ProjectGroupEntityTemp model)
         {
             InitializeComponent();
+
+            InitForm(model);
+
+            GetShakingNumberDetails();
+        }
+        public static frmShakingNumbersDetails GetInstance(ProjectGroupEntityTemp model)
+        {
+            if (frmShakingNumbersDtls == null)
+            {
+                frmShakingNumbersDtls = new frmShakingNumbersDetails(model);
+            }
+            return frmShakingNumbersDtls;
         }
 
-        private void frmShakingNumbersDetails_Load(object sender, EventArgs e)
+        public void Exec(ProjectGroupEntityTemp model)
         {
-            InitForm();
+            InitForm(model);
 
             GetShakingNumberDetails();
         }
@@ -31,12 +44,11 @@ namespace HouseSelection.UI
             this.Close();
         }
 
-        private void InitForm()
+        private void InitForm(ProjectGroupEntityTemp model)
         {
-            frmShakingNumbersManagement fm = new frmShakingNumbersManagement();
-            groupId = fm.model.ProjectGroupID;
-            label1.Text = fm.model.ProjectNumber + " - " + fm.model.ProjectName;
-            label1.Text = fm.model.ProjectGroupName;
+            groupId = model.ProjectGroupID;
+            label1.Text = model.ProjectNumber + " - " + model.ProjectName;
+            label1.Text = model.ProjectGroupName;
         }
 
         private void GetShakingNumberDetails()
@@ -50,18 +62,18 @@ namespace HouseSelection.UI
 
             GetShakingNumbersResponse getShakingNumbers = provide.GetShakingNumbers(groupId);
 
-            if (getShakingNumbers.Code != 0 || getShakingNumbers.ShakingNumberResultList.Count == 0)
+            if (getShakingNumbers.Code != 0)
             {
                 MessageBox.Show("获取摇号详情失败, 错误信息： " + getShakingNumbers.ErrMsg);
                 return;
             }
             else
             {
-                List<GetShakingNumberDetails> listTemp = new List<GetShakingNumberDetails>();
+                List<GetShakingNumberSource> listTemp = new List<GetShakingNumberSource>();
 
                 foreach(GetShakingNumberResultEntityTemp item in getShakingNumbers.ShakingNumberResultList)
                 {
-                    GetShakingNumberDetails model = new GetShakingNumberDetails();
+                    GetShakingNumberSource model = new GetShakingNumberSource();
                     model.ShakingNumber = item.ShakingNumber;
                     model.ShakingNumberSequance = item.ShakingNumberSequance;
                     model.Name = item.Subscriber.Name;
@@ -69,7 +81,6 @@ namespace HouseSelection.UI
                     model.Telephone = item.Subscriber.Telephone;
                     listTemp.Add(model);
                 }
-
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = listTemp;
             }

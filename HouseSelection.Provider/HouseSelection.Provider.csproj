@@ -78,10 +78,12 @@
     <Compile Include="Client\Request\GetProjectGroupRequest.cs" />
     <Compile Include="Client\Request\GetProjectRoleBaseInfoRequest.cs" />
     <Compile Include="Client\Request\GetProjectsRequest.cs" />
+    <Compile Include="Client\Request\GetSelectionDetailRequest.cs" />
     <Compile Include="Client\Request\GetSelectRoleByProjectIDRequest.cs" />
     <Compile Include="Client\Request\GetSelectTimePeriodRequest.cs" />
     <Compile Include="Client\Request\GetShakingNumbersRequest.cs" />
     <Compile Include="Client\Request\GetSubscriberByHouseIDRequest.cs" />
+    <Compile Include="Client\Request\GetSubscriberSelectionHistoryRequest.cs" />
     <Compile Include="Client\Request\GetSubscribersRequest.cs" />
     <Compile Include="Client\Request\GetTokenRequest.cs" />
     <Compile Include="Client\Request\ImportHouseInfoRequest.cs" />
@@ -91,10 +93,12 @@
     <Compile Include="Client\Response\GetHousesResponse.cs" />
     <Compile Include="Client\Response\GetProjectGroupResponse.cs" />
     <Compile Include="Client\Response\GetProjectRoleBaseInfoResponse.cs" />
+    <Compile Include="Client\Response\GetSelectionDetailResponse.cs" />
     <Compile Include="Client\Response\GetSelectRoleByProjectIDResponse.cs" />
     <Compile Include="Client\Response\GetSelectTimePeriodResponse.cs" />
     <Compile Include="Client\Response\GetShakingNumbersResponse.cs" />
     <Compile Include="Client\Response\GetSubscriberByHouseIDResponse.cs" />
+    <Compile Include="Client\Response\GetSubscriberSelectionHistoryResponse.cs" />
     <Compile Include="Client\Response\ProjectEntityResponse.cs" />
     <Compile Include="Client\Response\SubscriberEntityResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

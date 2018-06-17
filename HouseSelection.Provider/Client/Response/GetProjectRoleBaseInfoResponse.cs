@@ -49,6 +49,12 @@ namespace HouseSelection.Provider.Client.Response
         public int HouseGroupID { get; set; }
         public string HouseGroupName { get; set; }
     }
+
+    public class DictionaryTemp
+    {
+        public int ListID { get; set; }
+        public string ControlName { get; set; }
+    }
 }
 
 

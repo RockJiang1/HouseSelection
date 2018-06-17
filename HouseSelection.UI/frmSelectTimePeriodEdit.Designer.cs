@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,6 +48,8 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(122, 110);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(210, 21);
@@ -54,6 +57,8 @@
             // 
             // dateTimePicker2
             // 
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(527, 110);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(210, 21);
@@ -156,6 +161,8 @@
             // Operate
             // 
             this.Operate.DataPropertyName = "Operate";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate.DefaultCellStyle = dataGridViewCellStyle1;
             this.Operate.HeaderText = "操作";
             this.Operate.Name = "Operate";
             // 

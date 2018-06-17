@@ -3,10 +3,12 @@ using System.Windows.Forms;
 using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Model;
+using HouseSelection.Utility;
+
 
 namespace HouseSelection.UI
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : MetroFramework.Forms.MetroForm
     {
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
@@ -15,13 +17,13 @@ namespace HouseSelection.UI
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)
         {
             string sUserAccount = string.Empty;
             string sUserPassword = string.Empty;
 
-            sUserAccount = textBox1.Text;
-            sUserPassword = textBox2.Text;
+            sUserAccount = txtAccount.Text;
+            sUserPassword = MD5Helper.ToMD5(txtPassword.Text);
 
             if (!string.IsNullOrEmpty(sUserAccount) && !string.IsNullOrEmpty(sUserPassword))
             {
@@ -36,15 +38,20 @@ namespace HouseSelection.UI
                 BaseResultEntity result = provide.CheckBackEndAccount(sUserAccount, sUserPassword);
                 if (result.Code == 0)
                 {
-                    frmMain main = new frmMain();
+                    frmMain main = frmMain.GetInstance();
                     main.Show();
-                    this.Close();
+                    this.Hide();
                 }
                 else
                 {
                     MessageBox.Show("登录验证失败，请输入正确的用户名，密码！");
                 }
             }
+        }
+
+        private void skinButton2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

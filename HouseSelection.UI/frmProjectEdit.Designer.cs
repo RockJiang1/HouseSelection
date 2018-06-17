@@ -91,6 +91,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmProjectEdit
             // 
@@ -106,7 +107,6 @@
             this.Controls.Add(this.label1);
             this.Name = "frmProjectEdit";
             this.Text = "frmProjectEdit";
-            this.Load += new System.EventHandler(this.frmProjectEdit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

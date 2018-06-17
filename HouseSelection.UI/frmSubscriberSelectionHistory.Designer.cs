@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,7 +41,9 @@
             this.AuthStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SelectionStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfirmStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AbandonStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShakingResultID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SelectionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,7 +87,9 @@
             this.AuthStatus,
             this.SelectionStatus,
             this.ConfirmStatus,
+            this.AbandonStatus,
             this.ShakingResultID,
+            this.SelectionID,
             this.Operate1,
             this.Operate2});
             this.dataGridView1.Location = new System.Drawing.Point(12, 206);
@@ -91,12 +97,14 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(959, 431);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ProjectID
             // 
             this.ProjectID.DataPropertyName = "ProjectID";
             this.ProjectID.HeaderText = "项目ID";
             this.ProjectID.Name = "ProjectID";
+            this.ProjectID.Visible = false;
             // 
             // ProjectNumber
             // 
@@ -134,21 +142,39 @@
             this.ConfirmStatus.HeaderText = "确认状态";
             this.ConfirmStatus.Name = "ConfirmStatus";
             // 
+            // AbandonStatus
+            // 
+            this.AbandonStatus.DataPropertyName = "AbandonStatus";
+            this.AbandonStatus.HeaderText = "弃选状态";
+            this.AbandonStatus.Name = "AbandonStatus";
+            // 
             // ShakingResultID
             // 
             this.ShakingResultID.DataPropertyName = "ShakingResultID";
             this.ShakingResultID.HeaderText = "摇号结果ID";
             this.ShakingResultID.Name = "ShakingResultID";
+            this.ShakingResultID.Visible = false;
+            // 
+            // SelectionID
+            // 
+            this.SelectionID.DataPropertyName = "SelectionID";
+            this.SelectionID.HeaderText = "选房ID";
+            this.SelectionID.Name = "SelectionID";
+            this.SelectionID.Visible = false;
             // 
             // Operate1
             // 
             this.Operate1.DataPropertyName = "Operate1";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Operate1.HeaderText = "操作1";
             this.Operate1.Name = "Operate1";
             // 
             // Operate2
             // 
             this.Operate2.DataPropertyName = "Operate2";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Blue;
+            this.Operate2.DefaultCellStyle = dataGridViewCellStyle2;
             this.Operate2.HeaderText = "操作2";
             this.Operate2.Name = "Operate2";
             // 
@@ -163,6 +189,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmSubscriberSelectionHistory";
             this.Text = "frmSubscriberSelectionHistory";
+            this.Load += new System.EventHandler(this.frmSubscriberSelectionHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -182,7 +209,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AuthStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn SelectionStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConfirmStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AbandonStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShakingResultID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SelectionID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate2;
     }

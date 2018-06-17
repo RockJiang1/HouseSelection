@@ -12,7 +12,7 @@ using HouseSelection.Provider.Client.Request;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.NetworkHelper;
 using HouseSelection.Model;
-
+using System.Reflection;
 
 namespace HouseSelection.Provider
 {
@@ -80,6 +80,66 @@ namespace HouseSelection.Provider
                 result.Add(rowEntity);
             }
             return result;
+        }
+
+        /// <summary>
+        /// Convert a List{T} to a DataTable.
+        /// </summary>
+        public DataTable ToDataTable<T>(List<T> items)
+        {
+            var tb = new DataTable(typeof(T).Name);
+
+            PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (PropertyInfo prop in props)
+            {
+                Type t = GetCoreType(prop.PropertyType);
+                tb.Columns.Add(prop.Name, t);
+            }
+
+            foreach (T item in items)
+            {
+                var values = new object[props.Length];
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item, null);
+                }
+
+                tb.Rows.Add(values);
+            }
+
+            return tb;
+        }
+
+        /// <summary>
+        /// Determine of specified type is nullable
+        /// </summary>
+        public static bool IsNullable(Type t)
+        {
+            return !t.IsValueType || (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>));
+        }
+
+        /// <summary>
+        /// Return underlying type if type is Nullable otherwise return the type
+        /// </summary>
+        public static Type GetCoreType(Type t)
+        {
+            if (t != null && IsNullable(t))
+            {
+                if (!t.IsValueType)
+                {
+                    return t;
+                }
+                else
+                {
+                    return Nullable.GetUnderlyingType(t);
+                }
+            }
+            else
+            {
+                return t;
+            }
         }
 
         public TokenResultEntity GetToken()
@@ -207,7 +267,10 @@ namespace HouseSelection.Provider
             {
                 var request = new GetProjectGroupRequest()
                 {
-                    ProjectID = projectId
+                    ProjectID = projectId,
+                    PageIndex = 1,
+                    PageSize = 999999
+                    
                 };
 
                 result = this.Client.InvokeAPI<GetProjectGroupResponse>(request);
@@ -280,7 +343,9 @@ namespace HouseSelection.Provider
             {
                 var request = new GetShakingNumbersRequest()
                 {
-                    ProjectGroupID = projectId
+                    ProjectGroupID = projectId,
+                    PageIndex = 1,
+                    PageSize = 100
                 };
 
                 result = this.Client.InvokeAPI<GetShakingNumbersResponse>(request);
@@ -337,8 +402,8 @@ namespace HouseSelection.Provider
             {
                 var request = new GetAllSubscribersReguest
                 {
-                    PageIndex = 99999,
-                    PageSize = 1
+                    PageIndex = 1,
+                    PageSize = 999999
                 };
 
                 result = this.Client.InvokeAPI<SubscriberEntityResponse>(request);
@@ -362,8 +427,8 @@ namespace HouseSelection.Provider
                 var request = new GetSubscribersRequest()
                 {
                     SearchStr = searchStr,
-                    PageIndex = 99999,
-                    PageSize = 1
+                    PageIndex = 1,
+                    PageSize = 999999
                 };
 
                 result = this.Client.InvokeAPI<SubscriberEntityResponse>(request);
@@ -597,14 +662,14 @@ namespace HouseSelection.Provider
 
         }
 
-        public GetFrontEndAccountResponse GetAllFrontEndAccount(int projectId)
+        public GetFrontEndAccountResponse GetAllFrontEndAccount()
         {
             GetFrontEndAccountResponse result = new GetFrontEndAccountResponse();
             try
             {
                 var request = new GetAllFrontEndAccountRequest()
                 {
-                    ProjectID = projectId,
+                    //ProjectID = projectId,
                     PageIndex = 1,
                     PageSize = 99999
                 };
@@ -648,7 +713,7 @@ namespace HouseSelection.Provider
 
         }
 
-        public BaseResultEntity EditFrontEndAccount(int id, string account, string passwordold, string password)
+        public BaseResultEntity EditFrontEndAccount(int id, string account, string passwordold, string password, List<int> projrctId)
         {
             BaseResultEntity result = new BaseResultEntity();
             try
@@ -658,7 +723,8 @@ namespace HouseSelection.Provider
                     AccountID=id,
                     Account = account,
                     BeforePassword = passwordold,
-                    Password = password
+                    Password = password,
+                    ProjectID = projrctId
                 };
 
                 result = this.Client.InvokeAPI<BaseResultEntity>(request);
@@ -905,6 +971,52 @@ namespace HouseSelection.Provider
                 };
 
                 result = this.Client.InvokeAPI<BaseResultEntity>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetSubscriberSelectionHistoryResponse GetSubscriberSelectionHistory(int Id)
+        {
+            GetSubscriberSelectionHistoryResponse result = new GetSubscriberSelectionHistoryResponse();
+            try
+            {
+                var request = new GetSubscriberSelectionHistoryRequest()
+                {
+                    SubscriberID = Id
+                };
+
+                result = this.Client.InvokeAPI<GetSubscriberSelectionHistoryResponse>(request);
+
+            }
+            catch (Exception ex)
+            {
+                result.Code = 9999;
+                result.ErrMsg = ex.Message;
+            }
+
+            return result;
+
+        }
+
+        public GetSelectionDetailResponse GetSelectionDetail(int Id)
+        {
+            GetSelectionDetailResponse result = new GetSelectionDetailResponse();
+            try
+            {
+                var request = new GetSelectionDetailRequest()
+                {
+                    SelectionID = Id
+                };
+
+                result = this.Client.InvokeAPI<GetSelectionDetailResponse>(request);
 
             }
             catch (Exception ex)
