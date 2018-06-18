@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -35,8 +36,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AllName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -85,8 +85,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
             this.AccountID,
-            this.ProjectNumber,
-            this.ProjectName,
+            this.AllName,
             this.Account,
             this.Operate});
             this.dataGridView1.Location = new System.Drawing.Point(12, 165);
@@ -110,19 +109,12 @@
             this.AccountID.Name = "AccountID";
             this.AccountID.Visible = false;
             // 
-            // ProjectNumber
+            // AllName
             // 
-            this.ProjectNumber.DataPropertyName = "ProjectNumber";
-            this.ProjectNumber.HeaderText = "项目编号";
-            this.ProjectNumber.Name = "ProjectNumber";
-            this.ProjectNumber.Width = 120;
-            // 
-            // ProjectName
-            // 
-            this.ProjectName.DataPropertyName = "ProjectName";
-            this.ProjectName.HeaderText = "项目名称";
-            this.ProjectName.Name = "ProjectName";
-            this.ProjectName.Width = 200;
+            this.AllName.DataPropertyName = "AllName";
+            this.AllName.HeaderText = "项目名称";
+            this.AllName.Name = "AllName";
+            this.AllName.Width = 400;
             // 
             // Account
             // 
@@ -134,6 +126,8 @@
             // Operate
             // 
             this.Operate.DataPropertyName = "Operate";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate.DefaultCellStyle = dataGridViewCellStyle1;
             this.Operate.HeaderText = "操作";
             this.Operate.Name = "Operate";
             this.Operate.Width = 150;
@@ -165,8 +159,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AllName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate;
     }

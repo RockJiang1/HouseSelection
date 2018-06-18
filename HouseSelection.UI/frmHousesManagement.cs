@@ -4,19 +4,28 @@ using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.Model;
+using System.Collections.Generic;
 
 namespace HouseSelection.UI
 {
-    public partial class frmHousesManagement : Form
+    public partial class frmHousesManagement : MetroFramework.Forms.MetroForm
     {
         public HouseEstateEntityTemp model = new HouseEstateEntityTemp();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmHousesManagement frmHouseMgt;
         public frmHousesManagement()
         {
             InitializeComponent();
+        }
 
-            GetHouseEstates(false);
+        public static frmHousesManagement GetInstance()
+        {
+            if (frmHouseMgt == null)
+            {
+                frmHouseMgt = new frmHousesManagement();
+            }
+            return frmHouseMgt;
         }
 
         private void frmHousesManagement_Load(object sender, EventArgs e)
@@ -33,12 +42,14 @@ namespace HouseSelection.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            frmMain main = frmMain.GetInstance();
+            main.Show();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmHousesImport fm = new frmHousesImport();
+            frmHousesImport fm = frmHousesImport.GetInstance();
             fm.ShowDialog();
         }
 
@@ -70,12 +81,19 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getHouseEstates.HouseEstateList.Count; i++)
+                List<HouseEstateSource> list = new List<HouseEstateSource>();
+                foreach (HouseEstateEntityTemp item in getHouseEstates.HouseEstateList)
                 {
-                    getHouseEstates.HouseEstateList[i].Operate= "楼盘信息详情";
+                    HouseEstateSource obj = new HouseEstateSource();
+                    obj.HouseEstateID = item.HouseEstateID;
+                    obj.ProjectNumber = item.ProjectNumber;
+                    obj.ProjectName = item.ProjectName;
+                    obj.HouseEstateName = item.HouseEstateName;
+                    obj.Operate = "楼盘信息详情";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getHouseEstates.HouseEstateList;
+                dataGridView1.DataSource = list;
             }
         }
 
@@ -91,7 +109,8 @@ namespace HouseSelection.UI
                 //可以在此打开新窗口，把参数传递过去
                 model.HouseEstateID= Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 model.HouseEstateName = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                frmProjectEdit fm = new frmProjectEdit();
+                frmHouseDetails fm = frmHouseDetails.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
         }

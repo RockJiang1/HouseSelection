@@ -18,7 +18,7 @@ namespace HouseSelection.Provider.Client.Request
         {
             get { return PostRequestContentType.Json; }
         }
-        public int ProjectID { get; set; }
+        //public int ProjectID { get; set; }
         /// <summary>
         /// ERP门店ID
         /// </summary>

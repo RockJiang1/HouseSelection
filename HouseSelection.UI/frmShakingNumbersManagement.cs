@@ -4,18 +4,29 @@ using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.Model;
+using System.Collections.Generic;
 
 namespace HouseSelection.UI
 {
     
     public partial class frmShakingNumbersManagement : Form
     {
-        public GetProjectGroupResponseTemp model = new GetProjectGroupResponseTemp();
+        public ProjectGroupEntityTemp model = new ProjectGroupEntityTemp();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmShakingNumbersManagement frmShakingNumbersMgt;
         public frmShakingNumbersManagement()
         {
             InitializeComponent();
+        }
+
+        public static frmShakingNumbersManagement GetInstance()
+        {
+            if (frmShakingNumbersMgt == null)
+            {
+                frmShakingNumbersMgt = new frmShakingNumbersManagement();
+            }
+            return frmShakingNumbersMgt;
         }
 
         private void frmShakingNumbersManagement_Load(object sender, EventArgs e)
@@ -27,7 +38,7 @@ namespace HouseSelection.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmMain main = new frmMain();
+            frmMain main = frmMain.GetInstance();
             main.Show();
             this.Close();
         }
@@ -49,7 +60,7 @@ namespace HouseSelection.UI
             }
             else
             {
-                comboBox1.DataSource = getProject;//绑定数据源
+                comboBox1.DataSource = getProject.ProjectList;//绑定数据源
                 comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
                 comboBox1.ValueMember = "ID";//实际值
             }
@@ -85,13 +96,23 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getProjectGroup.ProjectGroupList.Count; i++)
+                List<ProjectGroupSource1st> list = new List<ProjectGroupSource1st>();
+                int i = 0;
+                foreach (ProjectGroupEntityTemp item in getProjectGroup.ProjectGroupList)
                 {
-                    getProjectGroup.ProjectGroupList[i].No = i;
-                    getProjectGroup.ProjectGroupList[i].Operate = "摇号信息详情";
+                    i++;
+                    ProjectGroupSource1st obj = new ProjectGroupSource1st();
+                    obj.No = i;
+                    obj.ProjectID = item.ProjectID;
+                    obj.ProjectNumber = item.ProjectNumber;
+                    obj.ProjectName = item.ProjectName;
+                    obj.ProjectGroupID = item.ProjectGroupID;
+                    obj.ProjectGroupName = item.ProjectGroupName;
+                    obj.Operate = "摇号信息详情";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getProjectGroup.ProjectGroupList;
+                dataGridView1.DataSource = list;
             }
         }
 
@@ -106,11 +127,12 @@ namespace HouseSelection.UI
             {
                 //可以在此打开新窗口，把参数传递过去
                 
-                model.ProjectNumber = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                model.ProjectName = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                model.ProjectGroupID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                model.ProjectGroupName = this.dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                frmShakingNumbersDetails fm = new frmShakingNumbersDetails();
+                model.ProjectNumber = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                model.ProjectName = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                model.ProjectGroupID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                model.ProjectGroupName = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                frmShakingNumbersDetails fm = frmShakingNumbersDetails.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
         }

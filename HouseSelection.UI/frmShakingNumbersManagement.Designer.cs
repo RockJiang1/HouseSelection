@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -141,6 +142,8 @@
             // Operate
             // 
             this.Operate.DataPropertyName = "Operate";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.Operate.DefaultCellStyle = dataGridViewCellStyle1;
             this.Operate.HeaderText = "操作";
             this.Operate.Name = "Operate";
             this.Operate.Width = 150;

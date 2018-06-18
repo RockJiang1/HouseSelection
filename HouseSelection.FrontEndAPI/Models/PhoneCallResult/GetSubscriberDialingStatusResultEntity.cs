@@ -9,15 +9,17 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallResult
 {
     public class GetSubscriberDialingStatusResultEntity : BaseResultEntity
     {
-        /// <summary>
-        /// 未拨打列表
-        /// </summary>
-        public List<UndialedInfo> Undialed { get; set; }
+        ///// <summary>
+        ///// 未拨打列表
+        ///// </summary>
+        //public List<UndialedInfo> Undialed { get; set; }
 
-        /// <summary>
-        /// 未接通列表
-        /// </summary>
-        public List<NotconnectedInfo> Notconnected { get; set; }
+        ///// <summary>
+        ///// 未接通列表
+        ///// </summary>
+        //public List<NotconnectedInfo> Notconnected { get; set; }
+
+        public List<DialedInfo> DialedInfoList { get; set; }
     }
 
     public class UndialedInfo
@@ -40,5 +42,32 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallResult
         public DateTime LastCallTime { get; set; }
 
         public string Phone { get; set; }
+    }
+
+    public class DialedInfo
+    {
+        public int Sequence { get; set; }
+
+        public string Name { get; set; }
+
+        public string Phone { get; set; }
+
+        public string IdentityID { get; set; }
+
+        public bool IsUndialed { get; set; }
+
+        public bool IsNotConnected { get; set; }
+
+        public string NotConnectedReason { get; set; }
+
+        public int CallTimes { get; set; }
+
+        public DateTime LastCallTime { get; set; }
+
+        public TimeSpan BeginTime { get; set; }
+
+        public TimeSpan EndTime { get; set; }
+
+
     }
 }

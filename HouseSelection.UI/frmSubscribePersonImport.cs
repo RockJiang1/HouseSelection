@@ -19,7 +19,7 @@ namespace HouseSelection.UI
 
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-
+        public static frmSubscribePersonImport frmSubscribersImport;
         public frmSubscribePersonImport()
         {
             InitializeComponent();
@@ -38,8 +38,18 @@ namespace HouseSelection.UI
                 return;
             }
 
-            //comboBox1.DataSource = getProject.ProjectList;
-            //comboBox1.DisplayMember= getProject.ProjectList
+            comboBox1.DataSource = getProject.ProjectList;
+            comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
+            comboBox1.ValueMember = "ID";//实际值
+        }
+
+        public static frmSubscribePersonImport GetInstance()
+        {
+            if (frmSubscribersImport == null)
+            {
+                frmSubscribersImport = new frmSubscribePersonImport();
+            }
+            return frmSubscribersImport;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,8 +78,8 @@ namespace HouseSelection.UI
             int iprojectId;
             try
             {
-                iprojectId = 2;
-               
+                iprojectId = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+
                 TokenResultEntity getToken = provide.GetToken();
                 if (getToken.Code != 0)
                 {
@@ -97,8 +107,14 @@ namespace HouseSelection.UI
                         {
                             
                             result = provide.ImportSubscriber(dt, iprojectId, item.Name);
+                            if (!string.IsNullOrEmpty(result))
+                            {
+                                MessageBox.Show("导入认购人信息失败, 错误信息： " + result);
+                                return;
+                            }
                         }
                     }
+                    MessageBox.Show("导入认购人信息成功！");
 
                 }
             }

@@ -7,11 +7,11 @@ using HouseSelection.NetworkHelper;
 
 namespace HouseSelection.Provider.Client.Request
 {
-    public class GetShakingNumbersRequest : GeneralRequest
+    public class GetSelectionDetailRequest : GeneralRequest
     {
         protected override string APIAddress
         {
-            get { return "/api/GetShakingNumbers"; }
+            get { return "/api/GetSelectionDetail"; }
         }
 
         public override PostRequestContentType ContentType
@@ -22,9 +22,7 @@ namespace HouseSelection.Provider.Client.Request
         /// <summary>
         /// ERP门店ID
         /// </summary>
-        public int ProjectGroupID { get; set; }
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
+        public int SelectionID { get; set; }
     }
 }
 

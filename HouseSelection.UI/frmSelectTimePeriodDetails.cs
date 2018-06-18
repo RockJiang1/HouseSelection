@@ -4,6 +4,8 @@ using HouseSelection.Provider;
 using HouseSelection.Provider.Client;
 using HouseSelection.Provider.Client.Response;
 using HouseSelection.Model;
+using System.Collections.Generic;
+
 namespace HouseSelection.UI
 {
     public partial class frmSelectTimePeriodDetails : Form
@@ -11,20 +13,35 @@ namespace HouseSelection.UI
         private int projectgroupId = 0;
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmSelectTimePeriodDetails()
+        public static frmSelectTimePeriodDetails frmSelectTimePeriodDtls;
+        public frmSelectTimePeriodDetails(int projectgroupId, string desc)
         {
             InitializeComponent();
 
-            InitForm();
+            InitForm(projectgroupId, desc);
 
             GetSelectTimePeriod();
         }
 
-        private void InitForm()
+        public static frmSelectTimePeriodDetails GetInstance(int projectgroupId , string desc)
         {
-            frmSelectTimePeriodManagement fm = new frmSelectTimePeriodManagement();
-            projectgroupId = fm.projectgroupId;
-            label1.Text = fm.desc;
+            if (frmSelectTimePeriodDtls == null)
+            {
+                frmSelectTimePeriodDtls = new frmSelectTimePeriodDetails(projectgroupId, desc);
+            }
+            return frmSelectTimePeriodDtls;
+        }
+
+        public void Exec(int projectgroupId, string desc)
+        {
+            InitForm(projectgroupId, desc);
+            GetSelectTimePeriod();
+        }
+
+        private void InitForm(int id, string desc)
+        {
+            projectgroupId = id;
+            label1.Text = desc;
         }
 
         private void GetSelectTimePeriod()
@@ -44,18 +61,26 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 0; i < getSelectTimePeriod.SelectTimeList.Count; i++)
+                int i = 0;
+                this.dataGridView1.Rows.Clear();
+                foreach (SelectTimePeriodEntityTemp item in getSelectTimePeriod.SelectTimeList)
                 {
-                    getSelectTimePeriod.SelectTimeList[i].No = i + 1;
+                    this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[i].Cells[0].Value = i + 1;
+                    this.dataGridView1.Rows[i].Cells[1].Value = Convert.ToDateTime(item.StartTime).ToString("yyyy-MM-dd HH:mm");
+                    this.dataGridView1.Rows[i].Cells[2].Value = Convert.ToDateTime(item.EndTime).ToString("yyyy-MM-dd HH:mm");
+                    this.dataGridView1.Rows[i].Cells[3].Value = item.StartNumber;
+                    this.dataGridView1.Rows[i].Cells[4].Value = item.EndNumber;
+                    this.dataGridView1.Rows[i].Cells[5].Value = "删除";
+                    this.dataGridView1.Columns[5].Visible = false;
+                    i++;
                 }
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getSelectTimePeriod.SelectTimeList;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmSelectTimePeriodManagement fm = new frmSelectTimePeriodManagement();
+            frmSelectTimePeriodManagement fm = frmSelectTimePeriodManagement.GetInstance();
             fm.Show();
             this.Close();
         }

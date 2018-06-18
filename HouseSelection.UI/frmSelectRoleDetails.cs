@@ -17,28 +17,43 @@ namespace HouseSelection.UI
     public partial class frmSelectRoleDetails : Form
     {
         private int projectId = 0;
-        private Dictionary<int, String> ProjectGroupa1st = new Dictionary<int, string>();
-        private Dictionary<int, String> RoomType1st = new Dictionary<int, string>();
-        private Dictionary<int, String> FamilyNumber2nd = new Dictionary<int, string>();
-        private Dictionary<int, String> RoomType2nd = new Dictionary<int, string>();
-        private Dictionary<int, String> ProjectGroupa3rd = new Dictionary<int, string>();
-        private Dictionary<int, String> HouseGroup3rd = new Dictionary<int, string>();
+        private List<DictionaryTemp> ProjectGroupa1st = new List<DictionaryTemp>();
+        private List<DictionaryTemp> RoomType1st = new List<DictionaryTemp>();
+        private List<DictionaryTemp> FamilyNumber2nd = new List<DictionaryTemp>();
+        private List<DictionaryTemp> RoomType2nd = new List<DictionaryTemp>();
+        private List<DictionaryTemp> ProjectGroupa3rd = new List<DictionaryTemp>();
+        private List<DictionaryTemp> HouseGroup3rd = new List<DictionaryTemp>();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmSelectRoleDetails()
+        public static frmSelectRoleDetails frmSelRoleDtls;
+        public frmSelectRoleDetails(ProjectEntityTemp model)
         {
             InitializeComponent();
 
-            InitForm();
+            InitForm(model);
 
             GetProjectRoleBaseInfo();
         }
 
-        private void InitForm()
+        public static frmSelectRoleDetails GetInstance(ProjectEntityTemp model)
         {
-            frmSelectRoleManagement fm = new frmSelectRoleManagement();
-            projectId = fm.model.ID;
-            label1.Text = fm.model.Name;
+            if (frmSelRoleDtls == null)
+            {
+                frmSelRoleDtls = new frmSelectRoleDetails(model);
+            }
+            return frmSelRoleDtls;
+        }
+
+        public void Exec(ProjectEntityTemp model)
+        {
+            InitForm(model);
+            GetProjectRoleBaseInfo();
+        }
+
+        private void InitForm(ProjectEntityTemp model)
+        {
+            projectId = model.ID;
+            label1.Text = model.Name;
         }
 
         private void GetProjectRoleBaseInfo()
@@ -69,27 +84,41 @@ namespace HouseSelection.UI
             int i = 0;
             int top_pg = 50;
             int left_pg = 15;
-            foreach (ProjectGroupSingleEntityTemp gp in model.ProjectGroupList)
+            List<ProjectGroupSingleEntityTemp> gplist = new List<ProjectGroupSingleEntityTemp>();
+            gplist = model.ProjectGroupList.OrderBy(x => x.ProjectGroupID).ToList();
+            List<RoomTypeEntityTemp> rtlist = new List<RoomTypeEntityTemp>();
+            rtlist = model.RoomTypeList.OrderBy(x => x.RoomTypeID).ToList();
+            List<int> fnlist = new List<int>();
+            fnlist = model.FamilyNumber.OrderBy(x => x).ToList();
+            List<HouseGroupEntityTemp> hglist = new List<HouseGroupEntityTemp>();
+            hglist = model.HouseGroupList.OrderBy(x => x.HouseGroupID).ToList();
+            foreach (ProjectGroupSingleEntityTemp gp in gplist)
             {
                 i++;
+                DictionaryTemp labelobj = new DictionaryTemp();
                 Label label = new Label();
                 label.Name = "lblRole1st" + i;
                 label.Text = gp.ProjectGroupName;
+                labelobj.ListID = gp.ProjectGroupID;
+                labelobj.ControlName = label.Name;
                 label.Location = new System.Drawing.Point(left_pg, top_pg);
-                ProjectGroupa1st.Add(gp.ProjectGroupID, label.Name);
+                ProjectGroupa1st.Add(labelobj);
                 panel1.Controls.Add(label);
                 int j = 0;
                 int top_rt = top_pg;
                 int left_rt = 150;
 
-                foreach (RoomTypeEntityTemp rt in model.RoomTypeList)
+                foreach (RoomTypeEntityTemp rt in rtlist)
                 {
                     j++;
                     CheckBox chkbox = new CheckBox();
+                    DictionaryTemp chkobj = new DictionaryTemp();
                     chkbox.Name = "chkRole1st" + i + j;
                     chkbox.Text = rt.RoomTypeName;
+                    chkobj.ListID = rt.RoomTypeID;
+                    chkobj.ControlName = chkbox.Name;
                     chkbox.Location = new System.Drawing.Point(left_rt, top_rt);
-                    RoomType1st.Add(rt.RoomTypeID, chkbox.Name);
+                    RoomType1st.Add(chkobj);
                     panel1.Controls.Add(chkbox);
                 }
                 top_pg = top_pg + 20;
@@ -101,26 +130,32 @@ namespace HouseSelection.UI
             i = 0;
             top_pg = 50;
             left_pg = 15;
-            foreach (int num in model.FamilyNumber)
+            foreach (int num in fnlist)
             {
                 i++;
+                DictionaryTemp labelobj = new DictionaryTemp();
                 Label label = new Label();
                 label.Name = "lblRole2nd" + i;
                 label.Text = num + "人家庭";
+                labelobj.ListID = num;
+                labelobj.ControlName = label.Name;
                 label.Location = new System.Drawing.Point(left_pg, top_pg);
-                FamilyNumber2nd.Add(num, label.Name);
+                FamilyNumber2nd.Add(labelobj);
                 panel2.Controls.Add(label);
                 int j = 0;
                 int top_rt = top_pg;
                 int left_rt = 150;
-                foreach (RoomTypeEntityTemp rt in model.RoomTypeList)
+                foreach (RoomTypeEntityTemp rt in rtlist)
                 {
                     j++;
                     CheckBox chkbox = new CheckBox();
+                    DictionaryTemp chkobj = new DictionaryTemp();
                     chkbox.Name = "chkRole2nd" + i + j;
                     chkbox.Text = rt.RoomTypeName;
+                    chkobj.ListID = rt.RoomTypeID;
+                    chkobj.ControlName = chkbox.Name;
                     chkbox.Location = new System.Drawing.Point(left_rt, top_rt);
-                    RoomType2nd.Add(rt.RoomTypeID, chkbox.Name);
+                    RoomType2nd.Add(chkobj);
                     panel2.Controls.Add(chkbox);
                 }
                 top_pg = top_pg + 20;
@@ -132,26 +167,32 @@ namespace HouseSelection.UI
             i = 0;
             top_pg = 50;
             left_pg = 15;
-            foreach (ProjectGroupSingleEntityTemp gp in model.ProjectGroupList)
+            foreach (ProjectGroupSingleEntityTemp gp in gplist)
             {
                 i++;
+                DictionaryTemp labelobj = new DictionaryTemp();
                 Label label = new Label();
                 label.Name = "lblRole3rd" + i;
                 label.Text = gp.ProjectGroupName;
+                labelobj.ListID = gp.ProjectGroupID;
+                labelobj.ControlName = label.Name;
                 label.Location = new System.Drawing.Point(left_pg, top_pg);
-                ProjectGroupa3rd.Add(gp.ProjectGroupID, label.Name);
+                ProjectGroupa3rd.Add(labelobj);
                 panel1.Controls.Add(label);
                 int j = 0;
                 int top_rt = top_pg;
                 int left_rt = 150;
-                foreach (HouseGroupEntityTemp hg in model.HouseGroupList)
+                foreach (HouseGroupEntityTemp hg in hglist)
                 {
                     j++;
                     CheckBox chkbox = new CheckBox();
+                    DictionaryTemp chkobj = new DictionaryTemp();
                     chkbox.Name = "chkRole3rd" + i + j;
                     chkbox.Text = hg.HouseGroupName;
+                    chkobj.ListID = hg.HouseGroupID;
+                    chkobj.ControlName = chkbox.Name;
                     chkbox.Location = new System.Drawing.Point(left_rt, top_rt);
-                    HouseGroup3rd.Add(hg.HouseGroupID, chkbox.Name);
+                    HouseGroup3rd.Add(chkobj);
                     panel1.Controls.Add(chkbox);
                 }
                 top_pg = top_pg + 20;
@@ -163,95 +204,5 @@ namespace HouseSelection.UI
         {
             this.Close();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int i = 0;
-
-            List<ProjectGroupAndRoomTypeRoleTemp> list1 = new List<ProjectGroupAndRoomTypeRoleTemp>();
-            foreach (KeyValuePair<int, string> gpkv in ProjectGroupa1st)
-            {
-                i++;
-                foreach (KeyValuePair<int, string> rtkv in RoomType1st)
-                {
-                    string value = rtkv.Value;
-                    if (Convert.ToInt32(value.Substring(10, 1)) == i)
-                    {
-                        if (((CheckBox)panel1.Controls.Find("value", true)[0]).Checked == true)
-                        {
-                            ProjectGroupAndRoomTypeRoleTemp item = new ProjectGroupAndRoomTypeRoleTemp();
-                            item.ProjectGroupID = gpkv.Key;
-                            item.RoomTypeID = rtkv.Key;
-                            list1.Add(item);
-                        }
-                    }
-                }
-            }
-
-            i = 0;
-            List<FamilyNumberAndRoomTypeRoleTemp> list2 = new List<FamilyNumberAndRoomTypeRoleTemp>();
-            foreach (KeyValuePair<int, string> gpkv in FamilyNumber2nd)
-            {
-                i++;
-                foreach (KeyValuePair<int, string> rtkv in RoomType2nd)
-                {
-                    string value = rtkv.Value;
-                    if (Convert.ToInt32(value.Substring(10, 1)) == i)
-                    {
-                        if (((CheckBox)panel2.Controls.Find("value", true)[0]).Checked == true)
-                        {
-                            FamilyNumberAndRoomTypeRoleTemp item = new FamilyNumberAndRoomTypeRoleTemp();
-                            item.FamilyNumber = gpkv.Key;
-                            item.RoomTypeID = rtkv.Key;
-                            list2.Add(item);
-                        }
-                    }
-                }
-            }
-
-            i = 0;
-            List<ProjectGroupAndHouseGroupRoleTemp> list3 = new List<ProjectGroupAndHouseGroupRoleTemp>();
-            foreach (KeyValuePair<int, string> gpkv in ProjectGroupa3rd)
-            {
-                i++;
-                foreach (KeyValuePair<int, string> rtkv in HouseGroup3rd)
-                {
-                    string value = rtkv.Value;
-                    if (Convert.ToInt32(value.Substring(10, 1)) == i)
-                    {
-                        if (((CheckBox)panel3.Controls.Find("value", true)[0]).Checked == true)
-                        {
-                            ProjectGroupAndHouseGroupRoleTemp item = new ProjectGroupAndHouseGroupRoleTemp();
-                            item.ProjectGroupID = gpkv.Key;
-                            item.HouseGroupID = rtkv.Key;
-                            list3.Add(item);
-                        }
-                    }
-                }
-            }
-
-
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
-            }
-
-            BaseResultEntity getProject = provide.AddSelectRole(projectId, list1, list2, list3);
-            if (getProject.Code != 0)
-            {
-                MessageBox.Show("添加项目失败, 错误信息： " + getProject.ErrMsg);
-                return;
-            }
-            else
-            {
-                MessageBox.Show("添加项目成功！");
-                frmProjectManagement fm = new frmProjectManagement();
-                //fm.GetProjectInfo();
-                this.Close();
-            }
-        }
-
     }
 }

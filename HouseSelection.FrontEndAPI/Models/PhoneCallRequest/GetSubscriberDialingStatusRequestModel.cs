@@ -11,8 +11,10 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallRequest
 
         public int GroupId { get; set; }
 
-        public int BeginNumber { get; set; }
-
-        public int EndNumber { get; set; }
+        /// <summary>
+        /// eg:
+        /// 100-200,201-300,...,600-900
+        /// </summary>
+        public List<string> NumberRegions { get; set; }
     }
 }

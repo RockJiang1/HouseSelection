@@ -14,26 +14,37 @@ using HouseSelection.Model;
 
 namespace HouseSelection.UI
 {
-    public partial class frmProjectManagement : Form
+    public partial class frmProjectManagement : MetroFramework.Forms.MetroForm
     {
         public EditProjectRequest model = new EditProjectRequest();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
-        public frmProjectManagement()
+
+        public static frmProjectManagement frmProMgt;
+        private frmProjectManagement()
         {
             InitializeComponent();
         }
 
+        public static frmProjectManagement GetInstance()
+        {
+            if(frmProMgt == null)
+            {
+                frmProMgt = new frmProjectManagement();
+            }
+            return frmProMgt;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            frmMain main = new frmMain();
+            frmMain main = frmMain.GetInstance();
             main.Show();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmProjectAdd fm = new frmProjectAdd();
+            frmProjectAdd fm = frmProjectAdd.GetInstance();
             fm.ShowDialog();
         }
 
@@ -47,22 +58,22 @@ namespace HouseSelection.UI
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate")
             {
                 //可以在此打开新窗口，把参数传递过去
-                model.ID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                model.Number = this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                model.Name = this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                model.DevelopCompany = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                model.IdentityNumber = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                model.ProjectArea = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                frmProjectEdit fm = new frmProjectEdit();
+                model.ID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+                model.Number = this.dataGridView1.Rows[e.RowIndex].Cells["Number"].Value.ToString();
+                model.Name = this.dataGridView1.Rows[e.RowIndex].Cells["Name"].Value.ToString();
+                model.DevelopCompany = this.dataGridView1.Rows[e.RowIndex].Cells["DevelopCompany"].Value==null?"":this.dataGridView1.Rows[e.RowIndex].Cells["DevelopCompany"].Value.ToString();
+                model.IdentityNumber = this.dataGridView1.Rows[e.RowIndex].Cells["IdentityNumber"].Value==null?"": this.dataGridView1.Rows[e.RowIndex].Cells["IdentityNumber"].Value.ToString();
+                model.ProjectArea = this.dataGridView1.Rows[e.RowIndex].Cells["ProjectArea"].Value.ToString();
+                frmProjectEdit fm = frmProjectEdit.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
         }
 
         private void clearDataView()
         {
-            DataTable dt = (DataTable)dataGridView1.DataSource;
-            dt.Rows.Clear();
-            dataGridView1.DataSource = dt;
+            List<ProjectSource1st> list = new List<ProjectSource1st>();
+            dataGridView1.DataSource = list;
         }
 
         private void frmProjectManagement_Load(object sender, EventArgs e)
@@ -107,12 +118,21 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getProject.ProjectList.Count; i++)
+                List<ProjectSource1st> list = new List<ProjectSource1st>();
+                foreach(ProjectEntityTemp item in getProject.ProjectList)
                 {
-                    getProject.ProjectList[i].Operate = "修改项目";
+                    ProjectSource1st obj = new ProjectSource1st();
+                    obj.ID = item.ID;
+                    obj.Number = item.Number;
+                    obj.Name = item.Name;
+                    obj.DevelopCompany = item.DevelopCompany;
+                    obj.IdentityNumber = item.IdentityNumber;
+                    obj.ProjectArea = item.ProjectArea;
+                    obj.Operate = "修改项目";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getProject.ProjectList;
+                dataGridView1.DataSource = list;
             }
         }
     }

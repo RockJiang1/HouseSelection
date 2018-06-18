@@ -13,34 +13,49 @@ namespace HouseSelection.UI
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
         private int projectId = 0;
-        public frmProjectEdit()
+
+        public static frmProjectEdit frmProEdit;
+
+        private frmProjectEdit(EditProjectRequest model)
         {
             InitializeComponent();
+
+            InitForm(model);
         }
 
-        private void frmProjectEdit_Load(object sender, EventArgs e)
+        public static frmProjectEdit GetInstance(EditProjectRequest model)
         {
-            InitForm();
+            if(frmProEdit == null)
+            {
+                frmProEdit = new frmProjectEdit(model);
+            }
+            return frmProEdit;
         }
 
-        private void InitForm()
+        public void Exec(EditProjectRequest model)
+        {
+            InitForm(model);
+        }
+
+        private void InitForm(EditProjectRequest model)
         {
             BaseHelper baseHelper = new BaseHelper();
             comboBox1.DataSource = baseHelper.GetAreaList();//绑定数据源
             comboBox1.DisplayMember = "Name";//主要是设置下拉框显示的值
             comboBox1.ValueMember = "ID";//实际值
 
-            frmProjectManagement fm = new frmProjectManagement();
-            projectId = fm.model.ID;
-            label1.Text = fm.model.Number;
-            textBox1.Text = fm.model.Name;
-            textBox2.Text = fm.model.DevelopCompany;
-            textBox3.Text = fm.model.IdentityNumber;
-            comboBox1.Text = fm.model.ProjectArea;
+            projectId = model.ID;
+            label1.Text = model.Number;
+            textBox1.Text = model.Name;
+            textBox2.Text = model.DevelopCompany;
+            textBox3.Text = model.IdentityNumber;
+            comboBox1.Text = model.ProjectArea;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            frmProjectManagement fm = frmProjectManagement.GetInstance();
             this.Close();
         }
 
@@ -78,7 +93,7 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("修改项目成功！");
-                frmProjectManagement fm = new frmProjectManagement();
+                frmProjectManagement fm = frmProjectManagement.GetInstance();
                 fm.GetProjectInfo(false);
                 this.Close();
             }

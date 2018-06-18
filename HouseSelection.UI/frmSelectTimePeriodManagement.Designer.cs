@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ProjectID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectGroupID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectGpId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectGroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Operate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,15 +71,15 @@
             this.ProjectID,
             this.ProjectNumber,
             this.ProjectName,
-            this.ProjectGroupID,
+            this.ProjectGpId,
             this.ProjectGroupName,
             this.Operate1,
             this.Operate2,
             this.Operate3});
-            this.dataGridView1.Location = new System.Drawing.Point(11, 159);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 155);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(893, 449);
+            this.dataGridView1.Size = new System.Drawing.Size(892, 448);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -85,52 +88,53 @@
             this.ProjectID.DataPropertyName = "ProjectID";
             this.ProjectID.HeaderText = "项目ID";
             this.ProjectID.Name = "ProjectID";
-            this.ProjectID.Visible = false;
             // 
             // ProjectNumber
             // 
             this.ProjectNumber.DataPropertyName = "ProjectNumber";
             this.ProjectNumber.HeaderText = "项目编号";
             this.ProjectNumber.Name = "ProjectNumber";
-            this.ProjectNumber.Width = 150;
             // 
             // ProjectName
             // 
             this.ProjectName.DataPropertyName = "ProjectName";
             this.ProjectName.HeaderText = "项目名称";
             this.ProjectName.Name = "ProjectName";
-            this.ProjectName.Width = 200;
             // 
-            // ProjectGroupID
+            // ProjectGpId
             // 
-            this.ProjectGroupID.DataPropertyName = "ProjectGroupID";
-            this.ProjectGroupID.HeaderText = "项目分组ID";
-            this.ProjectGroupID.Name = "ProjectGroupID";
-            this.ProjectGroupID.Visible = false;
+            this.ProjectGpId.DataPropertyName = "ProjectGroupID";
+            this.ProjectGpId.HeaderText = "项目分组ID";
+            this.ProjectGpId.Name = "ProjectGpId";
             // 
             // ProjectGroupName
             // 
             this.ProjectGroupName.DataPropertyName = "ProjectGroupName";
             this.ProjectGroupName.HeaderText = "项目分组名称";
             this.ProjectGroupName.Name = "ProjectGroupName";
-            this.ProjectGroupName.Width = 150;
             // 
             // Operate1
             // 
             this.Operate1.DataPropertyName = "Operate1";
-            this.Operate1.HeaderText = "操作1";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Blue;
+            this.Operate1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Operate1.HeaderText = "创建时段";
             this.Operate1.Name = "Operate1";
             // 
             // Operate2
             // 
             this.Operate2.DataPropertyName = "Operate2";
-            this.Operate2.HeaderText = "操作2";
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Blue;
+            this.Operate2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Operate2.HeaderText = "修改时段";
             this.Operate2.Name = "Operate2";
             // 
             // Operate3
             // 
             this.Operate3.DataPropertyName = "Operate3";
-            this.Operate3.HeaderText = "操作3";
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Blue;
+            this.Operate3.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Operate3.HeaderText = "查看详情";
             this.Operate3.Name = "Operate3";
             // 
             // frmSelectTimePeriodManagement
@@ -157,7 +161,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectGroupID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectGpId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectGroupName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Operate2;

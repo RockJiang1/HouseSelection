@@ -17,70 +17,61 @@ namespace HouseSelection.UI
     public partial class frmClientAccountManagement : Form
     {
         public FrontEndAccountEntityTemp model = new FrontEndAccountEntityTemp();
+        private List<FrontEndAccountEntityTemp> temp = new List<FrontEndAccountEntityTemp>();
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmClientAccountManagement frmClientAccountMgt;
         public frmClientAccountManagement()
         {
             InitializeComponent();
 
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
+            GetFrontEndAccount(false);
+        }
 
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
+        public static frmClientAccountManagement GetInstance()
+        {
+            if (frmClientAccountMgt == null)
             {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
+                frmClientAccountMgt = new frmClientAccountManagement();
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
-
-            GetFrontEndAccountResponse getAllFrontEndAccount = provide.GetAllFrontEndAccount(0);
-            if (getAllFrontEndAccount.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.ErrMsg);
-                return;
-            }
-            else
-            {
-                for (int i = 1; i < getAllFrontEndAccount.AccountList.Count; i++)
-                {
-                    getAllFrontEndAccount.AccountList[i].No = i;
-                    getAllFrontEndAccount.AccountList[i].Operate = "修改项目";
-                }
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getAllFrontEndAccount.AccountList;
-            }
+            return frmClientAccountMgt;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frmMain main = new frmMain();
+            frmMain main = frmMain.GetInstance();
             main.Show();
             this.Close();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int accountid = 0;
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Operate")
             {
                 //可以在此打开新窗口，把参数传递过去 
-                model.AccountID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
-                model.ProjectNumber = this.dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                model.ProjectName = this.dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                model.Account = this.dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                frmClientAccountEdit fm = new frmClientAccountEdit();
+                accountid = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                model = temp.Where(x => x.AccountID == accountid).FirstOrDefault();
+                frmClientAccountEdit fm = frmClientAccountEdit.GetInstance(model);
+                fm.Exec(model);
                 fm.ShowDialog();
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string searchStr = string.Empty;
+            GetFrontEndAccount(true);
+        }
 
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-            searchStr = textBox1.Text;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmClientAccountAdd fm = frmClientAccountAdd.GetInstance();
+            fm.ShowDialog();
+        }
+
+        private void GetFrontEndAccount(bool isSearch)
+        {
+            //clearDataView();
 
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
@@ -88,10 +79,18 @@ namespace HouseSelection.UI
                 MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
                 return;
             }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
 
-            GetFrontEndAccountResponse getFrontEndAccount = provide.GetFrontEndAccount(searchStr);
+            GetFrontEndAccountResponse getFrontEndAccount = new GetFrontEndAccountResponse();
+            if (isSearch == false)
+            {
+                getFrontEndAccount = provide.GetAllFrontEndAccount();
+            }
+            else
+            {
+                string searchStr = string.Empty;
+                searchStr = textBox1.Text;
+                getFrontEndAccount = provide.GetFrontEndAccount(searchStr);
+            }
             if (getFrontEndAccount.Code != 0)
             {
                 MessageBox.Show("获取Token失败, 错误信息： " + getFrontEndAccount.ErrMsg);
@@ -99,53 +98,25 @@ namespace HouseSelection.UI
             }
             else
             {
-                for (int i = 1; i < getFrontEndAccount.AccountList.Count; i++)
+                int i = 0;
+                List<FrontEndAccountSource> list = new List<FrontEndAccountSource>();
+                foreach (FrontEndAccountEntityTemp item in getFrontEndAccount.AccountList)
                 {
-                    getFrontEndAccount.AccountList[i].No = i;
-                    getFrontEndAccount.AccountList[i].Operate = "修改项目";
+                    temp.Add(item);
+                    i++;
+                    FrontEndAccountSource obj = new FrontEndAccountSource();
+                    obj.No = i;
+                    obj.AccountID = item.AccountID;
+                    obj.Account = item.Account;
+                    foreach(AccountProjectEntityTemp pjitem in item.ProjectList)
+                    {
+                        obj.AllName = obj.AllName + "[" +pjitem.ProjectNumber + "-" + pjitem.ProjectName + "]"; 
+                    }
+                    obj.Operate = "修改密码";
+                    list.Add(obj);
                 }
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getFrontEndAccount.AccountList;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            frmClientAccountAdd fm = new frmClientAccountAdd();
-            fm.ShowDialog();
-        }
-
-        private void RefreshDataView(string pwd1st, string pwd2nd)
-        {
-
-            GlobalTokenHelper.gToken = "";
-            GlobalTokenHelper.Expiry = 0;
-            clearDataView();
-
-            TokenResultEntity getToken = provide.GetToken();
-            if (getToken.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getToken.ErrMsg);
-                return;
-            }
-            GlobalTokenHelper.gToken = getToken.Access_Token;
-            GlobalTokenHelper.Expiry = getToken.Expiry;
-
-            GetFrontEndAccountResponse getAllFrontEndAccount = provide.GetAllFrontEndAccount(0);
-            if (getAllFrontEndAccount.Code != 0)
-            {
-                MessageBox.Show("获取Token失败, 错误信息： " + getAllFrontEndAccount.ErrMsg);
-                return;
-            }
-            else
-            {
-                for (int i = 1; i < getAllFrontEndAccount.AccountList.Count; i++)
-                {
-                    getAllFrontEndAccount.AccountList[i].No = i;
-                    getAllFrontEndAccount.AccountList[i].Operate = "修改项目";
-                }
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = getAllFrontEndAccount.AccountList;
+                dataGridView1.DataSource = list;
             }
         }
 

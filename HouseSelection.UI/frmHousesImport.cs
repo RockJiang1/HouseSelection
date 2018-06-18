@@ -18,6 +18,7 @@ namespace HouseSelection.UI
     {
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+        public static frmHousesImport frmHouseIMport;
         public frmHousesImport()
         {
             InitializeComponent();
@@ -25,6 +26,15 @@ namespace HouseSelection.UI
             InitForm();
 
             GetProjectInfo();
+        }
+
+        public static frmHousesImport GetInstance()
+        {
+            if (frmHouseIMport == null)
+            {
+                frmHouseIMport = new frmHousesImport();
+            }
+            return frmHouseIMport;
         }
 
         private void InitForm()
@@ -79,7 +89,7 @@ namespace HouseSelection.UI
             int iprojectId;
             try
             {
-                iprojectId = 2;
+                iprojectId = Convert.ToInt32(comboBox1.SelectedValue.ToString());
 
                 TokenResultEntity getToken = provide.GetToken();
                 if (getToken.Code != 0)
@@ -110,10 +120,12 @@ namespace HouseSelection.UI
                             if (!string.IsNullOrEmpty(result))
                             {
                                 MessageBox.Show("导入房源信息失败, 错误信息： " + result);
+                                return;
                             }
                         }
                     }
-                    
+                    MessageBox.Show("导入房源信息成功！");
+
                 }
             }
             catch (Exception ex)

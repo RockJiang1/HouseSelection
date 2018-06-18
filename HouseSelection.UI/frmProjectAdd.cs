@@ -12,9 +12,20 @@ namespace HouseSelection.UI
     {
         private GeneralClient Client = new GeneralClient();
         BaseProvide provide = new BaseProvide();
+
+        public static frmProjectAdd frmProAdd;
         public frmProjectAdd()
         {
             InitializeComponent();  
+        }
+
+        public static frmProjectAdd GetInstance()
+        {
+            if (frmProAdd == null)
+            {
+                frmProAdd = new frmProjectAdd();
+            }
+            return frmProAdd;
         }
 
         private void frmProjectAdd_Load(object sender, EventArgs e)
@@ -33,6 +44,7 @@ namespace HouseSelection.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            frmProjectManagement fm = frmProjectManagement.GetInstance();
             this.Close();
         }
 
@@ -69,7 +81,7 @@ namespace HouseSelection.UI
             else
             {
                 MessageBox.Show("添加项目成功！");
-                frmProjectManagement fm = new frmProjectManagement();
+                frmProjectManagement fm = frmProjectManagement.GetInstance();
                 fm.GetProjectInfo(false);
                 this.Close();
             }
