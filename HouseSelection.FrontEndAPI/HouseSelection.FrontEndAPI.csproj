@@ -202,7 +202,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PhoneCall\GetPhoneCallProjectGroupListController.cs" />
-    <Compile Include="Controllers\PhoneCall\GetSubscriberInfoForPhoneCallController.cs" />
+    <Compile Include="Controllers\PhoneCall\GetSubscriberDialingStatusController.cs" />
     <Compile Include="Controllers\PhoneCall\PhoneCallLoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Publicity\GetAreaListController.cs" />
@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
     <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
     <Compile Include="Controllers\RefreshTokenController.cs" />
+    <Compile Include="Controllers\SelectHouse\GetHouseEstatesController.cs" />
     <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
     <Compile Include="Controllers\GetTokenController.cs" />
     <Compile Include="Controllers\SelectHouse\SelectHouseLoginController.cs" />
@@ -244,10 +245,14 @@
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetRoomQuantityInfoResultEntity.cs" />
     <Compile Include="Models\RefreshTokenEntity.cs" />
+    <Compile Include="Models\SelectHouseRequest\GetHouseEstatesRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\GetSubscriberByIdentityRequestModel.cs" />
     <Compile Include="Controllers\SelectHouse\SubscriberAuthorizeController.cs" />
+    <Compile Include="Models\SelectHouseRequest\SelectHouseLoginRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\SubscriberAuthorizeRequestModel.cs" />
+    <Compile Include="Models\SelectHouseResult\GetHouseEstatesResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\GetSubscriberByIdentityResultEntity.cs" />
+    <Compile Include="Models\SelectHouseResult\SelectHouseLoginResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\SubscriberAuthorizeResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />

@@ -21,6 +21,7 @@ namespace HouseSelection.PrivateAPI.Controllers
         [ApiAuthorize]
         public GetShakingNumbersResultEntity Post(GetShakingNumbersRequestModel req)
         {
+            Logger.LogDebug("GetShakingNumbers Request:" + JsonHelper.SerializeObject(req), "GetShakingNumbersController", "Post");
             var ret = new GetShakingNumbersResultEntity()
             {
                 Code = 0,
