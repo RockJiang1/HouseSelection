@@ -12,10 +12,47 @@ namespace HouseSelection.UI
 {
     public partial class frmMain : MetroFramework.Forms.MetroForm
     {
+        private static int intervaiTop = 5;
+        private static int fixHeight = 35;
         public static frmMain main;
         public frmMain()
         {
             InitializeComponent();
+
+            InitForm();
+        }
+
+        private void InitForm()
+        {
+            SetControlsSize();
+        }
+
+        private void SetControlsSize()
+        {
+            int iActulaWidth = Screen.PrimaryScreen.Bounds.Width;
+            int iActulaHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            picLogo.Location = new System.Drawing.Point(0, intervaiTop);
+            picToolBar.Location = new System.Drawing.Point(picLogo.Width, intervaiTop);
+            picToolBar.Size = new Size(iActulaWidth- picLogo.Width,picLogo.Height);
+
+            gbMenu.Location = new System.Drawing.Point(0 , picLogo.Height + intervaiTop);
+            gbMenu.Size = new Size(picLogo.Width, iActulaHeight- gbMenu.Top);
+
+            for(int i = 1; i <= 10; i++)
+            {
+                string ctlMainName = "picMenuMain" + i.ToString();
+                string ctlSubName = "picMenuSub" + i.ToString();
+
+                ((PictureBox)gbMenu.Controls.Find(ctlMainName, true)[0]).Location = new System.Drawing.Point(0, (i - 1) * fixHeight + 1);
+                ((PictureBox)gbMenu.Controls.Find(ctlMainName, true)[0]).Size = new Size(picLogo.Width, fixHeight);
+                ((PictureBox)gbMenu.Controls.Find(ctlSubName, true)[0]).Location = new System.Drawing.Point(0, (i - 1) * fixHeight + 1);
+                ((PictureBox)gbMenu.Controls.Find(ctlSubName, true)[0]).Size = new Size(picLogo.Width, fixHeight);
+                ((PictureBox)gbMenu.Controls.Find(ctlMainName, true)[0]).BringToFront();
+            }
+
+            pnlChildForm.Location = new System.Drawing.Point(gbMenu.Width, gbMenu.Top);
+            pnlChildForm.Size = new Size(picToolBar.Width, gbMenu.Height);
         }
 
         public static frmMain GetInstance()
@@ -27,58 +64,56 @@ namespace HouseSelection.UI
             return main;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void picMenuMain1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void picMenuMain2_Click(object sender, EventArgs e)
         {
             frmProjectManagement fm = frmProjectManagement.GetInstance();
             fm.Show();
-            this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            frmShakingNumbersManagement fm = frmShakingNumbersManagement.GetInstance();
-            fm.Show();
-            this.Hide();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void picMenuMain3_Click(object sender, EventArgs e)
         {
             frmHousesManagement fm = frmHousesManagement.GetInstance();
             fm.Show();
-            this.Hide();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void picMenuMain4_Click(object sender, EventArgs e)
         {
             frmSubscribePersonManagement fm = frmSubscribePersonManagement.GetInstance();
             fm.Show();
-            this.Hide();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void picMenuMain5_Click(object sender, EventArgs e)
         {
-            frmSelectTimePeriodManagement fm = frmSelectTimePeriodManagement.GetInstance();
+            frmShakingNumbersManagement fm = frmShakingNumbersManagement.GetInstance();
             fm.Show();
-            this.Hide();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            frmClientAccountManagement fm = frmClientAccountManagement.GetInstance();
-            fm.Show();
-            this.Hide();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void picMenuMain6_Click(object sender, EventArgs e)
         {
             frmSelectRoleManagement fm = frmSelectRoleManagement.GetInstance();
             fm.Show();
-            this.Hide();
+        }
+
+        private void picMenuMain7_Click(object sender, EventArgs e)
+        {
+            frmSelectTimePeriodManagement fm = frmSelectTimePeriodManagement.GetInstance();
+            fm.Show();
+        }
+
+        private void picMenuMain8_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void picMenuMain9_Click(object sender, EventArgs e)
+        {
+            frmClientAccountManagement fm = frmClientAccountManagement.GetInstance();
+            fm.Show();
         }
     }
 }
