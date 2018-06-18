@@ -38,7 +38,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
 
                     if (_shakingResult == null)
                     {
-                        throw (new Exception("要好结果【" + req.ShakingNumberResultID + "】不存在！请确认项目信息！"));
+                        throw (new Exception("摇号结果【" + req.ShakingNumberResultID + "】不存在！请确认项目信息！"));
                     }
 
                     var _houseEstates = _houseEstateBLL.GetModels(h => h.ProjectID == _shakingResult.ProjectGroup.ProjectID).ToList();
