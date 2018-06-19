@@ -20,7 +20,8 @@ namespace HouseSelection.DAL
                                   && H.SubscriberID != null
                                   && DB.RoleProjectGroupAndHouseGroup.Any(x => x.HouseGroupID == H.GroupID && x.ProjectGroupID == _shaking.ProjectGroupID)
                                   && DB.RoleFamilyNumberAndRoomType.Any(x => x.RoomTypeID == H.RoomTypeID && x.FamilyNumber == _shaking.SubscriberProjectMapping.Subscriber.FamilyMemberNumber)
-                                  && DB.RoleProjectGroupAndRoomType.Any(x => x.RoomTypeID == H.RoomTypeID && x.ProjectGroupID == _shaking.ProjectGroupID)).ToList();
+                                  && DB.RoleProjectGroupAndRoomType.Any(x => x.RoomTypeID == H.RoomTypeID && x.ProjectGroupID == _shaking.ProjectGroupID)
+                                  select H).ToList();
 
             }
         }

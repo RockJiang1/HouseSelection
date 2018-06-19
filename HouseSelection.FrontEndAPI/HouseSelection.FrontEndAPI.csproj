@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Publicity\GetProjectsByAreaController.cs" />
     <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
     <Compile Include="Controllers\RefreshTokenController.cs" />
+    <Compile Include="Controllers\SelectHouse\ConfirmSelectHouseController.cs" />
     <Compile Include="Controllers\SelectHouse\GetHouseEstatesController.cs" />
     <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
     <Compile Include="Controllers\GetTokenController.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Models\PublicityResult\GetProjectsByAreaResultEntity.cs" />
     <Compile Include="Models\PublicityResult\GetRoomQuantityInfoResultEntity.cs" />
     <Compile Include="Models\RefreshTokenEntity.cs" />
+    <Compile Include="Models\SelectHouseRequest\ConfirmSelectHouseRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\GetHouseEstatesRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\GetSubscriberByIdentityRequestModel.cs" />
     <Compile Include="Controllers\SelectHouse\SubscriberAuthorizeController.cs" />

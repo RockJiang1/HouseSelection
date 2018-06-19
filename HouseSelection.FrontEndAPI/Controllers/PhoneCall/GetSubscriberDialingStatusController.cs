@@ -58,45 +58,49 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                     }
                     else
                     {
-                        results.AddRange(_shakingNumberResultBLL.GetModels(i => i.ShakingNumberSequance >= beginNumber && i.ShakingNumberSequance <= endNumber).ToList());
+                        //results.AddRange(_shakingNumberResultBLL.GetModels(i => i.ProjectGroupID == req.GroupId && i.ShakingNumberSequance >= beginNumber && i.ShakingNumberSequance <= endNumber).ToList());
+                        ret.DialedInfoList.AddRange(_shakingNumberResultBLL.GetSubscriberDialingStatus(req.GroupId, beginNumber, endNumber));
                     }
                 }
                 // 2.查找结果 拼接响应实体
-                if (results != null && results.Count > 0)
-                {
-                    int index = 1;
-                    results.ForEach(i =>
-                    {
-                        TimeSpan startTime;
-                        TimeSpan endTime;
-                        GetPeriodTimes(i.ID, out startTime, out endTime);
-                        var subInfo = GetSubscriberBySPMId(i.SubscriberProjectMappingID);
-                        if (subInfo != null)
-                        {
-                            string reason = string.Empty;
-                            if (i.TelephoneNoticeRecord.FirstOrDefault() != null)
-                            {
-                                reason = GetReason(i.TelephoneNoticeRecord.First().ResultType);
-                            }
-                            var dialedInfo = new DialedInfo()
-                            {
-                                Sequence = index,
-                                Name = subInfo.Name,
-                                IdentityID = subInfo.IdentityNumber,
-                                BeginTime = startTime,
-                                EndTime = endTime,
-                                CallTimes = i.NoticeTime,
-                                IsContacted = i.IsContacted,
-                                IsCallBack = i.IsCallBack,
-                                IsMessageSend = i.IsMessageSend,
-                                ResultType = reason,
-                                LastCallTime = i.LastUpdate ?? i.CreateTime,
-                                Phone = subInfo.Telephone
-                            };
-                            ret.DialedInfoList.Add(dialedInfo);
-                        }
-                    });
-                }
+                //if (results != null && results.Count > 0)
+                //{
+                //    //int index = 1;
+                //    results.ForEach(i =>
+                //    {
+                //        //TimeSpan startTime;
+                //        //TimeSpan endTime;
+                //        //GetPeriodTimes(i.ID, out startTime, out endTime);
+                //        //var subInfo = GetSubscriberBySPMId(i.SubscriberProjectMappingID);
+                //        //if (subInfo != null)
+                //        //{
+                //        //var _selectPeriod = i.HouseSelectPeriod.FirstOrDefault(x => x.ShakingNumberResultID == i.ID);
+                //        //    string reason = string.Empty;
+                //        //    if (i.TelephoneNoticeRecord.FirstOrDefault() != null)
+                //        //    {
+                //        //        reason = GetReason(i.TelephoneNoticeRecord.First().ResultType);
+                //        //    }
+                //        //    var dialedInfo = new DialedInfo()
+                //        //    {
+                //        //        Sequence = i.SelectHouseSequance,
+                //        //        //Name = subInfo.Name,
+                //        //        Name = i.SubscriberProjectMapping.Subscriber.Name,
+                //        //        //IdentityID = subInfo.IdentityNumber,
+                //        //        IdentityID = i.SubscriberProjectMapping.Subscriber.IdentityNumber,
+                //        //        BeginTime = _selectPeriod == null ? null : _selectPeriod.StartTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                //        //        EndTime = _selectPeriod == null ? null : _selectPeriod.EndTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                //        //        CallTimes = i.NoticeTime,
+                //        //        IsContacted = i.IsContacted,
+                //        //        IsCallBack = i.IsCallBack,
+                //        //        IsMessageSend = i.IsMessageSend,
+                //        //        ResultType = reason,
+                //        //        LastCallTime = (i.LastUpdate ?? i.CreateTime).ToString("yyyy-MM-dd HH:mm:ss"),
+                //        //        Phone = i.SubscriberProjectMapping.Subscriber.Telephone
+                //        //    };
+                //            //ret.DialedInfoList.Add(dialedInfo);
+                //        //}
+                //    });
+                //}
             }
             catch (Exception ex)
             {
