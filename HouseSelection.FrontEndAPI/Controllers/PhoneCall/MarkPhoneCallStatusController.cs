@@ -1,4 +1,6 @@
 ﻿using HouseSelection.BLL;
+using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
+using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,43 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
     {
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
 
-        public BaseResultEntity Post()
+        //[Authorize]
+        public BaseResultEntity Post(MarkPhoneCallStatusRequestModel req)
         {
-            var ret = new BaseResultEntity();
+            var ret = new BaseResultEntity()
+            {
+                Code = 0,
+                ErrMsg = string.Empty
+            };
+
+            try
+            {
+                var snr = _shakingNumberResultBLL.GetModels(i => i.ID == req.ShakingResultNumberId).First();
+                if (snr != null)
+                {
+                    if (req.IsCallBack)
+                    {
+                        snr.IsCallBack = true;
+                    }
+                    if (req.IsSendMessage)
+                    {
+                        snr.IsMessageSend = true;
+                    }
+                    _shakingNumberResultBLL.Update(snr);
+                }
+                else
+                {
+                    ret.Code = 99;
+                    ret.ErrMsg = "没有id为" + req.ShakingResultNumberId + "的摇号记录。";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException("更新摇号通知状态时发生异常！", "MarkPhoneCallStatusController", "Post", ex);
+                ret.Code = 999;
+                ret.ErrMsg = ex.Message;
+            }
+
             return ret;
         }
     }

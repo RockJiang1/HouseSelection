@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterfaceResultEnum.cs" />
+    <Compile Include="PhoneCallReasonType.cs" />
     <Compile Include="PrivateInterfaceResultCodeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

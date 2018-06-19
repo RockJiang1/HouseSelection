@@ -231,7 +231,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PhoneCallRequest\GetPhoneCallProjectGroupListRequestModel.cs" />
     <Compile Include="Models\PhoneCallRequest\GetSubscriberDialingStatusRequestModel.cs" />
+    <Compile Include="Models\PhoneCallRequest\MarkPhoneCallStatusRequestModel.cs" />
     <Compile Include="Models\PhoneCallRequest\PhoneCallLoginRequestModel.cs" />
+    <Compile Include="Models\PhoneCallRequest\SaveNotifyRecordsRequestModel.cs" />
     <Compile Include="Models\PhoneCallResult\GetPhoneCallProjectGroupListResultEntity.cs" />
     <Compile Include="Models\PhoneCallResult\GetSubscriberDialingStatusResultEntity.cs" />
     <Compile Include="Models\PhoneCallResult\PhoneCallLoginResultEntity.cs" />

@@ -1,0 +1,37 @@
+﻿2018-06-18 06:27:16,990 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":null}	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:27:17,237 [7] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48 
+2018-06-18 06:28:39,073 [10] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":null}	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:30:32,608 [6] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":null}	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:30:33,850 [6] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48 
+2018-06-18 06:31:51,496 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":null}	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:31:51,572 [7] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 48 
+2018-06-18 06:32:04,210 [7] INFO  - GetSubscriberDialingStatus Request:null	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:32:04,264 [7] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 37	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 37 
+2018-06-18 06:39:52,115 [11] INFO  - GetSubscriberDialingStatus Request:null	GetSubscriberDialingStatusController.Post 
+2018-06-18 06:39:52,275 [11] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 37	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 C:\Users\yanmengbiao\source\repos\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 37 
+2018-06-18 06:40:23,244 [14] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5502-5512","5532-5542"]}	GetSubscriberDialingStatusController.Post 
