@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseSelection.Enum", "Hous
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{491E63CA-3436-4AC3-8F35-E63B3609FD10}"
 	ProjectSection(SolutionItems) = preProject
-		\\Mac\Home\Desktop\前端接口说明文档.xlsx = \\Mac\Home\Desktop\前端接口说明文档.xlsx
+		Doc\前端接口说明文档.xlsx = Doc\前端接口说明文档.xlsx
 		Doc\接口说明文档.xlsx = Doc\接口说明文档.xlsx
 		Doc\数据库表结构说明.xlsx = Doc\数据库表结构说明.xlsx
 		Doc\现场选房接口说明.xlsx = Doc\现场选房接口说明.xlsx
