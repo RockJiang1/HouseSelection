@@ -56,10 +56,12 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallResult
 
         public bool IsUndialed { get; set; }
 
-        public bool IsNotConnected { get; set; }
+        public bool IsContacted { get; set; }
 
-        public string NotConnectedReason { get; set; }
+        public bool IsCallBack { get; set; }
 
+        public bool IsMessageSend { get; set; }
+        
         public int CallTimes { get; set; }
 
         public DateTime LastCallTime { get; set; }
@@ -67,6 +69,8 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallResult
         public TimeSpan BeginTime { get; set; }
 
         public TimeSpan EndTime { get; set; }
+
+        public string ResultType { get; set; }
 
 
     }

@@ -73,6 +73,11 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                         var subInfo = GetSubscriberBySPMId(i.SubscriberProjectMappingID);
                         if (subInfo != null)
                         {
+                            string reason = string.Empty;
+                            if (i.TelephoneNoticeRecord.FirstOrDefault() != null)
+                            {
+                                reason = GetReason(i.TelephoneNoticeRecord.First().ResultType);
+                            }
                             var dialedInfo = new DialedInfo()
                             {
                                 Sequence = index,
@@ -81,10 +86,11 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                                 BeginTime = startTime,
                                 EndTime = endTime,
                                 CallTimes = i.NoticeTime,
-                                IsNotConnected = !i.IsContacted,
-                                IsUndialed = i.NoticeTime == 0,
+                                IsContacted = i.IsContacted,
+                                IsCallBack = i.IsCallBack,
+                                IsMessageSend = i.IsMessageSend,
+                                ResultType = reason,
                                 LastCallTime = i.LastUpdate ?? i.CreateTime,
-                                NotConnectedReason = string.Empty,
                                 Phone = subInfo.Telephone
                             };
                             ret.DialedInfoList.Add(dialedInfo);
@@ -127,6 +133,45 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                 begintime = periodInfo.StartTime.TimeOfDay;
                 endtime = periodInfo.EndTime.TimeOfDay;
             }
+        }
+
+        private string GetReason(int type)
+        {
+            string reason = string.Empty;
+            switch (type)
+            {
+                case 1:
+                    reason = "有效电话";
+                    break;
+                case 2:
+                    reason = "关机";
+                    break;
+                case 3:
+                    reason = "不在服务区";
+                    break;
+                case 4:
+                    reason = "停机";
+                    break;
+                case 5:
+                    reason = "无人接听";
+                    break;
+                case 6:
+                    reason = "挂断";
+                    break;
+                case 7:
+                    reason = "空号";
+                    break;
+                case 8:
+                    reason = "暂时不方便稍后再拨";
+                    break;
+                case 9:
+                    reason = "非本人";
+                    break;
+                default:
+                    reason = "异常状态";
+                    break;
+            }
+            return reason;
         }
     }
 }
