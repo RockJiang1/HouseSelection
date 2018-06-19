@@ -203,8 +203,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PhoneCall\GetPhoneCallProjectGroupListController.cs" />
     <Compile Include="Controllers\PhoneCall\GetSubscriberDialingStatusController.cs" />
+    <Compile Include="Controllers\PhoneCall\MarkPhoneCallStatusController.cs" />
     <Compile Include="Controllers\PhoneCall\PhoneCallLoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhoneCall\SaveNotifyRecordsController.cs" />
     <Compile Include="Controllers\Publicity\GetAreaListController.cs" />
     <Compile Include="Controllers\Publicity\GetHouseBuildingsController.cs" />
     <Compile Include="Controllers\Publicity\GetHouseEstateDetailsController.cs" />
