@@ -73,7 +73,11 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                             Address = p.Address,
                             Name = p.Name,
                             Number = p.Number,
-                            ProjectArea = areaName
+                            ProjectArea = areaName,
+                            IsEnd = p.IsEnd,
+                            EndReason = p.EndReason,
+                            IdentityNumber = p.IdentityNumber,
+                            DevelopCompany = p.DevelopCompany
                         };
 
                         ret.Projects.Add(project);
