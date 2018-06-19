@@ -20,5 +20,10 @@ namespace HouseSelection.BLL
         {
             return _houseDAL.GetValidHouses(ShakingNumberID, HouseEstateID, Building);
         }
+
+        public bool ValidHouseSelection(int ShakingNumberID, int HouseID)
+        {
+            return _houseDAL.ValidHouseSelection(ShakingNumberID, HouseID);
+        }
     }
 }

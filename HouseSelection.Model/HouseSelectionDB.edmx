@@ -213,6 +213,16 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
+        <EntityType Name="SelectingHouseStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShakingNumberResultID" Type="int" Nullable="false" />
+          <Property Name="SelectStatus" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
         <EntityType Name="ShakingNumberResult">
           <Key>
             <PropertyRef Name="ID" />
@@ -665,6 +675,7 @@
           <EntitySet Name="RoleProjectGroupAndHouseGroup" EntityType="Self.RoleProjectGroupAndHouseGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleProjectGroupAndRoomType" EntityType="Self.RoleProjectGroupAndRoomType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SelectingHouseStatus" EntityType="Self.SelectingHouseStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShakingNumberResult" EntityType="Self.ShakingNumberResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscriber" EntityType="Self.Subscriber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubscriberFamilyMember" EntityType="Self.SubscriberFamilyMember" Schema="dbo" store:Type="Tables" />
@@ -1060,6 +1071,7 @@
             <End Role="FrontEndAccount" EntitySet="FrontEndAccount" />
             <End Role="TelephoneNoticeRecord" EntitySet="TelephoneNoticeRecord" />
           </AssociationSet>
+          <EntitySet Name="SelectingHouseStatus" EntityType="HouseSelectionDBModel.SelectingHouseStatus" />
           </EntityContainer>
         <EntityType Name="BackEndAccount">
           <Key>
@@ -1641,6 +1653,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SelectingHouseStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShakingNumberResultID" Type="Int32" Nullable="false" />
+          <Property Name="SelectStatus" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1947,6 +1969,17 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="FrontEndAccountID" ColumnName="FrontEndAccountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SelectingHouseStatus">
+            <EntityTypeMapping TypeName="HouseSelectionDBModel.SelectingHouseStatus">
+              <MappingFragment StoreEntitySet="SelectingHouseStatus">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="SelectStatus" ColumnName="SelectStatus" />
+                <ScalarProperty Name="ShakingNumberResultID" ColumnName="ShakingNumberResultID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -216,12 +216,15 @@
     <Compile Include="Controllers\Publicity\GetRoomQuantityInfoController.cs" />
     <Compile Include="Controllers\RefreshTokenController.cs" />
     <Compile Include="Controllers\SelectHouse\ConfirmSelectHouseController.cs" />
+    <Compile Include="Controllers\SelectHouse\GetCurrentSelectionController.cs" />
     <Compile Include="Controllers\SelectHouse\GetHouseEstatesController.cs" />
     <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
     <Compile Include="Controllers\GetTokenController.cs" />
     <Compile Include="Controllers\SelectHouse\GetValidBuildingsController.cs" />
     <Compile Include="Controllers\SelectHouse\GetValidHousesController.cs" />
     <Compile Include="Controllers\SelectHouse\SelectHouseLoginController.cs" />
+    <Compile Include="Controllers\SelectHouse\SignConfirmSelectionController.cs" />
+    <Compile Include="Controllers\SelectHouse\StartSelectionController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -259,6 +262,7 @@
     <Compile Include="Models\SelectHouseRequest\GetValidBuildingsRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\GetValidHousesRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\SelectHouseLoginRequestModel.cs" />
+    <Compile Include="Models\SelectHouseRequest\StartSelectionRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\SubscriberAuthorizeRequestModel.cs" />
     <Compile Include="Models\SelectHouseResult\GetHouseEstatesResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\GetSubscriberByIdentityResultEntity.cs" />

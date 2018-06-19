@@ -48,5 +48,6 @@ namespace HouseSelection.Model
         public virtual DbSet<RoleProjectGroupAndRoomType> RoleProjectGroupAndRoomType { get; set; }
         public virtual DbSet<FrontEndAccount> FrontEndAccount { get; set; }
         public virtual DbSet<FrontEndAccountProjectMapping> FrontEndAccountProjectMapping { get; set; }
+        public virtual DbSet<SelectingHouseStatus> SelectingHouseStatus { get; set; }
     }
 }

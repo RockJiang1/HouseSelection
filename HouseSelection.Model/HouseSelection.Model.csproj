@@ -157,6 +157,9 @@
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="RoomTypeEntity.cs" />
+    <Compile Include="SelectingHouseStatus.cs">
+      <DependentUpon>HouseSelectionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SelectTimePeriodEntity.cs" />
     <Compile Include="ShakingNumberResult.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
