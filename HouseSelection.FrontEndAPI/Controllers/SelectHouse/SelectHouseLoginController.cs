@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using HouseSelection.BLL;
-using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
-using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
+using HouseSelection.FrontEndAPI.Models.SelectHouseRequest;
+using HouseSelection.FrontEndAPI.Models.SelectHouseResult;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
 using HouseSelection.Utility;
 using HouseSelection.Authorize;
 using HouseSelection.Enum;
-using System.Web;
 
 namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
 {
@@ -23,10 +21,10 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
         FrontEndAccountProjectMappingBLL _mappingBLL = new FrontEndAccountProjectMappingBLL();
         ProjectBLL _projectBLL = new ProjectBLL();
 
-        public PhoneCallLoginResultEntity Post(PhoneCallLoginRequestModel req)
+        public SelectHouseLoginResultEntity Post(SelectHouseLoginRequestModel req)
         {
-            Logger.LogInfo("PhoneCallLogin Request:" + JsonHelper.SerializeObject(req), "PhoneCallLoginController", "Post");
-            var ret = new PhoneCallLoginResultEntity()
+            Logger.LogInfo("SelectHouseLogin Request:" + JsonHelper.SerializeObject(req), "SelectHouseLoginController", "Post");
+            var ret = new SelectHouseLoginResultEntity()
             {
                 Code = 0,
                 ErrMsg = string.Empty,
@@ -109,7 +107,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
             }
             catch (Exception ex)
             {
-                Logger.LogException("前台登陆时发生异常！", "PhoneCallLoginController", "Post", ex);
+                Logger.LogException("前台登陆时发生异常！", "SelectHouseLoginController", "Post", ex);
                 ret.Code = 999;
                 ret.ErrMsg = ex.Message;
             }

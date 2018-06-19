@@ -10,9 +10,15 @@ namespace HouseSelection.BLL
 {
     public class HouseBLL : BaseBLL<House>
     {
+        private HouseDAL _houseDAL = new HouseDAL();
         public override void SetDAL()
         {
             _dal = new HouseDAL();
+        }
+
+        public List<House> GetValidHouses(int ShakingNumberID, int HouseEstateID, int Building)
+        {
+            return _houseDAL.GetValidHouses(ShakingNumberID, HouseEstateID, Building);
         }
     }
 }

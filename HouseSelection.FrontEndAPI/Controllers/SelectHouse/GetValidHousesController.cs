@@ -1,25 +1,26 @@
-﻿using HouseSelection.BLL;
-using HouseSelection.FrontEndAPI.Models.PublicityRequest;
-using HouseSelection.FrontEndAPI.Models.PublicityResult;
-using HouseSelection.LoggerHelper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using HouseSelection.BLL;
+using HouseSelection.FrontEndAPI.Models.SelectHouseRequest;
+using HouseSelection.FrontEndAPI.Models.SelectHouseResult;
+using HouseSelection.LoggerHelper;
 
-namespace HouseSelection.FrontEndAPI.Controllers.Publicity
+namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
 {
-    public class GetHouseEstateDetailsController:ApiController
+    public class GetValidHousesController : ApiController
     {
         HouseBLL _houseBLL = new HouseBLL();
         SubscriberBLL _subscriberBLL = new SubscriberBLL();
         HouseGroupBLL _houseGroupBLL = new HouseGroupBLL();
         RoomTypeBLL _roomTypeBLL = new RoomTypeBLL();
 
-        public GetHouseEstateDetailsResultEntity Post(GetHouseEstateDetailsRequestModel req)
+        public GetValidHousesResultEntity Post(GetValidHousesRequestModel req)
         {
-            var ret = new GetHouseEstateDetailsResultEntity()
+            var ret = new GetValidHousesResultEntity()
             {
                 Code = 0,
                 ErrMsg = "",
@@ -28,7 +29,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
 
             try
             {
-                if (req.HouseEstateId <= 0 || req.ProjectId <= 0)
+                if (req.HouseEstateId <= 0 || req.ProjectId <= 0 || req.ShakingNumberResultId <= 0)
                 {
                     ret.Code = 401;
                     ret.ErrMsg = "入参无效。";
@@ -36,19 +37,20 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                 else
                 {
                     var houses = _houseBLL.GetModels(h => h.ProjectID == req.ProjectId && h.HouseEstateID == req.HouseEstateId && h.Building == req.BuildingId).ToList();
+                    var validHouses = _houseBLL.GetValidHouses(req.ShakingNumberResultId, req.HouseEstateId, req.BuildingId);
 
-                    houses.ForEach(h => 
+                    houses.ForEach(h =>
                     {
                         var houseInfo = new HouseInfo();
                         houseInfo.Building = h.Building;
                         houseInfo.Unit = h.Unit;
 
-                        var subscriberInfo = _subscriberBLL.GetModels(i => i.ID == h.SubscriberID).FirstOrDefault();
-                        string subscriberName = string.Empty;
-                        if (subscriberInfo != null)
-                        {
-                            subscriberName = subscriberInfo.Name;
-                        }
+                        //var subscriberInfo = _subscriberBLL.GetModels(i => i.ID == h.SubscriberID).FirstOrDefault();
+                        //string subscriberName = string.Empty;
+                        //if (subscriberInfo != null)
+                        //{
+                        //    subscriberName = subscriberInfo.Name;
+                        //}
 
                         var groupInfo = _houseGroupBLL.GetModels(g => g.ID == h.GroupID).FirstOrDefault();
                         string groupName = string.Empty;
@@ -79,7 +81,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                             TotalPrice = h.TotalPrice,
                             Toward = h.Toward,
                             Unit = h.Unit,
-                            IsSelected = isSelected ? 1 : 0
+                            IsSelected = isSelected ? 1 : 0,
+                            IsValid = validHouses.Any(x => x.ID == h.ID) ? 1 : 0
                         };
                         ret.Houses.Add(houseInfo);
                     });
