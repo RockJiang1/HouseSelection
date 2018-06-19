@@ -60,6 +60,7 @@
     <Compile Include="RoleProjectGroupAndHouseGroupBLL.cs" />
     <Compile Include="RoleProjectGroupAndRoomTypeBLL.cs" />
     <Compile Include="RoomTypeBLL.cs" />
+    <Compile Include="SelectingHouseStatusBLL.cs" />
     <Compile Include="ShakingNumberResultBLL.cs" />
     <Compile Include="SubscriberBLL.cs" />
     <Compile Include="SubscriberFamilyMemberBLL.cs" />

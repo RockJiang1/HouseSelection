@@ -676,3 +676,23 @@ BEGIN
 	ALTER TABLE ShakingNumberResult ADD IsAgent BIT NOT NULL DEFAULT 0
 END
 GO
+
+--选房状态表
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = N'SelectingHouseStatus' AND [type] = 'U')
+BEGIN
+	CREATE TABLE SelectingHouseStatus
+	(
+		ID INT IDENTITY(1,1) NOT NULL,
+		ShakingNumberResultID INT NOT NULL,
+		SelectStatus INT NOT NULL,
+		CreateTime DATETIME NOT NULL,
+		LastUpdate DATETIME NULL,
+	 CONSTRAINT [PK_SelectingHouseStatus] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	ALTER TABLE SelectingHouseStatus ADD CONSTRAINT FK_SelectingHouseStatus_ShakingNumberResult_ID FOREIGN KEY(ShakingNumberResultID) REFERENCES ShakingNumberResult(ID)
+END
+GO
