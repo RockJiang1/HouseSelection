@@ -86,11 +86,11 @@ namespace HouseSelection.Model
         /// <summary>
         /// 是否选择
         /// </summary>
-        public bool IsSelected { get; set; }
+        public int IsSelected { get; set; }
 
         /// <summary>
         /// 是否有效
         /// </summary>
-        public bool IsValid { get; set; }
+        public int IsValid { get; set; }
     }
 }

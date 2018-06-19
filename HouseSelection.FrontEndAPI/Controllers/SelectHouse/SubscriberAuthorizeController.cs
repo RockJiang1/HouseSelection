@@ -39,6 +39,7 @@ namespace HouseSelection.FrontEndAPI.Controllers
                 {
                     _dbShaking.IsAuthorized = true;
                     _dbShaking.IsAgent = req.IsAgent == 0 ? false : true;
+                    _dbShaking.LastUpdate = DateTime.Now;
                     _shakingBLL.Update(_dbShaking);
                 }
             }

@@ -11,7 +11,6 @@ using HouseSelection.Model;
 using HouseSelection.Utility;
 using HouseSelection.Authorize;
 using HouseSelection.Enum;
-using System.Web;
 
 namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
 {

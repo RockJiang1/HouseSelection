@@ -79,7 +79,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.Publicity
                             TotalPrice = h.TotalPrice,
                             Toward = h.Toward,
                             Unit = h.Unit,
-                            IsSelected = isSelected
+                            IsSelected = isSelected ? 1 : 0
                         };
                         ret.Houses.Add(houseInfo);
                     });

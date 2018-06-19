@@ -81,8 +81,8 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
                             TotalPrice = h.TotalPrice,
                             Toward = h.Toward,
                             Unit = h.Unit,
-                            IsSelected = isSelected,
-                            IsValid = validHouses.Any(x => x.ID == h.ID)
+                            IsSelected = isSelected ? 1 : 0,
+                            IsValid = validHouses.Any(x => x.ID == h.ID) ? 1 : 0
                         };
                         ret.Houses.Add(houseInfo);
                     });
