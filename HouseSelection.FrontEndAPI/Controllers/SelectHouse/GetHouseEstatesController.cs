@@ -22,7 +22,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
         [ApiAuthorize]
         public GetHouseEstatesResultEntity Post(GetHouseEstatesRequestModel req)
         {
-            Logger.LogDebug("GetHousesEstateByProject Request:" + JsonHelper.SerializeObject(req), "GetHouseEstatesByProjectController", "Post");
+            Logger.LogDebug("GetHouseEstates Request:" + JsonHelper.SerializeObject(req), "GetHouseEstatesController", "Post");
             GetHouseEstatesResultEntity ret = new GetHouseEstatesResultEntity
             {
                 Code = 0,
@@ -59,14 +59,14 @@ namespace HouseSelection.FrontEndAPI.Controllers.SelectHouse
                 }
                 else
                 {
-                    Logger.LogWarning("摇号ID" + req.ShakingNumberResultID + "无效，请校验后重新请求。", "GetHouseEstatesByProjectController", "post");
+                    Logger.LogWarning("摇号ID" + req.ShakingNumberResultID + "无效，请校验后重新请求。", "GetHouseEstatesController", "Post");
                     ret.Code = 2;
                     ret.ErrMsg = "参数错误。";
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException("获取楼盘列表时发生异常！", "GetHouseEstatesByProjectController", "Post", ex);
+                Logger.LogException("获取楼盘列表时发生异常！", "GetHouseEstatesController", "Post", ex);
                 ret.Code = 999;
                 ret.ErrMsg = ex.Message;
             }

@@ -216,6 +216,8 @@
     <Compile Include="Controllers\SelectHouse\GetHouseEstatesController.cs" />
     <Compile Include="Controllers\SelectHouse\GetSubscriberByIdentityController.cs" />
     <Compile Include="Controllers\GetTokenController.cs" />
+    <Compile Include="Controllers\SelectHouse\GetValidBuildingsController.cs" />
+    <Compile Include="Controllers\SelectHouse\GetValidHousesController.cs" />
     <Compile Include="Controllers\SelectHouse\SelectHouseLoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,10 +250,14 @@
     <Compile Include="Models\SelectHouseRequest\GetHouseEstatesRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\GetSubscriberByIdentityRequestModel.cs" />
     <Compile Include="Controllers\SelectHouse\SubscriberAuthorizeController.cs" />
+    <Compile Include="Models\SelectHouseRequest\GetValidBuildingsRequestModel.cs" />
+    <Compile Include="Models\SelectHouseRequest\GetValidHousesRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\SelectHouseLoginRequestModel.cs" />
     <Compile Include="Models\SelectHouseRequest\SubscriberAuthorizeRequestModel.cs" />
     <Compile Include="Models\SelectHouseResult\GetHouseEstatesResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\GetSubscriberByIdentityResultEntity.cs" />
+    <Compile Include="Models\SelectHouseResult\GetValidBuildingsResultEntity.cs" />
+    <Compile Include="Models\SelectHouseResult\GetValidHousesResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\SelectHouseLoginResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\SubscriberAuthorizeResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
