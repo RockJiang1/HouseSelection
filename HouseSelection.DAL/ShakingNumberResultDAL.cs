@@ -24,6 +24,7 @@ namespace HouseSelection.DAL
                            && SN.SelectHouseSequance <= EndSeq
                            select new DialedInfo
                            {
+                               ShakingNumberResultId = SN.ID,
                                Sequence = SN.SelectHouseSequance,
                                Name = S.Name,
                                IdentityID = S.IdentityNumber,

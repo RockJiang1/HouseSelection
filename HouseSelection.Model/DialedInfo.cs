@@ -8,6 +8,8 @@ namespace HouseSelection.Model
 {
     public class DialedInfo
     {
+        public int ShakingNumberResultId { get; set; }
+
         public int Sequence { get; set; }
 
         public string Name { get; set; }
