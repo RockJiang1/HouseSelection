@@ -10,7 +10,10 @@ namespace HouseSelection.Model
     {
         public int ShakingNumberResultId { get; set; }
 
-        public int Sequence { get; set; }
+
+        public int ShakingNumberSequance { get; set; }
+
+        public int SelectHouseSequence { get; set; }
 
         public string Name { get; set; }
 

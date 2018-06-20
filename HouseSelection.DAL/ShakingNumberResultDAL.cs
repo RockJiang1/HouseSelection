@@ -25,7 +25,8 @@ namespace HouseSelection.DAL
                            select new DialedInfo
                            {
                                ShakingNumberResultId = SN.ID,
-                               Sequence = SN.SelectHouseSequance,
+                               ShakingNumberSequance = SN.ShakingNumberSequance,
+                               SelectHouseSequence = SN.SelectHouseSequance,
                                Name = S.Name,
                                IdentityID = S.IdentityNumber,
                                //BeginTime = H == null ? null : H.StartTime.ToString("yyyy-MM-dd HH:mm:ss"),
