@@ -200,6 +200,7 @@
     <Compile Include="Controllers\House\GetHouseSubscriberController.cs" />
     <Compile Include="Controllers\House\GetSubscriberByHouseIDController.cs" />
     <Compile Include="Controllers\House\ImportHouseInfoController.cs" />
+    <Compile Include="Controllers\KeepAliveController.cs" />
     <Compile Include="Controllers\Project\AddProjectController.cs" />
     <Compile Include="Controllers\Account\CheckBackEndAccountController.cs" />
     <Compile Include="Controllers\Project\CloseProjectController.cs" />
@@ -375,6 +376,10 @@
     <ProjectReference Include="..\HouseSelection.Model\HouseSelection.Model.csproj">
       <Project>{203005a8-a2c9-4702-90e9-5584ba6dfe4b}</Project>
       <Name>HouseSelection.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HouseSelection.Redis\HouseSelection.Redis.csproj">
+      <Project>{99ed9864-afad-4825-886a-1de851413525}</Project>
+      <Name>HouseSelection.Redis</Name>
     </ProjectReference>
     <ProjectReference Include="..\HouseSelection.Utility\HouseSelection.Utility.csproj">
       <Project>{01cb5072-4f9b-464a-b26a-d593f96f55a8}</Project>
