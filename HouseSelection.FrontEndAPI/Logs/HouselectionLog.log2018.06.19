@@ -1,0 +1,132 @@
+﻿2018-06-19 16:38:14,639 [5] INFO  - PhoneCallLogin Request:{"LoginAccount":"Rock","LoginPassword":"E10ADC3949BA59ABBE56E057F20F883E"}	PhoneCallLoginController.Post 
+2018-06-19 16:38:15,937 [5] INFO  - 获取Token成功，AppId:Rock,AppSecret:E10ADC3949BA59ABBE56E057F20F883E,AccessToken:a442775ac7c54ace9a554cfa237952c8636650230959082457bd7c9cf64b33463480dbb17f4e2c55be	TokenController.Post 
+2018-06-19 16:38:33,598 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["1-200","300-400"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:39:47,580 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["1-200","300-400"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:39:55,722 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["1-200","300-400"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:40:30,117 [12] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["1-200","300-400"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:41:35,743 [22] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["601-700","801-900"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:41:42,056 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["601-700","801-900"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:42:49,311 [28] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:43:09,769 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:51:32,211 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:54:49,586 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":1,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:55:17,819 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 16:55:55,602 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:02:24,494 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:02:46,647 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:06:53,255 [7] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:06:54,449 [7] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.<>c__DisplayClass4_0.<Post>b__0(ShakingNumberResult i) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 81
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 68	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.<>c__DisplayClass4_0.<Post>b__0(ShakingNumberResult i) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 81
+   在 System.Collections.Generic.List`1.ForEach(Action`1 action)
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 68 
+2018-06-19 17:11:22,774 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:33:04,127 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:33:18,275 [5] FATAL - 获取认购人电话拨打情况时发生异常！
+System.NotSupportedException: LINQ to Entities 不识别方法“System.String ToString(System.String)”，因此该方法无法转换为存储表达式。
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.ConditionalTranslator.TypedTranslate(ExpressionConverter parent, ConditionalExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MemberInitTranslator.TypedTranslate(ExpressionConverter parent, MemberInitExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   在 System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   在 System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   在 System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 HouseSelection.DAL.ShakingNumberResultDAL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.DAL\ShakingNumberResultDAL.cs:行号 16
+   在 HouseSelection.BLL.ShakingNumberResultBLL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.BLL\ShakingNumberResultBLL.cs:行号 21
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 62	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.NotSupportedException: LINQ to Entities 不识别方法“System.String ToString(System.String)”，因此该方法无法转换为存储表达式。
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.ConditionalTranslator.TypedTranslate(ExpressionConverter parent, ConditionalExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MemberInitTranslator.TypedTranslate(ExpressionConverter parent, MemberInitExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   在 System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   在 System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   在 System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   在 System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   在 System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 HouseSelection.DAL.ShakingNumberResultDAL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.DAL\ShakingNumberResultDAL.cs:行号 16
+   在 HouseSelection.BLL.ShakingNumberResultBLL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.BLL\ShakingNumberResultBLL.cs:行号 21
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 62 
+2018-06-19 17:33:26,710 [6] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:39:18,005 [12] INFO  - PhoneCallLogin Request:{"LoginAccount":"Rock","LoginPassword":"E10ADC3949BA59ABBE56E057F20F883E"}	PhoneCallLoginController.Post 
+2018-06-19 17:39:18,903 [12] INFO  - 获取Token成功，AppId:Rock,AppSecret:E10ADC3949BA59ABBE56E057F20F883E,AccessToken:2f7c50e0cb82400cacffa1fde37c1b9f636650267588839139fe8f08b9a03d4a73a828b2a0bf2756a8	TokenController.Post 
+2018-06-19 17:39:25,583 [15] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:39:43,411 [15] FATAL - 获取认购人电话拨打情况时发生异常！
+System.InvalidOperationException: 到值类型“System.Int32”的强制转换失败，因为具体化值为 null。结果类型的泛型参数或查询必须使用可以为 null 的类型。
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   在 lambda_method(Closure , Shaper )
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   在 System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 HouseSelection.DAL.ShakingNumberResultDAL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.DAL\ShakingNumberResultDAL.cs:行号 17
+   在 HouseSelection.BLL.ShakingNumberResultBLL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.BLL\ShakingNumberResultBLL.cs:行号 21
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 62	GetSubscriberDialingStatusController.Post
+==EXCEPTION==
+System.InvalidOperationException: 到值类型“System.Int32”的强制转换失败，因为具体化值为 null。结果类型的泛型参数或查询必须使用可以为 null 的类型。
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   在 lambda_method(Closure , Shaper )
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   在 System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 HouseSelection.DAL.ShakingNumberResultDAL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.DAL\ShakingNumberResultDAL.cs:行号 17
+   在 HouseSelection.BLL.ShakingNumberResultBLL.GetSubscriberDialingStatus(Int32 GroupID, Int32 StartSeq, Int32 EndSeq) 位置 E:\HouseSelection\HouseSelection\HouseSelection.BLL\ShakingNumberResultBLL.cs:行号 21
+   在 HouseSelection.FrontEndAPI.Controllers.PhoneCall.GetSubscriberDialingStatusController.Post(GetSubscriberDialingStatusRequestModel req) 位置 E:\HouseSelection\HouseSelection\HouseSelection.FrontEndAPI\Controllers\PhoneCall\GetSubscriberDialingStatusController.cs:行号 62 
+2018-06-19 17:42:20,357 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:42:41,239 [18] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:42:56,742 [16] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:42:59,462 [12] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:43:00,663 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:43:15,705 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 
+2018-06-19 17:47:58,924 [5] INFO  - GetSubscriberDialingStatus Request:{"ProjectId":2,"GroupId":2,"NumberRegions":["5501-5600","5701-5800"]}	GetSubscriberDialingStatusController.Post 

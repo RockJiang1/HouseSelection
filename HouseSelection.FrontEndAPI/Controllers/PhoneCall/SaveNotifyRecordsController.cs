@@ -1,6 +1,7 @@
 ﻿using HouseSelection.BLL;
 using HouseSelection.Enum;
 using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
+using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
 using System;
@@ -16,11 +17,12 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
     {
         TelephoneNoticeRecordBLL _telephoneNoticeRecordBLL = new TelephoneNoticeRecordBLL();
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
+        HouseSelectPeriodBLL _selectPeriodBLL = new HouseSelectPeriodBLL();
 
-        //[Authorize]
-        public BaseResultEntity Post(SaveNotifyRecordsRequestModel req)
+        [Authorize]
+        public SaveNotifyRecordsResultEntity Post(SaveNotifyRecordsRequestModel req)
         {
-            var ret = new BaseResultEntity()
+            var ret = new SaveNotifyRecordsResultEntity()
             {
                 Code = 0,
                 ErrMsg = string.Empty
@@ -53,7 +55,28 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                 snr.LastUpdate = DateTime.Now;
                 snr.NoticeTime = snr.NoticeTime + 1;
                 _shakingNumberResultBLL.Update(snr);
-                
+
+                snr = _shakingNumberResultBLL.GetModels(i => i.ID == req.ShakeNumberResultId).First();
+                var _period = _selectPeriodBLL.GetModels(x => x.ShakingNumberResultID == req.ShakeNumberResultId).FirstOrDefault();
+                DateTime? dt = null;
+
+                ret.DialedInfo = new DialedInfo()
+                {
+                    ShakingNumberResultId = snr.ID,
+                    ShakingNumberSequance = snr.ShakingNumberSequance,
+                    SelectHouseSequence = snr.SelectHouseSequance,
+                    Name = snr.SubscriberProjectMapping.Subscriber.Name,
+                    IdentityID = snr.SubscriberProjectMapping.Subscriber.IdentityNumber,
+                    BeginTime = _period == null ? dt : _period.StartTime,
+                    EndTime = _period == null ? dt : _period.EndTime,
+                    CallTimes = snr.NoticeTime,
+                    IsContacted = snr.IsContacted,
+                    IsCallBack = snr.IsCallBack,
+                    IsMessageSend = snr.IsMessageSend,
+                    ResultType = (snr.TelephoneNoticeRecord.FirstOrDefault()) == null ? 0 : snr.TelephoneNoticeRecord.OrderByDescending(x => x.ID).FirstOrDefault().ResultType,
+                    LastCallTime = snr.NoticeTime == 0 ? null : snr.LastUpdate,
+                    Phone = snr.SubscriberProjectMapping.Subscriber.Telephone
+                };
             }
             catch (Exception ex)
             {

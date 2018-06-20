@@ -14,7 +14,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
     {
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
 
-        //[Authorize]
+        [Authorize]
         public BaseResultEntity Post(MarkPhoneCallStatusRequestModel req)
         {
             var ret = new BaseResultEntity()

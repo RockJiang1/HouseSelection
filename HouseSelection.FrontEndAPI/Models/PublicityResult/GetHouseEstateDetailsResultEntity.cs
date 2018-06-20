@@ -13,7 +13,7 @@ namespace HouseSelection.FrontEndAPI.Models.PublicityResult
          * 1.每栋包括几个单元
          * 2.每个单元的房间详情
          */
-         
+
         ///// <summary>
         ///// 单元列表
         ///// int-楼号
@@ -21,25 +21,25 @@ namespace HouseSelection.FrontEndAPI.Models.PublicityResult
         ///// </summary>
         //public List<Unit> Units { get; set; }
 
+        public int Building { get; set; }
+
         /// <summary>
         /// 房间列表
         /// </summary>
         public List<HouseInfo> Houses { get; set; }
     }
 
-    public class Unit
-    {
-        public int BuildingId { get; set; }
+    //public class Unit
+    //{
+    //    public int BuildingId { get; set; }
 
-        public List<int> Units { get; set; }
-    }
+    //    public List<int> Units { get; set; }
+    //}
 
     public class HouseInfo
     {
-        public int Building { get; set; }
-
         public int Unit { get; set; }
 
-        public HouseEntity HouseDetail { get; set; }
+        public List<HouseEntity> HouseDetail { get; set; }
     }
 }
