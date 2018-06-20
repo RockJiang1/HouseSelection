@@ -201,6 +201,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\KeepAliveController.cs" />
     <Compile Include="Controllers\PhoneCall\GetPhoneCallProjectGroupListController.cs" />
     <Compile Include="Controllers\PhoneCall\GetSubscriberDialingStatusController.cs" />
     <Compile Include="Controllers\PhoneCall\MarkPhoneCallStatusController.cs" />
