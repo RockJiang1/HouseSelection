@@ -40,6 +40,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                 var accountInfo = _accountBLL.GetModels(i => i.Account == req.LoginAccount && i.Password == req.LoginPassword).FirstOrDefault();
                 if (accountInfo == null)
                 {
+                    ret.Code = 101;
                     ret.ErrMsg = "登陆失败！账号密码错误";
                 }
                 else
