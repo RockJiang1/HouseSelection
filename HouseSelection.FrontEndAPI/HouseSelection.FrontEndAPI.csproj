@@ -226,6 +226,7 @@
     <Compile Include="Controllers\SelectHouse\SelectHouseLoginController.cs" />
     <Compile Include="Controllers\SelectHouse\SignConfirmSelectionController.cs" />
     <Compile Include="Controllers\SelectHouse\StartSelectionController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -272,6 +273,7 @@
     <Compile Include="Models\SelectHouseResult\GetValidHousesResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\SelectHouseLoginResultEntity.cs" />
     <Compile Include="Models\SelectHouseResult\SubscriberAuthorizeResultEntity.cs" />
+    <Compile Include="Models\UploadFileRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -382,7 +384,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\CallCustomer\" />
+    <Folder Include="Controllers\UploadFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
