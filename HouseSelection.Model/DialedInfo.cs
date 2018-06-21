@@ -31,11 +31,11 @@ namespace HouseSelection.Model
 
         public int CallTimes { get; set; }
 
-        public DateTime? LastCallTime { get; set; }
+        public string LastCallTime { get; set; }
 
-        public DateTime? BeginTime { get; set; }
+        public string BeginTime { get; set; }
 
-        public DateTime? EndTime { get; set; }
+        public string EndTime { get; set; }
 
         public int ResultType { get; set; }
     }

@@ -70,14 +70,14 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                     SelectHouseSequence = snr.SelectHouseSequance,
                     Name = snr.SubscriberProjectMapping.Subscriber.Name,
                     IdentityID = snr.SubscriberProjectMapping.Subscriber.IdentityNumber,
-                    BeginTime = _period == null ? dt : _period.StartTime,
-                    EndTime = _period == null ? dt : _period.EndTime,
+                    BeginTime = _period == null ? null : _period.StartTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                    EndTime = _period == null ? null : _period.EndTime.ToString("yyyy-MM-dd HH:mm:ss"),
                     CallTimes = snr.NoticeTime,
                     IsContacted = snr.IsContacted,
                     IsCallBack = snr.IsCallBack,
                     IsMessageSend = snr.IsMessageSend,
                     ResultType = (snr.TelephoneNoticeRecord.FirstOrDefault()) == null ? 0 : snr.TelephoneNoticeRecord.OrderByDescending(x => x.ID).FirstOrDefault().ResultType,
-                    LastCallTime = snr.NoticeTime == 0 ? null : snr.LastUpdate,
+                    LastCallTime = snr.NoticeTime == 0 ? null : snr.LastUpdate == null ? null : ((DateTime)snr.LastUpdate).ToString("yyyy-MM-dd HH:mm:ss"),
                     Phone = snr.SubscriberProjectMapping.Subscriber.Telephone
                 };
             }
