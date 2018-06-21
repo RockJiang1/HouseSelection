@@ -57,5 +57,10 @@ namespace HouseSelection.FrontEndAPI.Models
         /// 是否为代理人
         /// </summary>
         public int IsAgent { get; set; }
+
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public string Hint { get; set; }
     }
 }

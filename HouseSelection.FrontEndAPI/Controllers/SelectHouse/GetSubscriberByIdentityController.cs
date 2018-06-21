@@ -18,8 +18,10 @@ namespace HouseSelection.FrontEndAPI.Controllers
     public class GetSubscriberByIdentityController : ApiController
     {
         private ProjectBLL _projectBLL = new ProjectBLL();
+        private ProjectGroupBLL _GroupBLL = new ProjectGroupBLL();
         private HouseSelectPeriodBLL _selectPeriodBLL = new HouseSelectPeriodBLL();
         private ShakingNumberResultBLL _shakingBLL = new ShakingNumberResultBLL();
+        private HouseSelectionRecordBLL _selectRecordBLL = new HouseSelectionRecordBLL();
 
         [ApiAuthorize]
         public GetSubscriberByIdentityResultEntity Post(GetSubscriberByIdentityRequestModel req)
@@ -56,6 +58,10 @@ namespace HouseSelection.FrontEndAPI.Controllers
                         }
                         else
                         {
+                            var _selectRecord = _selectRecordBLL.GetModels(x => x.IsAbandon == true && x.SubscriberID == _dbShaking.SubscriberProjectMapping.SubscriberID);
+                            DateTime dt = DateTime.Now.AddMinutes(-30);
+                            var _validPeriod = _selectPeriodBLL.GetModels(x => x.StartTime >= dt && x.EndTime <= DateTime.Now).FirstOrDefault();
+
                             ret.ShakingNumberResultID = _dbShaking.ID;
                             ret.Name = _dbShaking.SubscriberProjectMapping.Subscriber.Name;
                             ret.IdentityNumber = _dbShaking.SubscriberProjectMapping.Subscriber.IdentityNumber;
@@ -66,6 +72,34 @@ namespace HouseSelection.FrontEndAPI.Controllers
                             ret.EndSelectTime = _dbPeriod.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
                             ret.IsAuthorized = _dbShaking.IsAuthorized ? 1 : 0;
                             ret.IsAgent = _dbShaking.IsAgent ? 1 : 0;
+                            if (_dbShaking.IsAuthorized)
+                            {
+                                ret.Hint = "该认购人已经身份审核过";
+                            }
+                            else if (_dbShaking.SubscriberProjectMapping.Subscriber.HouseSelectionRecord.Any(x => x.IsConfirm == true && x.IsAbandon == false))
+                            {
+                                ret.Hint = "该认购人已经确认选房";
+                            }
+                            else if(_dbShaking.SubscriberProjectMapping.Subscriber.HouseSelectionRecord.Any(x => x.IsAbandon == true))
+                            {
+                                ret.Hint = "该认购人已经在该项目中发生弃选";
+                            }
+                            else if(_selectRecord != null && _selectRecord.Count() >= 2)
+                            {
+                                ret.Hint = "该认购人历史弃选已次超过2次";
+                            }
+                            else if(_dbPeriod.StartTime < DateTime.Now.AddMinutes(-30) || _dbPeriod.EndTime > DateTime.Now)
+                            {
+                                ret.Hint = "该认购人不在选房时间段内，实际时间段为" + _dbPeriod.StartTime.ToString("yyyy-MM-dd HH:mm:ss") + " - " + _dbPeriod.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
+                            }
+                            else if(_validPeriod.ShakingNumberResult.ProjectGroupID != _dbShaking.ProjectGroupID)
+                            {
+                                ret.Hint = "该认购人不属于该时段分组，实际分组为:" + _validPeriod.ShakingNumberResult.ProjectGroup.ProjectGroupName;
+                            }
+                            else
+                            {
+                                ret.Hint = "";
+                            }
                         }
                     }
                 }
