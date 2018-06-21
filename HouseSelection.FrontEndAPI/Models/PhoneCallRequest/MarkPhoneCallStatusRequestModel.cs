@@ -7,7 +7,7 @@ namespace HouseSelection.FrontEndAPI.Models.PhoneCallRequest
 {
     public class MarkPhoneCallStatusRequestModel
     {
-        public int ShakingResultNumberId { get; set; }
+        public int ShakeNumberResultId { get; set; }
         
         public bool IsSendMessage { get; set; }
 

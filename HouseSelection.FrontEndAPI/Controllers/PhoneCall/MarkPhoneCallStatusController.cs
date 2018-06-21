@@ -2,6 +2,8 @@
 using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
+using HouseSelection.Authorize;
+using HouseSelection.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,10 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
     {
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
 
-        [Authorize]
+        [ApiAuthorize]
         public BaseResultEntity Post(MarkPhoneCallStatusRequestModel req)
         {
+            Logger.LogInfo("MarkPhoneCallStatus Request:" + JsonHelper.SerializeObject(req), "MarkPhoneCallStatusController", "Post");
             var ret = new BaseResultEntity()
             {
                 Code = 0,
@@ -25,7 +28,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
 
             try
             {
-                var snr = _shakingNumberResultBLL.GetModels(i => i.ID == req.ShakingResultNumberId).First();
+                var snr = _shakingNumberResultBLL.GetModels(i => i.ID == req.ShakeNumberResultId).First();
                 if (snr != null)
                 {
                     if (req.IsCallBack)
@@ -41,7 +44,7 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
                 else
                 {
                     ret.Code = 99;
-                    ret.ErrMsg = "没有id为" + req.ShakingResultNumberId + "的摇号记录。";
+                    ret.ErrMsg = "没有id为" + req.ShakeNumberResultId + "的摇号记录。";
                 }
             }
             catch (Exception ex)

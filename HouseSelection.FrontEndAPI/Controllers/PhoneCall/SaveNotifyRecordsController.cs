@@ -4,6 +4,8 @@ using HouseSelection.FrontEndAPI.Models.PhoneCallRequest;
 using HouseSelection.FrontEndAPI.Models.PhoneCallResult;
 using HouseSelection.LoggerHelper;
 using HouseSelection.Model;
+using HouseSelection.Authorize;
+using HouseSelection.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,10 @@ namespace HouseSelection.FrontEndAPI.Controllers.PhoneCall
         ShakingNumberResultBLL _shakingNumberResultBLL = new ShakingNumberResultBLL();
         HouseSelectPeriodBLL _selectPeriodBLL = new HouseSelectPeriodBLL();
 
-        [Authorize]
+        [ApiAuthorize]
         public SaveNotifyRecordsResultEntity Post(SaveNotifyRecordsRequestModel req)
         {
+            Logger.LogInfo("SaveNotifyRecords Request:" + JsonHelper.SerializeObject(req), "SaveNotifyRecordsController", "Post");
             var ret = new SaveNotifyRecordsResultEntity()
             {
                 Code = 0,
