@@ -28,97 +28,236 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
+            this.txtCompany = new System.Windows.Forms.TextBox();
+            this.txtIdentityNumber = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.skinLine1 = new CCWin.SkinControl.SkinLine();
+            this.lblTitle = new CCWin.SkinControl.SkinLabel();
+            this.lblProjectNumber = new CCWin.SkinControl.SkinLabel();
+            this.lblContent = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel3 = new CCWin.SkinControl.SkinLabel();
+            this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
+            this.cbArea = new CCWin.SkinControl.SkinComboBox();
+            this.btnAdd = new CCWin.SkinControl.SkinButton();
+            this.btnCancel = new CCWin.SkinControl.SkinButton();
             this.SuspendLayout();
             // 
-            // textBox2
+            // txtCompany
             // 
-            this.textBox2.Location = new System.Drawing.Point(108, 159);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(209, 21);
-            this.textBox2.TabIndex = 1;
+            this.txtCompany.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCompany.Location = new System.Drawing.Point(252, 160);
+            this.txtCompany.Name = "txtCompany";
+            this.txtCompany.Size = new System.Drawing.Size(251, 23);
+            this.txtCompany.TabIndex = 2;
+            this.txtCompany.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCompany_KeyPress);
             // 
-            // textBox3
+            // txtIdentityNumber
             // 
-            this.textBox3.Location = new System.Drawing.Point(108, 206);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(209, 21);
-            this.textBox3.TabIndex = 2;
+            this.txtIdentityNumber.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtIdentityNumber.Location = new System.Drawing.Point(252, 200);
+            this.txtIdentityNumber.Name = "txtIdentityNumber";
+            this.txtIdentityNumber.Size = new System.Drawing.Size(251, 23);
+            this.txtIdentityNumber.TabIndex = 3;
+            this.txtIdentityNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdentityNumber_KeyPress);
             // 
-            // button1
+            // txtName
             // 
-            this.button1.Location = new System.Drawing.Point(106, 314);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 27);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtName.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtName.Location = new System.Drawing.Point(252, 120);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(251, 23);
+            this.txtName.TabIndex = 1;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
-            // button2
+            // skinLine1
             // 
-            this.button2.Location = new System.Drawing.Point(229, 316);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 25);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.skinLine1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.skinLine1.BackColor = System.Drawing.Color.Transparent;
+            this.skinLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(41)))));
+            this.skinLine1.LineHeight = 1;
+            this.skinLine1.Location = new System.Drawing.Point(0, 40);
+            this.skinLine1.Name = "skinLine1";
+            this.skinLine1.Size = new System.Drawing.Size(680, 10);
+            this.skinLine1.TabIndex = 10;
+            this.skinLine1.Text = "skinLine1";
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.Location = new System.Drawing.Point(106, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(208, 23);
-            this.label1.TabIndex = 6;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitle.BorderColor = System.Drawing.Color.White;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTitle.Location = new System.Drawing.Point(9, 12);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(74, 21);
+            this.lblTitle.TabIndex = 11;
+            this.lblTitle.Text = "添加项目";
             // 
-            // textBox1
+            // lblProjectNumber
             // 
-            this.textBox1.Location = new System.Drawing.Point(106, 108);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(210, 21);
-            this.textBox1.TabIndex = 7;
+            this.lblProjectNumber.AutoSize = true;
+            this.lblProjectNumber.BackColor = System.Drawing.Color.Transparent;
+            this.lblProjectNumber.BorderColor = System.Drawing.Color.White;
+            this.lblProjectNumber.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblProjectNumber.Location = new System.Drawing.Point(144, 80);
+            this.lblProjectNumber.Name = "lblProjectNumber";
+            this.lblProjectNumber.Size = new System.Drawing.Size(79, 20);
+            this.lblProjectNumber.TabIndex = 12;
+            this.lblProjectNumber.Text = "项目编号：";
             // 
-            // comboBox1
+            // lblContent
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(108, 252);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(209, 20);
-            this.comboBox1.TabIndex = 8;
+            this.lblContent.BackColor = System.Drawing.Color.Transparent;
+            this.lblContent.BorderColor = System.Drawing.Color.White;
+            this.lblContent.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblContent.Location = new System.Drawing.Point(252, 80);
+            this.lblContent.Name = "lblContent";
+            this.lblContent.Size = new System.Drawing.Size(251, 21);
+            this.lblContent.TabIndex = 13;
+            // 
+            // skinLabel1
+            // 
+            this.skinLabel1.AutoSize = true;
+            this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel1.BorderColor = System.Drawing.Color.White;
+            this.skinLabel1.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel1.Location = new System.Drawing.Point(144, 120);
+            this.skinLabel1.Name = "skinLabel1";
+            this.skinLabel1.Size = new System.Drawing.Size(79, 20);
+            this.skinLabel1.TabIndex = 14;
+            this.skinLabel1.Text = "项目名称：";
+            // 
+            // skinLabel2
+            // 
+            this.skinLabel2.AutoSize = true;
+            this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel2.BorderColor = System.Drawing.Color.White;
+            this.skinLabel2.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel2.Location = new System.Drawing.Point(144, 160);
+            this.skinLabel2.Name = "skinLabel2";
+            this.skinLabel2.Size = new System.Drawing.Size(79, 20);
+            this.skinLabel2.TabIndex = 15;
+            this.skinLabel2.Text = "开发企业：";
+            // 
+            // skinLabel3
+            // 
+            this.skinLabel3.AutoSize = true;
+            this.skinLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel3.BorderColor = System.Drawing.Color.White;
+            this.skinLabel3.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel3.Location = new System.Drawing.Point(144, 200);
+            this.skinLabel3.Name = "skinLabel3";
+            this.skinLabel3.Size = new System.Drawing.Size(79, 20);
+            this.skinLabel3.TabIndex = 16;
+            this.skinLabel3.Text = "预售证号：";
+            // 
+            // skinLabel4
+            // 
+            this.skinLabel4.AutoSize = true;
+            this.skinLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel4.BorderColor = System.Drawing.Color.White;
+            this.skinLabel4.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel4.Location = new System.Drawing.Point(144, 240);
+            this.skinLabel4.Name = "skinLabel4";
+            this.skinLabel4.Size = new System.Drawing.Size(79, 20);
+            this.skinLabel4.TabIndex = 17;
+            this.skinLabel4.Text = "所在地区：";
+            // 
+            // cbArea
+            // 
+            this.cbArea.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cbArea.BorderColor = System.Drawing.Color.Silver;
+            this.cbArea.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbArea.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbArea.FormattingEnabled = true;
+            this.cbArea.Location = new System.Drawing.Point(252, 240);
+            this.cbArea.Name = "cbArea";
+            this.cbArea.Size = new System.Drawing.Size(251, 24);
+            this.cbArea.TabIndex = 4;
+            this.cbArea.WaterText = "";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnAdd.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnAdd.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btnAdd.DownBack = null;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.Location = new System.Drawing.Point(148, 310);
+            this.btnAdd.MouseBack = null;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.NormlBack = null;
+            this.btnAdd.Size = new System.Drawing.Size(108, 37);
+            this.btnAdd.TabIndex = 5;
+            this.btnAdd.Text = "创建";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
+            this.btnCancel.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnCancel.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btnCancel.DownBack = null;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(395, 310);
+            this.btnCancel.MouseBack = null;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.NormlBack = null;
+            this.btnCancel.Size = new System.Drawing.Size(108, 37);
+            this.btnCancel.TabIndex = 18;
+            this.btnCancel.Text = "取消";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmProjectAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 388);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(680, 399);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.cbArea);
+            this.Controls.Add(this.skinLabel4);
+            this.Controls.Add(this.skinLabel3);
+            this.Controls.Add(this.skinLabel2);
+            this.Controls.Add(this.skinLabel1);
+            this.Controls.Add(this.lblContent);
+            this.Controls.Add(this.lblProjectNumber);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.skinLine1);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtIdentityNumber);
+            this.Controls.Add(this.txtCompany);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmProjectAdd";
-            this.Text = "frmProjectAdd";
-            this.Load += new System.EventHandler(this.frmProjectAdd_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmProjectAdd_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtCompany;
+        private System.Windows.Forms.TextBox txtIdentityNumber;
+        private System.Windows.Forms.TextBox txtName;
+        private CCWin.SkinControl.SkinLine skinLine1;
+        private CCWin.SkinControl.SkinLabel lblTitle;
+        private CCWin.SkinControl.SkinLabel lblProjectNumber;
+        private CCWin.SkinControl.SkinLabel lblContent;
+        private CCWin.SkinControl.SkinLabel skinLabel1;
+        private CCWin.SkinControl.SkinLabel skinLabel2;
+        private CCWin.SkinControl.SkinLabel skinLabel3;
+        private CCWin.SkinControl.SkinLabel skinLabel4;
+        private CCWin.SkinControl.SkinComboBox cbArea;
+        private CCWin.SkinControl.SkinButton btnAdd;
+        private CCWin.SkinControl.SkinButton btnCancel;
     }
 }

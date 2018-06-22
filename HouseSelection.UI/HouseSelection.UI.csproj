@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="CSkin, Version=16.1.14.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\cskin.16.1.14.3\lib\net40\CSkin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
@@ -79,6 +80,12 @@
     </Compile>
     <Compile Include="frmClientAccountManagement.Designer.cs">
       <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHomePage.Designer.cs">
+      <DependentUpon>frmHomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHouseDetails.cs">
       <SubType>Form</SubType>
@@ -133,6 +140,24 @@
     </Compile>
     <Compile Include="frmProjectManagement.Designer.cs">
       <DependentUpon>frmProjectManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPromptError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPromptError.Designer.cs">
+      <DependentUpon>frmPromptError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPromptSuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPromptSuccess.Designer.cs">
+      <DependentUpon>frmPromptSuccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPromptWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPromptWarning.Designer.cs">
+      <DependentUpon>FrmPromptWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSelectRoleAdd.cs">
       <SubType>Form</SubType>
@@ -229,6 +254,9 @@
     <EmbeddedResource Include="frmClientAccountManagement.resx">
       <DependentUpon>frmClientAccountManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmHomePage.resx">
+      <DependentUpon>frmHomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHouseDetails.resx">
       <DependentUpon>frmHouseDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +283,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProjectManagement.resx">
       <DependentUpon>frmProjectManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPromptError.resx">
+      <DependentUpon>frmPromptError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPromptSuccess.resx">
+      <DependentUpon>frmPromptSuccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPromptWarning.resx">
+      <DependentUpon>FrmPromptWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSelectRoleAdd.resx">
       <DependentUpon>frmSelectRoleAdd.cs</DependentUpon>
@@ -306,6 +343,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -338,6 +376,15 @@
       <Project>{01cb5072-4f9b-464a-b26a-d593f96f55a8}</Project>
       <Name>HouseSelection.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\后台登录OK1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\后台登录OK2副本.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\后台登录OK2副本1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

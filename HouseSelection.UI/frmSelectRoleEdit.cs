@@ -303,9 +303,10 @@ namespace HouseSelection.UI
             }
             else
             {
+                int curPageIndex = 1;
                 MessageBox.Show("编辑项目规则成功！");
                 frmProjectManagement fm = frmProjectManagement.GetInstance();
-                fm.GetProjectInfo(false);
+                fm.GetProjectInfo(false, curPageIndex);
                 this.Close();
             }
         }

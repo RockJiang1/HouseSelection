@@ -168,11 +168,20 @@ namespace HouseSelection.Provider
                     };
 
                     result = this.Client.InvokeAPI<TokenResultEntity>(request);
-                    if (result.Code == 0)
+                    if (result == null)
                     {
-                        GlobalTokenHelper.gToken = result.Access_Token;
-                        GlobalTokenHelper.Expiry = result.Expiry;
-                        GlobalTokenHelper.gTokenDateTime = System.DateTime.Now;
+                        result = new TokenResultEntity();
+                        result.Code = 100;
+                        result.ErrMsg = "网络连接异常，请检查网络！";
+                    }
+                    else
+                    {
+                        if (result.Code == 0)
+                        {
+                            GlobalTokenHelper.gToken = result.Access_Token;
+                            GlobalTokenHelper.Expiry = result.Expiry;
+                            GlobalTokenHelper.gTokenDateTime = System.DateTime.Now;
+                        }
                     }
                 }
 
@@ -211,15 +220,15 @@ namespace HouseSelection.Provider
 
         }
 
-        public ProjectEntityResponse GetAllProjects()
+        public ProjectEntityResponse GetAllProjects(int pageIndex,int pageSize)
         {
             ProjectEntityResponse result = new ProjectEntityResponse();
             try
             {
                 var request = new GetAllProjectsRequest()
                 {
-                    PageIndex = 1,
-                    PageSize = 99999
+                    PageIndex = pageIndex,
+                    PageSize = pageSize
                 };
 
                 result = this.Client.InvokeAPI<ProjectEntityResponse>(request);
@@ -235,7 +244,7 @@ namespace HouseSelection.Provider
 
         }
 
-        public ProjectEntityResponse GetProjects(string searchStr)
+        public ProjectEntityResponse GetProjects(string searchStr,int pageIndex,int pageSize)
         {
             ProjectEntityResponse result = new ProjectEntityResponse();
             try
@@ -243,8 +252,8 @@ namespace HouseSelection.Provider
                 var request = new GetProjectsRequest()
                 {
                     SearchStr= searchStr,
-                    PageIndex = 1,
-                    PageSize = 99999
+                    PageIndex = pageIndex,
+                    PageSize = pageSize
                 };
 
                 result = this.Client.InvokeAPI<ProjectEntityResponse>(request);

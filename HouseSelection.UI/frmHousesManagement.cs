@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace HouseSelection.UI
 {
-    public partial class frmHousesManagement : MetroFramework.Forms.MetroForm
+    public partial class frmHousesManagement : Form
     {
         public HouseEstateEntityTemp model = new HouseEstateEntityTemp();
         private GeneralClient Client = new GeneralClient();

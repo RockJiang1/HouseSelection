@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="ImportHouseInfoRequestEntity.cs" />
     <Compile Include="ImportSubscriberRequestEntity.cs" />
+    <Compile Include="PageEntity.cs" />
     <Compile Include="Project.cs">
       <DependentUpon>HouseSelectionDB.tt</DependentUpon>
     </Compile>

@@ -38,6 +38,9 @@ namespace HouseSelection.UI
 
         private void GetProjects(bool isSearch)
         {
+            int pIndex = 1;
+            int psize = 9999;
+
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
             {
@@ -48,13 +51,13 @@ namespace HouseSelection.UI
             ProjectEntityResponse getProject = new ProjectEntityResponse();
             if (isSearch == false)
             {
-                getProject = provide.GetAllProjects();
+                getProject = provide.GetAllProjects(pIndex, psize);
             }
             else
             {
                 string searchStr = string.Empty;
                 searchStr = textBox1.Text;
-                getProject = provide.GetProjects(searchStr);
+                getProject = provide.GetProjects(searchStr, pIndex, psize);
             }
             if (getProject.Code != 0)
             {

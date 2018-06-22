@@ -111,6 +111,9 @@ namespace HouseSelection.UI
 
         private void GetProjects()
         {
+            int pIndex = 1;
+            int psize = 9999;
+
             TokenResultEntity getToken = provide.GetToken();
             if (getToken.Code != 0)
             {
@@ -118,7 +121,7 @@ namespace HouseSelection.UI
                 return;
             }
 
-            ProjectEntityResponse getProject = provide.GetAllProjects();
+            ProjectEntityResponse getProject = provide.GetAllProjects(pIndex, psize);
             if (getProject.Code != 0)
             {
                 MessageBox.Show("获取Token失败, 错误信息： " + getProject.ErrMsg);

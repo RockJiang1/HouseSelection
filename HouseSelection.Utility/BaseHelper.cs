@@ -31,5 +31,17 @@ namespace HouseSelection.Utility
 
             return result;
         }
+
+        public List<PageEntity> GetPageList()
+        {
+            List<PageEntity> result = new List<PageEntity>();
+            result.Add(new PageEntity() { ID = 5, Name = "5页/条" });
+            result.Add(new PageEntity() { ID = 10, Name = "10页/条" });
+            result.Add(new PageEntity() { ID = 15, Name = "15页/条" });
+            result.Add(new PageEntity() { ID = 20, Name = "20页/条" });
+            result.Add(new PageEntity() { ID = 25, Name = "25页/条" });
+    
+            return result;
+        }
     }
 }
